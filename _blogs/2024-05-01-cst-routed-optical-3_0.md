@@ -17,7 +17,7 @@ position: hidden
 
 ### PDF Download 
 
-<https://github.com/ios-xr/design/blob/master/Routed-Optical-Networking/2023-08-24-cst-routed-optical-3_0.pdf> 
+<https://github.com/ios-xr/design/blob/master/Routed-Optical-Networking/2025-05-01-cst-routed-optical-3_0.pdf> 
 
 # Revision History
 
@@ -43,6 +43,56 @@ position: hidden
 | Cisco EPNM | 7.2.1 | 
 
 <br>
+
+# TL;DR What's new in version 3.0?  
+
+The 3.0 release of Routed Optical Networking further enhances the solution to 
+enable new simplified optical deployments and continues to add unmatched 
+open standards-based IP+Optical automation. This section will briefly highlight 
+new additions but please see the detailed sections in the document for more 
+information.  
+
+## QDD-OLS Pluggable Optical Line System 
+
+The Cisco ONS-QDD-OLS transceiver adds a bi-directional optical amplifier capable 
+of +25dB of amplification. When coupled with a 4-channel mux/demux (FLD-4), 
+8-channel mux/demux cable, 16-channel mux/demux cable, or 64-channel mux/demux
+the user can build a simplified optical deployment supporting up to 32 400G 
+channels with a reach up to 120km.      
+
+![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols.png)
+
+
+## Optical Automation Updates  
+
+The 3.0 release introduces enhanced versions of the Routed Optical Networking 
+automation components.  
+
+### Cisco Optical Site Manager 7.11.2 
+
+Cisco Optical Site Manager (COSM) is an embedded XR application used to manage
+optical line systems at a site level as opposed to managing individual nodes.
+COSM represents a single point of management for the optical site, aggregating
+logging, alarm, and performance data for the node. When multiple physical
+shelves in a site run COSM it can be deployed in a HA configuration.    
+
+More information about COSM can be found later in this guide or at the following
+URL: 
+
+<https://www.cisco.com/c/en/us/td/docs/optical/cosm/711x/installation/guide/b-cosm-install-guide-r7-11-x/get-started.html> 
+
+
+### Cisco Optical Network Controller 3.1 
+
+Cisco Optical Network Controller (CONC) 3.1 represents a major leap forward in
+its capabilities to manage modern Cisco optical networks. CONC 3.1 is enhanced
+with a web UI and web applications used to view network-wide alarm information,
+performance data, inventory, and visualize the end to end optical network and
+its optical services. The standards-based TAPI 2.1 NBI remains interface with 
+upstream network controllers. More information on CONC 3.1 can be found later in this document and at the following 
+URL: 
+
+<https://www.cisco.com/c/en/us/support/optical-networking/optical-network-controller/series.html>
 
 
 # What is Routed Optical Networking?   
@@ -88,7 +138,6 @@ efficiency or additional value. OTN switching, like ATM previously, has not been
 able to keep up with traffic demands due to very complex hardware. Unlike
 Ethernet/IP, OTN also does not have a widely interoperable control plane, 
 locking providers into a single vendor or solution long-term.   
-
 
 ## Operational Complexity 
 
@@ -773,13 +822,13 @@ policy dynamic-cs-srte-to-57c3-p2
 ### Circuit-Style SR-TE with Bandwidth Admission Control using Crosswork Circuit Style Manager 
 
 Routed Optical Networking 2.1 with Crosswork Network Controller 5.0 and IOS-XR
-7.9.1 now supports utilizing the new Circuit Style Manager to provide Bandwidth
+7.9.1+ supports utilizing the new Circuit Style Manager to provide Bandwidth
 Admission Controller and guaranteed bandwidth paths for Circuit-Style Policies.
 CNC 5.0 also supports full provisioning, monitoring, and visualization of
 Circuit-Style Policies.  
 
 #### CNC Circuit-Style Manager Configuration 
-In CNC 5.0, Circuit Style Manager uses a simple network-wide bandwidth
+In CNC 5.0+ , Circuit Style Manager uses a simple network-wide bandwidth
 percentage setting to reserve a specific amount of bandwidth for BW-guaranteed
 CS-SRTE policies. CNC's network model will track the allocation of bandwidth on
 each link and the amount of capacity reserved by active CS-SRTE Policies. 
