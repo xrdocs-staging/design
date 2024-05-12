@@ -284,6 +284,7 @@ The following highlights the capabilities of the QDD-OLS
   on Cisco multiplexer options 
 - ZR+ distances of 120km or greater are achievable depending on fiber conditions 
 - Streaming Telemetry using the Cisco-IOS-XR-controller-ots-oper model 
+- Supports ALS (Automatic Laser Shutdown) and APR (Automatic Power Reduction)
 
 The following diagram shows how the QDD-OLS is deployed. DCO optics are
 connected via a mux/demux to the COM side of the QDD-OLS. The Cisco options for
@@ -395,7 +396,22 @@ where 400G may not be needed, OpenZR+ optics can be run at 100G or 200G.
 Additionally, hardware with QSFP-DD 100G ports can utilize OpenZR+ optics in
 100G mode.  This can be ideal for high density access and aggregation networks.
 
-## QDD Optical Line System (QDD-OLS) deployment 
+## QDD Optical Line System (QDD-OLS) deployment
+
+### QDD OLS XR CLI Configuration 
+In RON 3.0 the management of the QDD-OLS is supported using the IOS-XR CLI. The 
+amplifier power is set manually based on the number of channels and the distance
+required.   
+
+The following configuration sets the pre-amp gain to +13dB and the booster 
+amp gain to +24dB:  
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+controller Ots0/0/3/2/0 egress-ampli-gain 130
+controller Ots0/0/3/2/1 egress-ampli-gain 240
+</div> 
+</pre>
 
 ### 4-channel (up to 1.6Tb) deployment using Cisco 15216-FLD-4  
 
@@ -417,7 +433,21 @@ routers.
 The ONC-BRK-CS-8LC is an 8-channel colorless add/drop multiplexer built into a 
 cable form factor made to work with the QDD-OLS. The cable has 8 separate LC 
 connectors for DCO optics and a single CS connector to connect to the COM side 
-of the QDD-OLS.  
+of the QDD-OLS. 
+
+Recommended channel plan for 8 channels using the BRK-CS-8LC: 
+
+|ITU Channel|Frequency (THz)| 
+|--------|----|
+|29|192.9|
+|31|193.1|
+|33|193.3|
+|35|193.5|
+|37|193.7|
+|39|193.9|
+|41|194.1|
+|43|194.3|
+
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-brk8.png)
 
