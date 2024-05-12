@@ -278,9 +278,12 @@ The following highlights the capabilities of the QDD-OLS
 
 - Independent booster and pre-amplifier 
 - Up to +17 dBm output power 
-- Supports fixed gain and "target" mode for setting power levels 
-- Can support deployments with 4 channels up to 32 channels, see the guide below on Cisco multiplexer options 
+- Supports fixed gain and "target" mode for setting power levels
+- 2.4Thz of total bandwidth to support 32 400G channels at 75Ghz per channel  
+- Can support deployments with 4 channels up to 32 channels, see the guide below
+  on Cisco multiplexer options 
 - ZR+ distances of 120km or greater are achievable depending on fiber conditions 
+- Streaming Telemetry using the Cisco-IOS-XR-controller-ots-oper model 
 
 The following diagram shows how the QDD-OLS is deployed. DCO optics are
 connected via a mux/demux to the COM side of the QDD-OLS. The Cisco options for
@@ -407,7 +410,7 @@ The diagram below shows a typical deployment with two 400G channels multiplexed
 onto a single outside plant fiber, giving 800G of bandwidth between the two 
 routers.  
 
-
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-fld4-picture.png)
 
 ### 8-channel (up to 3.2Tb) deployment using ONS-BRK-CS-8LC
 
@@ -418,6 +421,35 @@ of the QDD-OLS.
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-brk8.png)
 
+
+### 32-channel deployment (up to 12.8Tb) deployment using NCS1K-MD-64-C
+
+The NCS1K-MD-64 is a mux/demux with 75Ghz spacing specifically made to work with
+DCO optics and has been part of the Routed Optical Networking solution since its
+1.0. Coupled with the QDD-OLS users can create high bandwidth point to point
+spans up to 120km by simplify using pluggable router optics without any
+additional external amplifiers or active optical equipment.  
+
+The deployment following the other deployment use cases, with each DCO plugged
+into a specific fixed frequency port on the MD-64, which multiplexes those into 
+a single optical channel amplified by the QDD-OLS. The MD-64 is limited to 32 
+channels with the QDD-OLS due to the 2.4Thz of total bandwidth supported by the 
+QDD-OLS.   
+
+The below diagram shows represents a typical deployment. ZR/ZR+ DCO from two 
+different 8201-32FH routers are connected to a single MD-64 mux/demux connected 
+to a QDD-OLS amplifier in one of the 8201-32FH at each location.  
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-md64.png)
+
+
+### Multi-degree ring or mesh QDD-OLS deployment 
+
+Each QDD-OLS operates on a single degree. It's possible to use multiple QDD-OLS
+in a single location to support multi-degree connectivity. Aggregation rings with 
+longer distances and requirements for higher bandwidth are an ideal use case for 
+the QDD-OLS. One can build a potential multi-Tbps ring without deployming an 
+active optical line system, greatly reducing complexity of the overall network.     
 
 ## Supported DWDM Optical Topologies
 
