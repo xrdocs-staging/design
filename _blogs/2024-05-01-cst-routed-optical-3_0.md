@@ -280,7 +280,14 @@ The following highlights the capabilities of the QDD-OLS
 - Up to +17 dBm output power 
 - Supports fixed gain and "target" mode for setting power levels 
 - Can support deployments with 4 channels up to 32 channels, see the guide below on Cisco multiplexer options 
-- ZR+ distances of 120km are achievable depending on fiber conditions 
+- ZR+ distances of 120km or greater are achievable depending on fiber conditions 
+
+The following diagram shows how the QDD-OLS is deployed. DCO optics are
+connected via a mux/demux to the COM side of the QDD-OLS. The Cisco options for
+mux/demux up to 32 channels will be highlighted in the following sections.   
+
+![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols-deployment.png)
+
 
 The following diagram highlights the amplifier and port configuration of the QDD-OLS
 
@@ -300,9 +307,13 @@ Full datasheet for the various FLD-4 models can be found at:
 
 In release 3.0 with IOS-XR 7.11.1 the QDD-OLS is supported on the following NCS 5700
 series routers, with support across additional platforms coming in future XR
-releases.
+releases. 
 
-NCS 55A2-MO
+- NCS-55A2-MOD and NCS-57C3-MOD with MPA-2D4H MPA 
+- NCS-57B1-6D24
+- NCS-57B1-5DSE 
+- 8201-32FH (24.1.1)
+- 8201-24H8FH (24.1.1) 
 
 
 ## Cisco Routers
