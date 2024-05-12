@@ -398,11 +398,24 @@ Additionally, hardware with QSFP-DD 100G ports can utilize OpenZR+ optics in
 
 ## QDD Optical Line System (QDD-OLS) deployment
 
-### QDD OLS XR CLI Configuration 
-In RON 3.0 the management of the QDD-OLS is supported using the IOS-XR CLI. The 
-amplifier power is set manually based on the number of channels and the distance
-required.   
+### QDD OLS Gain Settings
+The QDD OLS gain is not automatically configured on the router, and must be set 
+by the user or an external system calculating the proper gain for the booster 
+and pre-amplifier.  
 
+The following table represents a lookup table based on the 
+fiber loss, transceiver type, and DCO mode for an 8-channel system.
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-8ch-settings.png)
+
+The following table represents a lookup table based on the 
+fiber loss, transceiver type, and DCO mode for a 16-channel system.
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-16ch-settings.png)
+
+
+### QDD OLS XR CLI Configuration 
+In RON 3.0 the management of the QDD-OLS is supported using the IOS-XR CLI. 
 The following configuration sets the pre-amp gain to +13dB and the booster 
 amp gain to +24dB:  
 
