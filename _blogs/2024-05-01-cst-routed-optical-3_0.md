@@ -284,7 +284,7 @@ The following highlights the capabilities of the QDD-OLS
 
 The following diagram shows how the QDD-OLS is deployed. DCO optics are
 connected via a mux/demux to the COM side of the QDD-OLS. The Cisco options for
-mux/demux up to 32 channels will be highlighted in the following sections.   
+mux/demux up to 32 channels will be highlighted in the optical use case section.   
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols-deployment.png)
 
@@ -292,13 +292,6 @@ mux/demux up to 32 channels will be highlighted in the following sections.
 The following diagram highlights the amplifier and port configuration of the QDD-OLS
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols-diagram.png)
-
-### 4-channel deployment with 15216-FLD-4 
-The Cisco 15216-FLD-4 is a passive multiplexer capable of carrying four DWDM channels. When coupled with the 
-QDD-OLS the user can carry up to four 400G signals across a single span up to 120km.  The 15216-FLD-4 is 
-available  
-
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-fld4.png)
 
 Full datasheet for the various FLD-4 models can be found at:  
 
@@ -398,6 +391,33 @@ on a single optics type, OpenZR+ can fulfill the need. In areas of the network
 where 400G may not be needed, OpenZR+ optics can be run at 100G or 200G.
 Additionally, hardware with QSFP-DD 100G ports can utilize OpenZR+ optics in
 100G mode.  This can be ideal for high density access and aggregation networks.
+
+## QDD Optical Line System (QDD-OLS) deployment 
+
+### 4-channel (up to 1.6Tb) deployment using Cisco 15216-FLD-4  
+
+The Cisco 15216-FLD-4 is a passive multiplexer capable of carrying four DWDM
+channels. When coupled with the QDD-OLS the user can carry up to four 400G
+signals across a single span up to 120km. The 15216-FLD-4 is available in 
+fixed 4-channel 400Ghz increments across the C-band.   
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-fld4.png)
+
+The diagram below shows a typical deployment with two 400G channels multiplexed
+onto a single outside plant fiber, giving 800G of bandwidth between the two 
+routers.  
+
+
+
+### 8-channel (up to 3.2Tb) deployment using ONS-BRK-CS-8LC
+
+The ONC-BRK-CS-8LC is an 8-channel colorless add/drop multiplexer built into a 
+cable form factor made to work with the QDD-OLS. The cable has 8 separate LC 
+connectors for DCO optics and a single CS connector to connect to the COM side 
+of the QDD-OLS.  
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-brk8.png)
+
 
 ## Supported DWDM Optical Topologies
 
