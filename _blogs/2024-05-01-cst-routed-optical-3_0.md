@@ -298,9 +298,11 @@ Full datasheet for the various FLD-4 models can be found at:
 <https://www.cisco.com/c/en/us/products/collateral/optical-networking/ons-15200-series-dwdm-systems/ons-15216-4-channel-optical-multiplexers-ds.html> 
 
 
-In release 3.0 with IOS-XR 7.11.1 the QDD-OLS is supported on the NCS 5700
+In release 3.0 with IOS-XR 7.11.1 the QDD-OLS is supported on the following NCS 5700
 series routers, with support across additional platforms coming in future XR
-releases. 
+releases.
+
+NCS 55A2-MO
 
 
 ## Cisco Routers
