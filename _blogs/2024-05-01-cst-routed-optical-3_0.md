@@ -60,7 +60,12 @@ of +25dB of amplification. When coupled with a 4-channel mux/demux (FLD-4),
 the user can build a simplified optical deployment supporting up to 32 400G 
 channels with a reach up to 120km.      
 
-![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols.png)
+![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols.png){:height="30%" width="30%"}
+
+More information about the QDD-OLS can be found later in this document under the 
+pluggables section and at the following Cisco URL: 
+
+<https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/qsfp-dd-plug-open-line-system-ds.html>
 
 
 ## Optical Automation Updates  
@@ -261,6 +266,43 @@ The following part numbers are used for Cisco's ZR400 and OpenZR+ MSA transceive
 Cisco datasheet for the QDD-400G-ZRP-S and QDD-400G-ZR-S transceivers can be found at <https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/datasheet-c78-744377.html> 
 
 Cisco datasheet for the DP04QSDD-HE0 can be found at <https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/400g-qsfp-dd-high-power-optical-module-ds.html> 
+
+## Cisco Pluggbale Optical Line System **New in 3.0** 
+
+The ONS-QDD-OLS adds greater simplification to the network by eliminating the 
+need for external amplifiers and multiplexers for deployments not requiring 
+optical ROADM functionality. The QDD-OLS utilizes a single QSFP-DD port with two 
+CS connectors.  One connector represents both the COM and LINE side of the  
+
+The following highlights the capabilities of the QDD-OLS 
+
+- Independent booster and pre-amplifier 
+- Up to +17 dBm output power 
+- Supports fixed gain and "target" mode for setting power levels 
+- Can support deployments with 4 channels up to 32 channels, see the guide below on Cisco multiplexer options 
+- ZR+ distances of 120km are achievable depending on fiber conditions 
+
+The following diagram highlights the amplifier and port configuration of the QDD-OLS
+
+![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols-diagram.png)
+
+### 4-channel deployment with 15216-FLD-4 
+The Cisco 15216-FLD-4 is a passive multiplexer capable of carrying four DWDM channels. When coupled with the 
+QDD-OLS the user can carry up to four 400G signals across a single span up to 120km.  The 15216-FLD-4 is 
+available  
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-fld4.png)
+
+Full datasheet for the various FLD-4 models can be found at:  
+
+<https://www.cisco.com/c/en/us/products/collateral/optical-networking/ons-15200-series-dwdm-systems/ons-15216-4-channel-optical-multiplexers-ds.html> 
+
+
+In release 3.0 with IOS-XR 7.11.1 the QDD-OLS is supported on the NCS 5700
+series routers, with support across additional platforms coming in future XR
+releases. 
+
+
 ## Cisco Routers
 
 We are at a point in NPU development where the pace of NPU bandwidth growth has
@@ -275,6 +317,8 @@ ASR 9000, and Cisco 8000 series routers. This enabled providers to utilize the a
 across their end to end infrastructure in a variety of router roles. See   
 
 ![](http://xrdocs.io/design/images/ron-hld/npu_bandwidth.png)
+
+
 
 
 ## Cisco Private Line Emulation 
