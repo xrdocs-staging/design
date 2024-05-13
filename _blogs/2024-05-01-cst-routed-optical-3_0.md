@@ -1676,6 +1676,14 @@ path tracing on the network topology visualization.
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-services.png){:height="100%" width="100%"}
 
+
+### CONC 3.1 Service Workspace  
+The service workspace allows users to see multiple aspects of the optical network 
+and services in a single dashboard view.  
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-workspace.png){:height="100%" width="100%"}
+
+
 ### CONC 3.1 to COSM Communication 
 
 Starting in CONC 3.1, the CONC application does not directly communicate with
