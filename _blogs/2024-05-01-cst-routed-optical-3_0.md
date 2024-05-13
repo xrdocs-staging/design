@@ -26,7 +26,7 @@ position: hidden
 | 1.0       | 01/10/2022| Initial Routed Optical Networking Publication 
 | 2.0       | 12/01/2022| Private Line Services, NCS 1010, CW HCO updates 
 | 2.1       | 06/24/2023| High-Power ZR+ Optics, Bandwidth Guaranteed PLE, Connectivity Verification
-| 3.0       | 05/01/2024| Pluggable Optical Line System, SSO and Cross Launch, CONC 3.1, COSM, HCO 8.0  
+| 3.0       | 05/01/2024| Pluggable Optical Line System, Starter Automation, SSO and Cross Launch, CONC 3.1, COSM, HCO 8.0  
 
 
 # Solution Component Software Versions  
@@ -40,7 +40,7 @@ position: hidden
 | Cisco Optical Site Manager | 7.11.2 | 
 | Crosswork Network Controller | 6.0 | 
 | Crosswork Hierarchical Controller | 8.0 |  
-| Cisco EPNM | 7.2.1 | 
+| Cisco EPNM | 7.1.2 | 
 
 <br>
 
@@ -67,6 +67,17 @@ pluggables section and at the following Cisco URL:
 
 <https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/qsfp-dd-plug-open-line-system-ds.html>
 
+## Routed Optical Networking Starter Automation 
+
+The Starter automation stack brings a simplified deployment for those looking to
+manage ZR/ZR+ circuits across their router and optical multi-layer networks but
+do not need the added IP controller functionality of Crosswork Network
+Controller. The Starter version consists of a single installation of Crosswork 
+Hierarchical Controller. The capabilities of CW HCO in the Starter version are 
+identical to the full stack solution, with the same visualization, 
+provisioning, and assurance capabilities. Migration from the starter to full 
+solution can be done in a seamless manner by simply adding the CNC adapter to 
+CW HCO.     
 
 ## Optical Automation Updates  
 
@@ -99,7 +110,7 @@ URL:
 
 <https://www.cisco.com/c/en/us/support/optical-networking/optical-network-controller/series.html>
 
-### Single Sign-On and HCO Cross-Launch 
+## Single Sign-On and HCO Cross-Launch 
 
 In release 3.0 there is now support for using SSO for HCO 8.0, CNC 6.0, CONC
 3.1, and COSM 7.11.2. This allows users to seamlessly navigate between
@@ -1570,7 +1581,7 @@ Responsible for Multi-Layer Automation is the Crosswork Hierarchical Controller.
 * CW HCO unifies data from the IP and optical networks into a single network
   model. HCO utilizes industry standard IETF topology models for IP and TAPI for
   optical topology and service information. HCO can also leverage legacy EMS/NMS
-  systems or use device interrogation.   
+  systems or use device interrogation.  
 * Responsible for managing multi-layer Routed Optical Networking links using a
   single UI.    
 *  Providing assurance at the IP and optical layers in a single tool. The
@@ -1587,6 +1598,13 @@ Responsible for Multi-Layer Automation is the Crosswork Hierarchical Controller.
 Please see the following resources for more information on Crosswork HCO. <https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/solution-overview-c22-744695.html> 
 
 ![](http://xrdocs.io/design/images/ron-hld/hco-multi-layer-circuit-2.png){:height="100%" width="100%"}
+
+
+### Crosswork Hierarchical Controller Routed Optical Networking Starter **New in 3.0** 
+
+In version 3.0 we introduce the Routed Optical Networking Automation Starter. 
+This is a simplified stack 
+
 
 ## Crosswork Network Controller 
 Crosswork Network Controller is a multi-vendor IP domain controller. Crosswork
