@@ -2088,9 +2088,11 @@ Link Assurance tool under the "Events" tab.
 
 ### Crosswork Hierarchical Controller to COSM Cross Launch 
 CW HCO 8.0+ includes new functionality to cross-launch from HCO to other
-applications based on the component being viewed in CW HCO. The functionality is 
-generic and rules can be built through the CW Hyperlinker configuration under the 
-Model Settings applications. 
+applications based on the component being viewed in CW HCO. The functionality is
+generic and rules can be built through the CW Hyperlinker configuration under
+the Model Settings applications. When CW HCO and the target application are
+within the same SAML SSO domain, the cross-launch is seamless requiring no
+additional login at the target application.   
 
 The release version of CW HCO 8.0 includes built-in Hyperlinker rules covering the 
 following components:  
