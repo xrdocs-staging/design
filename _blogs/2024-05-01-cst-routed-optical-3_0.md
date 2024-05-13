@@ -26,7 +26,7 @@ position: hidden
 | 1.0       | 01/10/2022| Initial Routed Optical Networking Publication 
 | 2.0       | 12/01/2022| Private Line Services, NCS 1010, CW HCO updates 
 | 2.1       | 06/24/2023| High-Power ZR+ Optics, Bandwidth Guaranteed PLE, Connectivity Verification
-| 3.0       | 05/01/2024| Pluggable Optical Line System, Automation updates: CONC 3.1, COSM, HCO 8.0  
+| 3.0       | 05/01/2024| Pluggable Optical Line System, SSO and Cross Launch, CONC 3.1, COSM, HCO 8.0  
 
 
 # Solution Component Software Versions  
@@ -98,6 +98,17 @@ upstream network controllers. More information on CONC 3.1 can be found later in
 URL: 
 
 <https://www.cisco.com/c/en/us/support/optical-networking/optical-network-controller/series.html>
+
+### Single Sign-On and HCO Cross-Launch 
+
+In release 3.0 there is now support for using SSO for HCO 8.0, CNC 6.0, CONC
+3.1, and COSM 7.11.2. This allows users to seamlessly navigate between
+applications with a single user login. It also allows for seamless cross-launch
+between different applications. HCO 8.0 introduces a new cross-launch framework
+allowing users to inspect network components in HCO and then navigate to
+low-level details in the Network Controller for the domain. As an example HCO
+will discover IGP topology from CNC using standard IETF models. Selecting a node
+in HCO will bring up a cross-launch item to the node details page in CNC.   
 
 
 # What is Routed Optical Networking?   
@@ -1600,7 +1611,7 @@ More information on Crosswork and Crosswork Network Controller can be found at <
 Cisco Optical Network Controller (Cisco ONC) is responsible for managing Cisco 
 optical line systems and circuit services. Cisco ONC exposes a ONF TAPI northbound 
 interface, the de facto industry standard for optical network management. Cisco ONC 
-runs as an application on the same Crosswork Infrastructure as CNC.  
+runs as an application on the same Crosswork Infrastructure as CNC. 
 
 More information on Cisco ONC can be found at <https://www.cisco.com/c/en/us/support/optical-networking/optical-network-controller/series.html> 
 
@@ -1701,7 +1712,7 @@ The below screenshot shows defined NMC cross-links.
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hco-cross-layer-link.png)
 
-### Cross-Layer Link Validation (New) 
+### Cross-Layer Link Validation 
 
 Starting in RON 2.1 and HCO 7.0 users now have the ability to validate the 
 connectivity of an NMC Cross-Layer link. Validation is done by manipulating the 
@@ -2051,6 +2062,55 @@ Crosswork HCO records any transition of a network resource between up/down opera
 Link Assurance tool under the "Events" tab. 
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance-events.png){:height="100%" width="100%"}
+
+## Cisco Optical Site Manager **New in 3.0** 
+
+Cisco Optical Site Manager represents a modern application used to manage
+optical nodes at the site level. In release 3.0 COSM is an embedded application
+running IOS-XR on the NCS 1010.   
+
+COSM includes components to configure and monitor the physical optical nodes
+which belong to the site. Node configuration, inventory, alarm, and performance
+data are covered by COSM.  
+
+The following shows a site with a single NCS 1010 OLT node with an MD-32 fixed 
+multiplexer connected.  
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-cosm-overview.png){:height="100%" width="100%"}
+
+
+## Cisco Optical Network Controller 3.1 **New in 3.0** 
+
+Cisco Optical Network Controller 3.1 introduces an enhanced version of CONC with 
+additional visualization, assurance, and optical service management capabilities.   
+
+### CONC 3.1 Network Visualization 
+The entire network can now be visualized within CONC itself using a geographic
+view.     
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-topology.png){:height="100%" width="100%"}
+
+### CONC 3.1 Network Alarms  
+Network-wide alarms are available in CONC for all nodes managed by CONC.  
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-alarm.png){:height="100%" width="100%"}
+
+### CONC 3.1 Service Assurance
+
+CONC 3.1 brings visual service assurance.  Users can see all services on the end
+to end network and trace the path using a component level path trace as well as
+path tracing on the network topology visualization.  
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-services.png){:height="100%" width="100%"}
+
+### CONC 3.1 to COSM Communication 
+
+Starting in CONC 3.1, the CONC application does not directly communicate with
+the NCS 1010 device. CONC 3.1 communicates with COSM, COSM aggregation
+inventory, alarm, and performance data from one or more nodes into a single
+communication point.  
+
+
 ## IOS-XR CLI Monitoring of ZR400/OpenZR+ Optics
 
 ### Optics Controller 
