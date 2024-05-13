@@ -298,10 +298,6 @@ The following diagram highlights the amplifier and port configuration of the QDD
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols-diagram.png)
 
-Full datasheet for the various FLD-4 models can be found at:  
-
-<https://www.cisco.com/c/en/us/products/collateral/optical-networking/ons-15200-series-dwdm-systems/ons-15216-4-channel-optical-multiplexers-ds.html> 
-
 
 In release 3.0 with IOS-XR 7.11.1 the QDD-OLS is supported on the following NCS 5700
 series routers, with support across additional platforms coming in future XR
@@ -441,6 +437,12 @@ onto a single outside plant fiber, giving 800G of bandwidth between the two
 routers.  
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-fld4-picture.png)
+
+
+Full datasheet for the various FLD-4 models can be found at:  
+
+<https://www.cisco.com/c/en/us/products/collateral/optical-networking/ons-15200-series-dwdm-systems/ons-15216-4-channel-optical-multiplexers-ds.html> 
+
 
 ### 8-channel (up to 3.2Tb) deployment using ONS-BRK-CS-8LC
 
