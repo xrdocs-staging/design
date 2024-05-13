@@ -442,8 +442,8 @@ amp gain to +24dB:
 <pre class="highlight">
 controller Ots0/0/3/2/0 egress-ampli-gain 130
 controller Ots0/0/3/2/1 egress-ampli-gain 240
-</div> 
 </pre>
+</div> 
 
 ### 4-channel (up to 1.6Tb) deployment using Cisco 15216-FLD-4  
 
