@@ -2108,7 +2108,7 @@ following components:
 The following shows the node cross-launch function to COSM while using the Link
 Assurance application.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-optical-cross-launch.png){:height="100%" width="100%"}
+![](https://xrdocs.io/design/images/ron-hld/ron-hld-optical-cross-launch.png){:height="100%" width="100%"}
 
 ## Cisco Optical Site Manager **New in 3.0** 
 
@@ -2123,7 +2123,7 @@ data are covered by COSM.
 The following shows a site with a single NCS 1010 OLT node with an MD-32 fixed 
 multiplexer connected.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-cosm-overview.png){:height="100%" width="100%"}
+![](https://xrdocs.io/design/images/ron-hld/ron-hld-cosm-overview.png){:height="100%" width="100%"}
 
 
 ## Cisco Optical Network Controller 3.1 **New in 3.0** 
