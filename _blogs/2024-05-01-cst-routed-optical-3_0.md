@@ -1597,14 +1597,18 @@ Responsible for Multi-Layer Automation is the Crosswork Hierarchical Controller.
 
 Please see the following resources for more information on Crosswork HCO. <https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/solution-overview-c22-744695.html> 
 
-![](http://xrdocs.io/design/images/ron-hld/hco-multi-layer-circuit-2.png){:height="100%" width="100%"}
+![](https://xrdocs.io/design/images/ron-hld/hco-multi-layer-circuit-2.png){:height="100%" width="100%"}
 
 
 ### Crosswork Hierarchical Controller Routed Optical Networking Starter **New in 3.0** 
 
-In version 3.0 we introduce the Routed Optical Networking Automation Starter. 
-This is a simplified stack 
-
+In version 3.0 we introduce the Routed Optical Networking Automation Starter.
+The Automation Starter utilizes the standard HCO 8.0 installation but leverages
+the NSO adapter for provisioning and the XR adapter for assurance. HCO 8.0
+includes a containerized version of Cisco NSO, requiring no additional external
+installation of NSO to utilize the NSO RON-ML Function Pack. The look and feel of 
+Crosswork HCO for managing Routed Optical Networking services is no diffeent 
+between the Starter and Full solution.    
 
 ## Crosswork Network Controller 
 Crosswork Network Controller is a multi-vendor IP domain controller. Crosswork
@@ -2080,6 +2084,29 @@ Crosswork HCO records any transition of a network resource between up/down opera
 Link Assurance tool under the "Events" tab. 
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance-events.png){:height="100%" width="100%"}
+
+
+### Crosswork Hierarchical Controller to COSM Cross Launch 
+CW HCO 8.0+ includes new functionality to cross-launch from HCO to other
+applications based on the component being viewed in CW HCO. The functionality is 
+generic and rules can be built through the CW Hyperlinker configuration under the 
+Model Settings applications. 
+
+The release version of CW HCO 8.0 includes built-in Hyperlinker rules covering the 
+following components:  
+
+- IGP node to Crosswork Network Controller  
+- SR Policy to Crosswork Network Controller
+- RSVP-TE LSP to Crosswork Network Controller  
+- L2VPN service to Crosswork Network Controller 
+- L3VPN service to Crosswork Network Controller 
+- Optical Node to Cisco Optical Site Manager  
+- Optical Port to Cisco Optical Site Manager 
+
+The following shows the node cross-launch function to COSM while using the Link
+Assurance application.   
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-optical-cross-launch.png){:height="100%" width="100%"}
 
 ## Cisco Optical Site Manager **New in 3.0** 
 
