@@ -279,7 +279,8 @@ The following highlights the capabilities of the QDD-OLS
 - Independent booster and pre-amplifier 
 - Up to +17 dBm output power 
 - Supports fixed gain and "target" mode for setting power levels
-- 2.4Thz of total bandwidth to support 32 400G channels at 75Ghz per channel  
+- 2.4Thz of total bandwidth to support 32 400G channels at 75Ghz per channel 
+- 194.775 – 192.375 THz range supported  
 - Can support deployments with 4 channels up to 32 channels, see the guide below
   on Cisco multiplexer options 
 - ZR+ distances of 120km or greater are achievable depending on fiber conditions 
