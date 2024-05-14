@@ -26,7 +26,7 @@ position: hidden
 | 1.0       | 01/10/2022| Initial Routed Optical Networking Publication 
 | 2.0       | 12/01/2022| Private Line Services, NCS 1010, CW HCO updates 
 | 2.1       | 06/24/2023| High-Power ZR+ Optics, Bandwidth Guaranteed PLE, Connectivity Verification
-| 3.0       | 05/01/2024| Pluggable Optical Line System, Starter Automation, SSO and Cross Launch, CONC 3.1, COSM, HCO 8.0  
+| 3.0       | 05/01/2024| Pluggable Optical Line System, Starter Automation, SSO and Cross Launch, CONC 3.1, COSM, HCO 8.0, 100G/400G P2P DCO Optics  
 
 
 # Solution Component Software Versions  
@@ -88,9 +88,10 @@ automation components.
 
 Cisco Optical Site Manager (COSM) is an embedded XR application used to manage
 optical line systems at a site level as opposed to managing individual nodes.
-COSM represents a single point of management for the optical site, aggregating
-logging, alarm, and performance data for the node. When multiple physical
-shelves in a site run COSM it can be deployed in a HA configuration.    
+COSM represents a single point of management for the optical site aggregating
+logging, alarm, and performance data for the single or multi-shelf node. When
+multiple physical shelves in a site run COSM it can be deployed in a HA
+configuration.    
 
 More information about COSM can be found later in this guide or at the following
 URL: 
@@ -289,7 +290,29 @@ Cisco datasheet for the QDD-400G-ZRP-S and QDD-400G-ZR-S transceivers can be fou
 
 Cisco datasheet for the DP04QSDD-HE0 can be found at <https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/400g-qsfp-dd-high-power-optical-module-ds.html> 
 
-## Cisco Pluggbale Optical Line System **New in 3.0** 
+
+## Cisco Point to Point 100G and 400G Coherent Optics 
+Release 3.0 introduces two new coherent QDD optics. The optics use a fixed
+frequency of 193.70Thz and are meant for point to point dark fiber applications. 
+
+### DP04QSDD-ER1 
+The DP04QSDD-ER1 is a 400G coherent transceiver capable of transmitting a 400G
+signal unamplified up to 45km and amplified up to 80km. The DP04QSDD-ER1 can be 
+configured to operate in OIF 400ZR mode when configured using CFEC. Since the 
+ER1 is fixed frequency the remote end must be tuned to the frequency of the ER1.   
+
+### DP01QSDD-ZF1 
+The DP01QSDD-ZF1 is a 100G transceiver capable of
+transmitting a 100G signal unamplified to 80km and up to 120km amplified.     
+
+### Unamplified Deployment 
+The following highlights the reach of the optics without the use of amplifiers.
+The use of the QDD-OLS amplifier mentioned int he next section can increase the
+reach to 80/120km.  
+
+![](http://xrdocs.io/design/images/ron-hld/ron-hld-p2p-optics.png)
+
+## Cisco Pluggbale Optical Line System   
 
 The ONS-QDD-OLS adds greater simplification to the network by eliminating the 
 need for external amplifiers and multiplexers for deployments not requiring 
