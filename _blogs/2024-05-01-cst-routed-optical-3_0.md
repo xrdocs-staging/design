@@ -1687,7 +1687,7 @@ and services in a single dashboard view.
 ### CONC 3.1 to COSM Communication 
 
 Starting in CONC 3.1, the CONC application does not directly communicate with
-the NCS 1010 device. CONC 3.1 communicates with COSM, COSM aggregation
+the NCS 1010 device. CONC 3.1 communicates with COSM, COSM aggregates
 inventory, alarm, and performance data from one or more nodes into a single
 communication point.  
 
