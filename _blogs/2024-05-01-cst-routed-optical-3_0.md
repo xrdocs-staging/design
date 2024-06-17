@@ -2,7 +2,8 @@
 published: true
 date: '2024-05-01 15:22 -0600'
 title: Cisco Routed Optical Networking 
-author: Phil Bedard 
+author: Phil Bedard
+permalink: /blogs/latest-routed-optical-networking-hld  
 excerpt: Routed Optical Networking 3.0  
 tags:
   - iosxr
@@ -50,7 +51,11 @@ The 3.0 release of Routed Optical Networking further enhances the solution to
 enable new simplified optical deployments and continues to add unmatched 
 open standards-based IP+Optical automation. This section will briefly highlight 
 new additions but please see the detailed sections in the document for more 
-information.  
+information. 
+
+Aslo, please see the recent blog on DCO monitoring located here:  
+<https://xrdocs.io/design/blogs/xr-dco-monitoring> 
+
 
 ## QDD-OLS Pluggable Optical Line System 
 
