@@ -18,6 +18,30 @@ date: null
             <img src="{{ base_path }}/images/design_lp/ron-icon.png" alt="" />
           </div>
         <div class="archive__item-body">
+            <h2 class="archive__item-title">Routed Optical Networking Design 3.0&nbsp; 
+            <img src="{{ base_path }}/images/design_lp/updated.png" alt="" /></h2>
+            <div class="archive__item-excerpt" style="font-size: 0.65em;">
+              <p>Update to the Routed Optical Networking Design.  The 3.0 version of the design introduces simplifies optical transport using the QDD Optical Line System, new 100G/400G P2P DCO optics, 
+                 and many additions and enhancements to Cisco's automation portfolio managing IP+Optical networks.    
+             </p>
+            </div>
+            <p>
+            <a href="{{ base_path }}/blogs/latest-routed-optical-networking-hld" 
+                  class="btn ">Routed Optical Networking 3.0 📖</a>
+                  </p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="feature__wrapper">
+    <div class="feature__item--right">
+      <div class="archive__item">
+          <div class="archive__item-teaser center" style="max-height: 300px; max-width: 300px;display: block;
+           margin-left: auto; margin-right: auto;">
+            <img src="{{ base_path }}/images/design_lp/ron-icon.png" alt="" />
+          </div>
+        <div class="archive__item-body">
             <h2 class="archive__item-title">Routed Optical Networking Design 2.1&nbsp; 
             <img src="{{ base_path }}/images/design_lp/updated.png" alt="" /></h2>
             <div class="archive__item-excerpt" style="font-size: 0.65em;">
@@ -27,7 +51,7 @@ date: null
              </p>
             </div>
             <p>
-            <a href="{{ base_path }}/blogs/latest-routed-optical-networking-hld" 
+            <a href="{{ base_path }}/blogs/2023-08-24-cst-routed-optical-2_1/" 
                   class="btn ">Routed Optical Networking 2.1 📖</a>
                   </p>
         </div>
