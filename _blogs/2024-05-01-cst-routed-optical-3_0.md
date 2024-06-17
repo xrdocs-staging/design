@@ -18,7 +18,7 @@ position: hidden
 
 ### PDF Download 
 
-<https://github.com/ios-xr/design/blob/master/Routed-Optical-Networking/2025-05-01-cst-routed-optical-3_0.pdf> 
+<https://github.com/ios-xr/design/blob/master/Routed-Optical-Networking/2024-05-01-cst-routed-optical-3_0.pdf> 
 
 # Revision History
 
