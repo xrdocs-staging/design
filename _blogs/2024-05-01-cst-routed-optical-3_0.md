@@ -322,7 +322,9 @@ reach to 80/120km.
 The ONS-QDD-OLS adds greater simplification to the network by eliminating the 
 need for external amplifiers and multiplexers for deployments not requiring 
 optical ROADM functionality. The QDD-OLS utilizes a single QSFP-DD port with two 
-CS connectors.  One connector represents both the COM and LINE side of the  
+CS connectors.  One connector represents the COM side connected to a multiplexer 
+or directly to a DWDM transceiver, the line side connects to the outside plant 
+fiber.     
 
 The following highlights the capabilities of the QDD-OLS 
 
