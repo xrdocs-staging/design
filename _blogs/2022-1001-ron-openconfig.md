@@ -213,7 +213,8 @@ QSFP-DD MPA in MPA slot 3 and DCO transceiver in Port 3 the OpticalChannel is
 line card in slot 1 and DCO transceiver in port 0, the OpticalChannel is
 0/1-OpticalChannel-0/1/0/0.  
 
-### Component Optical Provisioning Parameters  
+### Component Optical Provisioning Parameters 
+ 
 |Parameter|Units|
 |--------|----|
 |frequency|Mhz | 
