@@ -7,6 +7,7 @@ tags:
   - iosxr
   - Optical
   - RON
+published: false
 ---
 
 {% include toc %}
@@ -17,37 +18,37 @@ tags:
 
 ![image](https://github.com/user-attachments/assets/c4a7b5d5-d62b-4b59-8779-848ecd47d5b9)
 
-### Scope
+## Scope
 
 Fiber cuts are a common cause of network outages. If you consider the huge amount of traffic that can be carried on a single fiber using modern optical line systems – in the order of 25-50Tb/s – these failures can cause significant service impact. Therefore, the design of the network must take these outages into account – despite the significant cost this adds to the network. While in some parts of the world fiber cuts are rare enough to justify designing the network against a single fiber cut, in densely populated developing countries, with a high amount of construction projects, fiber cuts are quite common, forcing the network designer to design the network against 2 or even 3 simultaneous fiber cuts.
 
 In this document we focus on different solutions to protect IP traffic from fiber cuts. Some of these solutions use optical switching technology and restore traffic in the optical domain. Other solutions use the built-in protection capability of the IP layer to restore the traffic. Finally, some solutions leverage both the optical layer and IP layer to optimally restore the traffic.
 
-### Traffic protection technologies
+## Traffic protection technologies
 
 The following options for protecting IP traffic against fiber cuts are the most common ones in SP networks. 
 
-#### IP protection/restoration
+### IP protection/restoration
 
 The IP network has inherent traffic protection capabilities thanks to fast convergence of its routing protocol. For high priority services, additional mechanisms exist – even fast end-to-end 1:1 protection for some segments routing tunnels. In addition to mechanisms that apply to all traffic types, the IP layer can distinguish between high priority traffic and best-effort traffic and favor the former, in case there is not enough capacity to protect everything. 
 
 This is, by far, the simplest and most flexible solution from an operational perspective since it only involves functionality that is needed anyway, while all other schemes below involve the optical layer, implying additional provisioning and more complex multilayer behavior.
 
-#### Dedicated optical protection (1+1)
+### Dedicated optical protection (1+1)
 
 This is an optical mechanism for protecting an optical connection by duplicating the data carried over it at the source of the wavelength, sending the second copy over a different path, and selecting the best copy of the data at the destination, before the receiver. This is a very fast mechanism, but it requires dedicated hardware per wavelength (called Photonic Switch Module) and is therefore complex and costly. Both working and protection paths and wavelength are static and cannot change if failure conditions require it. 
 
 From the IP layer perspective, when such protection kicks in, IP links between routers go down and up – in some cases without triggering any IP reconvergence.
 This scheme is often coupled with optical restoration, and then it is referred to as “1+1+R”. For purposes of the analysis below, both schemes can be treated independently – each one with its distinct advantages and disadvantages.
 
-#### Optical restoration
+### Optical restoration
 
 A mechanism that utilizes the wavelength switching mechanism that exists in modern high-end DWDM networks. Upon failure of a fiber, the control plane of the optical layer kicks in (typically, such solutions have been implemented before the days of SDN control) to figure out all impacted optical connections and to dynamically find alternate paths for them around the failure. In some cases, this implies changing the wavelength of the connection, which can take tens of seconds. Therefore, this is not considered a fast mechanism. Indeed, there is no need for it to be fast – all it needs to do is to get the IP layer back to its full capacity after a fiber cut, but before the next fiber cut occurs.
 Optical restoration is typically based on the vendor control plane (e.g. GMPLS) and has never evolved to support multivendor use cases. Therefore the solution is limited to a closed single vendor line system.
 
 From the IP layer perspective, IP links between routers go down and up, but the process takes a long time and therefore the IP layer will typically reconverge before the optical connection is restored, and then reconverge again once the optical connection is restored.
 
-#### Multilayer restoration (MLR)
+### Multilayer restoration (MLR)
 
 A more advanced restoration mechanism that considers both the IP layer and the optical layer. Since it involves both routers and optical gear – often from different vendors – the solution is based on the modern hierarchical SDN control architecture, which involves optical and IP controllers to control the gear and a hierarchical controller (HCO) to coordinate between the IP and optical controllers.
 
@@ -55,13 +56,13 @@ The solution works in a similar way to optical restoration – dynamically findi
 
 MLR has another advantage, which comes into play when reverting back to normal, after the fiber cut has been fixed: it can reroute the connection without any traffic loss. This is impossible with optical restoration, since any change of the optical path means that an IP link goes down and traffic is lost. The way MLR achieves this is by coordinating the process with the IP layer, first moving traffic away from the IP links, and only then switching the optical path. 
 
-### Which solution should be used for my network?
+## Which solution should be used for my network?
 
 The optimal choice of a traffic protection solution highly depends on your network: is it an optical mesh network or a bunch disparate point-to-point links and rings? Is it using traditional closed DWDM systems or transponders integrated into routers? (IPoDWDM or RON – click here for details.) The choice of solution also depends on your service availability considerations: are you worried about a single fiber cut, or are you prepared to invest to protect your network against multiple simultaneous cuts (or maintenance activities)?
 
 In this section we analyze the different options in light of the different network architecture and failure profile you are trying to protect against.
 
-#### IP protection/restoration
+### IP protection/restoration
 
 IP protection is always needed to deal with IP layer failures or maintenance activities. Such failures cannot be protected against by the optical layer. When the IP layer is sized to have sufficient spare capacity to deal with IP failures (most notably a router outage), it can already deal with a single fiber cut quite well (a central router carries more capacity than each of the fibers connecting it to the rest of the network). Therefore, most network planners tend to be satisfied with IP protection if they are not concerned with multiple simultaneous failures. In fact, even if a couple of simultaneous failures are plausible, a careful simulation of the likely failure scenarios and the resulting behavior of the IP layer may reveal that the network is still protected without extra capacity or with just a little extra capacity.
 
@@ -69,13 +70,13 @@ It should be noted that IP protection is very efficient, since it protects that 
 
 In addition, the IP layer can be configured to prefer certain types of traffic should congestion occur. This allows planners to size the network for full protection of all traffic under one failure, but selectively protect only premium traffic under multiple failures. Since most traffic in IP networks is typically best-effort traffic, there is a lot of room for premium traffic to be protected while preempting best-effort traffic – allowing such traffic to survive many simultaneous fiber cuts.
 
-#### Dedicated optical protection (1+1)
+### Dedicated optical protection (1+1)
 
 Dedicated optical protection is useful for protecting pure optical services that do not enjoy the protection that the IP layer provides – such as high-speed ELINE. This is indeed its main use case. But for IP services this mechanism adds no value – it only adds cost and complexity. While dedicated protection may work well for single fiber cuts, it can’t deal well with all dual failure scenarios since the second failure may affect the static protection path. The speed of protection that this scheme provides, is not an advantage for IP traffic since some of the protection mechanisms in the IP layer are just as fast. 
 
 We do see very limited use cases that justify using this scheme for protecting IP links. 
 
-#### Optical restoration
+### Optical restoration
 
 Optical restoration is useful for optical mesh networks, where multiple paths exist to deal with multiple failures. Such deployments are typical in the core but sometimes in large metro networks as well.
 To allow the control plane to pick any path without many constraints, a highly functional optical switch is required at router locations: directionless switching at a minimum, but full colorless + directionless + contentionless switching provides much better support. Such systems are called CDC-ROADMs – see here for an excellent series of tutorials on the topic). While CDC-ROADMs are deployed in high-end networks, they are expensive and complex, limiting the applicability of optical restoration.
@@ -94,7 +95,7 @@ The big difference between these two schemes, from a network planning perspectiv
 
 Finally, MLR lays the foundation many other novel capabilities, such as hitless coordinated maintenance between the layers and adaptive use of capacity in the face of optical degradations. Those will be covered in more detail in a subsequent post. 
 
-### Conclusions 
+## Conclusions 
 
 In this paper we surveyed different options network planners can use to protect IP services over an optical network. The right solution depends on the specific network architecture and conditions. If fiber cuts are rare or there is no requirement to protect all traffic under simultaneous failure conditions (especially best-effort traffic), the lowest cost and simplest solution to operate is to let the IP layer protect the traffic and keep the optical layer simple.
 
