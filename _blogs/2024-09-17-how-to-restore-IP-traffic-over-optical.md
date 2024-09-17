@@ -7,7 +7,6 @@ tags:
   - iosxr
   - Optical
   - RON
-published: false
 ---
 
 {% include toc %}
