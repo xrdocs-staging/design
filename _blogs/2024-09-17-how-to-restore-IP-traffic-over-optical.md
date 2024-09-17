@@ -1,6 +1,5 @@
 ---
 title: How to restore IP traffic over optical
-published: false
 date: '2024-09-17 17:14 +0300'
 author: Ori Gerstel
 excerpt: Solutions for restoring IP traffic over an optical system
