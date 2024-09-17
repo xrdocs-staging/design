@@ -9,22 +9,11 @@ tags:
   - RON
 ---
 
----
-published: false
-date: '2024-09-17 10:45 +0300'
-title: 'Protection IP Traffic Against Fiber Cuts'
-author: Ori Gerstel
-excerpt: Methods for protecting IP traffic over an optical system
-tags:
-  - iosxr
-  - Optical
-  - RON
-position: top
----
-
 {% include toc %}
 
 <br>
+
+# Protection IP Traffic Against Fiber Cuts
 
 ![image](https://github.com/user-attachments/assets/c4a7b5d5-d62b-4b59-8779-848ecd47d5b9)
 
