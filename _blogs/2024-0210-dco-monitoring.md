@@ -384,7 +384,7 @@ value is based on measured BER over a specific time period.
 The Q-Margin is a calculated value used to convey the health of the overall
 signal after being processed. It indicates how much signal margin exists and if
 degradation occurs how much it can degrade before the signal is lost. A Q-Margin
-less than 1 is considered unhealthy. The Q-Margin is useful during both circuit
+less than 0.5dB is considered unhealthy. The Q-Margin is useful during both circuit
 turn-up as well as checking the ongoing health of the circuit.   
 
 ### General guidelines for acceptable values 
