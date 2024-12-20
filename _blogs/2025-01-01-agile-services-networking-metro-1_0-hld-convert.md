@@ -20,52 +20,50 @@ position: hidden
 
 | Version          |Date                    |Comments| 
 | ---------------- | ---------------------- |-----|
-| 1.0       | 05/08/2018 |Initial Converged SDN Transport publication| 
-| 1.5          | 09/24/2018 |NCS540 Access, ZTP, NSO Services|
-| 2.0        | 4/1/2019 | Non-inline PE Topology, NCS-55A2-MOD, IPv4/IPv6/mLDP Multicast, LDP to SR Migration |  
-| 3.0        | 1/20/2020 | Converged Transport for Cable CIN, Multi-domain Multicast, Qos w/H-QoS access, MACSEC, Coherent Optic connectivity | 
-| 3.5        | 10/15/2020| Unnumbered access rings, Anycast SID ABR Resiliency, E-Tree for FTTH deployments, SR Multicast using Tree-SID, NCS 560, SmartPHY for R-PHY, Performance Measurement | 
-| 4.0        | 2/1/2020 | SR Flexible Algorithms inc. Inter-Domain, PTP multi-profile inc. G.82751<>G.8275.2 interworking, G.8275.2 on BVI, ODN support for EVPN ELAN, TI-LFA Open Ring support, NCS 520, SR on cBR8 | 
-| 5.0        | 7/1/2022 | Cisco 8000, Cloud Native BNG, EVPN-HE/EVPN-CGW, Dynamic Tree-SID, Routed Optical Networking, Crosswork Automation|  
+| 1.0       | 2/1/2024 |Initial ASN Metro HLD| 
 
 # Minimum supported IOS-XR Release 
 
-| CST Version          | XR version |  
+| ANS Metro Version          | XR version |  
 | ---------------- | ---------------------- |
-| 1.0       | 6.3.2 |  
-| 1.5        | 6.5.1      |
-| 2.0        | 6.5.3       |
-| 3.0        | 6.6.3 |
-| 3.5        | 7.1.2 |
-| 4.0        | 7.2.2 on NCS, 7.1.3 on ASR9K |
-| 5.0        | 7.5.2 on NCS, 8000, ASR 9000 (7.4.2 for cnBNG) |
+| 1.0       | 24.4.1 |  
 
 # Minimum supported IOS-XE Release 
 
-| CST Version          | XR version |  
+| ANS Metro Version          | XE version |  
 | ---------------- | ---------------------- |
-| 4.0        | 16.12.03 on NCS 520, ASR920; 17.03.01w on cBR-8 |
-| 5.0        | 16.12.03 on NCS 520, ASR920; 17.03.01w on cBR-8 |
+| 1.0        | 17.15.21 on NCS 520, ASR920; 17.15 on Catalyst 8500 |
 
-# Value Proposition
 
-Service Providers are facing the challenge to provide next generation
-services that can quickly adapt to market needs. New paradigms such as
-5G introduction, video traffic continuous growth, IoT proliferation and
-cloud services model require unprecedented flexibility, elasticity and
-scale from the network. Increasing bandwidth demands and decreasing ARPU
-put pressure on reducing network cost. At the same time, services need
-to be deployed faster and more cost effectively to stay competitive.
+# ANS Metro 1.0 component versions 
 
-Metro Access and Aggregation solutions have evolved from native
-Ethernet/Layer 2 based, to Unified MPLS to address the above challenges.
-The Unified MPLS architecture provides a single converged network
-infrastructure with a common operational model. It has great advantages
-in terms of network convergence, high scalability, high availability,
-and optimized forwarding. However, that architectural model is still
-quite challenging to manage, especially on large-scale networks, because
-of the large number of distributed network protocols involved which
-increases operational complexity.
+| Component          | Version |  
+| ---------------- | ---------------------- |
+| Crosswork Network Controller      | 7.0.1 |  
+| Crosswork Hierarchical Controller      | 9.0 |  
+| Crosswork Workflow Manager | 1.2 |  
+| Cisco Routed PON manager | 5.0 |  
+| Cisco Cloud Native BNG | 24.4.1 |  
+| Cisco Edge Protect DDoS | 24.4.1 |  
+| Cisco CX Edge Fabric NSO services | 1.0 |  
+
+# Service Provider challenges 
+
+Service providers continue to face challenges building networks to satisfy the 
+evolving demands of network services. The traditional "service edge" of the network was 
+built using typically larger modular chassis   
+
+# Agile Netowrking Services Metro solution 
+
+Networks must be built to handle the advanced services and increased traffic
+associated with modern network services. Networks must evolve so the
+infrastructure layer can keep up with the service layer. The result of these
+shifts is driving traffic away from centralized delivery to a more distributed
+network. New network architectures must be considered as design options moving
+forward that include these key aspects: Distributed and fixed routing systems to
+deliver services at any place in the network Fabric models delivering scale-out
+networks that can be built on-demand Flexible deployment options matching
+provider requirements Network simplification at all layers of the network
 
  Converged SDN Transport design introduces an SDN-ready architecture
 which evolves traditional Metro network design towards an SDN enabled,
@@ -103,6 +101,14 @@ customers who:**
   - Need a simple, scalable design that can support future growth
 
   - Want a future proof architecture built using industry-leading technology
+
+
+## AGS Metro building blocks 
+
+
+
+Cisco routers provide the basic building block for building networks which are 
+agile, efficient, and scalable.  
 
 ## Summary
 
@@ -165,7 +171,12 @@ blocks:**
 # Hardware Components in Design 
 
 ## Cisco 8000 
-The Converged SDN Transport design now includes the Cisco 8000 family. Cisco 8000 routers provide the lowest power consumption in the industry, all while supporting systems over 200 Tbps and features service providers require.  Starting in CST 5.0 the Cisco 8000 fulfills the role of core and aggregation router in the design. The 8000 provides transit for end to end unicast and multicast services including those using SR-TE and advanced capabilities such as SR Flexible Algorithms.  Service termination is not supported on the 8000 in CST 5.0.  
+ The Cisco 8000 family is one of the primary hardware components of the AGS
+ Metro design. Cisco 8000 routers provide the lowest power consumption in the
+ industry, all while supporting systems over 200 Tbps and features service
+ providers require. The expanded Silicon One family of ASICs now includes the P100, K100, and A100. 
+
+
 
 ![](http://xrdocs.io/design/images/cmf-hld/cst-hw-8000.png)
 
