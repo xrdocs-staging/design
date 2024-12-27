@@ -49,11 +49,12 @@ position: hidden
 
 # Service Provider challenges 
 
-Service providers continue to face challenges building networks to satisfy the 
-evolving demands of network services. The traditional "service edge" of the network was 
-built using typically larger modular chassis   
+Service providers continue to face challenges building networks to satisfy the
+evolving demands of network services. The traditional "service edge" of the
+network was built using typically larger modular chassis in a centralized
+location, resulting in inefficient traffic distribution 
 
-# Agile Netowrking Services Metro solution 
+# Agile Services Networking (ASN) Metro solution 
 
 Networks must be built to handle the advanced services and increased traffic
 associated with modern network services. Networks must evolve so the
@@ -65,16 +66,14 @@ deliver services at any place in the network Fabric models delivering scale-out
 networks that can be built on-demand Flexible deployment options matching
 provider requirements Network simplification at all layers of the network
 
- Converged SDN Transport design introduces an SDN-ready architecture
-which evolves traditional Metro network design towards an SDN enabled,
-programmable network capable of delivering all services (Residential,
-Business, 4G/5G Mobile Backhaul, Video, IoT) on the premise of
-simplicity, full programmability, and cloud integration, with guaranteed
-service level agreements (SLAs).
+Cisco's ASN Metro design introduces an end-to-end architecture
+which evolves traditional Metro network design towards a simplified,
+efficient network capable of delivering all network services (Residential,
+Business, 4G/5G Mobile Backhaul, Video, IoT) while adding enhanced ability to assure SLAs and provide security across all layers of the network.   
 
-![](http://xrdocs.io/design/images/cmf-hld/end-to-end.png)
+![](http://xrdocs.io/design/images/asn-metro/end-to-end.png)
 
-The  Converged SDN Transport design brings tremendous value to Service
+The ASN Metro design brings tremendous value to Service
 Providers:
 
   - **Fast service deployment** and **rapid time to market** through
@@ -83,16 +82,10 @@ Providers:
 
   - **Operational simplicity** with less protocols to operate and manage
 
-  - **Smooth migration towards an SDN-ready architecture** thanks to
-    backward-compatibility with existing network protocols and services
-
-  - **Next generation service** creation leveraging guaranteed SLAs
-
   - **Enhanced and optimized operations** using telemetry/analytics in
     conjunction with automation tools
 
-**The  Converged SDN Transport design is targeted at Service Provider
-customers who:**
+**The ASN Metro design is targeted at Network Service providers who:**
 
   - Want to evolve their existing Unified MPLS Network
 
@@ -105,27 +98,22 @@ customers who:**
 
 ## AGS Metro building blocks 
 
-
-
-Cisco routers provide the basic building block for building networks which are 
-agile, efficient, and scalable.  
+Cisco routers, Network Operating Systems (NOS), network automation, and
+architectural principles provide the basic building block for building agile, efficient, and scalable networks.  
 
 ## Summary
 
-The  Converged SDN Transport design satisfies the following criteria for scalable next-generation networks:   
+- **Efficient transport using Routed Optical Networking** Cisco's Routed Optical Network solution is used when possible to simplify router interconnections, replacing inefficient external transponders with pluggable digital coherent transceivers.  
 
+- **Simplified network control plane** Based on Segment Routing SRv6 or SR-MPLS, the network control plane is simplified scalable to meet even the largest service provider networks.  
 
-  - **Simple:** based on Segment Routing as unified forwarding plane and
-    EVPN and L3VPN as a common BGP based services control plane
+- **Built-in network assurance** Utilizing advanced functions like Segment Routing Performance Measure, and Integrated Performance Measurement, the network itself provides advanced assurance and telemetry functionality. When coupled with Cisco Provider Connectivity Assurance sensors, reporting, and advanced correlation it provides end to end assurance from underlay network to overlay services.  
 
-  - **Programmable:** Using SR-PCE to program end-to-end multi-domain paths across the
-    network with guaranteed SLAs
+- **Network convergence** Cisco Routed PON enabled providers to provide XGS-PON OLT functionality using a pluggable transceiver. This allows the termination of residential and business PON endpoints on the same routers providing fiber based service termination. This eliminates the need for dedicated PON hardware.   
 
-  - **Automated :** Service provisioning is fully automated using NSO
-    and YANG models; Analytics with model driven telemetry in
-    conjunction with Crosswork Network Controller to  
-    enhance operations and network visibility  
+- **CUPS based distributed subscriber termination** Cisco Cloud Native Broadband Network Gateway (cnBNG) is a CUPS-based solution combining a high-availability cloud native control plane with user-plane elements distributed closer to end users. Distributing the user-plane closer to end users allows for efficient traffic offload vs. traditional BNG deployments where traffic is backhauled to a centralized BNG.    
 
+- **Enhanced security and DDoS protection** Security begins with trust and verification of trust. Cisco's leading NOS security features ensure device authenticity and integrity. Cisco Trust Insights allows providers to monitor and report on the overall trust posture of network devices at all times, alerting on anomalies. Cisco's Edge Protect DDoS solution distributes DDoS detection and mitigation to every device in the network. The distribution of these function is more efficient and scales higher than traditional centralized DDoS detection and mitigation deployments.   
 
 # Technical Overview
 
