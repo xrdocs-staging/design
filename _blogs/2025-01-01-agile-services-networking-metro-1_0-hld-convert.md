@@ -1,8 +1,8 @@
 ---
 published: true 
 date: '2025-01-01 11:00-0400'
-title: Agile Services Networking Metro Architecture 1.0 High-Level Design 
-excerpt: Cisco Converged SDN Transport (CST) design introduces an SDN-ready architecture evolving network design towards an SDN enabled, programmable network capable of delivering all services.  
+title: Agile Services Networking - Agile Metro 1.0 High-Level Design 
+excerpt: Cisco Agile Services Networking enables network operators to build flexible converged networks to handle any type of service at any place in the network. Networks built using ASN provide the scale, efficiency, and resiliency required while maintaining a simplier and easier to operate network.  
 author: Phil Bedard 
 tags:
   - iosxr
@@ -39,6 +39,7 @@ position: hidden
 
 | Component          | Version |  
 | ---------------- | ---------------------- |
+| Crosswork Planning | 24.1.1 | 
 | Crosswork Network Controller      | 7.0.1 |  
 | Crosswork Hierarchical Controller      | 9.0 |  
 | Crosswork Workflow Manager | 1.2 |  
@@ -69,7 +70,13 @@ provider requirements Network simplification at all layers of the network
 Cisco's ASN Metro design introduces an end-to-end architecture
 which evolves traditional Metro network design towards a simplified,
 efficient network capable of delivering all network services (Residential,
-Business, 4G/5G Mobile Backhaul, Video, IoT) while adding enhanced ability to assure SLAs and provide security across all layers of the network.   
+Business, 4G/5G Mobile Backhaul, Video, IoT) while adding enhanced ability to assure SLAs and provide security across all layers of the network. 
+
+## Agile Services Networking use cases 
+
+### Agile Services Networking - Agile Metro 
+
+The Agile Metro is a key component of the overall solution as it helps providers build 
 
 ![](http://xrdocs.io/design/images/asn-metro/end-to-end.png)
 
@@ -83,13 +90,11 @@ Providers:
   - **Operational simplicity** with less protocols to operate and manage
 
   - **Enhanced and optimized operations** using telemetry/analytics in
-    conjunction with automation tools
+    conjunction with advanced model-driven automation tools   
 
 **The ASN Metro design is targeted at Network Service providers who:**
 
-  - Want to evolve their existing Unified MPLS Network
-
-  - Are looking for an SDN ready solution
+  - Want to deploy a simpler and easier to operate network that does not sacrifice functionality 
 
   - Need a simple, scalable design that can support future growth
 
@@ -98,18 +103,20 @@ Providers:
 
 ## AGS Metro building blocks 
 
+<h2>
 Cisco routers, Network Operating Systems (NOS), network automation, and
-architectural principles provide the basic building block for building agile, efficient, and scalable networks.  
+architectural principles provide the basic building block for building agile, efficient, and scalable networks. 
+</h2>  
 
-## Summary
+## Key Features  
 
 - **Efficient transport using Routed Optical Networking** Cisco's Routed Optical Network solution is used when possible to simplify router interconnections, replacing inefficient external transponders with pluggable digital coherent transceivers.  
 
 - **Simplified network control plane** Based on Segment Routing SRv6 or SR-MPLS, the network control plane is simplified scalable to meet even the largest service provider networks.  
 
-- **Built-in network assurance** Utilizing advanced functions like Segment Routing Performance Measure, and Integrated Performance Measurement, the network itself provides advanced assurance and telemetry functionality. When coupled with Cisco Provider Connectivity Assurance sensors, reporting, and advanced correlation it provides end to end assurance from underlay network to overlay services.  
+- **Built-in network assurance** Utilizing advanced functions like Segment Routing Performance Measurement (SR-PM), and Integrated Performance Measurement (IPM), the network itself provides advanced assurance and telemetry functionality. When coupled with Cisco Provider Connectivity Assurance sensors, reporting, and advanced correlation it provides end to end assurance from underlay network to overlay services.  
 
-- **Network convergence** Cisco Routed PON enabled providers to provide XGS-PON OLT functionality using a pluggable transceiver. This allows the termination of residential and business PON endpoints on the same routers providing fiber based service termination. This eliminates the need for dedicated PON hardware.   
+- **Network convergence** Cisco Routed PON enabled providers to provide XGS-PON OLT functionality using a pluggable transceiver. This allows the termination of residential and business PON endpoints on the same routers providing fiber based service termination. This eliminates the need for dedicated PON hardware. In addition to device level network convergence  
 
 - **CUPS based distributed subscriber termination** Cisco Cloud Native Broadband Network Gateway (cnBNG) is a CUPS-based solution combining a high-availability cloud native control plane with user-plane elements distributed closer to end users. Distributing the user-plane closer to end users allows for efficient traffic offload vs. traditional BNG deployments where traffic is backhauled to a centralized BNG.    
 
@@ -166,7 +173,7 @@ blocks:**
 
 
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-8000.png)
+![](http://xrdocs.io/design/images/asn-metro/cst-hw-8000.png)
 
 ## ASR 9000 
 The ASR 9000 is the router of choice for high scale edge services.  The Converged SDN Transport utilizes the ASR 9000 in a PE function role, performing high scale 
@@ -255,18 +262,13 @@ NCS-57C3 is available in both standard (NCS-57C3-MOD-SYS) and scale
 
 ![](http://xrdocs.io/design/images/cmf-hld/cst-hw-57c3.png)
 
-## ASR 920 
-The IOS-XE based ASR 920 is tested within the Converged SDN Transport as an access node. The Segment Routing data plane and supported service types are validated 
-on the ASR 920 within the CST design. <b>Please see the services support section for all service types supported on the ASR 920. </b>  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-asr920.png)
 
-## NCS 520 
-The IOS-XE based NCS 520 acts as an Ethernet demarcation device (NID) or carrier Ethernet switch in the Converged SDN Transport design. The MEF 3.0 certified device acts as a customer equipment termination point where QoS, OAM (Y.1731,802.3ah), and service validation/testing using Y.1564 can be performed. The NCS 520 is available in a variety of models covering different port requirements including industrial temp and conformal coated models for harsher environments.  
-
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-ncs520.png)
 # Transport – Design Components  
     
+
+
+
 ## Network Domain Structure 
 
 To provide unlimited network scale, the Converged SDN Transport is
