@@ -55,7 +55,7 @@ evolving demands of network services. The traditional "service edge" of the
 network was built using typically larger modular chassis in a centralized
 location, resulting in inefficient traffic distribution 
 
-# Agile Services Networking (ASN) Metro solution 
+# Cisco Agile Services Networking 
 
 Networks must be built to handle the advanced services and increased traffic
 associated with modern network services. Networks must evolve so the
@@ -67,12 +67,17 @@ deliver services at any place in the network Fabric models delivering scale-out
 networks that can be built on-demand Flexible deployment options matching
 provider requirements Network simplification at all layers of the network
 
-Cisco's ASN Metro design introduces an end-to-end architecture
-which evolves traditional Metro network design towards a simplified,
-efficient network capable of delivering all network services (Residential,
-Business, 4G/5G Mobile Backhaul, Video, IoT) while adding enhanced ability to assure SLAs and provide security across all layers of the network. 
+Cisco's Agile Services Networking introduces an end-to-end architecture which
+evolves traditional network design towards a simplified, efficient network
+capable of delivering all network services (AI, Residential, Business, 4G/5G
+mobile transport, video, IoT) while adding enhanced ability to assure SLAs and
+provide security across all layers of the network. These capabilities will be
+delivered at all parts of the network without compromise.   
 
-## Agile Services Networking use cases 
+## Agile Services Networking - Agile Metro overview 
+
+The Agile Metro is one component of the overall solution architecture providing 
+a scalable any to any network fabric for Metro networks.   
 
 ### Agile Services Networking - Agile Metro 
 
@@ -101,39 +106,38 @@ Providers:
   - Want a future proof architecture built using industry-leading technology
 
 
-## AGS Metro building blocks 
+## Agile Metro high-level building blocks 
 
-<h2>
-Cisco routers, Network Operating Systems (NOS), network automation, and
-architectural principles provide the basic building block for building agile, efficient, and scalable networks. 
-</h2>  
+### Cisco routers covering all operator use cases  
+### Advanced Network Operating Systems (NOS) 
+### Network Automation 
+### Architectural principles providing the basic building block for building agile, efficient, and scalable networks 
 
-## Key Features  
+## Key Agile Metro features  
 
-- **Efficient transport using Routed Optical Networking** Cisco's Routed Optical Network solution is used when possible to simplify router interconnections, replacing inefficient external transponders with pluggable digital coherent transceivers.  
+- **Efficient transport using Routed Optical Networking** Cisco's Routed Optical Network solution simplifies router interconnections across optical fiber, replacing inefficient external transponders with pluggable digital coherent transceivers. Private Line Emulation allows providers to use standard routers to transparently carry Ethernet, OTN/SONET, and Fiber Channel services across an IP network without sacrificing transport layer functionality and resilience.    
 
 - **Simplified network control plane** Based on Segment Routing SRv6 or SR-MPLS, the network control plane is simplified scalable to meet even the largest service provider networks.  
 
 - **Built-in network assurance** Utilizing advanced functions like Segment Routing Performance Measurement (SR-PM), and Integrated Performance Measurement (IPM), the network itself provides advanced assurance and telemetry functionality. When coupled with Cisco Provider Connectivity Assurance sensors, reporting, and advanced correlation it provides end to end assurance from underlay network to overlay services.  
 
-- **Network convergence** Cisco Routed PON enabled providers to provide XGS-PON OLT functionality using a pluggable transceiver. This allows the termination of residential and business PON endpoints on the same routers providing fiber based service termination. This eliminates the need for dedicated PON hardware. In addition to device level network convergence  
+- **Network device convergence** Cisco Routed PON enables providers to provide XGS-PON OLT functionality using a pluggable transceiver. This allows the termination of residential and business PON endpoints on the same routers providing fiber based service termination. 
+
+- **Network infrastructure convergence**  Carrying multiple services across a single unified network is easier to operate than distinct parallel networks. Agile Metro allows operators to converge residential, business, DCI, and future service types onto a single converged metro network with any to any connectivity.   
 
 - **CUPS based distributed subscriber termination** Cisco Cloud Native Broadband Network Gateway (cnBNG) is a CUPS-based solution combining a high-availability cloud native control plane with user-plane elements distributed closer to end users. Distributing the user-plane closer to end users allows for efficient traffic offload vs. traditional BNG deployments where traffic is backhauled to a centralized BNG.    
 
 - **Enhanced security and DDoS protection** Security begins with trust and verification of trust. Cisco's leading NOS security features ensure device authenticity and integrity. Cisco Trust Insights allows providers to monitor and report on the overall trust posture of network devices at all times, alerting on anomalies. Cisco's Edge Protect DDoS solution distributes DDoS detection and mitigation to every device in the network. The distribution of these function is more efficient and scales higher than traditional centralized DDoS detection and mitigation deployments.   
 
-# Technical Overview
+- **Advanced network automation** Simplifying operations requires not only infrastructure simplification but also changes in how networks are operated. The Cisco Crosswork family of network automation software covers the end to end lifecycle of the network. See the section on Network Automation for more detail on how the Agile Metro incorporates these components to help simplify the planning and operation of the network.  
+
+- **Integration across layers** Integration across layers includes both underlay/overlay integrations to enable carrying differentiated service traffic across specific engineered paths as well as the ability to correlate higher layer service to underlay infrastructure down to the physical fiber.  SD-WAN is one use case covered by Agile Metro where SD-WAN overlay services can be monitored along with the underlay paths carrying the traffic. 
+
+
+# Infrastructure network technical overview
 
 ![](http://xrdocs.io/design/images/cmf-hld/cmf-hld-hw.png)
 
-The  Converged SDN Transport design evolves from the successful Cisco
-Evolved Programmable Network (EPN) 5.0 architecture framework, to bring
-greater programmability and automation.
-
-In the  Converged SDN Transport design, the transport and service are built
-on-demand when the customer service is requested. The end-to-end
-inter-domain network path is programmed through controllers and selected
-based on the customer SLA, such as the need for a low latency path.
 
 **The  Converged SDN Transport is made of the following main building
 blocks:**
@@ -141,16 +145,10 @@ blocks:**
   - **IOS-XR as a common Operating System** proven in Service Provider
     Networks
 
-  - **Transport Layer** based on **Segment Routing** as Unified
-    Forwarding Plane
-
-  - **SDN - Segment Routing Path Computation Element (SR-PCE)** as Cisco Path Computation
-    Engine (PCE) coupled with Segment Routing to provide **simple** and
-    **scalable** inter-domain transport connectivity, Traffic
-    Engineering, and advanced Path control with constraints 
-
+  - **Transport Layer** based on **Segment Routing** as a unified forwarding plane  
+    
   - **Service Layer** for Layer 2 (EVPN) and Layer 3 VPN services based
-    on **BGP** **as Unified Control Plane**
+    on **BGP** **as the unified control plane**
 
   - **Automation and Analytics**
     
@@ -198,27 +196,9 @@ and core role in the Converged SDN Transport design. All platforms listed below
 support at least PTP class B timing and the full set of IOS-XR xVPN and Segment
 Routing features.   
 
-The NCS-55A1-48Q6H has 48x1GE/10GE/25GE interfaces and 6x40GE/100GE interfaces,
-supporting high density mobile and subscriber access aggregation applications.  
-The NCS-55A1-24Q6H-S and NCS-55A1-24Q6H-SS have 24x1GE/10GE, 24x1GE/10GE/25GE,
-and 6x40GE/100GE interfaces. The 24Q6H-SS provides MACSEC support on all
-interfaces. The NCS-55A1-24Q6H series also supports 10GE/25GE DWDM optics on all
-relevant ports.  
+These family of devices provide a flexible way to both aggregate downstream connections 
+as well terminate user services at different places in the network.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-55a1-48q6h.png)
-_NCS-55A1-48Q6H_ 
-
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-55a1-24q6h.png)
-_NCS-55A1-24Q6H_ 
-
-The NCS-57C1-48Q6D platform 32xSFP28 (1/10/25), 16xSFP56 (1/10/25/50), 4x400G QSFP-DD, 
-and 2xQSFP-DD with 4x100G/2x100G support. ZR/RZ+ optics can be utilized on three of 
-the 400G QSFP-DD interfaces.  
-
-The NCS-55A1-36H and NCS-55A1-36H-SE provide 36x100GE in 1RU for dense
-aggregation and core needs. The NCS-57B1-6D24 and NCS-57B1-5DSE provide
-24xQSFP28 and either 5 or 6 QSFP-DD ports capable of 400GE with support for ZR
-and ZR+ optics.    
 
 More information on the NCS 5500 fixed routers can be found at: 
 
@@ -1545,22 +1525,20 @@ require complex HA mechnaisms for resiliency, and are relatively painful to
 upgrade. Moving these network functions to a modern Kubernetes based
 cloud-native infrastructure reduces operator complexity providing native
 scale-out capacity growth, in-service software upgrades, and faster feature
-delivery.  Cisco cnBNG control plane supports deployment on VMWare ESXi,  
+delivery.  
 
 ### cnBNG User Plane 
 The cnBNG user plane is provided by Cisco ASR 9000 routers. The routers are
 responsible for terminating subscriber sessions (IPoE/PPPoE), communicating with
 the cnBNG control plane for user authentication and policy, applying
 subscriber policy elements such as QoS and security policies, and performs 
-subscriber routing.  
+subscriber routing. Fixed and modular platforms are supported  
 
 
- 
-
-# Cable Converged Interconnect Network (CIN)  
+# Converged aggregation  
 
 ## Summary  
-The Converged SDN Transport Design enables a multi-service CIN by adding support
+The enables a multi-service CIN by adding support
 for the features and functions required to build a scalable next-generation
 Ethernet/IP cable access network. Differentiated from simple switch or L3
 aggregation designs is the ability to support NG cable transport over the same
@@ -1578,117 +1556,6 @@ conversion much closer to users, reducing the cable distance and thus enabling
 denser and higher order modulation used to achieve Gbps speeds over existing
 cable infrastructure. This reference design will cover the CIN design to support
 Remote PHY deployments.  
-
-## Remote PHY Components and Requirements 
-This section will list some of the components of an R-PHY network and the
-network requirements driven by those components. It is not considered to be an
-exhaustive list of all R-PHY components, please see the CableLabs specification
-document, the latest which can be access via the following URL:
-<https://specification-search.cablelabs.com/CM-SP-R-PHY> 
-
-### Remote PHY Device (RPD) 
-The RPD unlocks the benefits of DAA by integrating the physical analog to
-digital conversions in a device deployed either in the field or located in a
-shelf in a facility. The uplink side of the RPD or RPHY shelf is simply
-IP/Ethernet, allowing transport across widely deployed IP infrastructure. The
-RPD-enabled node puts the PHY function much closer to an end user, allowing
-higher end-user speeds. The shelf allows cable operators to terminate only the
-PHY function in a hub and place the CMTS/MAC function in a more centralized
-facility, driving efficiency in the hub and overall network. The following
-diagram shows various options for how RPDs or an RPD shelf can be deployed.
-Since the PHY function is split from the MAC it allows independent placement of
-those functions.  
-
-#### RPD Network Connections  
-Each RPD is typically deployed with a single 10GE uplink connection. The compact
-RPD shelf uses a single 10GE uplink for each RPD.  
-
-### Cisco cBR-8 and cnBR 
-The Cisco Converged Broadband Router performs many functions as part of a Remote
-PHY solution. The cBR-8 provisions RPDs, originates L2TPv3 tunnels to RPDs,
-provisions cable modems, performs cable subscriber aggregation functions, and
-acts as the uplink L3 router to the rest of the service provider network. In the
-Remote PHY architecture the cBR-8 acts as the DOCSIS core and can also serve as
-a GCP server and video core. The cBR-8 runs IOS-XE. The cnBR, cloud native
-Broadband Router, provides DOCSIS core functionality in a server-based software
-platform deployable anywhere in the SP network. CST 3.0 has been validated using
-the cBR-8, the cnBR will be validated in an upcoming release. 
-
-#### cBR-8 Network Connections 
-The cBR-8 is best represented as having "upstream" and "downstream"
-connectivity. 
-
-The upstream connections are from the cBR8 Supervisor module to the SP network.
-Subscriber data traffic and video ingress these uplink connections for delivery
-to the cable access network. The cBR-8 SUP-160 has 8x10GE SFP+ physical
-connections, the SUP-250 has 2xQSFP28/QSFP+ interfaces for 40G/100G upstream
-connections.   
-
-In a remote PHY deployment the downstream connections to the CIN are via the
-Digital PIC (DPIC-8X10G) providing 40G of R-PHY throughput with 8 SFP+ network
-interfaces.  
-
-#### cBR-8 Redundancy 
-The cBR-8 supports both upstream and downstream redundancy. Supervisor
-redundancy uses active/standby connections to the SP network. Downstream
-redundancy can be configured at both the line card and port level. Line card
-redundancy uses an active/active mechanism where each RPD connects to the DOCSIS
-core function on both the active and hot standby Digital PIC line card. Port
-redundancy uses the concept of "port pairs" on each Digital PIC, with ports 0/1,
-2/3, 4/6, and 6/7 using either an active/active (L2) or active/standby (L3)
-mechanism. In the CST design we utilize a L3 design with the active/standby
-mechanism. The mechanism uses the same IP address on both ports, with the
-standby port kept in a physical down state until switchover occurs.   
-
-## Remote PHY Communication 
-
-### DHCP 
-The RPD is provisioned using ZTP (Zero Touch Provisioning). DHCPv4 and DHCPv6
-are used along with CableLabs DHCP options in order to attach the RPD to the
-correct GCP server for further provisioning.   
-
-### Remote PHY Standard Flows 
-The following diagram shows the different core functions of a Remote PHY
-solution and the communication between those elements. 
-
-<img src="http://xrdocs.io/design/images/cmf-hld/cmf-docsis-communication.png"
-width="500"/>
-
-
-### GCP 
-Generic Communications Protocol is used for the initial provisioning of the RPD.
-When the RPD boots and received its configuration via DHCP, one of the DHCP
-options will direct the RPD to a GCP server which can be the cBR-8 or Cisco
-Smart PHY. GCP runs over TCP typically on port 8190.    
-### UEPI and DEPI L2TPv3 Tunnels 
-The upstream output from an RPD is IP/Ethernet, enabling the simplification of
-the cable access network. Tunnels are used between the RPD PHY functions and
-DOCSIS core components to transport signals from the RPD to the core elements,
-whether it be a hardware device like the Cisco cBR-8 or a virtual network
-function provided by the Cisco cnBR (cloud native Broadband Router).  
-
-DEPI (Downstream External PHY Interface) comes from the M-CMTS architecture,
-where a distributed architecture was used to scale CMTS functions. In the Remote
-PHY architecture DEPI represents a tunnel used to encapsulate and transport from
-the DOCSIS MAC function to the RPD. UEPI (Upstream External PHY Interface) is
-new to Remote PHY, and is used to encode and transport analog signals from the
-RPD to the MAC function.   
-
-In Remote PHY both DEPI and UEPI tunnels use L2TPv3, defined in RFC 3931, to
-transport frames over an IP infrastructure. Please see the following Cisco white
-paper for more information on how tunnels are created specific to
-upstream/downstream channels and how data is encoded in the specific tunnel
-sessions.
-<https://www.cisco.com/c/en/us/solutions/collateral/service-provider/converged-cable-access-platform-ccap-solution/white-paper-c11-732260.html>.
-In general there will be one or two (standby configuration) UEPI and DEPI L2TPv3
-tunnels to each RPD, with each tunnel having many L2TPv3 sessions for individual
-RF channels identified by a unique session ID in the L2TPv3 header. Since L2TPv3
-is its own protocol, no port number is used between endpoints, the endpoint IP
-addresses are used to identify each tunnel. Unicast DOCSIS data traffic can
-utilize either or multicast L2TPv3 tunnels. Multicast tunnels are used with
-downstream virtual splitting configurations. Multicast video is encoded and
-delivered using DEPI tunnels as well, using a multipoint L2TPv3 tunnel to
-multiple RPDs to optimize video delivery.    
 
 ### CIN Network Requirements 
 
@@ -1709,139 +1576,6 @@ Control plane functions of Remote PHY are critical to achieving proper operation
 
 #### DHCPv4 and DHCPv6 Relay 
 As a critical component of the initial boot and provisioning of RPDs, the network must support DHCP relay functionality on all RPD-facing interfaces, for both IPv4 and IPv6.   
-
-## Converged SDN Transport CIN Design 
-
-## Deployment Topology Options 
-The Converged SDN Transport design is extremely flexible in how Remote PHY components are deployed. Depending on the size of the deployment, components can be deployed in a scalable leaf-spine fabric with dedicated routers for RPD and cBR-8 DPIC connections or collapsed into a single pair of routers for smaller deployments. If a smaller deployment needs to be expanded, the flexible L3 routed design makes it very easy to simply interconnect new devices and scale the design to a fabric supporting thousands of RPD and other access network connections.  
-
-### High Scale Design (Recommended)
-This option maximizes statistical multiplexing by aggregating Digital PIC downstream connections on a separate leaf device, allowing one to connect a number of cBR-8 interfaces to a fabric with minimal 100GE uplink capacity. The topology also supports the connectivity of remote shelves for hub consolidation. Another benefit is the fabric has optimal HA and the ability to easily scale with more leaf and spine nodes.     
-
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-topology-full.png)
-_High scale topology_ 
-
-### Collapsed Digital PIC and SUP Uplink Connectivity  
-This design for smaller deployments connects both the downstream Digital PIC connections and uplinks on the same CIN core device. If there is enough physical port availability and future growth does not dictate capacity beyond these nodes this design can be used. This design still provides full redundancy and the ability to connect RPDs to any cBR-8.  Care should be taken to ensure traffic between the DPIC and RPD does not traverse the SUP uplink interfaces. 
-
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-topology-small.png)
-_Collapsed cBR-8 uplink and Digital PIC connectivity_ 
-
-### Collapsed RPD and cBR-8 DPIC Connectivity 
-This design connects each cBR-8 Digital PIC connection to the RPD leaf connected to the RPDs it will serve. This design can also be considered a "pod" design where cBR-8 and RPD connectivity is pre-planned. Careful planning is needed since the number of ports on a single device may not scale efficiently with bandwidth in this configuration.   
-
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-topology-collapsed.png)
-_Collapsed or Pod cBR-8 Digital PIC and RPD connectivity_ 
-
-In the collapsed desigs care must be taken to ensure traffic between each RPD can reach the appropriate DPIC interface. If a leaf is single-homed to the aggregation router its DPIC interface is on, RPDs may not be able to reach their DPIC IP. The options with the shortest convergence time are: Adding interconnects between the agg devices or multiple uplinks from the leaf to agg devices.  
-
-## Cisco Hardware 
-The following table highlights the Cisco hardware utilized within the Converged SDN Transport design for Remote PHY. This table is non-exhaustive. One highlight is all NCS platforms listed are built using the same NPU family and share most features across all platforms. See specific platforms for supported scale and feature support.   
-
-| Product | Role | 10GE SFP+ | 25G SFP28 | 100G QSFP28 | Timing | Comments |
-| ------- | -----| ---------| -----------| --------------------- | ------ | -------- |  
-| NCS-55A1-24Q6H-S | RPD leaf | 48  | 24 | 6 | Class B | |  
-| N540-ACC-SYS | RPD leaf | 24 | 8 | 2 | Class B | Smaller deployments | 
-| NCS-55A1-48Q6H-S | DPIC leaf | 48  | 48 | 6 | Class B | |  
-| NCS-55A2-MOD | Remote agg | 40  | 24 | upto 8 | Class B | CFP2-DCO support | 
-| NCS-55A1-36H-S | Spine | 144 (breakout)  | 0 | 36 | Class B | | 
-| NCS-5502 | Spine | 192 (breakout) | 0 | 48 | None | |
-| NCS-5504 | Multi | Upto 576 | x | Upto 144 | Class B | 4-slot modular platform |  
-
-
-## Scalable L3 Routed Design  
-The Cisco validated design for cable CIN utilizes a L3 design with or without Segment Routing. Pure L2 networks are no longer used for most networks due to their inability to scale, troubleshooting difficulty, poor network efficiency, and poor resiliency. L2 bridging can be utilized on RPD aggregation routers to simplify RPD connectivity.   
-
-### L3 IP Routing  
-Like the overall CST design, we utilize IS-IS for IPv4 and IPv6 underlay routing and BGP to carry endpoint information across the network. The following diagram illustrates routing between network elements using a reference deployment. The table below describes the routing between different functions and interfaces. See the implementation guide for specific configuration.  
-
-| Interface | Routing | Comments | 
-| ----------|---------|----------| 
-|cBR-8 Uplink | IS-IS | Used for BGP next-hop reachability to SP Core | 
-|cBR-8 Uplink | BGP | Advertise subscriber and cable-modem routes to SP Core | 
-|cBR-8 DPIC | Static default in VRF | Each DPIC interface should be in its own VRF on the cBR-8 so it has a single routing path to its connected RPDs | 
-|RPD Leaf Main| IS-IS | Used for BGP next-hop reachability | 
-|RPD Leaf Main| BGP | Advertise RPD L3 interfaces to CIN for cBR-8 to RPD connectivity | 
-|RPD Leaf Timing| BGP | Advertise RPD upstream timing interface IP to rest of network | 
-|DPIC Leaf | IS-IS | Used for BGP next-hop reachability |  
-|DPIC Leaf | BGP | Advertise cBR-8 DPIC L3 interfaces to CIN for cBR-8 to RPD connectivity | 
-|CIN Spine | IS-IS | Used for reachability between BGP endpoints, the CIN Spine does not participate in BGP in a SR-enabled network | 
-|CIN Spine RPD Timing | IS-IS | Used to advertise RPD timing interface BGP next-hop information and advertise default | 
-|CIN Spine | BGP (optional) | In a native IP design the spine must learn BGP routes for proper forwarding |  
-
-### CIN Router to Router Interconnection
-It is recommended to use multiple L3 links when interconnecting adjacent routers, as opposed to using LAG, if possible. Bundles increase the possibility for timing inaccuracy due to asymmetric timing traffic flow between slave and master. If bundle interfaces are utilized, care should be taken to ensure the difference in paths between two member links is kept to a minimum.  All router links will be configured according to the global CST design. Leaf devices will be considered CST access PE devices and utilize BGP for all services routing. 
-
-#### Leaf Transit Traffic 
-In a single IGP network with equal IGP metrics, certain link failures may cause a leaf to become a transit node. Several options are available to keep transit traffic from transiting a leaf and potentially causing congestion. Using high metrics on all leaf to agg uplinks will prohibit this and is recommended in all configurations.   
-
-
-### cBR-8 DPIC to CIN Interconnection  
-The cBR-8 supports two mechanisms for DPIC high availability outlined in the overview section. DPIC line card and link redundancy is recommended but not a requirement. In the CST reference design, if link redundancy is being used each port pair on the active and standby line cards is connected to a different router and the default active ports (even port number) is connected to a different router. In the example figure, port 0 from active DPIC card 0 is connected to R1 and port 0 from standby DPIC card 1 is connected to R2.  DPIC link redundancy MUST be configured using the "cold" method since the design is using L3 to each DPIC interface and no intermediate L2 switching.  This is done with the _cable rphy link redundancy cold_ global command and will keep the standby link in a down/down state until switchover occurs. 
-
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-dpic-redundancy.png)
-_DPIC line card and link HA_ 
-
-#### DPIC Interface Configuration 
-Each DPIC interface should be configured in its own L3 VRF. This ensures traffic from an RPD assigned to a specific DPIC interface takes the traffic path via the specific interface and does not traverse the SUP interface for either ingress or egress traffic. It's recommended to use a static default route within each DPIC VRF towards the CIN network. Dynamic routing protocols could be utilized, however it will slow convergence during redundancy switchover.   
-
-#### Router Interface Configuration  
-If no link redundancy is utilized each DPIC interface will connect to the router using a point to point L3 interface. 
-
-If using cBR-8 link HA, failover time is reduced by utilizing the same gateway MAC address on each router. Link HA uses the same IP and MAC address on each port pair on the cBR-8, and retains routing and ARP information for the L3 gateway. If a different MAC address is used on each router, traffic will be dropped until an ARP occurs to populate the GW MAC address on the router after failover.  On the NCS platforms, a static MAC address cannot be set on a physical L3 interface.  The method used to set a static MAC address is to use a BVI (Bridged Virtual Interface), which allows one to set a static MAC address. In the case of DPIC interface connectivity, each DPIC interface should be placed into its own bridge domain with an associated BVI interface. Since each DPIC port is directly connected to the router interface, the same MAC address can be utilized on each BVI.  
-
-If using IS-IS to distribute routes across the CIN, each DPIC physical interface or BVI should be configured as a passive IS-IS interface in the topology. If using BGP to distribute routing information the "redistribute connected" command should be used with an appropriate route policy to restrict connected routes to only DPIC interface. The BGP configuration is the same whether using L3VPN or the global routing table.   
-
-It is recommended to use a /31 for IPv4 and /127 for IPv6 addresses for each DPIC port whether using a L3 physical interface or BVI on the CIN router.   
-
-### RPD to Router Interconnection  
-The Converged SDN Transport design supports both P2P L3 interfaces for RPD and DPIC aggregation as well as using Bridge Virtual Interfaces. A BVI is a logical L3 interface within a L2 bridge domain. In the BVI deployment the DPIC and RPD physical interfaces connected to a single leaf device share a common IP subnet with the gateway residing on the leaf router.  
-
-It is recommended to configure the RPD leaf using bridge-domains and BVI interfaces. This eases configuration on the leaf device as well as the DHCP configuration used for RPD provisioning. 
-
- The following shows the P2P and BVI deployment options.   
-
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-bvi-p2p.png)
-
-### Native IP or L3VPN/mVPN Deployment 
-Two options are available and validated to carry Remote PHY traffic between the RPD and MAC function. 
-
-- Native IP means the end to end communication occurs as part of the global routing table. In a network with SR-MPLS deployed such as the CST design, unicast IP traffic is still carried across the network using an MPLS header. This allows for fast reconvergence in the network by using SR and enabled the network to carry other VPN services on the network even if they are not used to carry Remote PHY traffic. In then native IP deployment, multicast traffic uses either PIM signaling with IP multicast forwarding or mLDP in-band signaling for label-switched multicast. The multicast profile used is profile 7 (Global mLDP in-band signaling).  
-
-- L3VPN and mVPN can also be utilized to carry Remote PHY traffic within a VPN service end to end. This has the benefit of separating Remote PHY traffic from the network underlay, improving security and treating Remote PHY as another service on a converged access network. Multicast traffic in this use case uses mVPN profile 14. mLDP is used for label-switched multicast, and the NG-MVPN BGP control plane is used for all multicast discovery and signaling.  
-
-#### SR-TE 
-Segment Routing Traffic Engineering may be utilized to carry traffic end to end across the CIN network. Using On-Demand Networking simplifies the deployment of SR-TE Policies from ingress to egress by using specific color BGP communities to instruct head-end nodes to create policies satisfying specific user constraints. As an example, if RPD aggregation prefixes are advertised using BGP to the DPIC aggregation device, SR-TE tunnels following a user constraint can be built dynamically between those endpoints.   
-
-### CIN Quality of Service (QoS)
-QoS is a requirement for delivering trouble-free Remote PHY. This design uses sample QoS configurations for concept illustration, but QoS should be tailored for specific network deployments. New CIN builds can utilize the configurations in the implementation guide verbatim if no other services are being carried across the network. Please see the section in this document on QoS for general NCS QoS information and the implementation guide for specific details.    
-
-#### CST Network Traffic Classification  
-The following lists specific traffic types which should be treated with specific priority, default markings, and network classification points.
-
-| Traffic Type | Ingress Interface | Priority | Default Marking | Comments | 
-| ----------|---------|----------|---------------|-------------| 
-| BGP | Routers, cBR-8 | Highest | CS6 (DSCP 48) | None |  
-| IS-IS | Routers, cBR-8 | Highest | CS6 | IS-IS is single-hop and uses highest priority queue by default | 
-| BFD | Routers | Highest | CS6 | BFD is single-hop and uses highest priority queue by default | 
-| DHCP | RPD | High | CS5 | DHCP COS is set explicitly | 
-| PTP | All | High | DSCP 46 | Default on all routers, cBR-8, and RPD | 
-| DOCSIS MAP/UCD | RPD, cBR-8 DPIC | High | DSCP 46 | | 
-| DOCSIS BWR | RPD, cBR-8 DPIC | High | DSCP 46 | | 
-| GCP | RPD, cBR-8 DPIC | Low | DSCP 0 | 
-| DOCSIS Data | RPD, cBR-8 DPIC | Low | DSCP 0 | 
-| Video | cBR-8 | Medium | DSCP 32 | Video within multicast L2TPv3 tunnel when cBR-8 is video core | 
-| MDD | RPD, cBR-8 | Medium | DSCP 40 |   
-
-### CST and Remote-PHY Load Balancing 
- Unicast network traffic is load balanced based on MPLS labels and IP header criteria. The devices used in the CST design are capable of load balancing traffic based on MPLS labels used in the SR underlay and IP headers underneath any MPLS labels. In the higher bandwidth downstream direction, where a series of L2TP3 tunnels are created from the cBR-8 to the RPD, traffic is hashed based on the source and destination IP addresses of those tunnels. Downstream L2TPv3 tunnels from a single Digital PIC interface to a set of RPDs will be distributed across the fabric based on RPD destination IP address. The followUing illustrates unicast load balancing across the network. 
-
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-load-balancing.png)
-
-Multicast traffic is not load balanced across the network. Whether the network is utilizing PIMv4, PIMv6, or mVPN, a multicast flow with two equal cost downstream paths will utilize only a single path, and only a single member link will be utilized in a link bundle. If using multicast, ensure sufficient bandwidth is available on a single link between two adjacencies.  
-
-### SmartPHY RPD Automation 
-SmartPHY is an automation solution for managing deployed RPDs across the SP network. In a non-SmartPHY deployment providers must manually assign RPHY cores via DHCP and manually configure the cBR8 by CLI SmartPHY provides a flexible either GUI or API driven way to eliminate manual configuration. SmartPHY is configured as the RPHY core in the DHCP server for all RPDs. When the RPD boots it will initiate a GCP session to SmartPHY.  SmartPHY identifies the RPD and if configured in SmartPHY, will redirect it to the proper RPHY core instance. When provisioning a new RPD, SmartPHY will also deploy the proper configuration to the RPHY core cBR8 node and verify the RPD is operational. The diagram below shows basic SmartPHY operation.  
 
 ![](http://xrdocs.io/design/images/cmf-hld/cst-hld-smartphy.png)
 
