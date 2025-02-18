@@ -136,39 +136,20 @@ Providers:
 
 # Infrastructure network technical overview
 
+The infrastructure portion of the network refers to the building blocks of any high scale service provider network. The hardware, interconnection, and low level control plane protocols are utilized together to build a modern agile scalable 
+network. 
+
+The following highlights the key technology building blocks used to build the Agile Metro network. 
+
 ![](http://xrdocs.io/design/images/asn-metro/asn-metro-hw.png)
 
+## Hardware Components 
 
-**The  Converged SDN Transport is made of the following main building
-blocks:**
-
-  - **IOS-XR as a common Operating System** proven in Service Provider
-    Networks
-
-  - **Transport Layer** based on **Segment Routing** as a unified forwarding plane  
-    
-  - **Service Layer** for Layer 2 (EVPN) and Layer 3 VPN services based
-    on **BGP** **as the unified control plane**
-
-  - **Automation and Analytics**
-    
-      - NSO for service provisioning
-    
-      - Netconf/YANG data models
-    
-      - Telemetry to enhance and simplify operations
-    
-      - Zero Touch Provisioning and Deployment (ZTP/ZTD)
-
-
-# Hardware Components in Design 
-
-## Cisco 8000 
+### Cisco 8000 
  The Cisco 8000 family is one of the primary hardware components of the Agile Metro  
  Metro design. Cisco 8000 routers provide the lowest power consumption in the
  industry, all while supporting systems over 200 Tbps and features service
- providers require. The expanded Silicon One family of ASICs in Metro 1.0 includes the P100 and K100 family of products fulfilling specific 
- roles in the solution.  
+ providers require. The expanded Silicon One family of ASICs in Metro 1.0 includes the P100 and K100 family of products fulfilling specific roles in the solution.  
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-8000.png)
 
@@ -178,16 +159,9 @@ blocks:**
 
 
 ## ASR 9000 
-The ASR 9000 is the router of choice for high scale edge services.  The Converged SDN Transport utilizes the ASR 9000 in a PE function role, performing high scale 
-L2VPN, L3VPN, and Pseudowire headend termination. All testing up to CST 3.0 has been performed using Tomahawk series line cards on the ASR 9000. Starting in CST 5.0 we introduce 
-ASR 9000 Lightspeed+ high capacity line cards to the design.  The ASR 9000 also serves as the user plane for Cisco's distributed BNG architecture.   
+The ASR 9000 is the router of choice for high scale edge services.  Agile Metro utilizes the ASR 9000 in a PE function role, performing high scale L2VPN, L3VPN, peering, and Pseudowire headend termination. The ASR 9000 is also utilized as a user plane in the distributed CUPS architecture for subscriber termination. 
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-asr9000.png)
-
-## NCS-560 
-The NCS-560 with RSP4 is a next-generation platform with high scale and modularity to fit in many access, pre-aggregation, and aggregation roles. Available in 4-slot and 7-slot versions, the NCS 560 is fully redundant with a variety of 40GE/100GE, 10GE, and 1GE modular adapters. The NCS 560 RSP4 has built-in GNSS timing support along with a high scale (-E) version to support full Internet routing tables or large VPN routing tables with room to spare for 5+ years of growth. The NCS 560 provides all of this with a very low power and space footprint with a depth of 9.5". 
-
-![](http://xrdocs.io/design/images/asn-metro/cst-hw-ncs560.png)
 
 ## NCS 5504, 5508, 5516 Modular Chassis 
 The modular chassis version of the NCS 5500 is available in 4, 8, and 16 slot versions for flexible interfaces at high scale with dual RP modules. A variety of line cards are available with 10G, 40G, 100G, and 400G interface support. The NCS 5500 fully supports timing distribution for applications needing high accuracy clocks like mobile backhaul.  
@@ -196,20 +170,19 @@ The modular chassis version of the NCS 5500 is available in 4, 8, and 16 slot ve
 
 ## NCS 5500 / 5700 Fixed Chassis 
 The NCS 5500 / 5700 fixed series devices are validated in access, aggregation,
-and core role in the Converged SDN Transport design. All platforms listed below
+and core role in the Agile Metro design. All platforms listed below
 support at least PTP class B timing and the full set of IOS-XR xVPN and Segment
 Routing features.   
 
 These family of devices provide a flexible way to both aggregate downstream connections 
 as well terminate user services at different places in the network.  
 
-
 More information on the NCS 5500 fixed routers can be found at: 
 
 <https://www.cisco.com/c/en/us/products/routers/network-convergence-system-5500-series/index.html>
 
 
-## NCS 540 Small, Medium, Large Density, and Fronthaul routers  
+## NCS 540 Small, Medium, and Large density routers
 The NCS 540 family of routers supports mobile and business services across a wide
 variety of service provier and enterprise applications, including support for
 Routed Optical Networking in the QSFP-DD enabled NCS-540 Large Density router.
@@ -218,16 +191,10 @@ More information on the NCS 540 router line can be found at:
 
 <https://www.cisco.com/c/en/us/products/routers/network-convergence-system-540-series-routers/index.html>
 
-The N540-FH-CSR-SYS and N540-FH-AGG-SYS Fronthaul routers introduced in CST 5.0 can be
-utilized for ultra low latency mobile fronthaul, midhaul, or backhaul networks.
-These fronthaul routers support native CPRI interfaces and special processing
-for eCPRI and ROE (Radio over Ethernet) traffic guaranteeing low latency.  These
-devices also support stringent class C timing.  
-
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-ncs540.png)
 
 ## NCS-55A2-MOD 
-The Converged SDN Transport design now supports the NCS-55A2-MOD access and aggregation router. The 55A2-MOD is a modular 2RU 
+The Agile Metro design now supports the NCS-55A2-MOD access and aggregation router. The 55A2-MOD is a modular 2RU 
 router with 24 1G/10G SFP+, 16 1G/10G/25G SFP28 onboard interfaces, and two modular slots capable of 400G of throughput 
 per slot using Cisco NCS Modular Port Adapters or MPAs. MPAs add additional 1G/10G SFP+, 100G QSFP28, or 
 100G/200G CFP2 interfaces. The 55A2-MOD is available in an extended temperature version with a conformal coating as well as a high scale 
@@ -237,7 +204,7 @@ configuration (NCS-55A2-MOD-SE-S) scaling to millions of IPv4 and IPv6 routes.
 
 ## NCS-57C3-MOD
 The NCS-57C3-MOD is the next-generation 300mm modular router supporting the
-Converged SDN Transport design. The NCS-57C3-MOD is a 3.2Tbps platform with the
+Agile Metro design. The NCS-57C3-MOD is a 3.2Tbps platform with the
 following fixed interfaces:  8xQSFP28 100G, 48 SFP28 1/10/25G. The 57C3 also
 includes two 800G MPA slots, and one 400G MPA slot for port expansion. These
 expansion modules support additional 1/10/25G, 100G, and 400G interfaces.  The
@@ -255,7 +222,7 @@ NCS-57C3 is available in both standard (NCS-57C3-MOD-SYS) and scale
 
 ## Network Domain Structure 
 
-To provide unlimited network scale, the Converged SDN Transport is
+To provide unlimited network scale, the Agile Metro is
 structured into multiple IGP Domains: Access, Aggregation, and Core. However as we will 
 illustrate in the next section, the number of domains is completely flexible based on 
 provider need. 
@@ -285,10 +252,10 @@ domain.:%s/
 
 _Figure 3: Distributed with expanded core_ 
 
-The  Converged SDN Transport transport design supports all three network
+The  Agile Metro transport design supports all three network
 options, while remaining easily customizable.
 
-The first phase of the  Converged SDN Transport, discussed later in this
+The first phase of the  Agile Metro, discussed later in this
 document, will cover in depth the scenario described in Figure 3.
 
 ## Topology options and PE placement - Inline and non-inline PE 
@@ -297,7 +264,7 @@ The non-inline PE topology, shown in the figure below, moves the services edge
 PE device from the forwarding path between the access/aggregation networks and
 the core.  There are several factors which can drive providers to this design
 vs. one with an in-line PE, some of which are outlined in the table below. The
-control-plane configuration of the Converged SDN Transport does not change, all
+control-plane configuration of the Agile Metro does not change, all
 existing ABR configuration remains the same, but the device no longer acts as a
 high-scale PE.    
 
@@ -324,7 +291,7 @@ in this release support class A or B timing depending on platform.
 
 ## Connectivity using 100G/200G digital coherent optics w/MACSec  
 
-Converged SDN Transport 3.0+ adds support for the use of pluggable CFP2-DCO
+Agile Metro 3.0+ adds support for the use of pluggable CFP2-DCO
 transceivers to enable high speed aggregation and access network infrastructure.
 As endpoint bandwidth increases due to technology innovation such as 5G and
 Remote PHY, access and aggregation networks must grow from 1G and 10G to 100G
@@ -361,7 +328,7 @@ deploying nodes by not requiring specific IPv4 or IPv6 interface addresses betwe
 only needs to configure each interface to use a Loopback address on the East and West interfaces of the nodes. IGP adjacencies will be formed over the unnumbered 
 interfaces.   
 
-IS-IS and Segment Routing/SR-TE utilized in the Converged SDN Transport design supports using 
+IS-IS and Segment Routing/SR-TE utilized in the Agile Metro design supports using 
 unnumbered interfaces. SR-PCE used to compute inter-domain SR-TE paths also supports the use of unnumbered interfaces. In the topology database each interface is 
 uniquely identified by a combination of router ID and SNMP IfIndex value. 
 
@@ -397,7 +364,7 @@ interface TenGigE0/0/0/2
 ## Intra-Domain Operation 
 ### Intra-Domain Routing and Forwarding
 
-The Converged SDN Transport is based on a fully programmable transport that
+The Agile Metro is based on a fully programmable transport that
 satisfies the requirements described earlier. The foundation technology
 used in the transport design is Segment Routing (SR) with a MPLS based
 Data Plane in Phase 1 and a IPv6 based Data Plane (SRv6) in future.
@@ -424,7 +391,7 @@ and Adjacency-SID are represented by the MPLS label and both are
 advertised by the IGP protocol. This IGP extension eliminates the need
 to use LDP or RSVP protocol to exchange MPLS labels.
 
-The Converged SDN Transport design uses IS-IS as the IGP protocol.
+The Agile Metro design uses IS-IS as the IGP protocol.
 
 ### Intra-Domain Forwarding - Fast Re-Route using TI-LFA  
 
@@ -448,7 +415,7 @@ Section: "Inter-Domain Forwarding - High Availability and Fast Re-Route" for add
     
 ### Inter-Domain Forwarding
 
-The Converged SDN Transport achieves network scale by IGP domain
+The Agile Metro achieves network scale by IGP domain
 separation. Each IGP domain is represented by separate IGP process on
 the Area Border Routers (ABRs).
 
@@ -627,12 +594,12 @@ The proposed design is very scalable and can be easily extended to
 support even higher numbers of PCEP sessions by adding
 additional RRs and SR-PCE elements into the Access Domain.
 
-Figure 11 shows the  Converged SDN Transport physical topology with examples
+Figure 11 shows the  Agile Metro physical topology with examples
 of product placement.
 
 ![](http://xrdocs.io/design/images/asn-metro/image12.png)
 
-_Figure 11:  Converged SDN Transport – Physical Topology with transport
+_Figure 11:  Agile Metro – Physical Topology with transport
 programmability_
 
 
@@ -651,7 +618,7 @@ Segment Routing provides a simple and scalable way of defining an
 end-to-end application-aware traffic engineering path known as an SR-TE Policy. 
 The SR-TE Policy expresses the intent of the applications constraints across the network.   
 
-In the  Converged SDN Transport design, the Service End Point uses PCEP 
+In the  Agile Metro design, the Service End Point uses PCEP 
 along with Segment Routing On-Demand Next-hop (SR-ODN) capability, to request from the controller a path that
 satisfies specific constraints (such as low latency). This is done by
 associating SLA tags/attributes to the path request. Upon receiving the
@@ -732,7 +699,7 @@ _Figure 12: XR Transport Controller – Components_
   - Computes Shortest, Disjoint, Low Latency, and Avoidance paths
   - North Bound interface with applications via REST API
 
-### Converged SDN Transport Path Computation Workflows 
+### Agile Metro Path Computation Workflows 
 
 #### Static SR-TE Policy Configuration   
 
@@ -870,17 +837,17 @@ segment-routing
 ## Segment Routing and Unified MPLS (BGP-LU) Co-existence 
 ### Summary 
 
-In the Converged SDN Transport 3.0 design we introduce validation for the co-existence of services using BGP Labeled Unicast transport for inter-domain forwarding and those using SR-TE. Many networks deployed today have an existing BGP-LU design which may not be easily migrated to SR, so graceful introduction between the two transport methods is required. In the case of a multipoint service such as EVPN ELAN or L3VPN, an endpoint may utilize BGP-LU to one endpoint and SR-TE to another.  
+In the Agile Metro 3.0 design we introduce validation for the co-existence of services using BGP Labeled Unicast transport for inter-domain forwarding and those using SR-TE. Many networks deployed today have an existing BGP-LU design which may not be easily migrated to SR, so graceful introduction between the two transport methods is required. In the case of a multipoint service such as EVPN ELAN or L3VPN, an endpoint may utilize BGP-LU to one endpoint and SR-TE to another.  
 
 ### ABR BGP-LU design  
-In a BGP-LU design each IGP domain or ASBR boundary node will exchange BGP labeled prefixes between domains while resetting the BGP next-hop to its own loopback address. The labeled unicast label will change at each domain boundary across the end to end network. Within each IGP domain, a label distribution protocol is used to supply MPLS connectivity between the domain boundary and interior nodes. In the Converged SDN Transport design, IS-IS with SR-MPLS extensions is used to provide intra-domain MPLS transport. This ensures within each domain BGP-LU prefixes are protected using TI-LFA.  
+In a BGP-LU design each IGP domain or ASBR boundary node will exchange BGP labeled prefixes between domains while resetting the BGP next-hop to its own loopback address. The labeled unicast label will change at each domain boundary across the end to end network. Within each IGP domain, a label distribution protocol is used to supply MPLS connectivity between the domain boundary and interior nodes. In the Agile Metro design, IS-IS with SR-MPLS extensions is used to provide intra-domain MPLS transport. This ensures within each domain BGP-LU prefixes are protected using TI-LFA.  
 
-The BGP-LU design utilized in the Converged SDN Transport validation is based on Cisco's Unified MPLS design used in EPN 4.0. 
+The BGP-LU design utilized in the Agile Metro validation is based on Cisco's Unified MPLS design used in EPN 4.0. 
 
 # Quality of Service and Assurance 
 
 ## Overview 
-Quality of Service is of utmost importance in today's multi-service converged networks. The Converged SDN Transport design has the ability to enforce end to end traffic path SLAs using Segment Routing Traffic Engineering. In addition to satisfying those path constraints, traditional QoS is used to make sure the PHB (Per-Hop Behavior) of each packet is enforced at each node across the converged network.  
+Quality of Service is of utmost importance in today's multi-service converged networks. The Agile Metro design has the ability to enforce end to end traffic path SLAs using Segment Routing Traffic Engineering. In addition to satisfying those path constraints, traditional QoS is used to make sure the PHB (Per-Hop Behavior) of each packet is enforced at each node across the converged network.  
 
 ## NCS 540, 560, 5500, and 5700 QoS Primer 
 Full details of the NCS 540 and 5500 QoS capabilities and configuration can be found at: 
@@ -1040,7 +1007,7 @@ policy-map core-egress-exp-marking
 ![](http://xrdocs.io/design/images/asn-metro/cst-treesid.png)
 
 ### Tree-SID Overview 
-Converged SDN Transport 3.5 introduces Segment Routing Tree-SID across all
+Agile Metro 3.5 introduces Segment Routing Tree-SID across all
 IOS-XR nodes.  TreeSID utilizes the programmability of SR-PCE to create and
 maintain an optimized multicast tree from source to receiver across an SR-only
 IPv4 network. In CST 3.5 Tree-SID utilizes MPLS labels at each hop in the
@@ -1085,16 +1052,16 @@ IP multicast continues to be an optimization method for delivering content
 traffic to many endpoints, especially traditional broadcast video. Unicast
 content dominates the traffic patterns of most networks today, but multicast
 carries critical high value services, so proper design and implementation is
-required. In Converged SDN Transport 2.0 we introduced multicast edge and core
+required. In Agile Metro 2.0 we introduced multicast edge and core
 validation for native IPv4/IPv6 multicast using PIM, global multicast using
 in-band mLDP (profile 7), and mVPN using mLDP with in-band signaling (profile
-6). Converged SDN Transport 3.0 extends this functionality by adding support for
+6). Agile Metro 3.0 extends this functionality by adding support for
 mLDP LSM with the NG-MVPN BGP control plane (profile 14). Using BGP signaling
 adds additional scale to the network over in-band mLDP signaling and fits with
 the overall design goals of CST. More information about deployment of profile 14
-can be found in the Converged SDN Transport implementation guide. Converged SDN
+can be found in the Agile Metro implementation guide. Converged SDN
 Transport 3.0 supports mLDP-based label switched multicast within a single doman
-and across IGP domain boundaries. In the case of the Converged SDN Transport
+and across IGP domain boundaries. In the case of the Agile Metro
 design multicast has been tested with the source and receivers on both access
 and ABR PE devices.   
 
@@ -1118,7 +1085,7 @@ router isis ACCESS
 </div> 
 
 ### LDP mLDP-only Session Capability (RFC 7473)  
-In Converged SDN Transport 3.0 we introduce the ability to only advertise mLDP state on each router adjacency, eliminating the need to filter LDP unicast FECs from advertisement into the network. This is done using the SAC (State Advertisement Control) TLV in the LDP initialization messages to advertise which LDP FEC classes to receive from an adjacent peer.  We can restrict the capabilities to mLDP only using the following configuration.  Please see the implementation guide and configurations for the full LDP configuration.   
+In Agile Metro 3.0 we introduce the ability to only advertise mLDP state on each router adjacency, eliminating the need to filter LDP unicast FECs from advertisement into the network. This is done using the SAC (State Advertisement Control) TLV in the LDP initialization messages to advertise which LDP FEC classes to receive from an adjacent peer.  We can restrict the capabilities to mLDP only using the following configuration.  Please see the implementation guide and configurations for the full LDP configuration.   
 
 <div class="highlighter-rouge">
 <pre class="highlight">
@@ -1130,7 +1097,7 @@ mpls ldp
 ### LDP Unicast FEC Filtering for SR Unicast with mLDP Multicast  
 The following is for historical context, please see the above section regarding disabling LDP unicast FECs using session capability advertisements. 
 
-The Converged SDN Transport design utilized Segment Routing with the MPLS dataplane for all unicast traffic. The first phase of multicast support in Converged SDN Transport 2.0 will use mLDP for use with existing mLDP based networks and new networks wishing to utilize label switcched multicast across the core. LDP is enabled on an interface for both unicast and multicast by default. Since SR is being used for unicast, one must filtering out all LDP unicast FECs to ensure they are not distributed across the network. SR is used for all unicast traffic in the presence of an LDP FEC for the same prefix, but filtering them reduces control-plane activity, may aid in re-convergence, and simplifies troubleshooting.  The following should be applied to all interfaces which have mLDP enabled:  
+The Agile Metro design utilized Segment Routing with the MPLS dataplane for all unicast traffic. The first phase of multicast support in Converged SDN Transport 2.0 will use mLDP for use with existing mLDP based networks and new networks wishing to utilize label switcched multicast across the core. LDP is enabled on an interface for both unicast and multicast by default. Since SR is being used for unicast, one must filtering out all LDP unicast FECs to ensure they are not distributed across the network. SR is used for all unicast traffic in the presence of an LDP FEC for the same prefix, but filtering them reduces control-plane activity, may aid in re-convergence, and simplifies troubleshooting.  The following should be applied to all interfaces which have mLDP enabled:  
 
 <div class="highlighter-rouge">
 <pre class="highlight">
@@ -1148,14 +1115,14 @@ address-family ipv4
 </pre> 
 </div>
 
-# Converged SDN Transport Use Cases
+# Agile Metro Use Cases
 
 Service Provider networks must adopt a very flexible design that satisfy
 any to any connectivity requirements, without compromising in stability
 and availability. Moreover, transport programmability is essential to
 bring SLA awareness into the network. 
 
-The goal of the Converged SDN Transport is to provide a flexible network
+The goal of the Agile Metro is to provide a flexible network
 blueprint that can be easily customized to meet customer specific
 requirements. This blueprint must adapt to carry any service type, for example  
 cable access, mobile, and business services over the same converged network infrastructure. 
@@ -1168,7 +1135,7 @@ design used in building those solutions.
 # 4G and 5G Mobile Networks  
 
 ## Summary and 5G Service Types  
-The Converged SDN Transport design introduces support for 5G networks and 5G services. There are a variety of new service use cases being defined by 3GPP for use on 5G networks, illustrated by the figure below. Networks must now be built to support the stringent SLA requirements of Ultra-Reliable Low-Latency services while also being able to cope with the massive bandwidth introduced by Enhanced Mobile Broadband services. The initial support for 5G in the Converged SDN Transport design focuses on the backhaul and midhaul portions of the network utilizing end to end Segment Routing. The design introduces no new service types, the existing scalable L3VPN and EVPN based services using BGP are sufficient for carrying 5G control-plane and user-plane traffic.   
+The Agile Metro design introduces support for 5G networks and 5G services. There are a variety of new service use cases being defined by 3GPP for use on 5G networks, illustrated by the figure below. Networks must now be built to support the stringent SLA requirements of Ultra-Reliable Low-Latency services while also being able to cope with the massive bandwidth introduced by Enhanced Mobile Broadband services. The initial support for 5G in the Converged SDN Transport design focuses on the backhaul and midhaul portions of the network utilizing end to end Segment Routing. The design introduces no new service types, the existing scalable L3VPN and EVPN based services using BGP are sufficient for carrying 5G control-plane and user-plane traffic.   
 
 ![](http://xrdocs.io/design/images/asn-metro/cmf-5g-services.png) 
 
@@ -1548,7 +1515,7 @@ Ethernet/IP cable access network. Differentiated from simple switch or L3
 aggregation designs is the ability to support NG cable transport over the same
 common infrastructure already supporting other services like mobile backhaul and
 business VPN services. Cable Remote PHY is simply another service overlayed onto
-the existing Converged SDN Transport network architecture. We will cover all
+the existing Agile Metro network architecture. We will cover all
 aspects of connectivity between the Cisco cBR-8 and the RPD device.  
 
 ## Distributed Access Architecture  
@@ -1585,10 +1552,10 @@ As a critical component of the initial boot and provisioning of RPDs, the networ
 
 ## 4G Transport and Services Modernization 
 
-While talk about deploying 5G services has reached a fever pitch, many providers are continuing to build and evolve their 4G networks. New services require more agile and scalable networks, satisfied by Cisco's Converged SDN Transport. The services modernization found 
-in Converged SDN Transport 2.0 follows work done in EPN 4.0. Transport modernization requires simplification and new abilities. We evolve the EPN 4.0 design based on LDP and hierarchical BGP-LU to one using Segment Routing with an MPLS data plane and the SR-PCE to add inter-domain path computation, scale, and programmability.  L3VPN based 4G services remain, but are modernized to utilize SR-TE On-Demand Next-Hop, reducing provisioning complexity, increasing scale, and adding advanced path computation constraints. 4G services utilizing L3VPN remain the same, but those utilizing L2VPN such as VPWS and VPLS transition to EVPN services. EVPN is the modern replacement for legacy LDP signalled L2VPN services, reducing complexity and adding advanced multi-homing functionality.   The following table highlights the legacy and new way of delivering services for 4G.  
+While talk about deploying 5G services has reached a fever pitch, many providers are continuing to build and evolve their 4G networks. New services require more agile and scalable networks, satisfied by Cisco's Agile Metro. The services modernization found 
+in Agile Metro 2.0 follows work done in EPN 4.0. Transport modernization requires simplification and new abilities. We evolve the EPN 4.0 design based on LDP and hierarchical BGP-LU to one using Segment Routing with an MPLS data plane and the SR-PCE to add inter-domain path computation, scale, and programmability.  L3VPN based 4G services remain, but are modernized to utilize SR-TE On-Demand Next-Hop, reducing provisioning complexity, increasing scale, and adding advanced path computation constraints. 4G services utilizing L3VPN remain the same, but those utilizing L2VPN such as VPWS and VPLS transition to EVPN services. EVPN is the modern replacement for legacy LDP signalled L2VPN services, reducing complexity and adding advanced multi-homing functionality.   The following table highlights the legacy and new way of delivering services for 4G.  
 
-| Element | EPN 4.0 | Converged SDN Transport | 
+| Element | EPN 4.0 | Agile Metro | 
 | ---------------- | ---------------------- |-----|
 | Intra-domain MPLS Transport | LDP | IS-IS w/Segment Routing |  
 | Inter-domain MPLS Transport | BGP Labeled Unicast| SR using SR-PCE for Computation |
@@ -1601,7 +1568,7 @@ The CST 4G Transport modernization covers only MPLS-based access and not L2 acce
 # Business and Infrastructure Services using L3VPN and EVPN 
 
 ## EVPN Multicast 
-Multicast within a L2VPN EVPN has been supported since Converged SDN Transport 1.0. Multicast traffic within an EVPN is replicated to the endpoints interested in a specific group via EVPN signaling. EVPN utilizes ingress replication for all multicast traffic, meaning multicast is encapsulated with a specific EVPN label and unicast to each PE router with interested listeners for each multicast group. Ingress replication may add additional traffic to the network, but simplifies the core and data plane by eliminating multicast signaling, state, and hardware replication.  EVPN multicast is also not subject to domain boundary restrictions.
+Multicast within a L2VPN EVPN has been supported since Agile Metro 1.0. Multicast traffic within an EVPN is replicated to the endpoints interested in a specific group via EVPN signaling. EVPN utilizes ingress replication for all multicast traffic, meaning multicast is encapsulated with a specific EVPN label and unicast to each PE router with interested listeners for each multicast group. Ingress replication may add additional traffic to the network, but simplifies the core and data plane by eliminating multicast signaling, state, and hardware replication.  EVPN multicast is also not subject to domain boundary restrictions.
 
 ### EVPN Centralized Gateway Multicast 
 In CGW deployments, EVPN multicast is enhanced with support for EVPN Route Type
@@ -1613,19 +1580,19 @@ remote router. In release 5.0 CGW is supported on ASR 9000 routers only.  CGW
 selective multicast is supported for IPv4 and *,G multicast.   
 
 
-## LDP to Converged SDN Transport Migration  
+## LDP to Agile Metro Migration  
 Very few networks today are built as greenfield networks, most new designs are migrated 
-from existing ones and must support some level of interop during migration. In the Converged SDN Transport 
-design we tackle one of the most common migration scenarios, LDP to the Converged SDN Transport design. The following 
+from existing ones and must support some level of interop during migration. In the Agile Metro 
+design we tackle one of the most common migration scenarios, LDP to the Agile Metro design. The following 
 sections explain the configuration and best practices for performing the migration. The design is 
 applicable to transport and services originating and terminating in the same LDP domain.     
 
-### Towards Converged SDN Transport Design  
-The Converged SDN Transport design utilizes isolated IGP domains in different parts of the network, with each domain 
+### Towards Agile Metro Design  
+The Agile Metro design utilizes isolated IGP domains in different parts of the network, with each domain 
 separated at a logical boundary by an ASBR router. SR-PCE is used to provide end to end paths across the 
 inter-domain network. LDP does not support inter-domain transport, only between LDP FECs in the 
 same IGP domain. It is recommended to plan logical boundaries if necessary when doing a flat LDP migration to 
-the Converged SDN Transport design, so that when migration is complete the future scale benefits can be realized.  
+the Agile Metro design, so that when migration is complete the future scale benefits can be realized.  
  
 ### Segment Routing Enablement 
 One must define the global Segment Routing Block (SRGB) to be used across the network on every node 
@@ -1693,7 +1660,7 @@ one-way latency on the end to end path of 1680uS has exceeded the SLA of 500uS.
 
 ## Zero Touch Provisioning
 
-In addition to model-driven configuration and operation, Converged SDN Transport 1.5 
+In addition to model-driven configuration and operation, Agile Metro 1.5 
 supports ZTP operation for automated device provisioning. ZTP is useful both in 
 production as well as staging environments to automate initial device software 
 installation, deploy an initial bootstrap configuration, as well as advanced functionality 
@@ -1715,7 +1682,7 @@ in RFC 8572. More information on Crosswork ZTP can be found at
 
 ## Model-Driven Telemetry 
 
-In the 3.0 release the implementation guide includes a table of model-driven telemetry paths applicable to different components within the design.  More information on Cisco model-driven telemetry can be found at <https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/telemetry/66x/b-telemetry-cg-ncs5500-66x.html>. Additional information about how to consume and visualize telemetry data can be found at <https://xrdocs.io/telemetry>. We also introduce integration with Cisco Crosswork Health Insights, a telemetry and automated remediation platform, and sensor packs correspondding to Converged SDN Transport components. More information on Crosswork Health Insights can be found at <https://www.cisco.com/c/en/us/support/cloud-systems-management/crosswork-health-insights/model.html>  
+In the 3.0 release the implementation guide includes a table of model-driven telemetry paths applicable to different components within the design.  More information on Cisco model-driven telemetry can be found at <https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/telemetry/66x/b-telemetry-cg-ncs5500-66x.html>. Additional information about how to consume and visualize telemetry data can be found at <https://xrdocs.io/telemetry>. We also introduce integration with Cisco Crosswork Health Insights, a telemetry and automated remediation platform, and sensor packs correspondding to Agile Metro components. More information on Crosswork Health Insights can be found at <https://www.cisco.com/c/en/us/support/cloud-systems-management/crosswork-health-insights/model.html>  
 
 ## Transport and Service Management using Crosswork Network Controller
 Crosswork Network Controller provides support for provisioning SR-TE and RSVP-TE
@@ -1734,7 +1701,7 @@ physical underlay network elements with the help of standard open APIs
 such as NETCONF/YANG or a vendor-specific CLI using Network Element
 Drivers (NED).
 
-In the  Converged SDN Transport design, NSO is used for Services
+In the  Agile Metro design, NSO is used for Services
 Management, Service Provisioning, and Service Orchestration. Example or Core NSO 
 Function Packs are used for end-to-end provisioning of CST services.  
 
@@ -1776,7 +1743,7 @@ can also directly use the device YANG models using NETCONF for device
 configuration. These service templates enable NSO to operate in a
 multi-vendor environment.
 
-## Converged SDN Transport Supported Service Models
+## Agile Metro Supported Service Models
 CST 5.0+ supports using NSO Transport SDN Function Packs. The T-SDN function 
 packs cover both Traffic Engineering and xVPN service provisioning.  CST 5.0 is 
 aligned with T-SDN FP Bundle version 3.0 which includes the following function packs.
@@ -1805,8 +1772,8 @@ Example function packs are meant to be used as-is or modified to fit specific ne
 # Base Services Supporting Advanced Use Cases  
 ## Overview
 
-The Converged SDN Transport Design aims to enable simplification across all
-layers of a Service Provider network. Thus, the  Converged SDN Transport
+The Agile Metro Design aims to enable simplification across all
+layers of a Service Provider network. Thus, the  Agile Metro
 services layer focuses on a converged Control Plane based on BGP.
 
 BGP based Services include EVPNs and Traditional L3VPNs (VPNv4/VPNv6).
@@ -1971,7 +1938,7 @@ using well-established designs based on Data Central Interconnect (DCI).
 Figure 27 shows hierarchical services deployed on PE routers, but the
 same design applies when services are deployed on AG or DCI routers.
 
-The Converged SDN Transport Design offers scalable hierarchical services with
+The Agile Metro Design offers scalable hierarchical services with
 simplified provisioning. The three most important use cases are
 described in the following sections:
 
@@ -2094,9 +2061,9 @@ a all-active, single-active, or port-active configuration.
 _Figure 32: Hierarchical Services EVPN Centralized GW_ 
 
     
-# The Converged SDN Transport Design - Summary
+# The Agile Metro Design - Summary
 
-The Converged SDN Transport brings huge simplification at the Transport as
+The Agile Metro brings huge simplification at the Transport as
 well as at the Services layers of a Service Provider network.
 Simplification is a key factor for real Software Defined Networking
 (SDN). Cisco continuously improves Service Provider network designs to
@@ -2106,13 +2073,13 @@ From a very well established and robust Unified MPLS design, Cisco has
 embarked on a journey toward transport simplification and
 programmability, which started with the Transport Control Plane
 unification in Evolved Programmable Network 5.0 (EPN5.0). The Cisco
-Converged SDN Transport provides another huge leap forward in simplification and
+Agile Metro provides another huge leap forward in simplification and
 programmability adding Services Control Plane unification and
 centralized path computation.
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-overview.png)
 
-_Figure 51: Converged SDN Transport – Evolution_
+_Figure 51: Agile Metro – Evolution_
 
 The transport layer requires only IGP protocols with Segment Routing
 extensions for Intra and Inter Domain forwarding. Fast recovery for node
@@ -2126,6 +2093,6 @@ protocols like BGP-LS, PCEP, BGP-SR-TE, etc., for path computation and
 NETCONF/YANG for service provisioning, thus providing a on open
 standards based solution.
 
-For all those reasons, the Cisco Converged SDN Transport design really brings an
+For all those reasons, the Cisco Agile Metro design really brings an
 exciting evolution in Service Provider Networking.
 
