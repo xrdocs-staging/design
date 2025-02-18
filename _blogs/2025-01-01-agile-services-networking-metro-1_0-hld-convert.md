@@ -149,14 +149,13 @@ The following highlights the key technology building blocks used to build the Ag
  The Cisco 8000 family is one of the primary hardware components of the Agile Metro  
  Metro design. Cisco 8000 routers provide the lowest power consumption in the
  industry, all while supporting systems over 200 Tbps and features service
- providers require. The expanded Silicon One family of ASICs in Metro 1.0 includes the P100 and K100 family of products fulfilling specific roles in the solution.  
+ providers require. The expanded Silicon One family of ASICs in Agile Metro 1.0 includes the P100 and K100 family of products fulfilling specific roles in the solution.  
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-8000.png)
 
 ### New Agile Metro hardware 
 
 ![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000.png)
-
 
 ## ASR 9000 
 The ASR 9000 is the router of choice for high scale edge services.  Agile Metro utilizes the ASR 9000 in a PE function role, performing high scale L2VPN, L3VPN, peering, and Pseudowire headend termination. The ASR 9000 is also utilized as a user plane in the distributed CUPS architecture for subscriber termination. 
@@ -181,7 +180,6 @@ More information on the NCS 5500 fixed routers can be found at:
 
 <https://www.cisco.com/c/en/us/products/routers/network-convergence-system-5500-series/index.html>
 
-
 ## NCS 540 Small, Medium, and Large density routers
 The NCS 540 family of routers supports mobile and business services across a wide
 variety of service provier and enterprise applications, including support for
@@ -193,72 +191,26 @@ More information on the NCS 540 router line can be found at:
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-ncs540.png)
 
-## NCS-55A2-MOD 
-The Agile Metro design now supports the NCS-55A2-MOD access and aggregation router. The 55A2-MOD is a modular 2RU 
-router with 24 1G/10G SFP+, 16 1G/10G/25G SFP28 onboard interfaces, and two modular slots capable of 400G of throughput 
-per slot using Cisco NCS Modular Port Adapters or MPAs. MPAs add additional 1G/10G SFP+, 100G QSFP28, or 
-100G/200G CFP2 interfaces. The 55A2-MOD is available in an extended temperature version with a conformal coating as well as a high scale 
-configuration (NCS-55A2-MOD-SE-S) scaling to millions of IPv4 and IPv6 routes.   
-
-![](http://xrdocs.io/design/images/asn-metro/cst-hw-ncs-55a2-mod.png)
-
-## NCS-57C3-MOD
-The NCS-57C3-MOD is the next-generation 300mm modular router supporting the
-Agile Metro design. The NCS-57C3-MOD is a 3.2Tbps platform with the
-following fixed interfaces:  8xQSFP28 100G, 48 SFP28 1/10/25G. The 57C3 also
-includes two 800G MPA slots, and one 400G MPA slot for port expansion. These
-expansion modules support additional 1/10/25G, 100G, and 400G interfaces.  The
-NCS-57C3 is available in both standard (NCS-57C3-MOD-SYS) and scale
-(NCS-57C3-MOD-SE-SYS) varieties.  
-
-![](http://xrdocs.io/design/images/asn-metro/cst-hw-57c3.png)
-
-
 
 # Transport – Design Components  
-    
-
-
 
 ## Network Domain Structure 
 
-To provide unlimited network scale, the Agile Metro is
-structured into multiple IGP Domains: Access, Aggregation, and Core. However as we will 
-illustrate in the next section, the number of domains is completely flexible based on 
-provider need. 
+In an Agile Metro network services can be located at any point within the network, blurring the traditional 
+network boundaries of access, aggregation, edge, and core. These segments in the network may still exist based 
+on geographical boundaries and interconnection, but the "edge" terminating user services can be placed throughout the metro network. The distribution of services enhances overall network scale and resilience.  
 
-Refer to the network topology in Figure 1.
+![](http://xrdocs.io/design/images/asn-metro/agile-metro-end-state.png) 
 
-![](http://xrdocs.io/design/images/asn-metro/cmf-high-scale-distributed.png)
-
-_Figure 1: High scale fully distributed_ 
-
-The network diagram in Figure 2 shows how a Service Provider network can
-be simplified by decreasing the number of IGP domains. In this scenario
-the Core domain is extended over the Aggregation domain, thus increasing
-the number of nodes in the
-Core.
-
-![](http://xrdocs.io/design/images/asn-metro/cmf-expanded-core.png)
-
-_Figure 2: Distributed with expanded access_ 
-
-A similar approach is shown in Figure 3. In this scenario the Core
-domain remains unaltered and the Access domain is extended over the
-Aggregation domain, thus increasing the number of nodes in the Access
-domain.:%s/
-
-![](http://xrdocs.io/design/images/asn-metro/cmf-expanded-access.png)
-
-_Figure 3: Distributed with expanded core_ 
-
-The  Agile Metro transport design supports all three network
-options, while remaining easily customizable.
-
-The first phase of the  Agile Metro, discussed later in this
-document, will cover in depth the scenario described in Figure 3.
 
 ## Topology options and PE placement - Inline and non-inline PE 
+
+### Edge fabric 
+
+### Edge services on a stick 
+
+### 
+
 
 The non-inline PE topology, shown in the figure below, moves the services edge
 PE device from the forwarding path between the access/aggregation networks and
