@@ -203,13 +203,23 @@ on geographical boundaries and interconnection, but the "edge" terminating user 
 ![](http://xrdocs.io/design/images/asn-metro/agile-metro-end-state.png) 
 
 
-## Topology options and PE placement - Inline and non-inline PE 
+## Topology options and PE placement - Inline and non-inline PE
+The design is flexible to support edge service placement at different places in the network.  
 
-### Edge fabric 
+![](http://xrdocs.io/design/images/asn-metro/metro-deployment-options.png) 
 
 ### Edge services on a stick 
+This model can be utilized for scenarios where the Edge service termination is relatively 
+low bandwidth compared to transit traffic and requires utilizing a more sophisticated edge device. In the Agile Metro 
+design this includes cases where CGNAT is being used or exception handling for MAP-T traffic.   
 
-### 
+### Fully distributed edge
+This model full distributes edge functions so any router within the metro can provide end user services.   
+
+### Edge Fabric 
+This design creates a scale out fabric which can be placed within a single provider location or 
+utilize WAN connections to create a larger fabric spanning multiple locations. 
+
 
 
 The non-inline PE topology, shown in the figure below, moves the services edge
