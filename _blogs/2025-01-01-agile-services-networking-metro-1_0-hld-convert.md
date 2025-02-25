@@ -211,37 +211,23 @@ The design is flexible to support edge service placement at different places in 
 ### Edge services on a stick 
 This model can be utilized for scenarios where the Edge service termination is relatively 
 low bandwidth compared to transit traffic and requires utilizing a more sophisticated edge device. In the Agile Metro 
-design this includes cases where CGNAT is being used or exception handling for MAP-T traffic.   
+design this includes cases where Carrier Grade NAT is being used or exception handling for MAP-T traffic.   
 
 ### Fully distributed edge
-This model full distributes edge functions so any router within the metro can provide end user services.   
+This model full distributes edge functions so any router within the metro can provide edge user services. A provider may use a fully distributed edge is if the bandwidth, port, or service scale does not exceed that of a single node or pair of nodes. Another scenario may be if   
 
 ### Edge Fabric 
 This design creates a scale out fabric which can be placed within a single provider location or 
-utilize WAN connections to create a larger fabric spanning multiple locations. 
-
-
-
-The non-inline PE topology, shown in the figure below, moves the services edge
-PE device from the forwarding path between the access/aggregation networks and
-the core.  There are several factors which can drive providers to this design
-vs. one with an in-line PE, some of which are outlined in the table below. The
-control-plane configuration of the Agile Metro does not change, all
-existing ABR configuration remains the same, but the device no longer acts as a
-high-scale PE.    
-
-![](http://xrdocs.io/design/images/asn-metro/non-inline-design.png)
-_Figure: Non-Inline Aggregation Topology_
+utilize WAN connections to create a larger fabric spanning multiple locations. An Edge Fabric is used 
+when providers want the ultimate scale in terminating user services, have a necessity for using specific leaf
+devices for different services types, or need to create a multi-vendor fabric. See the "Edge Fabric" section of 
+the document for more information on building and managing Edge Fabrics.   
 
 
 ## Cisco Routed Optical Networking 
-Starting in CST 5.0, the CST design now supports and validates 400G ZR/ZR+
-tunable DWDM QSFP-DD transceivers. These transceivers are supported across the
-ASR 9000, Cisco 8000, NCS 5500/5700, and NCS 540 routers with QSFP-DD ports.
-Routed Optical Network as part of the Coverged SDN Transport design adds
-simplification of provider IP and Optical infrastructure to the control and data
-plane simplification introduced in previous CST designs. All CST capabilities are 
-supported over Cisco ZR and ZR+ enabled interfaces. 
+Routed Optical Networking is a foundational component of the Agile Metro for network operators with their own fiber assets 
+utilizing point to point dark fiber connections or multiplexed DWDM connections.   
+
 
 For more information on Cisco's Routed Optical Networking design please see the 
 following high-level design document:  
@@ -250,39 +236,6 @@ following high-level design document:
 
 Note class C timing is currently not supported over ZR/ZR+ optics, ZR/ZR+ optics 
 in this release support class A or B timing depending on platform.   
-
-## Connectivity using 100G/200G digital coherent optics w/MACSec  
-
-Agile Metro 3.0+ adds support for the use of pluggable CFP2-DCO
-transceivers to enable high speed aggregation and access network infrastructure.
-As endpoint bandwidth increases due to technology innovation such as 5G and
-Remote PHY, access and aggregation networks must grow from 1G and 10G to 100G
-and beyond. Coherent router optics simplify this evolution by allowing an
-upgrade path to increase ring bandwidth up to 400Gbps without deploying costly
-DWDM optical line systems. CFP2-DCO transceivers are supported using 400G
-Modular Port Adapters for the NCS-55A2-MOD-S/SE, NCS-57C3-MOD-S/SE chassis and
-NC55-MOD-A-S/SE line cards. The NC55-MPA-1TH2H-S MPA has two QSFP28 ports and
-one CFP2-DCO port. The NC55-MPA-2TH-HX-S is a temperature hardened version of
-this MPA. The NC55-MPA-2TH-S has two CFP2-DCO ports.  
-
-MACSec is an industry standard protocol running at L2 to provide encryption
-across Ethernet links. In CST 3.0 MACSec is enabled across CFP2-DCO access to
-aggregation links. MACSec support is hardware dependent, please consult
-individual hardware data sheets for MACSec support.   
-
-### Routed Optical Networking ring deployment without multiplexers 
-In the simplest deployment access rings are deployed over dark fiber, enabling
-plug and play operation up to 80km without amplification.
-
-![](http://xrdocs.io/design/images/asn-metro/cmf-dwdm-ring.png)
-_Routed Optical Networking DWDM ring deployment_ 
-
-### Routed Optical Networking deployment with multiplexer 
-In this option the nodes are deployed with active or passive multiplexers to maximize fiber utilization rings needing more bandwidth per ring site. While this example shows each site on the ring having direct DWDM links back to the aggregation nodes, a hybrid approach could also be supported targeting only high-bandwidth locations with direct links while leaving other sites on a an aggregation ring.   
-
-![](http://xrdocs.io/design/images/asn-metro/cmf-dwdm-mux.png)
-_Routed Optical Networking DWDM hub and spoke or partial mesh deployment_ 
-
 
 ## Unnumbered Interface Support 
 In CST 3.5, starting at IOS-XR 7.1.1 we have added support for unnumbered interfaces. Using unnumbered interfaces in the network eases the burden of 
