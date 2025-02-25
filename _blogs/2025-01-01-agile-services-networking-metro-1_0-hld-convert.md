@@ -228,23 +228,154 @@ the document for more information on building and managing Edge Fabrics.
 Routed Optical Networking is a foundational component of the Agile Metro for network operators with their own fiber assets 
 utilizing point to point dark fiber connections or multiplexed DWDM connections.   
 
-
 For more information on Cisco's Routed Optical Networking design please see the 
 following high-level design document:  
 
 <https://xrdocs.io/design/blogs/latest-routed-optical-networking-hld> 
 
-Note class C timing is currently not supported over ZR/ZR+ optics, ZR/ZR+ optics 
-in this release support class A or B timing depending on platform.   
+
+## Segment Routing 
+
+Segment Routing is another foundational component of Agile Services Networking. The Segment Routing architecture is available with 
+two forwarding planes, IPv6 and MPLS. SRv6 presents a highly scalable and simplified data plane for modern networks. SRv6 is simply IP routing, using IPv6 addresses to represent end nodes as well as end services. The Agile Services Networking solution uses SRv6 with uSID as the primary dataplane, but also utilizes SR-MPLS which is fully supported across all hardware, software, and automation products. 
+
+## Traffic Engineering 
+
+### Segment Routing Flexible Algorithms (Flex-Algo) 
+
+A powerful tool used to create traffic engineered Segment Routing paths is SR
+Flexible Algorithms, better known as SR Flex-Algo.  Flex-Algo assigns a specific
+set of "algorithms" to a Segment. The algorithm identifies a specific
+computation constraint the segment supports. There are standards based algorithm
+definitions such as least cost IGP path and latency, or providers can define
+their own algorithms to satisfy their business needs.  Agile Services Networking supports
+computation of Flex-Algo paths in intra-domain and inter-domain deployments. 
+Flex-Algo limits the computation of a path to only those nodes participating in
+that algorithm. This gives a powerful way to create multiple network domains
+within a single larger network, constraining an SR path computation to segments
+satisfying the metrics defined by the algorithm. As you will see, we can now use
+a single node SID to reach a node via a path satisfying an advanced constraint
+such as delay.  
+
+Operators can solve most traffic engineering use cases with Flex-Algo. Capabilities of Flex-Algo are continually being enhanced, supporting additional metrics and constraints for path computation. In XR 24.4.1 the following metrics and constraints are supported.  
+
+### Flex-Algo Metrics  
+
+Delay 
+: Delay utilizes the measured or statically configured delay of each link to compute an end to end lowest latency path. Delay values are computed or defined using SR Performance Measurement.   
+Generic 
+: The generic metric type is used by operators to build a custom topology based on their own metrics. The generic metric for each link is defined in the IS-IS configuration for each link. The Flex-Algo topology will only include nodes/links with the generic metric defined, and will follow the lowest cost path using those user-defined metrics. 
+TE: 
+The TE metric is an additional metric which can be assigned to each link. The TE metric is advertised in the standard IS-IS traffic engineering TLVs.  
+
+### Flex-Algo Constraints 
+
+Affinity: 
+Affinity uses standard unidirectional traffic engineering affinities (groups) to include or exclude links from the topology. IOS-XR also supports reverse affinities, meaning if the affinity is being sent from node B to A, A will take that link into account when computing the Flex-Algo. One use case is if an affinity is being applied by the remote node on the link due to packet errors.  
+
+Minimum Bandwidth: 
+The minimum bandwidth metric is uses to prune links below a certain bandwidth value. This is useful for networks with a mix of high and low speed links to ensure traffic does not take a low speed path. An example is a network with 10G access rings connected to a higher speed aggregation network. High speed traffic between aggregation locations should never traverse the access rings, and this is easily achievable usign the minimimum bandwidth constraint.  
+
+Maximum Delay: 
+Maximum delay uses the measured or statically set SR-PM delay values to prune high delay links from the network. While the delay metric will calculate the lowest delay path, this will ensure that path never takes high delay links.  
+
+
+### Flex-Algo SRv6 Locator Assignment 
+
+
+### Flex-Algo Node SID Assignment
+Nodes participating in a specific algorithm must have a unique node SID prefix assigned to the algorithm. In a typical deployment, the same Loopback address is 
+used for multiple algorithms. IGP extensions advertise algorithm membership throughout the network. Below is an example of a node with multiple algorithms and node SID 
+assignments. By default, the basic IGP path computation is assigned to algorithm "0".  Algorithm "1" is also reserved. Algorithms 128-255 are user-definable. All Flex-Algo 
+SIDs belong to the same global SRGB so providers deploying SR should take this into account. Each algorithm should be assigned its own block of SIDs within 
+the SRGB, in the case below the SRGB is 16000-32000, each algorithm is assigned 1000 SIDs.   
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+ interface Loopback0
+  address-family ipv4 unicast
+   prefix-sid index 150
+   prefix-sid algorithm 128 absolute 18003
+   prefix-sid algorithm 129 absolute 19003
+   prefix-sid algorithm 130 absolute 20003
+</pre>
+</div>
+
+### Flex-Algo IGP Definition 
+Flexible algorithms being used within a network must be defined in the IGP domains in the network The configuration is typically 
+done on at least one node under the IGP configuration for domain. Under the definition the metric type used for computation is 
+defined along with any link affinities. Link affinities are used to constrain the algorithm to not only specific nodes, but 
+also specific links. These affinities are the same previously used by RSVP-TE.  
+
+**Note: Inter-domain Flex-Algo path computation requires synchronized Flex-Algo definitions across the end-to-end path** 
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+ flex-algo 130
+  metric-type delay
+  advertise-definition
+ !
+ flex-algo 131
+  advertise-definition
+  affinity exclude-any red
+</pre>
+</div>
+
+### Path Computation across SR Flex-Algo Network 
+Flex-Algo works by creating a separate topology for each algorithm. By default,
+all links interconnecting nodes participating in the same algorithm can be used
+for those paths. If the algorithm is defined to include or exclude specific link
+affinities, the topology will reflect it. A SR-TE path computation using a
+specific Flex-Algo will use the Algo's topology for end the end path
+computation. It will also look at the metric type defined for the Algo and use
+it for the path computation.  Even with a complex topology, a single SID is used
+for the end to end path, as opposed to using a series of node and adjacency SIDs
+to steer traffic across a shared topology. Each node participating in the
+algorithm has adjacencies to other nodes utilizing the same algorithm, so when a
+incoming MPLS label matching the algo SID enters, it will utilize the path
+specific to the algorithm.  A Flex-Algo can also be used as a constraint in an
+ODN policy.   
+### Flex-Algo Dual-Plane Example 
+A very simple use case for Flex-Algo is to easily define a dual-plane network
+topology where algorithm 129 red and algorithm 130 is green. Nodes A1 and A6
+participate in both algorithms. When a path request is made for algorithm 129,
+the head-end nodes A1 and A6 will only use paths specific to the algorithm.  The
+SR-TE Policy does not need to reference the specific SID, only the Algo being
+used as the constraints. The local node or SR-PCE will utilize the Algo to
+compute the path dynamically.   
+
+![](http://xrdocs.io/design/images/asn-metro/cst-hld-dual-plane.png)
+
+The following policy configuration is an example of constraining the path to the Algo 129 "Red" path.  
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+ traffic-eng
+  policy GREEN-PE8-128
+   color 1128 end-point ipv4 100.0.2.53
+   candidate-paths
+    preference 1
+     dynamic
+      pcep
+      !
+      metric
+       type igp
+      !
+     !
+<b>     constraints
+      segments
+       sid-algorithm 129</b> 
+</pre>
+</div>
 
 ## Unnumbered Interface Support 
-In CST 3.5, starting at IOS-XR 7.1.1 we have added support for unnumbered interfaces. Using unnumbered interfaces in the network eases the burden of 
-deploying nodes by not requiring specific IPv4 or IPv6 interface addresses between adjacent node. When inserting a new node into an existing access ring the provider
-only needs to configure each interface to use a Loopback address on the East and West interfaces of the nodes. IGP adjacencies will be formed over the unnumbered 
-interfaces.   
+
+If building an IPv6/SRv6 based network, IS-IS utilizes link-local addresses for node adjacencies. It does not require the 
+operator number interfaces in a common subnet like IPv4. This simplifies the overall deployment of the network and allows an operator to insert nodes into an existing IS-IS adjacency path without additional configuration.  If using IS-IS for IPv4, the operator can achieve similar behavior by using unnumbered support.  
 
 IS-IS and Segment Routing/SR-TE utilized in the Agile Metro design supports using 
-unnumbered interfaces. SR-PCE used to compute inter-domain SR-TE paths also supports the use of unnumbered interfaces. In the topology database each interface is 
+unnumbered IPv4 interfaces. In the topology database each interface is 
 uniquely identified by a combination of router ID and SNMP IfIndex value. 
 
 
@@ -662,6 +793,7 @@ enhances the inter-domain capabilities and can now compute inter-domain paths us
 Flex-Algo limits the computation of a path to only those nodes participating in that algorithm. This gives a powerful way to create multiple network 
 domains within a single larger network, constraining an SR path computation to segments satisfying the metrics defined by the algorithm. As you will see, 
 we can now use a single node SID to reach a node via a path satisfying an advanced constraint such as delay.  
+
 ### Flex-Algo Node SID Assignment
 Nodes participating in a specific algorithm must have a unique node SID prefix assigned to the algorithm. In a typical deployment, the same Loopback address is 
 used for multiple algorithms. IGP extensions advertise algorithm membership throughout the network. Below is an example of a node with multiple algorithms and node SID 
