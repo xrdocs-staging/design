@@ -274,16 +274,40 @@ Affinity:
 Affinity uses standard unidirectional traffic engineering affinities (groups) to include or exclude links from the topology. IOS-XR also supports reverse affinities, meaning if the affinity is being sent from node B to A, A will take that link into account when computing the Flex-Algo. One use case is if an affinity is being applied by the remote node on the link due to packet errors.  
 
 Minimum Bandwidth: 
-The minimum bandwidth metric is uses to prune links below a certain bandwidth value. This is useful for networks with a mix of high and low speed links to ensure traffic does not take a low speed path. An example is a network with 10G access rings connected to a higher speed aggregation network. High speed traffic between aggregation locations should never traverse the access rings, and this is easily achievable usign the minimimum bandwidth constraint.  
+The minimum bandwidth metric is uses to prune links below a certain bandwidth value. This is useful for networks with a mix of high and low speed links to ensure traffic does not take a low speed path. An example is a network with 10G access rings connected to a higher speed aggregation network. High speed traffic between aggregation locations should never traverse the access rings, and this is easily achievable using the minimum bandwidth constraint. 
 
 Maximum Delay: 
 Maximum delay uses the measured or statically set SR-PM delay values to prune high delay links from the network. While the delay metric will calculate the lowest delay path, this will ensure that path never takes high delay links.  
 
 
-### Flex-Algo SRv6 Locator Assignment 
+### Flex-Algo SRv6 locator assignment 
+SRv6 locators are defined under the primary SRv6 configuration. Each defined locator for the node can be assigned a specific Flex-Algo, which is used by remote head-end nodes to calculate the specific Flex-Algo topology for end to end path computation.  
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+ srv6
+  encapsulation
+   source-address fccc:0:214::1
+  !
+  locators
+   locator LocAlgo0
+    micro-segment behavior unode psp-usd
+    prefix fccc:0:214::/48
+   !
+   locator LocAlgo128
+    micro-segment behavior unode psp-usd
+    prefix fccc:1:214::/48
+    algorithm 128
+   !
+  !
+ !
+!
+</pre>
+</div>
 
 
-### Flex-Algo Node SID Assignment
+### Flex-Algo MPLS SID Assignment
 Nodes participating in a specific algorithm must have a unique node SID prefix assigned to the algorithm. In a typical deployment, the same Loopback address is 
 used for multiple algorithms. IGP extensions advertise algorithm membership throughout the network. Below is an example of a node with multiple algorithms and node SID 
 assignments. By default, the basic IGP path computation is assigned to algorithm "0".  Algorithm "1" is also reserved. Algorithms 128-255 are user-definable. All Flex-Algo 
@@ -328,14 +352,15 @@ for those paths. If the algorithm is defined to include or exclude specific link
 affinities, the topology will reflect it. A SR-TE path computation using a
 specific Flex-Algo will use the Algo's topology for end the end path
 computation. It will also look at the metric type defined for the Algo and use
-it for the path computation.  Even with a complex topology, a single SID is used
+it for the path computation. Even with a complex topology, a single SID is used
 for the end to end path, as opposed to using a series of node and adjacency SIDs
 to steer traffic across a shared topology. Each node participating in the
-algorithm has adjacencies to other nodes utilizing the same algorithm, so when a
-incoming MPLS label matching the algo SID enters, it will utilize the path
-specific to the algorithm.  A Flex-Algo can also be used as a constraint in an
-ODN policy.   
-### Flex-Algo Dual-Plane Example 
+algorithm has adjacencies to other nodes utilizing the same algorithm, so when an 
+incoming SRv6 IP address or MPLS label matching the algo SID enters, it will utilize the path
+specific to the algorithm. On-demand SR-TE policies can also use a specific algorithm.   
+
+
+### Flex-Algo SR-MPLS dual-plane topology example  
 A very simple use case for Flex-Algo is to easily define a dual-plane network
 topology where algorithm 129 red and algorithm 130 is green. Nodes A1 and A6
 participate in both algorithms. When a path request is made for algorithm 129,
@@ -369,13 +394,17 @@ segment-routing
 </pre>
 </div>
 
-## Unnumbered Interface Support 
+## Agile networks using SRv6 or IPv4 unnumbered interfaces  
 
-If building an IPv6/SRv6 based network, IS-IS utilizes link-local addresses for node adjacencies. It does not require the 
-operator number interfaces in a common subnet like IPv4. This simplifies the overall deployment of the network and allows an operator to insert nodes into an existing IS-IS adjacency path without additional configuration.  If using IS-IS for IPv4, the operator can achieve similar behavior by using unnumbered support.  
+If building an IPv6/SRv6 based network, IS-IS utilizes link-local addresses for
+node adjacencies. It does not require the operator number interfaces in a common
+subnet like IPv4. This simplifies the overall deployment of the network and
+allows an operator to insert nodes into an existing IS-IS adjacency path without
+additional configuration.  If using IS-IS for IPv4, the operator can achieve
+similar behavior by using unnumbered support.  
 
-IS-IS and Segment Routing/SR-TE utilized in the Agile Metro design supports using 
-unnumbered IPv4 interfaces. In the topology database each interface is 
+IS-IS and Segment Routing/SR-TE utilized in the Agile Metro design supports
+using unnumbered IPv4 interfaces. In the topology database each interface is
 uniquely identified by a combination of router ID and SNMP IfIndex value. 
 
 
@@ -406,56 +435,6 @@ interface TenGigE0/0/0/2
 !
 </pre>
 </div>
-
-## Intra-Domain Operation 
-### Intra-Domain Routing and Forwarding
-
-The Agile Metro is based on a fully programmable transport that
-satisfies the requirements described earlier. The foundation technology
-used in the transport design is Segment Routing (SR) with a MPLS based
-Data Plane in Phase 1 and a IPv6 based Data Plane (SRv6) in future.
-
-Segment Routing dramatically reduces the amount of protocols needed in a
-Service Provider Network. Simple extensions to traditional IGP protocols
-like ISIS or OSPF provide full Intra-Domain Routing and Forwarding
-Information over a label switched infrastructure, along with High
-Availability (HA) and Fast Re-Route (FRR) capabilities.
-
-Segment Routing defines the following routing related concepts:
-
-  - Prefix-SID – A node identifier that must be unique for each node in
-    a IGP Domain. Prefix-SID is statically allocated by th3 network
-    operator.
-
-  - Adjacency-SID – A node’s link identifier that must be unique for
-    each link belonging to the same node. Adjacency-SID is typically
-    dynamically allocated by the node, but can also be statically
-    allocated.
-
-In the case of Segment Routing with a MPLS Data Plane, both Prefix-SID
-and Adjacency-SID are represented by the MPLS label and both are
-advertised by the IGP protocol. This IGP extension eliminates the need
-to use LDP or RSVP protocol to exchange MPLS labels.
-
-The Agile Metro design uses IS-IS as the IGP protocol.
-
-### Intra-Domain Forwarding - Fast Re-Route using TI-LFA  
-
-Segment-Routing embeds a simple Fast Re-Route (FRR) mechanism known as
-Topology Independent Loop Free Alternate (TI-LFA).
-
-TI-LFA provides sub 50ms convergence for link and node protection.
-TI-LFA is completely stateless and does not require any additional
-signaling mechanism as each node in the IGP Domain calculates a primary
-and a backup path automatically and independently based on the IGP
-topology. After the TI-LFA feature is enabled, no further care is
-expected from the network operator to ensure fast network recovery from
-failures. This is in stark contrast with traditional MPLS-FRR, which
-requires RSVP and RSVP-TE and therefore adds complexity in the transport
-design.
-
-Please refer also to the Area Border Router Fast Re-Route covered in
-Section: "Inter-Domain Forwarding - High Availability and Fast Re-Route" for additional details.
 
 ## Inter-Domain Operation
     
@@ -580,68 +559,6 @@ SR Data Plane Monitoring provides proactive method to ensure
 reachability between all SR enabled nodes in an IGP domain. SR DPM utilizes well known MPLS OAM 
 capabilities with crafted SID lists to ensure valid forwarding across the entire IGP domain. See the CST Implementation Guide for 
 more details on SR Data Plane monitoring.  
-
-### Inter-Domain Open Ring Support  
-Prior to CST 4.0 and XR 7.2.1, the use of TI-LFA within a ring topology required the ring be closed within the IGP domain. This 
-required an interconnect at the ASBR domain node for each IGP domain terminating on the ASBR.  This type of connectivity was not 
-always possible in an aggregation network due to fiber or geographic constraints. In CST 4.0 we have introduced support for 
-open rings by utilizing MPLSoGRE tunnels between terminating boundary nodes across the upstream IGP domain. The following picture 
-illustrates open ring support between an access and aggregation network.   
-
-![](http://xrdocs.io/design/images/asn-metro/cst-hld-open-ring.png)
-
-In the absence of a physical link between the boundary nodes PA1 and PA2, GRE tunnels can be created to interconnect each domain 
-over its adjacent domain. During a protection event, such as the link failure between PA1 and GA1, traffic will enter the tunnel on the 
-protection node, in this case PA1 towards PA2. Keep in mind traffic will loop back through the domain until re-convergence occurs. In the case of a 
-core failure, bandwidth may not be available in an access ring to carry all core traffic, so care must be taken to determine traffic impact.     
-## Transport Programmability
-
-Figure 9 and Figure 10 show the design of Route-Reflectors (RR), Segment Routing 
-Path Computation Element (SR-PCE) and WAN Automation Engines (WAE).
-High-Availability is achieved by device redundancy in the Aggregation
-and Core networks.
-
-![](http://xrdocs.io/design/images/asn-metro/image10.png)
-
-_Figure 9: Transport Programmability – PCEP_
-
-Transport RRs collect network topology from ABRs through BGP Link State (BGP-LS).
-Each Transport ABR has a BGP-LS session with the two Domain RRs. Each domain is represented 
-by a different BGP-LS instance ID.  
-
-Aggregation Domain RRs collect network topology information from the
-Access and the Aggregation IGP Domain (Aggregation ABRs are part of the
-Access and the Aggregation IGP Domain). Core Domain RRs collect network
-topology information from the Core IGP Domain.
-
-Aggregation Domain RRs have BGP-LS sessions with Core RRs.
-
-Through the Core RRs, the Aggregation Domains RRs advertise local
-Aggregation and Access IGP topologies and receive the network topologies
-of the remote Access and Aggregation IGP Domains as well as the network
-topology of the Core IGP Domain. Hence, each RR maintains the overall
-network topology in BGP-LS.
-
-Redundant Domain SR-PCEs have BGP-LS sessions with the local Domain RRs
-through which they receive the overall network topology. Refer to
-Section: "Segment Routing Path Computation Element (SR-PCE)" for more details about SR-PCE.
-
-SR-PCE is capable of computing the Inter-Domain LSP path on-demand. The computed path (Segment Routing SID List) is communicated to the Service End Points via a Path Computation Element Protocol (PCEP) response as shown in Figure 9. 
-
-The Service End Points create a SR-TE Policy and use the SID list returned by SR-PCE as the primary 
-path.   
-
-Service End Points can be located on the Access Routers for End-to-End 
-Services or at both the Access and domain PE routers for Hierarchical Services. The domain PE routers and ABRs may or may not be the same router. The SR-TE Policy Data
-Plane in the case of Service End Point co-located with the Access router
-was described in Figure 5.
-
-The proposed design is very scalable and can be easily extended to
-support even higher numbers of PCEP sessions by adding
-additional RRs and SR-PCE elements into the Access Domain.
-
-Figure 11 shows the  Agile Metro physical topology with examples
-of product placement.
 
 ![](http://xrdocs.io/design/images/asn-metro/image12.png)
 
