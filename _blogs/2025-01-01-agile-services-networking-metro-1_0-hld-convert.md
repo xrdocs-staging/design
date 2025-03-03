@@ -194,13 +194,18 @@ More information on the NCS 540 router line can be found at:
 
 # Transport – Design Components  
 
-## Network Domain Structure 
+## Agile service placement 
 
 In an Agile Metro network services can be located at any point within the network, blurring the traditional 
 network boundaries of access, aggregation, edge, and core. These segments in the network may still exist based 
 on geographical boundaries and interconnection, but the "edge" terminating user services can be placed throughout the metro network. The distribution of services enhances overall network scale and resilience.  
 
 ![](http://xrdocs.io/design/images/asn-metro/agile-metro-end-state.png) 
+
+
+## Network domains and IGP structure 
+
+
 
 
 ## Topology options and PE placement - Inline and non-inline PE
@@ -394,6 +399,40 @@ segment-routing
 </pre>
 </div>
 
+
+### Traffic Engineering (Tactical Steering) – SR-TE Policy
+
+Segment Routing provides a simple and scalable way of defining an end-to-end
+application-aware traffic engineering path known as an SR-TE Policy. The SR-TE
+Policy expresses the intent of the applications constraints across the network.
+The path computation will minimize the number of segments required to build the
+end to end path across the network, simplifying deploying and increasing the
+supported path length.   
+
+In the Agile Metro design, SR-TE can be utilized for both IPv6 and MPLS dataplanes for 
+more advanced traffic engineering use cases.  
+
+Path computation of the end to end SR-TE path is carried out either on the head-end node 
+or by using a PCE (Path Computation Element). SR-TE policies can be persistently configured 
+on the head-end node or computed on-demand using Cisco "On-Demand Next Hop" or ODN feature.   
+
+
+### Segment Routing Path Computation Element (SR-PCE)
+
+Segment Routing Path Computation Element, or SR-PCE, is a Cisco Path Computation
+Engine (PCE) and is implemented as a feature included as part of Cisco IOS-XR
+operating system. The function is typically deployed on Cisco's virtual router, the XRv-9000 
+as it involves control plane operations only. The SR-PCE
+gains network topology awareness from BGP-LS advertisements received from the
+underlying IGP network. Such knowledge is leveraged by the embedded multi-domain
+computation engine to provide optimal path information to Path Computation
+Element Clients (PCCs) using the Path Computation Element Protocol (PCEP).  
+
+The PCC is the device where the service originates (PE) and therefore it
+requires end-to-end connectivity over the segment routing enabled
+multi-domain network.
+
+
 ## Agile networks using SRv6 or IPv4 unnumbered interfaces  
 
 If building an IPv6/SRv6 based network, IS-IS utilizes link-local addresses for
@@ -436,9 +475,7 @@ interface TenGigE0/0/0/2
 </pre>
 </div>
 
-## Inter-Domain Operation
-    
-### Inter-Domain Forwarding
+## Agile Metro network domains 
 
 The Agile Metro achieves network scale by IGP domain
 separation. Each IGP domain is represented by separate IGP process on
