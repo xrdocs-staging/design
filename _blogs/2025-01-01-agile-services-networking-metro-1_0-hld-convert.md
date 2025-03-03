@@ -205,8 +205,17 @@ on geographical boundaries and interconnection, but the "edge" terminating user 
 
 ## Network domains and IGP structure 
 
+Network domains are defined by different criteria. Scale is the primary driver
+for creating separate network domains but it could be for other reasons such as
+administrative boundaries or geographic regions. In the case of the Agile
+network design we will utilize distinct IGP instances at network domain
+boundary routers (ABRs). Boundary nodes will contain two or more IGP instances. Traffic paths
+crossing domain boundaries can utilize redistribution, SR-TE using SR-PCE, and
+traditional overlay options like BGP-LU. SRv6 using aggregation and
+redistribution is the preferred approach for greenfield networks and networks
+migrating from legacy MPLS (LDP, RSVP-TE) to Segment Routing.   
 
-
+The Agile Metro achieves network scale by IGP domain separation. 
 
 ## Topology options and PE placement - Inline and non-inline PE
 The design is flexible to support edge service placement at different places in the network.  
@@ -310,7 +319,6 @@ segment-routing
 !
 </pre>
 </div>
-
 
 ### Flex-Algo MPLS SID Assignment
 Nodes participating in a specific algorithm must have a unique node SID prefix assigned to the algorithm. In a typical deployment, the same Loopback address is 
@@ -475,384 +483,59 @@ interface TenGigE0/0/0/2
 </pre>
 </div>
 
-## Agile Metro network domains 
+### SR-MPLS Area Border Routers – Anycast-SID
 
-The Agile Metro achieves network scale by IGP domain
-separation. Each IGP domain is represented by separate IGP process on
-the Area Border Routers (ABRs).
-
-Section: "Intra-Domain Routing and Forwarding" described basic Segment Routing concepts: Prefix-SID and
-Adjacency-SID. This section introduces the concept of Anycast SID.
-Segment Routing allows multiple nodes to share the same Prefix-SID,
-which is then called a “Anycast” Prefix-SID or Anycast-SID. Additional
-signaling protocols are not required, as the network operator simply
-allocates the same Prefix SID (thus a Anycast-SID) to a pair of nodes
-typically acting as ABRs.
-
-Figure 4 shows two sets of ABRs:
-
-  - Aggregation ABRs – AG
-
-  - Provider Edge ABRs – PE
-
-![](http://xrdocs.io/design/images/asn-metro/image6.png)
-
-_Figure 4: IGP Domains - ABRs Anycast-SID_
-
-Figure 5 shows the End-To-End Stack of SIDs for packets traveling from
-left to right through the
-network.
-
-![](http://xrdocs.io/design/images/asn-metro/image7.png)
-
-_Figure 5: Inter-Domain LSP – SR-TE Policy_
-
-The End-To-End Inter-Domain Label Switched Path (LSP) was computed via
-Segment Routing Traffic Engineering (SR-TE) Policies.
-
-**On the Access router “A” the SR-TE Policy imposes:**
-
-  - Local Aggregation Area Border Routers Anycast-SID: Local-AG
-    Anycast-SID
-
-  - Local Provider Edge Area Border Routers Anycast-SID: Local-PE
-    Anycast SID
-
-  - Remote Provider Edge Area Border Routers Anycast-SID: Remote-PE
-    Anycast-SID
-
-  - Remote Aggregation Area Border Routers Anycast-SID: Remote-AG
-    Anycast-SID
-
-  - Remote/Destination Access Router: Destination-A Prefix-SID:
-    Destination-A Prefix-SID
-
-The SR-TE Policy is programmed on the Access device on-demand by an
-external Controller and does not require any state to be signaled
-throughout the rest of the network. The SR-TE Policy provides, by simple
-SID stacking (SID-List), an elegant and robust way to program
-Inter-Domain LSPs without requiring additional protocols such as BGP-LU
-(RFC3107).
-
-Please refer to Section: "Transport Programmability" for additional details.
-
-### Area Border Routers – Prefix-SID and Anycast-SID
-
-Section: "Inter-Domain Forwarding" showed the use of Anycast-SID at the ABRs for the
-provisioning of an Access to Access End-To-End LSP. When the LSP is set
-up between the Access Router and the AG/PE ABRs, there are two options:
-
-1.  ABRs are represented by Anycast-SID; or
-
-2.  Each ABR is represented by a unique Prefix-SID.
-
-Choosing between Anycast-SID or Prefix-SID depends on the requested service and
-inclusion of Anycast SIDs in the SR-TE Policy.  If one is using the SR-PCE, such
-as the case of ODN SR-TE paths, the inclusion of Anycast SIDs is done via
-configuration.   
-
-Note both options can be combined on the same network.
-
-### Inter-Domain Forwarding - High Availability and Fast Re-Route
-
-AG/PE ABRs redundancy enables high availability for Inter-Domain
-Forwarding.
-
-![](http://xrdocs.io/design/images/asn-metro/image6.png)
-
-_Figure 7: IGP Domains - ABRs Anycast-SID_
-
-When Anycast-SID is used to represent AG or PE ABRs, no other mechanism
-is needed for Fast Re-Route (FRR). Each IGP Domain provides FRR
-independently by TI-LFA as described in Section: "Intra-Domain Forwarding - Fast Re-Route".
-
-Figure 8 shows how FRR is achieved for a Inter-Domain
-LSP.
-
-![](http://xrdocs.io/design/images/asn-metro/image9.png)
-
-_Figure 8: Inter-Domain - FRR_
-
-The access router on the left imposes the Anycast-SID of the ABRs and
-the Prefix-SID of the destination access router. For FRR, any router in
-IGP1, including the Access router, looks at the top label: “ABR
-Anycast-SID”. For this label, each device maintains a primary and backup
-path preprogrammed in the HW. In IGP2, the top label is “Destination-A”.
-For this label, each node in IGP2 has primary and backup paths
-preprogrammed in the HW. The backup paths are computed by TI-LFA.
-
-As Inter-Domain forwarding is achieved via SR-TE Policies, FRR is
-completely self-contained and does not require any additional protocol.
-
-Note that when traditional BGP-LU is used for Inter-Domain forwarding,
-BGP-PIC is also required for FRR.
-
-Inter-Domain LSPs provisioned by SR-TE Policy are protected by FRR also
-in case of ABR failure (because of Anycast-SID). This is not possible
-with BGP-LU/BGP-PIC, since BGP-LU/BGP-PIC have to wait for the IGP to
-converge first.
-
-SR Data Plane Monitoring provides proactive method to ensure 
-reachability between all SR enabled nodes in an IGP domain. SR DPM utilizes well known MPLS OAM 
-capabilities with crafted SID lists to ensure valid forwarding across the entire IGP domain. See the CST Implementation Guide for 
-more details on SR Data Plane monitoring.  
-
-![](http://xrdocs.io/design/images/asn-metro/image12.png)
-
-_Figure 11:  Agile Metro – Physical Topology with transport
-programmability_
-
-
-### Traffic Engineering (Tactical Steering) – SR-TE Policy
-
-Operators want to fully monetize their network infrastructure by
-offering differentiated services. Traffic engineering is used to provide
-different paths (optimized based on diverse constraints, such as
-low-latency or disjoined paths) for different applications. The
-traditional RSVP-TE mechanism requires signaling along the path for
-tunnel setup or tear down, and all nodes in the path need to maintain
-states. This approach doesn’t work well for cloud applications, which
-have hyper scale and elasticity requirements.
-
-Segment Routing provides a simple and scalable way of defining an
-end-to-end application-aware traffic engineering path known as an SR-TE Policy. 
-The SR-TE Policy expresses the intent of the applications constraints across the network.   
-
-In the  Agile Metro design, the Service End Point uses PCEP 
-along with Segment Routing On-Demand Next-hop (SR-ODN) capability, to request from the controller a path that
-satisfies specific constraints (such as low latency). This is done by
-associating SLA tags/attributes to the path request. Upon receiving the
-request, the SR-PCE controller calculates the path based on the requested
-SLA, and uses PCEP to dynamically program the ingress node
-with a specific SR-TE Policy.
-
-### Traffic Engineering (Tactical Steering)  - Per-Flow SR-TE Policy 
-
-SR-TE and On-Demand Next-Hop have been enhanced to support per-flow traffic
-steering. Per-flow traffic steering is accomplished by using ingress QoS
-policies to mark traffic with a traffic class which is mapped to a SR-TE Policy
-supporting that traffic class.  A variety of IP header match criteria can be
-used in the QoS policy to classify traffic, giving operators flexibility to
-carry a specific traffic flow in a SR-TE Policy matching the SLA of the traffic.  
+In the case of SR-MPLS and computing end to end paths using SR-TE with SR-PCE,
+the use of Anycast SIDs is advisable. SR-PCE is aware of anycast SIDs in the
+topology and will compute a path utilizing them at IGP instance boundaries,
+creating a resilient end to end path for SR-MPLS SR-TE policies. In the event of
+a failure of an ABR node, traffic will quickly reroute to the other node since
+the SID being used in the SR-TE path is the same across all ABRs sharing the
+same Anycast SID.  
 
 ### Traffic Engineering - Dynamic Anycast-SID Paths and Black Hole Avoidance 
 
-As shown in Figure 7, inter-domain resilience and load-balancing is satisfied by
-using the same Anycast SID on each boundary node. Starting in CST 3.5 Anycast
-SIDs are used by a centralized SR-PCE without having to define an explicit SID
-list. Anycast SIDs are learned via the topology information distributed to the
-SR-PCE using BGP-LS. Once the SR-PCE knows the location of a set of Anycast
-SIDs, it will utilize the SID in the path computation to an egress node. The
-SR-PCE will only utilize the Anycast SID if it has a valid path to the next SID
-in the computed path, meaning if one ABR loses it's path to the adjacent domain,
-the SR-PCE will update the head-end path with one utilizing a normal node SID to
-ensure traffic is not dropped.   
+Inter-domain resilience and load-balancing is satisfied by using the same
+Anycast SID on each boundary node. Once the SR-PCE knows the location of a set
+of Anycast SIDs, it will utilize the SID in the path computation to an egress
+node. The SR-PCE will only utilize the Anycast SID if it has a valid path to the
+next SID in the computed path, meaning if one ABR loses it's path to the
+adjacent domain, the SR-PCE will update the head-end path with one utilizing a
+normal node SID to ensure traffic is not dropped.   
 
 It is also possible to withdraw an anycast SID from the topology by using the
-conditional route advertisement feature for IS-IS, new in 3.5. Once the anycast
+conditional route advertisement feature for IS-IS. Once the anycast
 SID Loopback has been withdrawn, it will no longer be used in a SR Policy path.
 Conditional route advertisement can be used for SR-TE Policies with Anycast SIDs
 in either dynamic or static SID candidate paths. Conditional route advertisement
 is implemented by supplying the router with a list of remote prefixes to monitor
 for reachability in the RIB. If those routes disappear from the RIB, the
-interface route will be withdrawn. Please see the CST Implementation Guide for
-instructions on configuring anycast SID inclusion and blackhole avoidance.   
-
-## Transport Controller Path Computation Engine (PCE)
-    
-### Segment Routing Path Computation Element (SR-PCE)
-
-Segment Routing Path Computation Element, or SR-PCE, is a Cisco Path Computation
-Engine (PCE) and is implemented as a feature included as part of Cisco IOS-XR
-operating system. The function is typically deployed on a Cisco IOS-XR cloud
-appliance XRv-9000, as it involves control plane operations only. The SR-PCE
-gains network topology awareness from BGP-LS advertisements received from the
-underlying network. Such knowledge is leveraged by the embedded multi-domain
-computation engine to provide optimal path information to Path Computation
-Element Clients (PCCs) using the Path Computation Element Protocol (PCEP).  
-
-The PCC is the device where the service originates (PE) and therefore it
-requires end-to-end connectivity over the segment routing enabled
-multi-domain network.
-
-The SR-PCE provides a path based on constraints such as:
-
-  - Shortest path (IGP metrics).
-
-  - Traffic-Engineering metrics. 
-  
-  - Disjoint paths starting on one or two nodes.
-  
-  - Latency  
-
-![](http://xrdocs.io/design/images/asn-metro/image13.png)
-
-_Figure 12: XR Transport Controller – Components_
-
-### PCE Controller Summary – SR-PCE 
-
-**Segment Routing Path Computation Element (SR-PCE):**
-
-  - Runs as a feature on a physical or virtual IOS-XR node 
-  - Collects topology from BGP using BGP-LS, ISIS, or OSPF 
-  - Deploys SR Policies based on client requests  
-  - Computes Shortest, Disjoint, Low Latency, and Avoidance paths
-  - North Bound interface with applications via REST API
-
-### Agile Metro Path Computation Workflows 
-
-#### Static SR-TE Policy Configuration   
-
-1.  NSO provisions the service. Alternatively, the service can be
-    provisioned via CLI
-
-2.  SR-TE Policy is configured via NSO or CLI on the access node to 
-    the other service end points, specifying pcep as the computation method    
-
-3.  Access Router requests a path from SR-PCE with metric type and constraints 
-
-4.  SR-PCE computes the path
-
-4.  SR-PCE provides the path to Access Router
-
-6.  Access Router acknowledges and installs the SR Policy as the forwarding path for the service.  
-
-#### On-Demand Next-Hop Driven Configuration  
-
-1.  NSO provisions the service. Alternatively, the service can be
-    provisioned via CLI
-
-2.  On-demand colors are configured on each node, specifying specific constraints 
-    and pcep as the dynamic computation method
-
-3.  On reception of service routes with a specific ODN color community, Access Router 
-    requests a path from SR-PCE to the BGP next-hop as the SR-TE endpoint.   
-
-4.  SR-PCE computes the path
-
-5.  SR-PCE provides the path to Access Router
-
-6.  Access Router acknowledges and installs the SR Policy as the forwarding path for the service.  
+interface route will be withdrawn.  
 
 
-## Segment Routing Flexible Algorithms (Flex-Algo) 
+### SR-MPLS, SRv6, and Unified MPLS (BGP-LU) Co-existence 
 
-A powerful tool used to create traffic engineered Segment Routing paths is SR Flexible Algorithms, better known as 
-SR Flex-Algo.  Flex-Algo assigns a specific set of "algorithms" to a Segment. The algorithm identifies a specific 
-computation constraint the segment supports. There are standards based algorithm definitions such as least cost IGP path and latency, or providers 
-can define their own algorithms to satisfy their business needs.  CST 4.0 supports computation of Flex-Algo paths in intra-domain and inter-domain 
-deployments. In CST 4.0 (IOS-XR 7.2.2) inter-domain Flex-Algo using SR-PCE is limited to IGP lowest metric path computation.  CST 5.0 (IOS-XR 7.5.2) 
-enhances the inter-domain capabilities and can now compute inter-domain paths using additional metric types such as a latency.  
+In the Agile Metro design validation is performed for the co-existence of
+services using BGP Labeled Unicast transport for inter-domain forwarding and
+those using SR-MPLS and SRv6. Many networks deployed today have an existing BGP-LU design
+which may not be easily migrated to SR, so graceful introduction between the two
+transport methods is required.
 
-Flex-Algo limits the computation of a path to only those nodes participating in that algorithm. This gives a powerful way to create multiple network 
-domains within a single larger network, constraining an SR path computation to segments satisfying the metrics defined by the algorithm. As you will see, 
-we can now use a single node SID to reach a node via a path satisfying an advanced constraint such as delay.  
-
-### Flex-Algo Node SID Assignment
-Nodes participating in a specific algorithm must have a unique node SID prefix assigned to the algorithm. In a typical deployment, the same Loopback address is 
-used for multiple algorithms. IGP extensions advertise algorithm membership throughout the network. Below is an example of a node with multiple algorithms and node SID 
-assignments. By default, the basic IGP path computation is assigned to algorithm "0".  Algorithm "1" is also reserved. Algorithms 128-255 are user-definable. All Flex-Algo 
-SIDs belong to the same global SRGB so providers deploying SR should take this into account. Each algorithm should be assigned its own block of SIDs within 
-the SRGB, in the case below the SRGB is 16000-32000, each algorithm is assigned 1000 SIDs.   
-
-<div class="highlighter-rouge">
-<pre class="highlight">
- interface Loopback0
-  address-family ipv4 unicast
-   prefix-sid index 150
-   prefix-sid algorithm 128 absolute 18003
-   prefix-sid algorithm 129 absolute 19003
-   prefix-sid algorithm 130 absolute 20003
-</pre>
-</div>
-
-### Flex-Algo IGP Definition 
-Flexible algorithms being used within a network must be defined in the IGP domains in the network The configuration is typically 
-done on at least one node under the IGP configuration for domain. Under the definition the metric type used for computation is 
-defined along with any link affinities. Link affinities are used to constrain the algorithm to not only specific nodes, but 
-also specific links. These affinities are the same previously used by RSVP-TE.  
-
-**Note: Inter-domain Flex-Algo path computation requires synchronized Flex-Algo definitions across the end-to-end path** 
-
-<div class="highlighter-rouge">
-<pre class="highlight">
- flex-algo 130
-  metric-type delay
-  advertise-definition
- !
- flex-algo 131
-  advertise-definition
-  affinity exclude-any red
-</pre>
-</div>
-
-### Path Computation across SR Flex-Algo Network 
-Flex-Algo works by creating a separate topology for each algorithm. By default,
-all links interconnecting nodes participating in the same algorithm can be used
-for those paths. If the algorithm is defined to include or exclude specific link
-affinities, the topology will reflect it. A SR-TE path computation using a
-specific Flex-Algo will use the Algo's topology for end the end path
-computation. It will also look at the metric type defined for the Algo and use
-it for the path computation.  Even with a complex topology, a single SID is used
-for the end to end path, as opposed to using a series of node and adjacency SIDs
-to steer traffic across a shared topology. Each node participating in the
-algorithm has adjacencies to other nodes utilizing the same algorithm, so when a
-incoming MPLS label matching the algo SID enters, it will utilize the path
-specific to the algorithm.  A Flex-Algo can also be used as a constraint in an
-ODN policy.   
-### Flex-Algo Dual-Plane Example 
-A very simple use case for Flex-Algo is to easily define a dual-plane network
-topology where algorithm 129 red and algorithm 130 is green. Nodes A1 and A6
-participate in both algorithms. When a path request is made for algorithm 129,
-the head-end nodes A1 and A6 will only use paths specific to the algorithm.  The
-SR-TE Policy does not need to reference the specific SID, only the Algo being
-used as the constraints. The local node or SR-PCE will utilize the Algo to
-compute the path dynamically.   
-
-![](http://xrdocs.io/design/images/asn-metro/cst-hld-dual-plane.png)
-
-The following policy configuration is an example of constraining the path to the Algo 129 "Red" path.  
-
-<div class="highlighter-rouge">
-<pre class="highlight">
-segment-routing
- traffic-eng
-  policy GREEN-PE8-128
-   color 1128 end-point ipv4 100.0.2.53
-   candidate-paths
-    preference 1
-     dynamic
-      pcep
-      !
-      metric
-       type igp
-      !
-     !
-<b>     constraints
-      segments
-       sid-algorithm 129</b> 
-</pre>
-</div>
+## Agile Metro Edge Fabric
 
 
-## Segment Routing and Unified MPLS (BGP-LU) Co-existence 
-### Summary 
-
-In the Agile Metro 3.0 design we introduce validation for the co-existence of services using BGP Labeled Unicast transport for inter-domain forwarding and those using SR-TE. Many networks deployed today have an existing BGP-LU design which may not be easily migrated to SR, so graceful introduction between the two transport methods is required. In the case of a multipoint service such as EVPN ELAN or L3VPN, an endpoint may utilize BGP-LU to one endpoint and SR-TE to another.  
-
-### ABR BGP-LU design  
-In a BGP-LU design each IGP domain or ASBR boundary node will exchange BGP labeled prefixes between domains while resetting the BGP next-hop to its own loopback address. The labeled unicast label will change at each domain boundary across the end to end network. Within each IGP domain, a label distribution protocol is used to supply MPLS connectivity between the domain boundary and interior nodes. In the Agile Metro design, IS-IS with SR-MPLS extensions is used to provide intra-domain MPLS transport. This ensures within each domain BGP-LU prefixes are protected using TI-LFA.  
-
-The BGP-LU design utilized in the Agile Metro validation is based on Cisco's Unified MPLS design used in EPN 4.0. 
-
-# Quality of Service and Assurance 
+# Quality of Service 
 
 ## Overview 
-Quality of Service is of utmost importance in today's multi-service converged networks. The Agile Metro design has the ability to enforce end to end traffic path SLAs using Segment Routing Traffic Engineering. In addition to satisfying those path constraints, traditional QoS is used to make sure the PHB (Per-Hop Behavior) of each packet is enforced at each node across the converged network.  
+Quality of Service is of utmost importance in today's multi-service converged
+networks. The Agile Metro design has the ability to enforce end to end traffic
+path SLAs using Segment Routing Traffic Engineering. In addition to satisfying
+those path constraints, traditional QoS is used to make sure the PHB (Per-Hop
+Behavior) of each packet is enforced at each node across the converged network.  
 
 ## NCS 540, 560, 5500, and 5700 QoS Primer 
 Full details of the NCS 540 and 5500 QoS capabilities and configuration can be found at: 
-<https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/qos/75x/b-qos-cg-ncs5500-75x.html>
+<https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/qos/24xx/configuration/guide/b-qos-cg-ncs5500-24xx.html>
 
 The NCS platforms utilize the same MQC configuration for QoS as other IOS-XR platforms but based on their hardware architecture use different elements for implementing end to end QoS. On these platforms ingress traffic is: 
 1. Matched using flexible criteria via Class Maps
@@ -870,25 +553,7 @@ The QoS configuration of the Cisco 8000 follows similar configuration guidelines
 as the NCS 540, 5500, and NCS 5700 series devices. Detailed documentation of
 8000 series QoS including platform dependencies can be found at:  
 
-<https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/qos/75x/b-qos-cg-8k-75x.html> 
-
-## Support for Time Sensitive Networking in N540-FH-CSR-SYS and N540-FH-AGG-SYS 
-The Fronthaul family of NCS 540 routers support frame preemption based on the
-IEEE 802.1Qbu-2016 and Time Sensitive Networking (TSN) standards.  
-
-Time Sensitive Networking (TSN) is a set of IEEE standards that addresses the
-timing-critical aspect of signal flow in a packet switched Ethernet network to
-ensure deterministic operation. TSN operates at the Ethernet layer on physical
-interfaces. Frames are marked with a specific QoS class (typically 7 in a device
-with classes 0-7) qualify as express traffic, while other classes other than
-control plane traffic are marked as preemptable traffic.  
-
-This allows critical signaling traffic to traverse a device as quickly as
-possible without having to wait for lower priority frames before being
-transmitted on the wire.  
-
-Please see the TSN configuration guide for NCS 540 Fronthaul routers at
-<https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5xx/fronthaul/b-fronthaul-config-guide-ncs540-fh/m-fh-tsn-ncs540.pdf>
+<https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/qos/24xx/configuration/guide/b-qos-cg-8k-24xx.html> 
 
 ## Hierarchical Edge QoS 
 Hierarchical QoS enables a provider to set an overall traffic rate across all services, and then configure parameters per-service via a child QoS policy where the percentages of guaranteed bandwidth are derived from the parent rate
@@ -896,9 +561,7 @@ Hierarchical QoS enables a provider to set an overall traffic rate across all se
 ### H-QoS platform support 
 NCS platforms support 2-level and 3-level H-QoS. 3-level H-QoS applies a policer (ingress) or shaper (egress) to a physical interface, with each sub-interface having a 2-level H-QoS policy applied. Hierarchical QoS is not enabled by default on the NCS 540 and 5500 platforms. H-QoS is enabled using the <b>hw-module profile qos hqos-enable</b> command.  Once H-QoS is enabled, the number of priority levels which can be assigned is reduced from 1-7 to 1-4. Additionally, any hierarchical QoS policy assigned to a L3 sub-interface using priority levels must include a "shape" command.   
 
-The ASR9000 supports multi-level H-QoS at high scale for edge aggregation function. In the case of hierarchical services, H-QoS can be applied to PWHE L3 interfaces.  
-
-## CST Core QoS mapping with five classes 
+## Agile Services Core QoS mapping with five classes 
 QoS designs are typically tailored for each provider, but we introduce a 5-level QoS design which can fit most provider needs. The design covers transport of both unicast and multicast traffic.  
 
 | Traffic Type |  Core Marking | Core Priority | Comments | 
@@ -1002,18 +665,18 @@ policy-map core-egress-exp-marking
 </pre>
 </div> 
 
-## L3 Multicast using Segment Routing Tree-SID
+# Multicast 
+
+## L3 Multicast using SR-MPLS Tree-SID
 ### Tree SID Diagram 
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-treesid.png)
 
 ### Tree-SID Overview 
-Agile Metro 3.5 introduces Segment Routing Tree-SID across all
-IOS-XR nodes.  TreeSID utilizes the programmability of SR-PCE to create and
+Tree-SID utilizes the programmability of SR-PCE to create and
 maintain an optimized multicast tree from source to receiver across an SR-only
-IPv4 network. In CST 3.5 Tree-SID utilizes MPLS labels at each hop in the
-network.  Each node in the network maintains a session to the same set of SR-PCE
-controllers.  The SR-PCE creates the tree using PCE-initiated segments. TreeSID
+IPv4 network.  Each node in the network maintains a session to the same set of SR-PCE
+controllers. The SR-PCE creates the tree using PCE-initiated segments. TreeSID
 supports advanced functionality such as TI-LFA for fast protection and disjoint
 trees.  
 ### Static Tree-SID 
@@ -1030,7 +693,7 @@ guidelines and examples.
 
 ### Dynamic Tree-SID using BGP mVPN Control-Plane 
 
-In CST 5.0+, we now support using fully dynamic signaling to create multicast
+IOS-XR supports using fully dynamic signaling to create multicast
 distribution trees using Tree-SID. Sources and receivers are discovered using
 BGP auto-discovery (BGP-AD) and advertised throughout the mVPN using the IPv4 or
 IPv6 mVPN AFI/SAFI. Once the source head-end node learns of receivers, the
@@ -1045,26 +708,19 @@ All routers across the network needing to participate in the tree, including
 core nodes, must be configured as a PCC to the primary PCE being used by the
 head-end node.  
 
-Please see the CST 5.0+ Implementation Guide for dynamic Tree-SID configuration 
-guidelines and examples.  
+Please see the Agile Services Networking Implementation Guide for more information 
+on implementing SR-MPLS Tree-SID. 
 
 ## L3 IP Multicast and mVPN using mLDP  
-IP multicast continues to be an optimization method for delivering content
-traffic to many endpoints, especially traditional broadcast video. Unicast
-content dominates the traffic patterns of most networks today, but multicast
-carries critical high value services, so proper design and implementation is
-required. In Agile Metro 2.0 we introduced multicast edge and core
-validation for native IPv4/IPv6 multicast using PIM, global multicast using
-in-band mLDP (profile 7), and mVPN using mLDP with in-band signaling (profile
-6). Agile Metro 3.0 extends this functionality by adding support for
-mLDP LSM with the NG-MVPN BGP control plane (profile 14). Using BGP signaling
-adds additional scale to the network over in-band mLDP signaling and fits with
-the overall design goals of CST. More information about deployment of profile 14
-can be found in the Agile Metro implementation guide. Converged SDN
-Transport 3.0 supports mLDP-based label switched multicast within a single doman
-and across IGP domain boundaries. In the case of the Agile Metro
-design multicast has been tested with the source and receivers on both access
-and ABR PE devices.   
+The Agile Metro design supports using mLDP for multicast distribution when using 
+SR-MPLS or SRv6 for unicast transport.  
+Using BGP signaling adds additional scale to the network over in-band
+mLDP signaling and fits with the overall design goals of CST. More information
+about deployment of profile 14 can be found in the Agile Metro implementation
+guide. The Agile Services Networking design supports mLDP-based label switched multicast
+within a single doman and across IGP domain boundaries. In the case of the Agile
+Metro design multicast has been tested with the source and receivers on both
+access and ABR PE devices.   
 
 | Supported Multicast Profiles | Description |  
 | ----------------------- | ---------------- | 
@@ -1086,7 +742,7 @@ router isis ACCESS
 </div> 
 
 ### LDP mLDP-only Session Capability (RFC 7473)  
-In Agile Metro 3.0 we introduce the ability to only advertise mLDP state on each router adjacency, eliminating the need to filter LDP unicast FECs from advertisement into the network. This is done using the SAC (State Advertisement Control) TLV in the LDP initialization messages to advertise which LDP FEC classes to receive from an adjacent peer.  We can restrict the capabilities to mLDP only using the following configuration.  Please see the implementation guide and configurations for the full LDP configuration.   
+IOS-XR has the ability to only advertise mLDP state on each router adjacency, eliminating the need to filter LDP unicast FECs from advertisement into the network. This is done using the SAC (State Advertisement Control) TLV in the LDP initialization messages to advertise which LDP FEC classes to receive from an adjacent peer.  We can restrict the capabilities to mLDP only using the following configuration.  Please see the implementation guide and configurations for the full LDP configuration.   
 
 <div class="highlighter-rouge">
 <pre class="highlight">
@@ -1094,27 +750,6 @@ mpls ldp
  capabilities sac mldp-only
 </pre> 
 </div> 
-
-### LDP Unicast FEC Filtering for SR Unicast with mLDP Multicast  
-The following is for historical context, please see the above section regarding disabling LDP unicast FECs using session capability advertisements. 
-
-The Agile Metro design utilized Segment Routing with the MPLS dataplane for all unicast traffic. The first phase of multicast support in Converged SDN Transport 2.0 will use mLDP for use with existing mLDP based networks and new networks wishing to utilize label switcched multicast across the core. LDP is enabled on an interface for both unicast and multicast by default. Since SR is being used for unicast, one must filtering out all LDP unicast FECs to ensure they are not distributed across the network. SR is used for all unicast traffic in the presence of an LDP FEC for the same prefix, but filtering them reduces control-plane activity, may aid in re-convergence, and simplifies troubleshooting.  The following should be applied to all interfaces which have mLDP enabled:  
-
-<div class="highlighter-rouge">
-<pre class="highlight">
-ipv4 access-list no-unicast-ldp 
-10 deny ipv4 any any
-!
-RP/0/RSP0/CPU0:Node-6#show run mpls ldp
-mpls ldp
-log
-  neighbor
-address-family ipv4
-  label
-   local
-    allocate for no-unicast-ldp
-</pre> 
-</div>
 
 # Agile Metro Use Cases
 
@@ -1127,18 +762,13 @@ The goal of the Agile Metro is to provide a flexible network
 blueprint that can be easily customized to meet customer specific
 requirements. This blueprint must adapt to carry any service type, for example  
 cable access, mobile, and business services over the same converged network infrastructure. 
-The following sections highglight some specific customer use cases and the components of the 
+The following sections highlight the use cases and the components of the 
 design used in building those solutions.  
 
-![](http://xrdocs.io/design/images/asn-metro/cmf-multi-service-network.png) 
-
-
-# 4G and 5G Mobile Networks  
+# Mobile transport 
 
 ## Summary and 5G Service Types  
 The Agile Metro design introduces support for 5G networks and 5G services. There are a variety of new service use cases being defined by 3GPP for use on 5G networks, illustrated by the figure below. Networks must now be built to support the stringent SLA requirements of Ultra-Reliable Low-Latency services while also being able to cope with the massive bandwidth introduced by Enhanced Mobile Broadband services. The initial support for 5G in the Converged SDN Transport design focuses on the backhaul and midhaul portions of the network utilizing end to end Segment Routing. The design introduces no new service types, the existing scalable L3VPN and EVPN based services using BGP are sufficient for carrying 5G control-plane and user-plane traffic.   
-
-![](http://xrdocs.io/design/images/asn-metro/cmf-5g-services.png) 
 
 ## Key Validated Components 
 The following key features have been added to the CST validated design to support 5G deployments
@@ -1148,10 +778,11 @@ End to end timing using PTP with profiles G.8275.1 and G.8275.2 have been
 validated in the CST design. Best practice configurations are available in the
 online configurations and CST Implementation Guide. It is recommended to use
 G.8257.1 when possible to main the highest level of accuracy across the network.
-In CST 4.0+ we include validation for G.8275.1 to G.8275.2 interworking,
+IOS-XR fully supports G.8275.1 to G.8275.2 interworking,
 allowing the use of different profiles across the network. Synchronous Ethernet
 (SyncE) is also recommended across the network to maintain stability when timing
-to the PRC. All nodes used in the CST design support SyncE.  
+to the PRC. 
+
 ### Low latency SR-TE path computation
 The "latency" constraint type is used either with a configured SR Policy or ODN
 SR Policy specifies the computation engine to compute the lowest latency path
@@ -1166,6 +797,7 @@ IS-IS links and the regular IGP metric can be used in the absence of the
 link-delay metric. More information on Performance Measurement for link delay can 
 be found at <https://www.cisco.com/c/en/us/td/docs/routers/asr9000/software/asr9k-r7-5/segment-routing/configuration/guide/b-segment-routing-cg-asr9000-75x/configure-performance-measurement.html> 
 Performance Measurement is supported on all hardware used in the CST design.  
+
 #### <b>Dynamic Link Performance Measurement</b>  
 Starting in version 3.5 of the CST, dynamic measurement of one-way and two-way
 latency on logical links is fully supported across all devices. The delay
@@ -1507,64 +1139,6 @@ subscriber policy elements such as QoS and security policies, and performs
 subscriber routing. Fixed and modular platforms are supported  
 
 
-# Converged aggregation  
-
-## Summary  
-The enables a multi-service CIN by adding support
-for the features and functions required to build a scalable next-generation
-Ethernet/IP cable access network. Differentiated from simple switch or L3
-aggregation designs is the ability to support NG cable transport over the same
-common infrastructure already supporting other services like mobile backhaul and
-business VPN services. Cable Remote PHY is simply another service overlayed onto
-the existing Agile Metro network architecture. We will cover all
-aspects of connectivity between the Cisco cBR-8 and the RPD device.  
-
-## Distributed Access Architecture  
-The cable Converged Interconnect Network is part of a next-generation
-Distributed Access Architecture (DAA), an architecture unlocking higher
-subscriber bandwidth by moving traditional cable functions deeper into the
-network closer to end users. R-PHY or Remote PHY, places the analog to digital
-conversion much closer to users, reducing the cable distance and thus enabling
-denser and higher order modulation used to achieve Gbps speeds over existing
-cable infrastructure. This reference design will cover the CIN design to support
-Remote PHY deployments.  
-
-### CIN Network Requirements 
-
-#### IPv4/IPv6 Unicast and Multicast  
-Due to the large number of elements and generally greenfield network builds, the CIN network must support all functions using both IPv4 and IPv6. IPv6 may be carried natively across the network or within an IPv6 VPN across an IPv4 MPLS underlay network. Similarly the network must support multicast traffic delivery for both IPv4 and IPv6 delivered via the global routing table or Multicast VPN.  Scalable dynamic multicast requires the use of PIMv4, PIMv6, IGMPv3, and MLDv2 so these protocols are validated as part of the overall network design. IGMPv2 and MLDv2 snooping are also required for designs using access bridge domains and BVI interfaces for aggregation.    
-
-#### Network Timing 
-Frequency and phase synchronization is required between the cBR-8 and RPD to properly handle upstream scheduling and downstream transmission. Remote PHY uses PTP (Precision Timing Protocol) for timing synchronization with the ITU-T G.8275.2 timing profile. This profile carries PTP traffic over IP/UDP and supports a network with partial timing support, meaning multi-hop sessions between Grandmaster, Boundary Clocks, and clients as shown in the diagram below. The cBR-8 and its client RPD require timing alignment to the same Primary Reference Clock (PRC). In order to scale, the network itself must support PTP G.8275.2 as a T-BC (Boundary Clock).  Synchronous Ethernet (SyncE) is also recommended across the CIN network to maintain stability when timing to the PRC. 
-
-![](http://xrdocs.io/design/images/asn-metro/cmf-g82752.png)
-#### CST 4.0+ Update to CIN Timing Design 
-Starting in CST 4.0, NCS nodes support both G.8275.1 and G.8275.2 on the same node, and also support interworking between them.  If the network path between the PTP GM and client RPDs can support G.8275.1 on each hop, it should be used. G.8275.1 runs on physical interfaces and does not have limitations such as running over Bundle Ethernet interfaces.  The G.8275.1 to G.8275.2 interworking will take place on the RPD leaf node, with G.8275.2 being used to the RPDs.  The following diagram depicts a recommended end-to-end timing design between the PTP GM and the RPD. Please review the CST 4.0 Implementation Guide for details on configuring G.8275.1 to G.8275.2 interworking. In addition to PTP interworking, CST 4.0 supports PTP timing on BVI interfaces.   
-
-![](http://xrdocs.io/design/images/asn-metro/cst-hld-ptp-interworking.png)
-
-#### QoS
-Control plane functions of Remote PHY are critical to achieving proper operation and subscriber traffic throughput. QoS is required on all RPD-facing ports, the cBR-8 DPIC ports, and all core interfaces in between. Additional QoS may be necessary between the cBR-8, RPD, and any PTP timing elements. See the design section for further details on QoS components.   
-
-#### DHCPv4 and DHCPv6 Relay 
-As a critical component of the initial boot and provisioning of RPDs, the network must support DHCP relay functionality on all RPD-facing interfaces, for both IPv4 and IPv6.   
-
-![](http://xrdocs.io/design/images/asn-metro/cst-hld-smartphy.png)
-
-## 4G Transport and Services Modernization 
-
-While talk about deploying 5G services has reached a fever pitch, many providers are continuing to build and evolve their 4G networks. New services require more agile and scalable networks, satisfied by Cisco's Agile Metro. The services modernization found 
-in Agile Metro 2.0 follows work done in EPN 4.0. Transport modernization requires simplification and new abilities. We evolve the EPN 4.0 design based on LDP and hierarchical BGP-LU to one using Segment Routing with an MPLS data plane and the SR-PCE to add inter-domain path computation, scale, and programmability.  L3VPN based 4G services remain, but are modernized to utilize SR-TE On-Demand Next-Hop, reducing provisioning complexity, increasing scale, and adding advanced path computation constraints. 4G services utilizing L3VPN remain the same, but those utilizing L2VPN such as VPWS and VPLS transition to EVPN services. EVPN is the modern replacement for legacy LDP signalled L2VPN services, reducing complexity and adding advanced multi-homing functionality.   The following table highlights the legacy and new way of delivering services for 4G.  
-
-| Element | EPN 4.0 | Agile Metro | 
-| ---------------- | ---------------------- |-----|
-| Intra-domain MPLS Transport | LDP | IS-IS w/Segment Routing |  
-| Inter-domain MPLS Transport | BGP Labeled Unicast| SR using SR-PCE for Computation |
-| MPLS L3VPN (LTE S1,X2) | MPLS L3VPN | MPLS L3VPN w/ODN | 
-| L2VPN VPWS | LDP Pseudowire | EVPN VPWS w/ODN | 
-| eMBMS Multicast   | Native / mLDP | Native / mLDP |
-
-The CST 4G Transport modernization covers only MPLS-based access and not L2 access scenarios.  
 
 # Business and Infrastructure Services using L3VPN and EVPN 
 
@@ -1579,7 +1153,6 @@ allows the sender node to only transmit the multicast traffic to an EVPN router
 with an interested receiver instead of sending unwanted traffic dropped on the
 remote router. In release 5.0 CGW is supported on ASR 9000 routers only.  CGW
 selective multicast is supported for IPv4 and *,G multicast.   
-
 
 ## LDP to Agile Metro Migration  
 Very few networks today are built as greenfield networks, most new designs are migrated 
@@ -1615,6 +1188,99 @@ One component introduced with Segment Routing is the SR Mapping Server (SRMS), a
 element converting unicast LDP FECs to Segment Routing prefix-SIDs for advertisement 
 throughout the Segment Routing domain. Each separate IGP domain requires a pair of 
 SRMS nodes until full migratino to SR is complete.   
+
+# Network Assurance 
+
+## SR Performance Measurement  
+The network itself can perform dynamic performance measurement between any two
+endpoints in the network. Performance measurement includes delay and loss
+calculations. It is recommended SR-PM be enabled on all logical links across
+the network.  
+
+### Dynamic Link Performance Measurement
+SR-PM supports dynamic measurement of one-way and two-way
+delay and loss on logical links. The delay
+measurement feature utilizes TWAMP-Lite as the transport mechanism for probes
+and responses. PTP is a requirement for accurate measurement of one-way latency
+across links and is recommended for all nodes.  In the absence of PTP a
+"two-way" delay mode is supported to calculate the one-way link delay.
+
+Legacy hardware also now supports a software CPU based timestamp method to enable
+SR-PM delay measurements for hardware with PTP timing hardware.  
+
+Delay and loss measurement is also available for SR-TE Policy paths to give the
+provider an accurate latency and loss measurement for all services utilizing the SR-TE
+Policy. This information is available through SR Policy statistics using the CLI
+or model-driven telemetry. The latency measurement is done for all active
+candidate paths.  
+
+### Delay and Loss anomaly detection  
+It is possible to set thresholds for both delay and loss and trigger behaviors
+based on the type of resource being monitored using SR-PM. In the case of a
+SR-Policy, a candidate path can be deactivated if the delay or loss exceeds the
+configured thresholds. In the case of a logical link, the IGP advertising the
+link will set the "A" or anomaly bit for the link. When a receiving node
+receives the IGP link state data with the A bit set, it can raise the IGP cost
+on the link. 
+
+The "anomaly-check" command is used for delay thresholds, and the "anomaly-loss"
+command is used for loss thresholds.  
+
+### Sample SR-PM configuration 
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+
+performance-measurement
+ interface TenGigE0/0/0/5
+  delay-measurement
+  !
+ !
+ interface TenGigE0/0/0/23
+  delay-measurement
+  !
+ !
+ interface HundredGigE0/0/1/0
+  delay-measurement
+  !
+ !
+ interface HundredGigE0/0/1/1
+  delay-measurement
+  !
+ !
+ delay-profile interfaces default
+  advertisement
+   accelerated
+    threshold 25
+   !
+   anomaly-check upper-bound 1000 lower-bound 100
+   periodic
+    interval 120
+    threshold 10
+   !
+   anomaly-loss upper-bound 20 lower-bound 10
+  !
+  probe
+   measurement-mode two-way
+   protocol twamp-light
+  !
+ !
+ protocol twamp-light
+  measurement delay
+   unauthenticated
+    querier-dst-port 12345
+
+</div> 
+</pre> 
+
+
+# Security 
+
+## Security overview 
+
+## Edge DDoS Protect
+Cisco's Edge DDoS Protect presents an innovative solution providing fully distributed 
+DDoS protection for all places in the network.  Edge DDoS Protect  
 
 # Automation 
 
@@ -1681,94 +1347,10 @@ supports both traditional unsecure as well as fully secure ZTP operation as outl
 in RFC 8572. More information on Crosswork ZTP can be found at 
 <https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/datasheet-c78-743677.html> 
 
-## Model-Driven Telemetry 
-
-In the 3.0 release the implementation guide includes a table of model-driven telemetry paths applicable to different components within the design.  More information on Cisco model-driven telemetry can be found at <https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/telemetry/66x/b-telemetry-cg-ncs5500-66x.html>. Additional information about how to consume and visualize telemetry data can be found at <https://xrdocs.io/telemetry>. We also introduce integration with Cisco Crosswork Health Insights, a telemetry and automated remediation platform, and sensor packs correspondding to Agile Metro components. More information on Crosswork Health Insights can be found at <https://www.cisco.com/c/en/us/support/cloud-systems-management/crosswork-health-insights/model.html>  
-
 ## Transport and Service Management using Crosswork Network Controller
-Crosswork Network Controller provides support for provisioning SR-TE and RSVP-TE
-traffic engineering paths as well as managing the VPN services utilizing those
+Crosswork Network Controller provides support for provisioning SR-MPLS and SRv6   
+traffic engineering policies as well as managing the VPN services utilizing those
 paths or standard IGP based Segment Routing paths.   
-
-
-
-## Network Services Orchestrator 
-
-NSO is a management and orchestration (MANO) solution for network
-services and Network Functions Virtualization (NFV). The NSO includes
-capabilities for describing, deploying, configuring, and managing
-network services and VNFs, as well as configuring the multi-vendor
-physical underlay network elements with the help of standard open APIs
-such as NETCONF/YANG or a vendor-specific CLI using Network Element
-Drivers (NED).
-
-In the  Agile Metro design, NSO is used for Services
-Management, Service Provisioning, and Service Orchestration. Example or Core NSO 
-Function Packs are used for end-to-end provisioning of CST services.  
-
-**The NSO provides several options for service designing as shown in**
-**Figure 32**
-
-  - Service model with service template
-
-  - Service model with mapping logic
-
-  - Service model with mapping logic and service
-templates
-
-![](http://xrdocs.io/design/images/asn-metro/image33.png)
-
-_Figure 32: NSO – Components_
-
-A service model is a way of defining a service in a template format.
-Once the service is defined, the service model accepts user inputs for
-the actual provisioning of the service. For example, a E-Line service
-requires two endpoints and a unique virtual circuit ID to enable the
-service. The end devices, attachment circuit UNI interfaces, and a
-circuit ID are required parameters that should be provided by the user
-to bring up the E-Line service. The service model uses the YANG modeling
-language (RFC 6020) inside NSO to define a service.
-
-Once the service characteristics are defined based on the requirements,
-the next step is to build the mapping logic in NSO to extract the user
-inputs. The mapping logic can be implemented using Python or Java. The
-purpose of the mapping logic is to transform the service models to
-device models. It includes mechanisms of how service related operations
-are reflected on the actual devices. This involves mapping a service
-operation to available operations on the devices.
-
-Finally, service templates need to be created in XML for each device
-type. In NSO, the service templates are required to translate the
-service logic into final device configuration through CLI NED. The NSO
-can also directly use the device YANG models using NETCONF for device
-configuration. These service templates enable NSO to operate in a
-multi-vendor environment.
-
-## Agile Metro Supported Service Models
-CST 5.0+ supports using NSO Transport SDN Function Packs. The T-SDN function 
-packs cover both Traffic Engineering and xVPN service provisioning.  CST 5.0 is 
-aligned with T-SDN FP Bundle version 3.0 which includes the following function packs.
-
-### Core Function Packs
-Core Function Packs are supported function packs meant to be used as-is without 
-modification. 
-
-| CFP | Capabilities | 
-| ---------------- | ---------------------- |
-| SR-TE ODN | Configure SR-TE On-Demand Properties | 
-| SR-TE | Configured Segment Routing Traffic Engineered Policies | 
-
-### Example Function Packs 
-Example function packs are meant to be used as-is or modified to fit specific network use cases.  
-
-| FP | Capabilities | 
-| ---------------- | ---------------------- |
-| IETF-TE | Provision RSVP-TE LSPs using IETF IETF-TE model | 
-| L2NM | Provision EVPN-VPWS service using IETF L2NM model | 
-| L3NM | Provision multi-point L3VPN service using IETF L3NM model | 
-| Y1731 | Provision Y.1731 CFM for L2VPN/L3VPN services | 
-
-<https://www.cisco.com/c/dam/en/us/td/docs/cloud-systems-management/crosswork-network-automation/NSO_Reference_Docs/Cisco_NSO_Transport_SDN_Function_Pack_Bundle_User_Guide_3_0_0.pdf>
 
 # Base Services Supporting Advanced Use Cases  
 ## Overview
