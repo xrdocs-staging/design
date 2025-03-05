@@ -4,6 +4,7 @@ date: '2025-01-01 11:00-0400'
 title: Agile Services Networking - Agile Metro 1.0 High-Level Design 
 excerpt: Cisco Agile Services Networking enables network operators to build flexible converged networks to handle any type of service at any place in the network. Networks built using ASN provide the scale, efficiency, and resiliency required while maintaining a simplier and easier to operate network.  
 author: Phil Bedard 
+permalink: /blogs/latest-asn-metro-hld
 tags:
   - iosxr
   - Metro
@@ -242,6 +243,8 @@ the document for more information on building and managing Edge Fabrics.
 Routed Optical Networking is a foundational component of the Agile Metro for network operators with their own fiber assets 
 utilizing point to point dark fiber connections or multiplexed DWDM connections.   
 
+
+
 For more information on Cisco's Routed Optical Networking design please see the 
 following high-level design document:  
 
@@ -253,7 +256,6 @@ following high-level design document:
 Segment Routing is another foundational component of Agile Services Networking. The Segment Routing architecture is available with 
 two forwarding planes, IPv6 and MPLS. SRv6 presents a highly scalable and simplified data plane for modern networks. SRv6 is simply IP routing, using IPv6 addresses to represent end nodes as well as end services. The Agile Services Networking solution uses SRv6 with uSID as the primary dataplane, but also utilizes SR-MPLS which is fully supported across all hardware, software, and automation products. 
 
-## Traffic Engineering 
 
 ### Segment Routing Flexible Algorithms (Flex-Algo) 
 
@@ -273,7 +275,7 @@ such as delay.
 
 Operators can solve most traffic engineering use cases with Flex-Algo. Capabilities of Flex-Algo are continually being enhanced, supporting additional metrics and constraints for path computation. In XR 24.4.1 the following metrics and constraints are supported.  
 
-### Flex-Algo Metrics  
+#### Flex-Algo Metrics  
 
 Delay 
 : Delay utilizes the measured or statically configured delay of each link to compute an end to end lowest latency path. Delay values are computed or defined using SR Performance Measurement.   
@@ -282,7 +284,7 @@ Generic
 TE: 
 The TE metric is an additional metric which can be assigned to each link. The TE metric is advertised in the standard IS-IS traffic engineering TLVs.  
 
-### Flex-Algo Constraints 
+#### Flex-Algo Constraints 
 
 Affinity: 
 Affinity uses standard unidirectional traffic engineering affinities (groups) to include or exclude links from the topology. IOS-XR also supports reverse affinities, meaning if the affinity is being sent from node B to A, A will take that link into account when computing the Flex-Algo. One use case is if an affinity is being applied by the remote node on the link due to packet errors.  
@@ -294,7 +296,8 @@ Maximum Delay:
 Maximum delay uses the measured or statically set SR-PM delay values to prune high delay links from the network. While the delay metric will calculate the lowest delay path, this will ensure that path never takes high delay links.  
 
 
-### Flex-Algo SRv6 locator assignment 
+#### Flex-Algo SRv6 locator assignment 
+
 SRv6 locators are defined under the primary SRv6 configuration. Each defined locator for the node can be assigned a specific Flex-Algo, which is used by remote head-end nodes to calculate the specific Flex-Algo topology for end to end path computation.  
 
 <div class="highlighter-rouge">
@@ -320,7 +323,7 @@ segment-routing
 </pre>
 </div>
 
-### Flex-Algo MPLS SID Assignment
+#### Flex-Algo MPLS SID Assignment
 Nodes participating in a specific algorithm must have a unique node SID prefix assigned to the algorithm. In a typical deployment, the same Loopback address is 
 used for multiple algorithms. IGP extensions advertise algorithm membership throughout the network. Below is an example of a node with multiple algorithms and node SID 
 assignments. By default, the basic IGP path computation is assigned to algorithm "0".  Algorithm "1" is also reserved. Algorithms 128-255 are user-definable. All Flex-Algo 
@@ -338,7 +341,7 @@ the SRGB, in the case below the SRGB is 16000-32000, each algorithm is assigned 
 </pre>
 </div>
 
-### Flex-Algo IGP Definition 
+#### Flex-Algo IGP Definition 
 Flexible algorithms being used within a network must be defined in the IGP domains in the network The configuration is typically 
 done on at least one node under the IGP configuration for domain. Under the definition the metric type used for computation is 
 defined along with any link affinities. Link affinities are used to constrain the algorithm to not only specific nodes, but 
@@ -358,7 +361,7 @@ also specific links. These affinities are the same previously used by RSVP-TE.
 </pre>
 </div>
 
-### Path Computation across SR Flex-Algo Network 
+#### Path Computation across SR Flex-Algo Network 
 Flex-Algo works by creating a separate topology for each algorithm. By default,
 all links interconnecting nodes participating in the same algorithm can be used
 for those paths. If the algorithm is defined to include or exclude specific link
@@ -373,7 +376,7 @@ incoming SRv6 IP address or MPLS label matching the algo SID enters, it will uti
 specific to the algorithm. On-demand SR-TE policies can also use a specific algorithm.   
 
 
-### Flex-Algo SR-MPLS dual-plane topology example  
+#### Flex-Algo SR-MPLS dual-plane topology example  
 A very simple use case for Flex-Algo is to easily define a dual-plane network
 topology where algorithm 129 red and algorithm 130 is green. Nodes A1 and A6
 participate in both algorithms. When a path request is made for algorithm 129,
@@ -423,6 +426,16 @@ more advanced traffic engineering use cases.
 Path computation of the end to end SR-TE path is carried out either on the head-end node 
 or by using a PCE (Path Computation Element). SR-TE policies can be persistently configured 
 on the head-end node or computed on-demand using Cisco "On-Demand Next Hop" or ODN feature.   
+
+
+### Circuit Style Segment Routing 
+Circuit Style Segment Routing (CS-SR) is another Cisco advancement bringing 
+TDM circuit like behavior to SR-TE Policies. These policies use deterministic 
+hop by hop routing, co-routed bi-directional paths, hot standby protect paths
+with end to end liveness detection, and bandwidth guaranteed services.
+Standard Ethernet services not requiring bit transparency can be transported
+over a Segment Routing network similar to OTN networks without the additional
+cost, complexity, and inefficiency of an OTN network layer.   
 
 
 ### Segment Routing Path Computation Element (SR-PCE)
