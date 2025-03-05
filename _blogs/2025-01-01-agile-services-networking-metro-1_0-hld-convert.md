@@ -256,6 +256,49 @@ following high-level design document:
 Segment Routing is another foundational component of Agile Services Networking. The Segment Routing architecture is available with 
 two forwarding planes, IPv6 and MPLS. SRv6 presents a highly scalable and simplified data plane for modern networks. SRv6 is simply IP routing, using IPv6 addresses to represent end nodes as well as end services. The Agile Services Networking solution uses SRv6 with uSID as the primary dataplane, but also utilizes SR-MPLS which is fully supported across all hardware, software, and automation products. 
 
+### SRv6 Benefits 
+
+#### Scale 
+One of the main benefits of SRv6 is the ability to build networks at huge scale
+through address summarization. MPLS networks require a unique label per node be
+distributed to all nodes requiring mutual reachability. In most cases there is
+also the requirement of distributing a /32 IP prefix as well. In the MPLS CST
+design we have the option to eliminate the IP and MPLS label distribution by
+utilizing a PCE to compute end to end paths. While this method works well and is
+also available for SRv6 it can lead to a large number of SR-TE or SRv6-TE
+policies.  
+
+SRv6 allows us to summarize domain loopback addresses at IGP or BGP boundaries.
+This means a domain of 1000 nodes no longer requires advertising 1000 IP
+prefixes and associated labels, but can be summarized into a single IP
+advertisement reachable via a simple longest prefix match (LPM) lookup. Networks
+of tens of thousands of nodes can now provide full reachability with very few
+IPv6 routes. 
+
+![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-igp-layout.png)
+
+![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-isis-redist.png)
+
+#### Simplified Forwarding 
+In SRv6, if a node is not a terminating node it simply forwards the traffic
+using IPv6 IP forwarding.  This means nodes which are not SRv6 aware can also
+participate in a SRv6 network.  
+
+Forwarding in SRv6 follows the semantics of simple IPv6 routing. The destination 
+is always identified as an IPv6 address. In the case of an SRv6 packet without an 
+additional SRH, traffic is routed to the endpoint destination node hop by hop 
+based on normal destination based prefix lookups. In the case of a SRH, the SRH 
+is only processed by a node if it is the destination address in the outer IPv6 
+header. If the node is the last SID in the SID list it will pop the SRH and process
+the packet further.  If the node is not the last SID in the SID list it will replace
+the outer IPv6 destination address with the next IPv6 address in the SID list. 
+
+#### Forwarding and Service Congruency 
+As you will see in the services section, the destination IPv6 address in SRv6 is
+the service endpoint. Coupled with the simple forwarding this aids in
+troubleshooting and is much easier to understand than the MPLS layered service
+and data plane.   
+
 
 ### Segment Routing Flexible Algorithms (Flex-Algo) 
 
@@ -428,7 +471,8 @@ or by using a PCE (Path Computation Element). SR-TE policies can be persistently
 on the head-end node or computed on-demand using Cisco "On-Demand Next Hop" or ODN feature.   
 
 
-### Circuit Style Segment Routing 
+### Circuit Style Segment Routing (SR-MPLS) 
+
 Circuit Style Segment Routing (CS-SR) is another Cisco advancement bringing 
 TDM circuit like behavior to SR-TE Policies. These policies use deterministic 
 hop by hop routing, co-routed bi-directional paths, hot standby protect paths
@@ -437,6 +481,14 @@ Standard Ethernet services not requiring bit transparency can be transported
 over a Segment Routing network similar to OTN networks without the additional
 cost, complexity, and inefficiency of an OTN network layer.   
 
+### Circuit-Style SR-TE with Bandwidth Admission Control using CNC Circuit Style Manager 
+
+Crosswork Network Controller Circuit Style Manager provides Bandwidth
+Admission Controller and guaranteed bandwidth paths for Circuit-Style Policies.
+CNC also supports full provisioning, monitoring, and visualization of
+Circuit-Style SR-TE Policies. 
+
+![](http://xrdocs.io/design/images/ron-hld/ron-cnc-csm-policy-overview.png){:height="50%" width="50%"}
 
 ### Segment Routing Path Computation Element (SR-PCE)
 
@@ -453,7 +505,6 @@ The PCC is the device where the service originates (PE) and therefore it
 requires end-to-end connectivity over the segment routing enabled
 multi-domain network.
 
-
 ## Agile networks using SRv6 or IPv4 unnumbered interfaces  
 
 If building an IPv6/SRv6 based network, IS-IS utilizes link-local addresses for
@@ -467,9 +518,7 @@ IS-IS and Segment Routing/SR-TE utilized in the Agile Metro design supports
 using unnumbered IPv4 interfaces. In the topology database each interface is
 uniquely identified by a combination of router ID and SNMP IfIndex value. 
 
-
 ![](http://xrdocs.io/design/images/asn-metro/cst-hld-unnumbered.png)
-_Unnumbered node insertion_ 
 
 **Unnumbered interface configuration:**  
 
@@ -506,9 +555,11 @@ a failure of an ABR node, traffic will quickly reroute to the other node since
 the SID being used in the SR-TE path is the same across all ABRs sharing the
 same Anycast SID.  
 
-### Traffic Engineering - Dynamic Anycast-SID Paths and Black Hole Avoidance 
+### SRv6 and SR-MPLS black hole avoidance  
 
-Inter-domain resilience and load-balancing is satisfied by using the same
+#### SR-MPLS Anycast SID 
+
+Inter-domain resilience and load-balancing for SR-MPLS is satisfied by using the same
 Anycast SID on each boundary node. Once the SR-PCE knows the location of a set
 of Anycast SIDs, it will utilize the SID in the path computation to an egress
 node. The SR-PCE will only utilize the Anycast SID if it has a valid path to the
@@ -525,6 +576,17 @@ is implemented by supplying the router with a list of remote prefixes to monitor
 for reachability in the RIB. If those routes disappear from the RIB, the
 interface route will be withdrawn.  
 
+### SRv6 Unreachable Prefix Announcement (UPA) 
+Summarization hides the state of longer prefixes within the aggregate
+summary, leading to traffic loss or slower failover when an egress PE is
+unreachable. UPA is an IGP function to quickly poison a prefix which has become
+unreachable to an upstream node. It enables the notification of an individual
+prefix becoming unreachable, outside of the local area/domain and across the
+network in a manner that does not leave behind any persistent state in the
+link-state database. When an ingress PE receives the UPA for an egress PE it can 
+trigger fast switchover to an alternate path, such as a BGP PIC pre-programmed 
+backup path.    
+
 
 ### SR-MPLS, SRv6, and Unified MPLS (BGP-LU) Co-existence 
 
@@ -535,6 +597,35 @@ which may not be easily migrated to SR, so graceful introduction between the two
 transport methods is required.
 
 ## Agile Metro Edge Fabric
+Agile Services Networking enables providers to build networks in the way that
+best fits their business and service needs. One deployment method is build an
+Edge Fabric allowing providers to build a flexible scale-out network providing
+Edge services. Each leaf node in the fabric can be dedicated to a specific
+service type or multiple services can be deployed to the same fabric. One key
+property of the fabric is managing nodes by role and not as individual PE
+routers. A role is defined by a set of common properties and service termination
+needs. A fabric may be contained within a single location or span multiple
+geographic locations, interconnected using Cisco's Routed Optical Networking
+solution for simplicity and efficiency.    
+
+![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-diagram-1.png){:height="50%" width="50%"}
+
+### Additional Edge Fabric properties  
+
+- Topology-driven group of standard routers 
+- Uses standard protocols for intra-fabric control-plane and data plane, 
+not proprietary interconnect hardware and data plane 
+- Service / UNI facing ports are managed on individual leaf devices  
+- No requirement for homogenous hardware, different devices or even vendors could be used as leaves 
+- Not explicitly a Clos fabric, the spines can be collapsed spine/border nodes 
+
+### Edge Fabric deployment options 
+There is also flexibility in how and where the Edge Fabric is deployed in the provider network.  
+The diagram shows four potential options, but the deployment is primarily based on the provider requirements. The fully 
+distributed edge offers the highest scale and performance, but as interim steps during migration other models may be used.  
+
+![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-deployment-options.png){:height="50%" width="50%"}
+
 
 
 # Quality of Service 
