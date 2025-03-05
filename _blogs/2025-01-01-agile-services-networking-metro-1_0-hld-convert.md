@@ -154,9 +154,35 @@ The following highlights the key technology building blocks used to build the Ag
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-8000.png)
 
-### New Agile Metro hardware 
+### New Agile Services Networking hardware 
+Agile Services Networking introduces new Silicon One based hardware, simplifying provider deployments with a unified silicon strategy across all parts of the network.   
 
 ![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000.png)
+
+#### P100 routers and line cards 
+The P100 Silicon One ASIC provides up to 19.2Tbps of bandwidth. The 8212-48FH-M
+and 8711-32FH-M single-ASIC fixed routers are validated for edge services,
+peering, and aggregation roles in the Agile Metro design. P100 line cards are
+also available for modular systems including the Edge enhanced 88-LC1-12TH24FH-E
+and 88-LC1-52Y8H-EM.  The 88-LC1-52Y8H-EM is the first Silicon One line card
+offering a high density low speed aggregation with 52 SFP28 ports for 10G and
+25G native support. All line cards support MACSEC and Class C timing.   
+
+#### K100 routers and line cards 
+The K100 Silicon One ASIC provides higher scale edge services. The 6.4T ASIC
+will support advanced Edge service functionality for mobile, business services,
+Internet, peering, and enterprise use cases. The K100 natively supports MACSEC 
+has an embedded IPSec encryption engine (supported in a future release).
+
+The 8712-MOD-M released with XR 24.4.1 is a modular 4-slot router using a single ASIC providing 1.6T per slot. The following MPAs will be initially supported ont he 8712-MOD-M.  
+
+| MPA | Port layout |   
+| ----------|---------|
+| 8K-MPA-4D | 4 400G QSFP56-DD  | 
+| 8K-MPA-16H | 16 QSFP28| 
+| 8K-MPA-16Z2D | 16 SFP56 + 4 QSFP56-DD (2x400G or 4x100G/200G)| 
+| 8K-MPA-18Z1 | 18 SFP56 + 1 QSFP56-DD  |
+
 
 ## ASR 9000 
 The ASR 9000 is the router of choice for high scale edge services.  Agile Metro utilizes the ASR 9000 in a PE function role, performing high scale L2VPN, L3VPN, peering, and Pseudowire headend termination. The ASR 9000 is also utilized as a user plane in the distributed CUPS architecture for subscriber termination. 
@@ -241,9 +267,13 @@ the document for more information on building and managing Edge Fabrics.
 
 ## Cisco Routed Optical Networking 
 Routed Optical Networking is a foundational component of the Agile Metro for network operators with their own fiber assets 
-utilizing point to point dark fiber connections or multiplexed DWDM connections.   
+utilizing point to point dark fiber connections or multiplexed DWDM connections. At its basis Routed Optical Networking 
+eliminates redundant hardware and simplifies management through advanced automation. Routed Optical Networking works 
+with all types of optical networks; P2P dark fiber, simplified P2P DWDM using Cisco's Pluggable OLS with 
+passive multiplexers, and traditional multi-degree ROADMs.
 
 
+![](http://xrdocs.io/design/images/asn-metro/metro-routed-optical-networking.png) 
 
 For more information on Cisco's Routed Optical Networking design please see the 
 following high-level design document:  
@@ -626,7 +656,9 @@ distributed edge offers the highest scale and performance, but as interim steps 
 
 ![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-deployment-options.png){:height="50%" width="50%"}
 
-
+### Recommended Edge Fabric hardware 
+There is no hard and fast rule about specific hardware deployed in a specific role. Spines should be higher bandwidth and higher port count devices with no service termination on those nodes. If fixed devices are used as spines, the Silicon One P100-based 8212-48FH-M and 8711-32FH-M are ideal spines due to their high 400G and 100G density. P100 routers and line cards also have Edge service capabilities if there is a requirement for placing some services on the spine devices. Edge Leaf devices should be chosen based on UNI port speeds, 
+UNI port bandwidth, and in some cases specific feature support. The NCS 540, NCS 5500/5700, and 8000 series can be utilized for Internet services (DIA), peering, L2VPN, and L3VPN services. In the case of cnBNG user plane the ASR 9000 series satisfies that role.   
 
 # Quality of Service 
 
