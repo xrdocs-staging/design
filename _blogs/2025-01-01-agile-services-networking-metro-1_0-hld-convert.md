@@ -21,7 +21,7 @@ position: hidden
 
 | Version          |Date                    |Comments| 
 | ---------------- | ---------------------- |-----|
-| 1.0       | 2/1/2024 |Initial Agile Services Networking - Metro HLD| 
+| 1.0       | 2/1/2025 |Initial Agile Services Networking - Metro HLD| 
 
 # Minimum supported IOS-XR Release 
 
