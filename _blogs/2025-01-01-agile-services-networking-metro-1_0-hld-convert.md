@@ -59,14 +59,17 @@ location, resulting in inefficient traffic distribution
 # Cisco Agile Services Networking 
 
 Networks must be built to handle the advanced services and increased traffic
-associated with modern network services. Networks must evolve so the
-infrastructure layer can keep up with the service layer. The result of these
-shifts is driving traffic away from centralized delivery to a more distributed
-network. New network architectures must be considered as design options moving
-forward that include these key aspects: Distributed and fixed routing systems to
-deliver services at any place in the network Fabric models delivering scale-out
-networks that can be built on-demand Flexible deployment options matching
-provider requirements Network simplification at all layers of the network
+associated with modern network services. Artificial Intelligence is poised to
+drive growth in networks as AI applications become more bandwidth intensive.
+Networks must evolve so the infrastructure layer can keep up with the services
+layer and demands for high bandwidth any to any connectivity. The result of
+these shifts is driving traffic away from centralized delivery to a more
+distributed network. New network architectures must be considered as design
+options moving forward that include these key aspects: Distributed and fixed
+routing systems to deliver services at any place in the network Fabric models
+delivering scale-out networks that can be built on-demand Flexible deployment
+options matching provider requirements Network simplification at all layers of
+the network
 
 Cisco's Agile Services Networking introduces an end-to-end architecture which
 evolves traditional network design towards a simplified, efficient network
@@ -147,10 +150,12 @@ The following highlights the key technology building blocks used to build the Ag
 ## Hardware Components 
 
 ### Cisco 8000 
- The Cisco 8000 family is one of the primary hardware components of the Agile Metro  
- Metro design. Cisco 8000 routers provide the lowest power consumption in the
- industry, all while supporting systems over 200 Tbps and features service
- providers require. The expanded Silicon One family of ASICs in Agile Metro 1.0 includes the P100 and K100 family of products fulfilling specific roles in the solution.  
+The Cisco 8000 family is one of the primary hardware components of the Agile
+Metro design. Cisco 8000 routers provide the lowest power consumption in the
+industry, all while supporting systems over 200 Tbps and features service
+providers require. The expanded Silicon One family of ASICs in Agile Metro 1.0
+includes the P100 and K100 family of products fulfilling specific roles in the
+solution.  
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-8000.png)
 
@@ -225,7 +230,7 @@ More information on the NCS 540 router line can be found at:
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-ncs540.png)
 
 
-# Transport – Design Components  
+# Agile Metro Baseline transport 
 
 ## Agile service placement 
 
@@ -286,11 +291,70 @@ following high-level design document:
 
 <https://xrdocs.io/design/blogs/latest-routed-optical-networking-hld> 
 
+## Agile Metro Edge Fabric
+Agile Services Networking enables providers to build networks in the way that
+best fits their business and service needs. One deployment method is build an
+Edge Fabric allowing providers to build a flexible scale-out network providing
+Edge services. Each leaf node in the fabric can be dedicated to a specific
+service type or multiple services can be deployed to the same fabric. One key
+property of the fabric is managing nodes by role and not as individual PE
+routers. A role is defined by a set of common properties and service termination
+needs. A fabric may be contained within a single location or span multiple
+geographic locations, interconnected using Cisco's Routed Optical Networking
+solution for simplicity and efficiency.    
+
+![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-diagram-1.png){:height="100%" width="100%"}
+
+### Additional Edge Fabric properties  
+
+- Topology-driven group of standard routers 
+- Uses standard protocols for intra-fabric control-plane and data plane, 
+not proprietary interconnect hardware or proprietary data plane encapsulation 
+- Service / UNI facing ports are managed on individual leaf devices  
+- No requirement for homogenous hardware, different devices or even vendors could be used as edge leafs  
+- Not explicitly a Clos fabric, the spines can be collapsed spine/border nodes, or even terminate some user services  
+
+### Edge Fabric deployment options 
+There is also flexibility in how and where the Edge Fabric is deployed in the provider network.  
+The diagram shows four potential options, but the deployment is primarily based on the provider requirements. The fully 
+distributed edge offers the highest scale and performance, but as interim steps during migration other models may be used.  
+
+![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-deployment-options.png){:height="100%" width="100%"}
+
+### Recommended Edge Fabric hardware 
+There is no hard and fast rule about specific hardware deployed in a specific
+role. Spines should be higher bandwidth and higher port count devices with no
+service termination on those nodes. If fixed devices are used as spines, the
+Silicon One P100-based 8212-48FH-M and 8711-32FH-M are ideal spines due to their
+high 400G and 100G density. P100 routers and line cards also have Edge service
+capabilities if there is a requirement for placing some services on the spine
+devices. Edge Leaf devices should be chosen based on UNI port speeds, UNI port
+bandwidth, and in some cases specific feature support. The NCS 540, NCS
+5500/5700, and 8000 series can be utilized for Internet services (DIA), peering,
+L2VPN, and L3VPN services. In the case of cnBNG user plane the ASR 9000 series
+satisfies that role.  
+
+### Edge Fabric control plane 
+The control plane for the Edge Fabric utilizes standard routing protocols. IS-IS
+is the recommended IGP protocol to run across the fabric. A large fabric may
+utilize a separate IGP instance or IS-IS level for nodes with contiguous
+connectivity. It is expected the leaf nodes in a fabric belong to a single
+fabric. MP-BGP is utilized as an overlay service protocol, advertising EVPN and
+L3VPN routes to build both point-to-point and multi-point services. Internet
+services may be contained within a VRF (Internet in a VRF) or in the global
+routing table. The design supports using more centralized service route
+reflectors or using the edge fabric aggregation nodes as fabric route reflectors
+depending on the scale and redundancy required.   
 
 ## Segment Routing 
 
-Segment Routing is another foundational component of Agile Services Networking. The Segment Routing architecture is available with 
-two forwarding planes, IPv6 and MPLS. SRv6 presents a highly scalable and simplified data plane for modern networks. SRv6 is simply IP routing, using IPv6 addresses to represent end nodes as well as end services. The Agile Services Networking solution uses SRv6 with uSID as the primary dataplane, but also utilizes SR-MPLS which is fully supported across all hardware, software, and automation products. 
+Segment Routing is a foundational component of Agile Services Networking. The
+Segment Routing architecture is available with two forwarding planes, IPv6 and
+MPLS. SRv6 presents a highly scalable and simplified data plane for modern
+networks. SRv6 is simply IP routing, using IPv6 addresses to represent end nodes
+as well as end services. The Agile Services Networking solution uses SRv6 with
+uSID as the primary dataplane, but also utilizes SR-MPLS which is fully
+supported across all hardware, software, and automation products. 
 
 ### SRv6 Benefits 
 
@@ -334,6 +398,241 @@ As you will see in the services section, the destination IPv6 address in SRv6 is
 the service endpoint. Coupled with the simple forwarding this aids in
 troubleshooting and is much easier to understand than the MPLS layered service
 and data plane.   
+
+### Low latency SR-TE path computation
+The "latency" constraint type is used either with a configured SR Policy or ODN
+SR Policy specifies the computation engine to compute the lowest latency path
+across the network. The latency computation algorithm can use different
+mechanisms for computing the end to end path. The first and preferred mechanism
+is to use the realtime measured per-link one-way delay across the network. This
+measured information is distributed via IGP extensions across the IGP domain and
+to external PCEs using BGP-LS extensions for use in both intra-domain and
+inter-domain calculations. Two other metric types can also be utilized as part
+of the "latency" path computation. The TE metric, which can be defined on all SR
+IS-IS links and the regular IGP metric can be used in the absence of the
+link-delay metric. More information on Performance Measurement for link delay can 
+be found at <https://www.cisco.com/c/en/us/td/docs/routers/asr9000/software/24xx/segment-routing/configuration/guide/b-segment-routing-cg-asr9000-24xx.html> 
+Performance Measurement is supported on all hardware used in the Agile Metro design.   
+
+#### <b>Dynamic Link Performance Measurement</b>  
+Dynamic measurement of one-way and two-way
+latency on logical links is fully supported across all devices. The delay
+measurement feature utilizes TWAMP-Lite as the transport mechanism for probes
+and responses. Configuring PTP for accurate measurement of one-way latency
+across links and is recommended for all nodes. It is
+recommended to configure one-way delay on all IS-IS core links within the 
+network. A sample configuration can be found below and detailed configuration
+information can be found in the implementation guide. 
+
+One way delay measurement is also available for SR-TE Policy paths to give the
+provider an accurate latency measurement for all services utilizing the SR-TE
+Policy. This information is available through SR Policy statistics using the CLI
+or model-driven telemetry. The latency measurement is done for all active
+candidate paths.   
+
+Dynamic one-way link delay measurements using PTP are not currently supported on unnumbered interfaces. In the case of unnumbered interfaces, static link delay values must be used.    
+
+Different metric types can be used in a single path computation, with the following order used:  
+1. Unidirectional link delay metric either computed or statically defined  
+2. Statically defined TE metric 
+3. IGP metric 
+
+#### SR Policy latency constraint configuration on configured policy  
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+  traffic-eng
+    policy LATENCY-POLICY 
+      color 20 end-point ipv4 1.1.1.3
+      candidate-paths
+        preference 100
+          dynamic mpls
+            metric
+              type latency
+</pre>
+</div>
+
+#### SR Policy latency constraint configuration for ODN policies 
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+ traffic-eng
+  on-demand color 100 
+   dynamic
+    pcep
+    !
+    metric
+     type latency
+</pre>
+</div>
+
+#### Dynamic link delay metric configuration 
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ interface TenGigE0/0/0/10
+  delay-measurement
+ interface TenGigE0/0/0/20
+  delay-measurement
+  !
+ ! 
+  protocol twamp-light
+  measurement delay
+   unauthenticated
+    querier-dst-port 12345
+   !
+  !
+ !
+ delay-profile interfaces
+  advertisement
+   accelerated
+    threshold 25
+   !
+   periodic
+    interval 120
+    threshold 10
+   !
+  !
+  probe
+   measurement-mode one-way 
+   protocol twamp-light
+   computation-interval 60
+  !
+ !
+</pre>
+</div>
+
+#### Static defined link delay metric
+Static delay is set by configuring the "advertise-delay" value in microseconds under each interface 
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ interface TenGigE0/0/0/10
+  delay-measurement
+   advertise-delay 15000
+ interface TenGigE0/0/0/20
+  delay-measurement
+   advertise-delay 10000
+</pre>
+</div>
+
+#### TE metric definition  
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+ traffic-eng
+  interface TenGigE0/0/0/10
+   metric 15
+  !
+  interface TenGigE0/0/0/20
+   metric 10
+</pre>
+</div>
+
+The link-delay metrics are quantified in the unit of microseconds.  On most
+networks this can be quite large and may be out of range from normal IGP
+metrics, so care must be taken to ensure proper compatibility when mixing metric
+types. The largest possible IS-IS metric is 16777214 which is equivalent to
+16.77 seconds.    
+
+### SR Policy one-way delay measurement 
+In addition to the measurement of delay on physical links, the end to end
+one-way delay can also be measured across a SR Policy. This allows a provider to
+monitor the traffic path for increases in delay and log/alarm when thresholds
+are exceeded. Please note SR Policy latency measurements are not supported for
+PCE-computed paths, only those using head-end computation or configured static
+segment lists.  The basic configuration for SR Policy measurement follows:  
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ delay-profile sr-policy
+  advertisement
+   accelerated
+    threshold 25
+   !
+   periodic
+    interval 120
+    threshold 10
+   !
+   threshold-check
+    average-delay
+   !
+  !
+  probe
+   tos
+    dscp 46
+   !
+   measurement-mode one-way
+   protocol twamp-light
+   computation-interval 60
+   burst-interval 60
+  !
+ !
+ protocol twamp-light
+  measurement delay
+   unauthenticated
+    querier-dst-port 12345
+   !
+  !
+ !
+!
+segment-routing
+ traffic-eng
+  policy APE7-PM
+   color 888 end-point ipv4 100.0.2.52
+   candidate-paths
+    preference 200
+     dynamic
+      metric
+       type igp
+      !
+     !
+    !
+   !
+   performance-measurement
+    delay-measurement
+     logging
+      delay-exceeded
+</pre>
+</div>
+
+### IP Endpoint Delay Measurement 
+IOS-XR's Performance Measurement is extended to perform SLA 
+measurements between IP endpoints across multi-hop paths. Delay measurements 
+as well as liveness detection are supported. Model-driven telemetry as well as 
+CLI commands can be used to monitor the path delay.  
+
+#### Global Routing Table IP Endpoint Delay Measurement 
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ endpoint ipv4 1.1.1.5
+  source-address ipv4 1.1.1.1
+  delay-measurement
+  !
+ !
+ delay-profile endpoint default
+  probe
+   measurement-mode one-way
+</pre>
+</div>
+
+#### VRF IP Endpoint Delay Measurement 
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ endpoint ipv4 10.10.10.100 vrf green
+  source-address ipv4 1.1.1.1
+  delay-measurement
+  !
+ !
+ delay-profile endpoint default
+  probe
+   measurement-mode one-way
+</pre>
+</div>
 
 
 ### Segment Routing Flexible Algorithms (Flex-Algo) 
@@ -632,41 +931,19 @@ those using SR-MPLS and SRv6. Many networks deployed today have an existing BGP-
 which may not be easily migrated to SR, so graceful introduction between the two
 transport methods is required.
 
-## Agile Metro Edge Fabric
-Agile Services Networking enables providers to build networks in the way that
-best fits their business and service needs. One deployment method is build an
-Edge Fabric allowing providers to build a flexible scale-out network providing
-Edge services. Each leaf node in the fabric can be dedicated to a specific
-service type or multiple services can be deployed to the same fabric. One key
-property of the fabric is managing nodes by role and not as individual PE
-routers. A role is defined by a set of common properties and service termination
-needs. A fabric may be contained within a single location or span multiple
-geographic locations, interconnected using Cisco's Routed Optical Networking
-solution for simplicity and efficiency.    
+## Network timing 
+Modern infrastructure services require stable timing. Distributing timing
+through the network decreases overall cost by not requiring timing equipment at
+end locations. Components used in the Agile Metro design all support Precision
+Timing Protocol (PTP) timing distribution and in most cases support Class C
+timing accuracy. It is recommended to use G.8257.1 when possible to maintain the
+highest level of accuracy across the network. IOS-XR fully supports G.8275.1 to
+G.8275.2 interworking, allowing the use of different profiles across the
+network. Synchronous Ethernet (SyncE) is also recommended across the network to
+maintain stability when timing to the PRC.  
 
-![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-diagram-1.png){:height="100%" width="100%"}
 
-### Additional Edge Fabric properties  
-
-- Topology-driven group of standard routers 
-- Uses standard protocols for intra-fabric control-plane and data plane, 
-not proprietary interconnect hardware and data plane 
-- Service / UNI facing ports are managed on individual leaf devices  
-- No requirement for homogenous hardware, different devices or even vendors could be used as leaves 
-- Not explicitly a Clos fabric, the spines can be collapsed spine/border nodes 
-
-### Edge Fabric deployment options 
-There is also flexibility in how and where the Edge Fabric is deployed in the provider network.  
-The diagram shows four potential options, but the deployment is primarily based on the provider requirements. The fully 
-distributed edge offers the highest scale and performance, but as interim steps during migration other models may be used.  
-
-![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-deployment-options.png){:height="100%" width="100%"}
-
-### Recommended Edge Fabric hardware 
-There is no hard and fast rule about specific hardware deployed in a specific role. Spines should be higher bandwidth and higher port count devices with no service termination on those nodes. If fixed devices are used as spines, the Silicon One P100-based 8212-48FH-M and 8711-32FH-M are ideal spines due to their high 400G and 100G density. P100 routers and line cards also have Edge service capabilities if there is a requirement for placing some services on the spine devices. Edge Leaf devices should be chosen based on UNI port speeds, 
-UNI port bandwidth, and in some cases specific feature support. The NCS 540, NCS 5500/5700, and 8000 series can be utilized for Internet services (DIA), peering, L2VPN, and L3VPN services. In the case of cnBNG user plane the ASR 9000 series satisfies that role.   
-
-# Quality of Service 
+## Quality of Service 
 
 ## Overview 
 Quality of Service is of utmost importance in today's multi-service converged
@@ -690,7 +967,7 @@ The <code>priority-level</code> command used in an egress QoS policy specifies t
 
 Please note, multicast traffic does not follow the same constructs as unicast traffic for prioritization. All multicast traffic assigned to Traffic Classes 1-4 are treated as Low Priority and traffic assigned to 5-6 treated as high priority.     
 
-## Cisco 8000 QoS  
+## Cisco 8000, 8010, 8600, and 8700 QoS  
 The QoS configuration of the Cisco 8000 follows similar configuration guidelines
 as the NCS 540, 5500, and NCS 5700 series devices. Detailed documentation of
 8000 series QoS including platform dependencies can be found at:  
@@ -701,10 +978,12 @@ as the NCS 540, 5500, and NCS 5700 series devices. Detailed documentation of
 Hierarchical QoS enables a provider to set an overall traffic rate across all services, and then configure parameters per-service via a child QoS policy where the percentages of guaranteed bandwidth are derived from the parent rate
 
 ### H-QoS platform support 
-NCS platforms support 2-level and 3-level H-QoS. 3-level H-QoS applies a policer (ingress) or shaper (egress) to a physical interface, with each sub-interface having a 2-level H-QoS policy applied. Hierarchical QoS is not enabled by default on the NCS 540 and 5500 platforms. H-QoS is enabled using the <b>hw-module profile qos hqos-enable</b> command.  Once H-QoS is enabled, the number of priority levels which can be assigned is reduced from 1-7 to 1-4. Additionally, any hierarchical QoS policy assigned to a L3 sub-interface using priority levels must include a "shape" command.   
+NCS platforms support 2-level and 3-level H-QoS. 3-level H-QoS applies a policer (ingress) or shaper (egress) to a physical interface, with each sub-interface having a 2-level H-QoS policy applied. Hierarchical QoS is not enabled by default on the NCS 540 and 5500 platforms. H-QoS is enabled using the <b>hw-module profile qos hqos-enable</b> command.  Once H-QoS is enabled, the number of priority levels which can be assigned is reduced from 1-7 to 1-4. Additionally, any hierarchical QoS policy assigned to a L3 sub-interface using priority levels must include a "shape" command.  
+
+Hierarchical QoS will be available on the Cisco 8010 and 8700 series routers in a future Agile Metro release.  
 
 ## Agile Services Core QoS mapping with five classes 
-QoS designs are typically tailored for each provider, but we introduce a 5-level QoS design which can fit most provider needs. The design covers transport of both unicast and multicast traffic.  
+QoS designs are typically tailored for each provider. Ideally a network will utilize as few core QoS classes as necessary. Many modern networks carrying high bandwidth residential traffic could utilize just two classes, Best Effort and Higher Priority. Below is an example of a 5-level QoS design which can fit most provider needs. The design covers transport of both unicast and multicast traffic. If a provider does not need 5 classes, this can always be reduced.   
 
 | Traffic Type |  Core Marking | Core Priority | Comments | 
 | ----------|---------|----------|---------------|-------------| 
@@ -807,7 +1086,13 @@ policy-map core-egress-exp-marking
 </pre>
 </div> 
 
-# Multicast 
+## Multicast 
+Multicast traffic distribution can still be an important component in service 
+provider networks. Multicast is often used for video distribution and certain 
+services requiring distribution communication between endpoints.  
+
+### IPv6 multicast  
+Most IPv6 multicast utilizes 
 
 ## L3 Multicast using SR-MPLS Tree-SID
 ### Tree SID Diagram 
@@ -893,10 +1178,10 @@ mpls ldp
 </pre> 
 </div> 
 
-# Agile Metro Use Cases
+# Agile Metro example use cases
 
-Service Provider networks must adopt a very flexible design that satisfy
-any to any connectivity requirements, without compromising in stability
+Service Provider networks must adopt a flexible design satisfying  
+any to any connectivity, without compromising in stability
 and availability. Moreover, transport programmability is essential to
 bring SLA awareness into the network. 
 
@@ -907,13 +1192,20 @@ cable access, mobile, and business services over the same converged network infr
 The following sections highlight the use cases and the components of the 
 design used in building those solutions.  
 
-# Mobile transport 
+## Business edge including mobile backhaul  
 
-## Summary and 5G Service Types  
-The Agile Metro design introduces support for 5G networks and 5G services. There are a variety of new service use cases being defined by 3GPP for use on 5G networks, illustrated by the figure below. Networks must now be built to support the stringent SLA requirements of Ultra-Reliable Low-Latency services while also being able to cope with the massive bandwidth introduced by Enhanced Mobile Broadband services. The initial support for 5G in the Converged SDN Transport design focuses on the backhaul and midhaul portions of the network utilizing end to end Segment Routing. The design introduces no new service types, the existing scalable L3VPN and EVPN based services using BGP are sufficient for carrying 5G control-plane and user-plane traffic.   
+### Summary and service types  
+The Agile Metro design introduces support for 5G networks and 5G services. There
+are a variety of new service use cases being defined by 3GPP for use on 5G
+networks, illustrated by the figure below. Networks must now be built to support
+the stringent SLA requirements of Ultra-Reliable Low-Latency services while also
+being able to cope with the massive bandwidth introduced by Enhanced Mobile
+Broadband services. The initial support for 5G in the Converged SDN Transport
+design focuses on the backhaul and midhaul portions of the network utilizing end
+to end Segment Routing. The design introduces no new service types, the existing
+scalable L3VPN and EVPN based services using BGP are sufficient for carrying 5G
+control-plane and user-plane traffic.   
 
-## Key Validated Components 
-The following key features have been added to the CST validated design to support 5G deployments
 
 ### End to End Timing Validation 
 End to end timing using PTP with profiles G.8275.1 and G.8275.2 have been
@@ -925,273 +1217,6 @@ allowing the use of different profiles across the network. Synchronous Ethernet
 (SyncE) is also recommended across the network to maintain stability when timing
 to the PRC. 
 
-### Low latency SR-TE path computation
-The "latency" constraint type is used either with a configured SR Policy or ODN
-SR Policy specifies the computation engine to compute the lowest latency path
-across the network. The latency computation algorithm can use different
-mechanisms for computing the end to end path. The first and preferred mechanism
-is to use the realtime measured per-link one-way delay across the network. This
-measured information is distributed via IGP extensions across the IGP domain and
-to external PCEs using BGP-LS extensions for use in both intra-domain and
-inter-domain calculations. Two other metric types can also be utilized as part
-of the "latency" path computation. The TE metric, which can be defined on all SR
-IS-IS links and the regular IGP metric can be used in the absence of the
-link-delay metric. More information on Performance Measurement for link delay can 
-be found at <https://www.cisco.com/c/en/us/td/docs/routers/asr9000/software/asr9k-r7-5/segment-routing/configuration/guide/b-segment-routing-cg-asr9000-75x/configure-performance-measurement.html> 
-Performance Measurement is supported on all hardware used in the CST design.  
-
-#### <b>Dynamic Link Performance Measurement</b>  
-Starting in version 3.5 of the CST, dynamic measurement of one-way and two-way
-latency on logical links is fully supported across all devices. The delay
-measurement feature utilizes TWAMP-Lite as the transport mechanism for probes
-and responses. PTP is a requirement for accurate measurement of one-way latency
-across links and is recommended for all nodes.  In the absence of PTP a
-"two-way" delay mode is supported to calculate the one-way link delay. It is
-recommended to configure one-way delay on all IS-IS core links within the CST
-network. A sample configuration can be found below and detailed configuration
-information can be found in the implementation guide. 
-
-One way delay measurement is also available for SR-TE Policy paths to give the
-provider an accurate latency measurement for all services utilizing the SR-TE
-Policy. This information is available through SR Policy statistics using the CLI
-or model-driven telemetry. The latency measurement is done for all active
-candidate paths.   
-
-Dynamic one-way link delay measurements using PTP are not currently supported on unnumbered interfaces. In the case of unnumbered interfaces, static link delay values must be used.    
-
-Different metric types can be used in a single path computation, with the following order used:  
-1. Unidirectional link delay metric either computed or statically defined  
-2. Statically defined TE metric 
-3. IGP metric 
-
-#### SR Policy latency constraint configuration on configured policy  
-<div class="highlighter-rouge">
-<pre class="highlight">
-segment-routing
-  traffic-eng
-    policy LATENCY-POLICY 
-      color 20 end-point ipv4 1.1.1.3
-      candidate-paths
-        preference 100
-          dynamic mpls
-            metric
-              type latency
-</pre>
-</div>
-
-#### SR Policy latency constraint configuration for ODN policies 
-<div class="highlighter-rouge">
-<pre class="highlight">
-segment-routing
- traffic-eng
-  on-demand color 100 
-   dynamic
-    pcep
-    !
-    metric
-     type latency
-</pre>
-</div>
-
-#### Dynamic link delay metric configuration 
-<div class="highlighter-rouge">
-<pre class="highlight">
-performance-measurement
- interface TenGigE0/0/0/10
-  delay-measurement
- interface TenGigE0/0/0/20
-  delay-measurement
-  !
- ! 
-  protocol twamp-light
-  measurement delay
-   unauthenticated
-    querier-dst-port 12345
-   !
-  !
- !
- delay-profile interfaces
-  advertisement
-   accelerated
-    threshold 25
-   !
-   periodic
-    interval 120
-    threshold 10
-   !
-  !
-  probe
-   measurement-mode one-way 
-   protocol twamp-light
-   computation-interval 60
-  !
- !
-</pre>
-</div>
-
-#### Static defined link delay metric
-Static delay is set by configuring the "advertise-delay" value in microseconds under each interface 
-
-<div class="highlighter-rouge">
-<pre class="highlight">
-performance-measurement
- interface TenGigE0/0/0/10
-  delay-measurement
-   advertise-delay 15000
- interface TenGigE0/0/0/20
-  delay-measurement
-   advertise-delay 10000
-</pre>
-</div>
-
-#### TE metric definition  
-<div class="highlighter-rouge">
-<pre class="highlight">
-segment-routing
- traffic-eng
-  interface TenGigE0/0/0/10
-   metric 15
-  !
-  interface TenGigE0/0/0/20
-   metric 10
-</pre>
-</div>
-
-The link-delay metrics are quantified in the unit of microseconds.  On most
-networks this can be quite large and may be out of range from normal IGP
-metrics, so care must be taken to ensure proper compatibility when mixing metric
-types. The largest possible IS-IS metric is 16777214 which is equivalent to
-16.77 seconds.    
-
-### SR Policy one-way delay measurement 
-In addition to the measurement of delay on physical links, the end to end
-one-way delay can also be measured across a SR Policy. This allows a provider to
-monitor the traffic path for increases in delay and log/alarm when thresholds
-are exceeded. Please note SR Policy latency measurements are not supported for
-PCE-computed paths, only those using head-end computation or configured static
-segment lists.  The basic configuration for SR Policy measurement follows:  
-
-<div class="highlighter-rouge">
-<pre class="highlight">
-performance-measurement
- delay-profile sr-policy
-  advertisement
-   accelerated
-    threshold 25
-   !
-   periodic
-    interval 120
-    threshold 10
-   !
-   threshold-check
-    average-delay
-   !
-  !
-  probe
-   tos
-    dscp 46
-   !
-   measurement-mode one-way
-   protocol twamp-light
-   computation-interval 60
-   burst-interval 60
-  !
- !
- protocol twamp-light
-  measurement delay
-   unauthenticated
-    querier-dst-port 12345
-   !
-  !
- !
-!
-segment-routing
- traffic-eng
-  policy APE7-PM
-   color 888 end-point ipv4 100.0.2.52
-   candidate-paths
-    preference 200
-     dynamic
-      metric
-       type igp
-      !
-     !
-    !
-   !
-   performance-measurement
-    delay-measurement
-     logging
-      delay-exceeded
-</pre>
-</div>
-
-### IP Endpoint Delay Measurement 
-In CST 5.0+ IOS-XR's Performance Measurement is extended to perform SLA 
-measurements between IP endpoints across multi-hop paths. Delay measurements 
-as well as liveness detection are supported. Model-driven telemetry as well as 
-CLI commands can be used to monitor the path delay.  
-
-#### Global Routing Table IP Endpoint Delay Measurement 
-<div class="highlighter-rouge">
-<pre class="highlight">
-performance-measurement
- endpoint ipv4 1.1.1.5
-  source-address ipv4 1.1.1.1
-  delay-measurement
-  !
- !
- delay-profile endpoint default
-  probe
-   measurement-mode one-way
-</pre>
-</div>
-
-#### VRF IP Endpoint Delay Measurement 
-<div class="highlighter-rouge">
-<pre class="highlight">
-performance-measurement
- endpoint ipv4 10.10.10.100 vrf green
-  source-address ipv4 1.1.1.1
-  delay-measurement
-  !
- !
- delay-profile endpoint default
-  probe
-   measurement-mode one-way
-</pre>
-</div>
-
-### Segment Routing Flexible Algorithms for 5G Slicing 
-SR Flexible Algorithms, outlined earlier in the transport section, give
-providers a powerful mechanism to segment networks into topoligies defined by
-SLA requirements. The SLA-driven topologies solve the constraints of specific 5G
-service types such as Ulta-Reliable Low-Latency Services. Using SR with a packet
-dataplane ensures the most efficient network possible, unlike slicing solutions
-using optical transport or OTN.  
-
-### End to end network QoS with H-QoS on Access PE 
-QoS is of utmost importance for ensuring the mobile control plane and critical
-user plane traffic meets SLA requirements. Overall network QoS is covered in the
-QoS section in this document, this section will focus on basic Hierarchical QoS
-to support 5G services. 
-
-H-QoS enables a provider to set an overall traffic rate across all services, and
-then configure parameters per-service via a child QoS policy where the
-percentages of guaranteed bandwidth are derived from the parent rate. NCS
-platforms support 2-level and 3-level H-QoS. 3-level H-QoS applies a policer
-(ingress) or shaper (egress) to a physical interface, with each sub-interface
-having a 2-level H-QoS policy applied.  
-
-
-#### CST QoS mapping with 5 classes 
-
-| Traffic Type | Ingress Marking | Core Marking | Comments | 
-| ----------|---------|----------|---------------|-------------| 
-| Low latency | IPP 5  | EXP 5 | URLLC, consistent delay, small buffer|  
-| 5G Control Plane | IPP 4 | EXP 4 | Mobile control and billing |    
-| High Priority Service | IPP 3 (in contract), 1 (out of contract) | EXP 1,3 | Business service | 
-| Best Effort | IPP 0 | EXP 0 | General user traffic | 
-| Network Control | IPP 6 | EXP 6 | Underlay network control plane |  
 
 # FTTH Design using EVPN E-Tree 
 
