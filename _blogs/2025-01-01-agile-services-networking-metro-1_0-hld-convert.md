@@ -644,7 +644,7 @@ needs. A fabric may be contained within a single location or span multiple
 geographic locations, interconnected using Cisco's Routed Optical Networking
 solution for simplicity and efficiency.    
 
-![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-diagram-1.png){:height="50%" width="50%"}
+![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-diagram-1.png){:height="100%" width="100%"}
 
 ### Additional Edge Fabric properties  
 
@@ -660,7 +660,7 @@ There is also flexibility in how and where the Edge Fabric is deployed in the pr
 The diagram shows four potential options, but the deployment is primarily based on the provider requirements. The fully 
 distributed edge offers the highest scale and performance, but as interim steps during migration other models may be used.  
 
-![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-deployment-options.png){:height="50%" width="50%"}
+![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-deployment-options.png){:height="100%" width="100%"}
 
 ### Recommended Edge Fabric hardware 
 There is no hard and fast rule about specific hardware deployed in a specific role. Spines should be higher bandwidth and higher port count devices with no service termination on those nodes. If fixed devices are used as spines, the Silicon One P100-based 8212-48FH-M and 8711-32FH-M are ideal spines due to their high 400G and 100G density. P100 routers and line cards also have Edge service capabilities if there is a requirement for placing some services on the spine devices. Edge Leaf devices should be chosen based on UNI port speeds, 
