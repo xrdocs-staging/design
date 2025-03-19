@@ -185,7 +185,11 @@ The 8712-MOD-M released with XR 24.4.1 is a modular 4-slot router using a single
 
 
 ## ASR 9000 
-The ASR 9000 is the router of choice for high scale edge services.  Agile Metro utilizes the ASR 9000 in a PE function role, performing high scale L2VPN, L3VPN, peering, and Pseudowire headend termination. The ASR 9000 is also utilized as a user plane in the distributed CUPS architecture for subscriber termination. 
+Agile Metro utilizes the ASR 9000 devices using the 5th generation Lightspeed+
+NPU in a multi-service PE role, performing high scale L2VPN, L3VPN, peering, and
+Pseudowire headend termination. The ASR 9000 is also utilized as a user plane in
+the distributed CUPS architecture for subscriber termination. The solution 
+includes the ASR 9902 and ASR 9903 small form factor modular ASR 9000 routers.   
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-asr9000.png)
 
@@ -195,22 +199,24 @@ The modular chassis version of the NCS 5500 is available in 4, 8, and 16 slot ve
 ![](http://xrdocs.io/design/images/asn-metro/cst-hw-ncs5500.png)
 
 ## NCS 5500 / 5700 Fixed Chassis 
-The NCS 5500 / 5700 fixed series devices are validated in access, aggregation,
-and core role in the Agile Metro design. All platforms listed below
-support at least PTP class B timing and the full set of IOS-XR xVPN and Segment
-Routing features.   
+NCS 5500 and 5700 routers are supported in the Agile Metro design. They offer a 
+wide range of service and termination aggregation options based on capacity and 
+port needs. These series of routers are utilized across peering, core, DCI, 
+mobile backhaul, and business services use cases.   
 
-These family of devices provide a flexible way to both aggregate downstream connections 
-as well terminate user services at different places in the network.  
+More information on the NCS 5500 and NCS 5700 family of routers can be found at: 
 
-More information on the NCS 5500 fixed routers can be found at: 
+<https://www.cisco.com/site/us/en/products/networking/sdwan-routers/network-convergence-system-5500-series/index.html>
 
-<https://www.cisco.com/c/en/us/products/routers/network-convergence-system-5500-series/index.html>
+<https://www.cisco.com/site/us/en/products/networking/sdwan-routers/network-convergence-system-5700-series/index.html> 
 
 ## NCS 540 Small, Medium, and Large density routers
-The NCS 540 family of routers supports mobile and business services across a wide
-variety of service provier and enterprise applications, including support for
-Routed Optical Networking in the QSFP-DD enabled NCS-540 Large Density router.
+The NCS 540 family of routers support residential, mobile, and business services
+across a wide variety of service provier and enterprise applications, including
+support for Routed Optical Networking in the QSFP-DD enabled NCS-540 Large
+Density router. In the Agile Metro design the NCS 540 also supported Routed 
+Passive Optical Networking, combining XGS-PON last mile connections using the 
+Cisco pluggable SFP+ OLT.  
 
 More information on the NCS 540 router line can be found at: 
 
