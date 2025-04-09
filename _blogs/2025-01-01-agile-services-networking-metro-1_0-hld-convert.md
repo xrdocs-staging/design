@@ -1091,11 +1091,15 @@ Multicast traffic distribution can still be an important component in service
 provider networks. Multicast is often used for video distribution and certain 
 services requiring distribution communication between endpoints.  
 
-### IPv6 multicast  
-Most IPv6 multicast utilizes 
+### SRv6 Multicast Deployment  
+SRv6 unicast services seamlessly co-exist with traditional deployed multicast
+technology such as native PIM-SM/PIM-SSM, IP based mVPN, SR-MPLS Tree-SID, and
+mLDP. Multicast traffic today is not encapsulated and delivered via SRv6, but in
+future Agile Metro releases we will incorporate new Cisco-led technologies to
+bring together a unified control and data-plane using SRv6.  
 
-## L3 Multicast using SR-MPLS Tree-SID
-### Tree SID Diagram 
+### L3 Multicast using SR-MPLS Tree-SID
+#### Tree SID Diagram 
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-treesid.png)
 
@@ -1106,7 +1110,8 @@ IPv4 network.  Each node in the network maintains a session to the same set of S
 controllers. The SR-PCE creates the tree using PCE-initiated segments. TreeSID
 supports advanced functionality such as TI-LFA for fast protection and disjoint
 trees.  
-### Static Tree-SID 
+
+#### Static Tree-SID 
 
 Multicast traffic is forwarded across the tree using static S,G mappings at the
 head-end source nodes and tail-end receiver nodes. Providers needing a solution
@@ -1118,7 +1123,7 @@ supported for both default VRF (Global Routing Table) and mVPN.
 Please see the CST 3.5+ Implementation Guide for static Tree-SID configuration
 guidelines and examples. 
 
-### Dynamic Tree-SID using BGP mVPN Control-Plane 
+#### Dynamic Tree-SID using BGP mVPN Control-Plane 
 
 IOS-XR supports using fully dynamic signaling to create multicast
 distribution trees using Tree-SID. Sources and receivers are discovered using
@@ -1138,7 +1143,7 @@ head-end node.
 Please see the Agile Services Networking Implementation Guide for more information 
 on implementing SR-MPLS Tree-SID. 
 
-## L3 IP Multicast and mVPN using mLDP  
+### L3 IP Multicast and mVPN using mLDP  
 The Agile Metro design supports using mLDP for multicast distribution when using 
 SR-MPLS or SRv6 for unicast transport.  
 Using BGP signaling adds additional scale to the network over in-band
@@ -1158,7 +1163,7 @@ access and ABR PE devices.
 Profile 14 is recommended for all service use cases and supports both
 intra-domain and inter-domain transport use cases.  
 
-### LDP Auto-configuration 
+#### LDP Auto-configuration 
 LDP can automatically be enabled on all IS-IS interfaces with the following configuration in the IS-IS configuration 
 <div class="highlighter-rouge">
 <pre class="highlight">
@@ -1168,7 +1173,7 @@ router isis ACCESS
 </pre> 
 </div> 
 
-### LDP mLDP-only Session Capability (RFC 7473)  
+#### LDP mLDP-only Session Capability (RFC 7473)  
 IOS-XR has the ability to only advertise mLDP state on each router adjacency, eliminating the need to filter LDP unicast FECs from advertisement into the network. This is done using the SAC (State Advertisement Control) TLV in the LDP initialization messages to advertise which LDP FEC classes to receive from an adjacent peer.  We can restrict the capabilities to mLDP only using the following configuration.  Please see the implementation guide and configurations for the full LDP configuration.   
 
 <div class="highlighter-rouge">
@@ -1178,8 +1183,6 @@ mpls ldp
 </pre> 
 </div> 
 
-
-# Agile Metro network automation 
 
 # Agile Metro subscriber edge components 
 
@@ -1495,11 +1498,46 @@ performance-measurement
 
 # Security 
 
-## Security overview 
+## Security overview
+Security is a top priority in building modern networks. Cisco and the Agile
+Metro design use a defense in depth strategy. Each layer of security is
+addressed starting at the initial manufactured hardware and continuing across
+all layers up to the service layer. Application layer security is not covered by
+the Agile Metro infrastructure and services design but is covered by additional
+Cisco Security products.  
 
-## Edge DDoS Protect
+## Cisco DDoS Edge Protection
 Cisco's Edge DDoS Protect presents an innovative solution providing fully distributed 
-DDoS protection for all places in the network.  Edge DDoS Protect  
+DDoS protection for all places in the network.
+
+The key component of DDoS Edge Protect is a small, lightweight, and containerized DDoS detection engine,
+running inside Cisco IOS XR operating system on selected Cisco routers. As a
+feature of the router itself, the solution provides out-of-path, full detection,
+and granular mitigation capabilities against volumetric DDoS attacks. This
+allows the router to become the first line of defense against DDoS attacks where
+attack traffic can be blocked in-place and no longer needs to be backhauled to
+dedicated scrubbing infrastructure. This gives operators the opportunity to extend
+DDoS protection to the edge of the network which would otherwise be
+cost-prohibitive and negatively impacting the application latency and the
+quality of experience. The overall scrubbing capacity of the network is also increased 
+since every router now has DDoS scrubbing capability. 
+
+
+You can apply this solution to the existing install base and to new router
+deployments without requiring any additional hardware.
+
+![](http://xrdocs.io/design/images/asn-metro/metro-ddos-protect-overview.png)
+
+
+### DDoS Edge Protect operation 
+
+
+### DDoS Edge Protection management  
+The management of the on-router DDoS Edge Protect containers is done through 
+Cisco's Edge Protect DDoS controller. The controller manages the deployment of 
+containers to the routers and acts as a single pane of glass for monitoring the 
+current state of the overall solution. The software tracks ongoing attacks and 
+mitigations deployed.  
 
 # Automation 
 
