@@ -1178,7 +1178,59 @@ mpls ldp
 </pre> 
 </div> 
 
-# Agile Metro example use cases
+
+# Agile Metro network automation 
+
+# Agile Metro subscriber edge components 
+
+## Cloud Native Broadband Network Gateway
+
+Cloud Native Broadband Gateway (cnBNG) represents a fundamental shift in how
+providers build converged access networks by separating the subscriber BNG
+control-plane functions from user-plane functions. CUPS (Control/User-Plane
+Separation) allows the use of scale-out x86 compute for subscriber control-plane
+functions, allowing providers to place these network functions at an optimal
+place in the network, and also allows simplification of user-plane elements.
+This simplification enables providers to distribute user-plane elements closer
+to end users, optimizing traffic efficiency to and from subscribers. In the CST
+5.0 design we include both traditional physical BNG (pBNG) and the newer cnBNG
+architecture.  
+
+## Cisco cnBNG Architecture
+
+Cisco's cnBNG supports the BBF TR-459 standards for control and user plane
+communication. The State Control Interface (SCi) is used for programming and
+management of dynamic subscriber interfaces including accounting information.
+The Control Packet Redirect Interface (CPRi) as its name implies redirects user
+packets destined for control-plane functions from the user plane to control
+plane. These include: DHCP DORA, DHCPv6, PPPoE, and L2TP. More information on 
+TR-459 can be found at <https://www.broadband-forum.org/marketing/download/TR-459.pdf> 
+
+### cnBNG Control Plane 
+The cloud native BNG control plane is a highly resilient scale out architecture.
+Traditional physical BNGs embedded in router software often scale poorly,
+require complex HA mechnaisms for resiliency, and are relatively painful to
+upgrade. Moving these network functions to a modern Kubernetes based
+cloud-native infrastructure reduces operator complexity providing native
+scale-out capacity growth, in-service software upgrades, and faster feature
+delivery.  
+
+### cnBNG User Plane 
+The cnBNG user plane is provided by Cisco ASR 9000 routers. The routers are
+responsible for terminating subscriber sessions (IPoE/PPPoE), communicating with
+the cnBNG control plane for user authentication and policy, applying
+subscriber policy elements such as QoS and security policies, and performs 
+subscriber routing. Fixed and modular platforms are supported  
+
+## Cisco Routed Passive Optical Networking 
+Cisco's Routed Optical Networking has helped reduce cost, space, and power by eliminating 
+
+
+# Agile Metro security 
+
+
+
+# Agile Metro use cases
 
 Service Provider networks must adopt a flexible design satisfying  
 any to any connectivity, without compromising in stability
