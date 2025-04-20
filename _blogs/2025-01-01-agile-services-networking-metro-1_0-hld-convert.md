@@ -1530,6 +1530,26 @@ deployments without requiring any additional hardware.
 
 
 ### DDoS Edge Protect operation 
+![](http://xrdocs.io/design/images/asn-metro/metro-ddos-operation.png)
+
+The above diagram explains the operation of Cisco DDoS Edge Protect. Standard 
+Netflow data is encapsulated in gRPC messages to the internal Edge Protect agent. 
+The data is analzyed by the agent and controller to determine the attack and the 
+proper mitigation technique. In most cases a granular ACL can be deployed to the 
+router to mitigate a volumetric attack, dropping traffic based on   
+
+#### Exampls ACL Deployment 
+
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+RP/0/RP0/CPU0:cst-8712-pa2#show run ipv4 access-list myACL
+ipv4 access-list myACL
+ 1 deny udp any eq 3000 host 17.2.1.2 eq domain packet-length eq 228
+ 6 deny tcp any eq 3400 host 18.19.1.2 eq www match-all -established -fin -psh +syn -urg packet-length eq 1178
+ 1301 permit ipv4 any any
+</div> 
+</pre>
 
 
 ### DDoS Edge Protection management  
