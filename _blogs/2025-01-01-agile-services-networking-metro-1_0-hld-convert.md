@@ -191,6 +191,9 @@ offering a high density low speed aggregation with 52 SFP28 ports for 10G and
 
 ![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-p100.png)
 
+More information on the 8711-32FH-M and 8212-48FH-M routers can be found at: 
+
+<https://www.cisco.com/c/en/us/products/se/2024/8/Collateral/8700-series-routers-ds.html>  
 
 #### K100 routers and line cards 
 The K100 Silicon One ASIC provides higher scale edge services. The 6.4T ASIC
@@ -202,7 +205,7 @@ has an embedded IPSec encryption engine (supported in a future release).
 
 ![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-8712.png)
 
-The 8712-MOD-M released with XR 24.4.1 is a modular 4-slot router using a single ASIC providing 1.6T per slot. The following MPAs will be initially supported ont he 8712-MOD-M.  
+The 8712-MOD-M released with XR 24.4.1 is a modular 2RU 4-slot router using a single ASIC providing 1.6T per slot. The following MPAs will be initially supported ont he 8712-MOD-M. The 8712-MOD-M supports MACSec on all ports with native NPU support for IPSec.   
 
 | MPA | Port layout |   
 | ----------|---------|
@@ -211,22 +214,34 @@ The 8712-MOD-M released with XR 24.4.1 is a modular 4-slot router using a single
 | 8K-MPA-16Z2D | 16 SFP56 + 4 QSFP56-DD (2x400G or 4x100G/200G)| 
 | 8K-MPA-18Z1 | 18 SFP56 + 1 QSFP56-DD  |
 
+More details on the 8712-MOD-M router can be found at:  
+
+<https://www.cisco.com/c/en/us/products/se/2024/8/Collateral/8700-series-routers-ds.html> 
+
 **8404-SYS** 
 
 ![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-8404.png)
 
-The 8404-SYS released with XR 25.2.1 is a modular fully redundant 4-slot router providing 1.2T per slot. The following MPAs will be 
-supported on the 8404-SYS. 
+The 8404-SYS released with XR 25.2.1 is a modular fully redundant 4RU 4-slot router providing 1.2T per slot. The 8404-SYS has a 300mm depth ideal for distributed edge applications. The 8404 supports Class C timing and extended temperature ranges. Each RSP on the 8404-SYS has an integrated 400G MPA with two QSFP-DD and two QSFP28 ports. The following MPAs will be supported on the 8404-SYS with each MPA supporting 800G of total bandwidth.   
 
+| MPA | Port layout |   
+| ----------|---------|
+| 84-MPA-2FH/6H-M | 2xQSFP-DD + 4xQSFP28  | 
+| 84-MPA-2H12Z-M | 12xSFP56 + 2xQSFP28 | 
 
+More details on the 8404-SYS router can be found at 
+
+<https://www.cisco.com/c/en/us/products/collateral/routers/8000-series-routers/8404-router-ds.html> 
 
 #### A100 routers and line cards 
-The K100 Silicon One ASIC provides higher scale edge services. The 6.4T ASIC
-will support advanced Edge service functionality for mobile, business services,
-Internet, peering, and enterprise use cases. The K100 natively supports MACSEC 
-has an embedded IPSec encryption engine (supported in a future release).
+Release 1.1 of Agile Metro introduces the first A100 based router focused on aggregation and access. 
 
-The 8712-MOD-M released with XR 24.4.1 is a modular 4-slot router using a single ASIC providing 1.6T per slot. The following MPAs will be initially supported ont he 8712-MOD-M.  
+**8011-4G24Y4H-I** 
+
+The 8011-4G24Y4H is a fixed router with 4xRJ45 ports supporting 1G, 24xSFP28 ports supporting 1G, 10G, and 25G and 4xQSFP28 ports supporting 
+40G or 100G. The router has a depth <300mm and supports I-temp conditions.  
+
+![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-8011-4g24y.png)
 
 
 ## ASR 9000 
