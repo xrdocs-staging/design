@@ -1,7 +1,7 @@
 ---
 published: true 
-date: '2025-01-01 11:00-0400'
-title: Agile Services Networking - Agile Metro 1.0 High-Level Design 
+date: '2025-07-01 11:00-0400'
+title: Agile Services Networking - Agile Metro 1.1 High-Level Design 
 excerpt: Cisco Agile Services Networking enables network operators to build flexible converged networks to handle any type of service at any place in the network. Networks built using ASN provide the scale, efficiency, and resiliency required while maintaining a simplier and easier to operate network.  
 author: Phil Bedard 
 permalink: /blogs/latest-asn-metro-hld
@@ -21,19 +21,22 @@ position: hidden
 
 | Version          |Date                    |Comments| 
 | ---------------- | ---------------------- |-----|
-| 1.0       | 2/1/2025 |Initial Agile Services Networking - Metro HLD| 
+| 1.0       | 2/1/2025 |Initial Agile Services Networking - Agile Metro HLD| 
+| 1.1       | 7/1/2025 |SiOne A100 introduction, enhanced automation | 
 
 # Minimum supported IOS-XR Release 
 
 | Agile Metro Version          | XR version |  
 | ---------------- | ---------------------- |
 | 1.0       | 24.4.1 |  
+| 1.1       | 25.2.1 |  
 
 # Minimum supported IOS-XE Release 
 
 | Agile Metro Version          | XE version |  
 | ---------------- | ---------------------- |
 | 1.0        | 17.15.21 on NCS 520, ASR920; 17.15 on Catalyst 8500 |
+| 1.1        | 17.15.21 on NCS 520, ASR920; 17.15 on Catalyst 8500 |
 
 
 # Agile Metro 1.0 component versions 
@@ -49,7 +52,21 @@ position: hidden
 | Cisco Edge Protect DDoS | 24.4.1 |  
 | Cisco CX Edge Fabric NSO services | 1.0 |  
 
-# Service Provider challenges 
+
+# Agile Metro 1.1 component versions 
+
+| Component          | Version |  
+| ---------------- | ---------------------- |
+| Crosswork Planning | 7.1  | 
+| Crosswork Network Controller      | 7.1 |  
+| Crosswork Hierarchical Controller      | 11.0 |  
+| Crosswork Workflow Manager | 2.0 |  
+| Cisco Routed PON manager | 5.0 |  
+| Cisco Cloud Native BNG | 25.2.1 |  
+| Cisco Edge Protect DDoS | 25.2.1 |  
+| Cisco CX Edge Fabric NSO services | 1.0 |  
+
+# Service Provider network challenges 
 
 Service providers continue to face challenges building networks to satisfy the
 evolving demands of network services. The traditional "service edge" of the
@@ -155,14 +172,13 @@ Metro design. Cisco 8000 routers provide the lowest power consumption in the
 industry, all while supporting systems over 200 Tbps and features service
 providers require. The expanded Silicon One family of ASICs in Agile Metro 1.0
 includes the P100 and K100 family of products fulfilling specific roles in the
-solution.  
+solution. 
 
-![](http://xrdocs.io/design/images/asn-metro/cst-hw-8000.png)
+Agile Metro 1.1 introduces the A100 based access and aggregation devices along with 
+the fully redundant K100 8404-SYS router.   
 
 ### New Agile Services Networking hardware 
 Agile Services Networking introduces new Silicon One based hardware, simplifying provider deployments with a unified silicon strategy across all parts of the network.   
-
-![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000.png)
 
 #### P100 routers and line cards 
 The P100 Silicon One ASIC provides up to 19.2Tbps of bandwidth. The 8212-48FH-M
@@ -173,11 +189,18 @@ and 88-LC1-52Y8H-EM.  The 88-LC1-52Y8H-EM is the first Silicon One line card
 offering a high density low speed aggregation with 52 SFP28 ports for 10G and
 25G native support. All line cards support MACSEC and Class C timing.   
 
+![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-p100.png)
+
+
 #### K100 routers and line cards 
 The K100 Silicon One ASIC provides higher scale edge services. The 6.4T ASIC
 will support advanced Edge service functionality for mobile, business services,
 Internet, peering, and enterprise use cases. The K100 natively supports MACSEC 
 has an embedded IPSec encryption engine (supported in a future release).
+
+**8712-MOD-M** 
+
+![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-8712.png)
 
 The 8712-MOD-M released with XR 24.4.1 is a modular 4-slot router using a single ASIC providing 1.6T per slot. The following MPAs will be initially supported ont he 8712-MOD-M.  
 
@@ -187,6 +210,23 @@ The 8712-MOD-M released with XR 24.4.1 is a modular 4-slot router using a single
 | 8K-MPA-16H | 16 QSFP28| 
 | 8K-MPA-16Z2D | 16 SFP56 + 4 QSFP56-DD (2x400G or 4x100G/200G)| 
 | 8K-MPA-18Z1 | 18 SFP56 + 1 QSFP56-DD  |
+
+**8404-SYS** 
+
+![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-8404.png)
+
+The 8404-SYS released with XR 25.2.1 is a modular fully redundant 4-slot router providing 1.2T per slot. The following MPAs will be 
+supported on the 8404-SYS. 
+
+
+
+#### A100 routers and line cards 
+The K100 Silicon One ASIC provides higher scale edge services. The 6.4T ASIC
+will support advanced Edge service functionality for mobile, business services,
+Internet, peering, and enterprise use cases. The K100 natively supports MACSEC 
+has an embedded IPSec encryption engine (supported in a future release).
+
+The 8712-MOD-M released with XR 24.4.1 is a modular 4-slot router using a single ASIC providing 1.6T per slot. The following MPAs will be initially supported ont he 8712-MOD-M.  
 
 
 ## ASR 9000 
