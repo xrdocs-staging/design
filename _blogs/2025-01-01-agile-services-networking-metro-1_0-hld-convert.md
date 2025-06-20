@@ -321,7 +321,7 @@ low bandwidth compared to transit traffic and requires utilizing a more sophisti
 design this includes cases where Carrier Grade NAT is being used or exception handling for MAP-T traffic.   
 
 ### Fully distributed edge
-This model full distributes edge functions so any router within the metro can provide edge user services. A provider may use a fully distributed edge is if the bandwidth, port, or service scale does not exceed that of a single node or pair of nodes. Another scenario may be if   
+This model full distributes edge functions so any router within the metro can provide edge user services. A provider may use a fully distributed edge is if the bandwidth, port, or service scale does not exceed that of a single node or pair of nodes. 
 
 ### Edge Fabric 
 This design creates a scale out fabric which can be placed within a single provider location or 
