@@ -448,11 +448,42 @@ header. If the node is the last SID in the SID list it will pop the SRH and proc
 the packet further.  If the node is not the last SID in the SID list it will replace
 the outer IPv6 destination address with the next IPv6 address in the SID list. 
 
-#### Forwarding and Service Congruency 
+#### Forwarding and service congruency 
 As you will see in the services section, the destination IPv6 address in SRv6 is
 the service endpoint. Coupled with the simple forwarding this aids in
 troubleshooting and is much easier to understand than the MPLS layered service
 and data plane.   
+
+
+# Control Plane design 
+
+## Control plane elements 
+
+### IS-IS as IGP 
+Simplicity is key when deploying modern networks. Legacy networks include a base 
+IGP protocol for route distribution along with an overlay protocol used for MPLS 
+label distribution. The Agile Services Networking design utilizes a single IGP 
+protocol, IS-IS, covering IPv4 and IPv6.   
+
+### IS-IS deployment and network segmentation 
+
+Segmentation of networks may be done at the IGP instance/process level for scale 
+or administrative reasons. The ability to aggregate and redistribute SRv6 prefixes 
+across IS-IS area or instance boundaries means 
+
+
+### Segment Routing 
+
+As mentioned in the building block section above, Segment Routing is a
+foundational element for building a modern services network. It simplifies the
+control and data plane of the network, eliminating legacy protocols such as LDP
+and RSVP-TE while providing additional capabilities for traffic engineering,
+network assurance, and network resiliency. 
+
+SR-MPLS or SRv6 Segment Identifiers (SIDs) are distributed using IS-IS in both 
+intra-domain and inter-domain use cases.  
+
+
 
 ### Low latency SR-TE path computation
 The "latency" constraint type is used either with a configured SR Policy or ODN
@@ -998,7 +1029,7 @@ network. Synchronous Ethernet (SyncE) is also recommended across the network to
 maintain stability when timing to the PRC.  
 
 
-## Quality of Service 
+## Quality of Service (Update for 8000)  
 
 ## Overview 
 Quality of Service is of utmost importance in today's multi-service converged
@@ -1006,6 +1037,8 @@ networks. The Agile Metro design has the ability to enforce end to end traffic
 path SLAs using Segment Routing Traffic Engineering. In addition to satisfying
 those path constraints, traditional QoS is used to make sure the PHB (Per-Hop
 Behavior) of each packet is enforced at each node across the converged network.  
+
+## Cisco 8000 QoS Primer  
 
 ## NCS 540, 560, 5500, and 5700 QoS Primer 
 Full details of the NCS 540 and 5500 QoS capabilities and configuration can be found at: 
@@ -1032,7 +1065,12 @@ as the NCS 540, 5500, and NCS 5700 series devices. Detailed documentation of
 ## Hierarchical Edge QoS 
 Hierarchical QoS enables a provider to set an overall traffic rate across all services, and then configure parameters per-service via a child QoS policy where the percentages of guaranteed bandwidth are derived from the parent rate
 
-### H-QoS platform support 
+### Cisco 8000 H-QoS Platform Support  
+Cisco 8000 P100 platforms support 2-level H-QoS. 
+
+Hierarchical QoS will be available on the Cisco 8404, 8010, and 8700 series routers in a future Agile Metro release.  
+
+### NCS 5500/5700 H-QoS platform support 
 NCS platforms support 2-level and 3-level H-QoS. 3-level H-QoS applies a policer (ingress) or shaper (egress) to a physical interface, with each sub-interface having a 2-level H-QoS policy applied. Hierarchical QoS is not enabled by default on the NCS 540 and 5500 platforms. H-QoS is enabled using the <b>hw-module profile qos hqos-enable</b> command.  Once H-QoS is enabled, the number of priority levels which can be assigned is reduced from 1-7 to 1-4. Additionally, any hierarchical QoS policy assigned to a L3 sub-interface using priority levels must include a "shape" command.  
 
 Hierarchical QoS will be available on the Cisco 8010 and 8700 series routers in a future Agile Metro release.  
@@ -1281,7 +1319,13 @@ subscriber policy elements such as QoS and security policies, and performs
 subscriber routing. Fixed and modular platforms are supported  
 
 ## Cisco Routed Passive Optical Networking 
-Cisco's Routed Optical Networking has helped reduce cost, space, and power by eliminating 
+Cisco's Routed Optical Networking has helped reduce cost, space, and power by
+replacing external transponder hardware with a pluggable transceiver. Cisco
+Routed Passive Optical Networking extends this concept by replacing a dedicated
+separate XGS-PON OLT chassis with a pluggable OLT used in Cisco routers. This
+enables providers to reduce the power and space footprint in remote locations
+and converge XGS-PON OLT function on routers providing other services such as 
+fiber based L2VPN/L3VPN business services or mobile backhaul.  
 
 
 # Agile Metro security 
@@ -1414,8 +1458,6 @@ responsible for terminating subscriber sessions (IPoE/PPPoE), communicating with
 the cnBNG control plane for user authentication and policy, applying
 subscriber policy elements such as QoS and security policies, and performs 
 subscriber routing. Fixed and modular platforms are supported  
-
-
 
 # Business and Infrastructure Services using L3VPN and EVPN 
 
