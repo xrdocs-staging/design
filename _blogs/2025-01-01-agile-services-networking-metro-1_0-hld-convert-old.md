@@ -4,7 +4,7 @@ date: '2025-07-01 11:00-0400'
 title: Agile Services Networking - Agile Metro 1.1 High-Level Design 
 excerpt: Cisco Agile Services Networking enables network operators to build flexible converged networks to handle any type of service at any place in the network. Networks built using ASN provide the scale, efficiency, and resiliency required while maintaining a simplier and easier to operate network.  
 author: Phil Bedard 
-permalink: /blogs/latest-asn-metro-hld
+permalink: /blogs/latest-asn-metro-hld-old
 tags:
   - iosxr
   - Metro
@@ -468,16 +468,8 @@ protocol, IS-IS, covering IPv4 and IPv6.
 ### IS-IS deployment and network segmentation 
 
 Segmentation of networks may be done at the IGP instance/process level for scale 
-or administrative reasons. The ability to aggregate and redistribute SRv6 (It's just IPv6!) prefixes 
-across IS-IS area or instance boundaries allows networks to scale to millions of routers
-with relatively few prefixes across the network. SRv6 retains Flex-Algo information across
-IS-IS instance boundaries.   
-
-
-![](http://xrdocs.io/design/images/asn-metro/metro-srv6-igp-domains.png){:height="100%" width="100%"}
-
-In the case of SR-MPLS inter-area traffic engineering is solved using SR-PCE, Cisco's 
-scalable Path Computation Element.  
+or administrative reasons. The ability to aggregate and redistribute SRv6 prefixes 
+across IS-IS area or instance boundaries means 
 
 
 ### Segment Routing 
@@ -491,6 +483,242 @@ network assurance, and network resiliency.
 SR-MPLS or SRv6 Segment Identifiers (SIDs) are distributed using IS-IS in both 
 intra-domain and inter-domain use cases.  
 
+
+
+### Low latency SR-TE path computation
+The "latency" constraint type is used either with a configured SR Policy or ODN
+SR Policy specifies the computation engine to compute the lowest latency path
+across the network. The latency computation algorithm can use different
+mechanisms for computing the end to end path. The first and preferred mechanism
+is to use the realtime measured per-link one-way delay across the network. This
+measured information is distributed via IGP extensions across the IGP domain and
+to external PCEs using BGP-LS extensions for use in both intra-domain and
+inter-domain calculations. Two other metric types can also be utilized as part
+of the "latency" path computation. The TE metric, which can be defined on all SR
+IS-IS links and the regular IGP metric can be used in the absence of the
+link-delay metric. More information on Performance Measurement for link delay can 
+be found at <https://www.cisco.com/c/en/us/td/docs/routers/asr9000/software/24xx/segment-routing/configuration/guide/b-segment-routing-cg-asr9000-24xx.html> 
+Performance Measurement is supported on all hardware used in the Agile Metro design.   
+
+#### <b>Dynamic Link Performance Measurement</b>  
+Dynamic measurement of one-way and two-way
+latency on logical links is fully supported across all devices. The delay
+measurement feature utilizes TWAMP-Lite as the transport mechanism for probes
+and responses. Configuring PTP for accurate measurement of one-way latency
+across links and is recommended for all nodes. It is
+recommended to configure one-way delay on all IS-IS core links within the 
+network. A sample configuration can be found below and detailed configuration
+information can be found in the implementation guide. 
+
+One way delay measurement is also available for SR-TE Policy paths to give the
+provider an accurate latency measurement for all services utilizing the SR-TE
+Policy. This information is available through SR Policy statistics using the CLI
+or model-driven telemetry. The latency measurement is done for all active
+candidate paths.   
+
+Dynamic one-way link delay measurements using PTP are not currently supported on unnumbered interfaces. In the case of unnumbered interfaces, static link delay values must be used.    
+
+Different metric types can be used in a single path computation, with the following order used:  
+1. Unidirectional link delay metric either computed or statically defined  
+2. Statically defined TE metric 
+3. IGP metric 
+
+#### SR Policy latency constraint configuration on configured policy  
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+  traffic-eng
+    policy LATENCY-POLICY 
+      color 20 end-point ipv4 1.1.1.3
+      candidate-paths
+        preference 100
+          dynamic mpls
+            metric
+              type latency
+</pre>
+</div>
+
+#### SR Policy latency constraint configuration for ODN policies 
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+ traffic-eng
+  on-demand color 100 
+   dynamic
+    pcep
+    !
+    metric
+     type latency
+</pre>
+</div>
+
+#### Dynamic link delay metric configuration 
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ interface TenGigE0/0/0/10
+  delay-measurement
+ interface TenGigE0/0/0/20
+  delay-measurement
+  !
+ ! 
+  protocol twamp-light
+  measurement delay
+   unauthenticated
+    querier-dst-port 12345
+   !
+  !
+ !
+ delay-profile interfaces
+  advertisement
+   accelerated
+    threshold 25
+   !
+   periodic
+    interval 120
+    threshold 10
+   !
+  !
+  probe
+   measurement-mode one-way 
+   protocol twamp-light
+   computation-interval 60
+  !
+ !
+</pre>
+</div>
+
+#### Static defined link delay metric
+Static delay is set by configuring the "advertise-delay" value in microseconds under each interface 
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ interface TenGigE0/0/0/10
+  delay-measurement
+   advertise-delay 15000
+ interface TenGigE0/0/0/20
+  delay-measurement
+   advertise-delay 10000
+</pre>
+</div>
+
+#### TE metric definition  
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+ traffic-eng
+  interface TenGigE0/0/0/10
+   metric 15
+  !
+  interface TenGigE0/0/0/20
+   metric 10
+</pre>
+</div>
+
+The link-delay metrics are quantified in the unit of microseconds.  On most
+networks this can be quite large and may be out of range from normal IGP
+metrics, so care must be taken to ensure proper compatibility when mixing metric
+types. The largest possible IS-IS metric is 16777214 which is equivalent to
+16.77 seconds.    
+
+### SR Policy one-way delay measurement 
+In addition to the measurement of delay on physical links, the end to end
+one-way delay can also be measured across a SR Policy. This allows a provider to
+monitor the traffic path for increases in delay and log/alarm when thresholds
+are exceeded. Please note SR Policy latency measurements are not supported for
+PCE-computed paths, only those using head-end computation or configured static
+segment lists.  The basic configuration for SR Policy measurement follows:  
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ delay-profile sr-policy
+  advertisement
+   accelerated
+    threshold 25
+   !
+   periodic
+    interval 120
+    threshold 10
+   !
+   threshold-check
+    average-delay
+   !
+  !
+  probe
+   tos
+    dscp 46
+   !
+   measurement-mode one-way
+   protocol twamp-light
+   computation-interval 60
+   burst-interval 60
+  !
+ !
+ protocol twamp-light
+  measurement delay
+   unauthenticated
+    querier-dst-port 12345
+   !
+  !
+ !
+!
+segment-routing
+ traffic-eng
+  policy APE7-PM
+   color 888 end-point ipv4 100.0.2.52
+   candidate-paths
+    preference 200
+     dynamic
+      metric
+       type igp
+      !
+     !
+    !
+   !
+   performance-measurement
+    delay-measurement
+     logging
+      delay-exceeded
+</pre>
+</div>
+
+### IP Endpoint Delay Measurement 
+IOS-XR's Performance Measurement is extended to perform SLA 
+measurements between IP endpoints across multi-hop paths. Delay measurements 
+as well as liveness detection are supported. Model-driven telemetry as well as 
+CLI commands can be used to monitor the path delay.  
+
+#### Global Routing Table IP Endpoint Delay Measurement 
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ endpoint ipv4 1.1.1.5
+  source-address ipv4 1.1.1.1
+  delay-measurement
+  !
+ !
+ delay-profile endpoint default
+  probe
+   measurement-mode one-way
+</pre>
+</div>
+
+#### VRF IP Endpoint Delay Measurement 
+<div class="highlighter-rouge">
+<pre class="highlight">
+performance-measurement
+ endpoint ipv4 10.10.10.100 vrf green
+  source-address ipv4 1.1.1.1
+  delay-measurement
+  !
+ !
+ delay-profile endpoint default
+  probe
+   measurement-mode one-way
+</pre>
+</div>
 
 
 ### Segment Routing Flexible Algorithms (Flex-Algo) 
@@ -531,6 +759,72 @@ The minimum bandwidth metric is uses to prune links below a certain bandwidth va
 Maximum Delay: 
 Maximum delay uses the measured or statically set SR-PM delay values to prune high delay links from the network. While the delay metric will calculate the lowest delay path, this will ensure that path never takes high delay links.  
 
+
+#### Flex-Algo SRv6 locator assignment 
+
+SRv6 locators are defined under the primary SRv6 configuration. Each defined locator for the node can be assigned a specific Flex-Algo, which is used by remote head-end nodes to calculate the specific Flex-Algo topology for end to end path computation.  
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+ srv6
+  encapsulation
+   source-address fccc:0:214::1
+  !
+  locators
+   locator LocAlgo0
+    micro-segment behavior unode psp-usd
+    prefix fccc:0:214::/48
+   !
+   locator LocAlgo128
+    micro-segment behavior unode psp-usd
+    prefix fccc:1:214::/48
+    algorithm 128
+   !
+  !
+ !
+!
+</pre>
+</div>
+
+#### Flex-Algo MPLS SID Assignment
+Nodes participating in a specific algorithm must have a unique node SID prefix assigned to the algorithm. In a typical deployment, the same Loopback address is 
+used for multiple algorithms. IGP extensions advertise algorithm membership throughout the network. Below is an example of a node with multiple algorithms and node SID 
+assignments. By default, the basic IGP path computation is assigned to algorithm "0".  Algorithm "1" is also reserved. Algorithms 128-255 are user-definable. All Flex-Algo 
+SIDs belong to the same global SRGB so providers deploying SR should take this into account. Each algorithm should be assigned its own block of SIDs within 
+the SRGB, in the case below the SRGB is 16000-32000, each algorithm is assigned 1000 SIDs.   
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+ interface Loopback0
+  address-family ipv4 unicast
+   prefix-sid index 150
+   prefix-sid algorithm 128 absolute 18003
+   prefix-sid algorithm 129 absolute 19003
+   prefix-sid algorithm 130 absolute 20003
+</pre>
+</div>
+
+#### Flex-Algo IGP Definition 
+Flexible algorithms being used within a network must be defined in the IGP domains in the network The configuration is typically 
+done on at least one node under the IGP configuration for domain. Under the definition the metric type used for computation is 
+defined along with any link affinities. Link affinities are used to constrain the algorithm to not only specific nodes, but 
+also specific links. These affinities are the same previously used by RSVP-TE.  
+
+**Note: Inter-domain Flex-Algo path computation requires synchronized Flex-Algo definitions across the end-to-end path** 
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+ flex-algo 130
+  metric-type delay
+  advertise-definition
+ !
+ flex-algo 131
+  advertise-definition
+  affinity exclude-any red
+</pre>
+</div>
+
 #### Path Computation across SR Flex-Algo Network 
 Flex-Algo works by creating a separate topology for each algorithm. By default,
 all links interconnecting nodes participating in the same algorithm can be used
@@ -542,8 +836,43 @@ it for the path computation. Even with a complex topology, a single SID is used
 for the end to end path, as opposed to using a series of node and adjacency SIDs
 to steer traffic across a shared topology. Each node participating in the
 algorithm has adjacencies to other nodes utilizing the same algorithm, so when an 
-incoming SRv6 locator or MPLS label matching the algo SID enters, it will utilize the path
+incoming SRv6 IP address or MPLS label matching the algo SID enters, it will utilize the path
 specific to the algorithm. On-demand SR-TE policies can also use a specific algorithm.   
+
+
+#### Flex-Algo SR-MPLS dual-plane topology example  
+A very simple use case for Flex-Algo is to easily define a dual-plane network
+topology where algorithm 129 red and algorithm 130 is green. Nodes A1 and A6
+participate in both algorithms. When a path request is made for algorithm 129,
+the head-end nodes A1 and A6 will only use paths specific to the algorithm.  The
+SR-TE Policy does not need to reference the specific SID, only the Algo being
+used as the constraints. The local node or SR-PCE will utilize the Algo to
+compute the path dynamically.   
+
+![](http://xrdocs.io/design/images/asn-metro/cst-hld-dual-plane.png)
+
+The following policy configuration is an example of constraining the path to the Algo 129 "Red" path.  
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+segment-routing
+ traffic-eng
+  policy GREEN-PE8-128
+   color 1128 end-point ipv4 100.0.2.53
+   candidate-paths
+    preference 1
+     dynamic
+      pcep
+      !
+      metric
+       type igp
+      !
+     !
+<b>     constraints
+      segments
+       sid-algorithm 129</b> 
+</pre>
+</div>
 
 
 ### Traffic Engineering (Tactical Steering) – SR-TE Policy
@@ -597,6 +926,89 @@ The PCC is the device where the service originates (PE) and therefore it
 requires end-to-end connectivity over the segment routing enabled
 multi-domain network.
 
+## Agile networks using SRv6 or IPv4 unnumbered interfaces  
+
+If building an IPv6/SRv6 based network, IS-IS utilizes link-local addresses for
+node adjacencies. It does not require the operator number interfaces in a common
+subnet like IPv4. This simplifies the overall deployment of the network and
+allows an operator to insert nodes into an existing IS-IS adjacency path without
+additional configuration.  If using IS-IS for IPv4, the operator can achieve
+similar behavior by using unnumbered support.  
+
+IS-IS and Segment Routing/SR-TE utilized in the Agile Metro design supports
+using unnumbered IPv4 interfaces. In the topology database each interface is
+uniquely identified by a combination of router ID and SNMP IfIndex value. 
+
+![](http://xrdocs.io/design/images/asn-metro/cst-hld-unnumbered.png)
+
+**Unnumbered interface configuration:**  
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+interface TenGigE0/0/0/2
+ description to-AG2
+ mtu 9216
+ ptp
+  profile My-Slave
+  port state slave-only
+  local-priority 10
+ !
+ service-policy input core-ingress-classifier
+ service-policy output core-egress-exp-marking
+<b> ipv4 point-to-point
+ ipv4 unnumbered Loopback0 </b> 
+ frequency synchronization
+  selection input
+  priority 10
+  wait-to-restore 1
+ !
+!
+</pre>
+</div>
+
+### SR-MPLS Area Border Routers – Anycast-SID
+
+In the case of SR-MPLS and computing end to end paths using SR-TE with SR-PCE,
+the use of Anycast SIDs is advisable. SR-PCE is aware of anycast SIDs in the
+topology and will compute a path utilizing them at IGP instance boundaries,
+creating a resilient end to end path for SR-MPLS SR-TE policies. In the event of
+a failure of an ABR node, traffic will quickly reroute to the other node since
+the SID being used in the SR-TE path is the same across all ABRs sharing the
+same Anycast SID.  
+
+### SRv6 and SR-MPLS black hole avoidance  
+
+#### SR-MPLS Anycast SID 
+
+Inter-domain resilience and load-balancing for SR-MPLS is satisfied by using the same
+Anycast SID on each boundary node. Once the SR-PCE knows the location of a set
+of Anycast SIDs, it will utilize the SID in the path computation to an egress
+node. The SR-PCE will only utilize the Anycast SID if it has a valid path to the
+next SID in the computed path, meaning if one ABR loses it's path to the
+adjacent domain, the SR-PCE will update the head-end path with one utilizing a
+normal node SID to ensure traffic is not dropped.   
+
+It is also possible to withdraw an anycast SID from the topology by using the
+conditional route advertisement feature for IS-IS. Once the anycast
+SID Loopback has been withdrawn, it will no longer be used in a SR Policy path.
+Conditional route advertisement can be used for SR-TE Policies with Anycast SIDs
+in either dynamic or static SID candidate paths. Conditional route advertisement
+is implemented by supplying the router with a list of remote prefixes to monitor
+for reachability in the RIB. If those routes disappear from the RIB, the
+interface route will be withdrawn.  
+
+### SRv6 Unreachable Prefix Announcement (UPA) 
+Summarization hides the state of longer prefixes within the aggregate
+summary, leading to traffic loss or slower failover when an egress PE is
+unreachable. UPA is an IGP function to quickly poison a prefix which has become
+unreachable to an upstream node. It enables the notification of an individual
+prefix becoming unreachable, outside of the local area/domain and across the
+network in a manner that does not leave behind any persistent state in the
+link-state database. When an ingress PE receives the UPA for an egress PE it can 
+trigger fast switchover to an alternate path, such as a BGP PIC pre-programmed 
+backup path.    
+
+
 ### SR-MPLS, SRv6, and Unified MPLS (BGP-LU) Co-existence 
 
 In the Agile Metro design validation is performed for the co-existence of
@@ -615,6 +1027,7 @@ highest level of accuracy across the network. IOS-XR fully supports G.8275.1 to
 G.8275.2 interworking, allowing the use of different profiles across the
 network. Synchronous Ethernet (SyncE) is also recommended across the network to
 maintain stability when timing to the PRC.  
+
 
 ## Quality of Service (Update for 8000)  
 
@@ -672,6 +1085,99 @@ QoS designs are typically tailored for each provider. Ideally a network will uti
 | High Priority 1 | EXP 3 | Medium-High | High priority service traffic |     
 | Medium Priority / Multicast | EXP 2  | Medium priority and multicast | 
 | Best Effort | EXP 0 | General user traffic | 
+
+### Example Core QoS Class and Policy Maps 
+These are presented for reference only, please see the implementation guide for the full QoS configuration 
+
+#### Class maps for ingress header matching
+<div class="highlighter-rouge">
+<pre class="highlight">
+class-map match-any match-ef-exp5
+ description High priority, EF 
+ match dscp 46
+ end-class-map
+!
+class-map match-any match-cs5-exp4
+ description Second highest priority
+ match dscp 40
+ end-class-map
+</pre>
+</div>
+<b>Ingress QoS policy</b> 
+<div class="highlighter-rouge">
+<pre class="highlight">
+policy-map ingress-classifier
+ class match-ef-exp5
+  set traffic-class 2
+  set qos-group 2
+ !
+ class match-cs5-exp4
+  set traffic-class 3
+  set qos-group 3
+ ! 
+ class class-default
+  set traffic-class 0
+  set dscp 0
+  set qos-group 0
+ !
+ end-policy-map
+</pre>
+</div>
+
+#### Class maps for egress queuing and marking policies
+<div class="highlighter-rouge">
+<pre class="highlight">
+class-map match-any match-traffic-class-2
+ description "Match highest priority traffic-class 2"
+ match traffic-class 2
+ end-class-map
+!
+class-map match-any match-traffic-class-3
+ description "Match high priority traffic-class 3"
+ match traffic-class 3
+ end-class-map
+!
+class-map match-any match-qos-group-2
+ match qos-group 2
+ end-class-map
+!
+class-map match-any match-qos-group-3
+ match qos-group 3
+ end-class-map
+</pre>
+</div>
+
+#### Egress QoS queuing policy 
+<div class="highlighter-rouge">
+<pre class="highlight">
+policy-map egress-queuing
+ class match-traffic-class-2
+  priority level 2
+ !
+ class match-traffic-class-3
+  priority level 3
+ !
+ class class-default
+ !
+ end-policy-map
+</pre>
+</div>
+
+#### Egress QoS marking policy 
+<div class="highlighter-rouge">
+<pre class="highlight">
+policy-map core-egress-exp-marking
+ class match-qos-group-2
+  set mpls experimental imposition 5
+ !
+ class match-qos-group-3
+  set mpls experimental imposition 4
+ class class-default
+  set mpls experimental imposition 0
+ !
+ end-policy-map
+</pre>
+</div> 
 
 ## Multicast 
 Multicast traffic distribution can still be an important component in service 
@@ -750,6 +1256,26 @@ access and ABR PE devices.
 Profile 14 is recommended for all service use cases and supports both
 intra-domain and inter-domain transport use cases.  
 
+#### LDP Auto-configuration 
+LDP can automatically be enabled on all IS-IS interfaces with the following configuration in the IS-IS configuration 
+<div class="highlighter-rouge">
+<pre class="highlight">
+router isis ACCESS
+ address-family ipv4 unicast
+  mpls ldp auto-config
+</pre> 
+</div> 
+
+#### LDP mLDP-only Session Capability (RFC 7473)  
+IOS-XR has the ability to only advertise mLDP state on each router adjacency, eliminating the need to filter LDP unicast FECs from advertisement into the network. This is done using the SAC (State Advertisement Control) TLV in the LDP initialization messages to advertise which LDP FEC classes to receive from an adjacent peer.  We can restrict the capabilities to mLDP only using the following configuration.  Please see the implementation guide and configurations for the full LDP configuration.   
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+mpls ldp
+ capabilities sac mldp-only
+</pre> 
+</div> 
+
 
 # Agile Metro subscriber edge components 
 
@@ -799,11 +1325,10 @@ Routed Passive Optical Networking extends this concept by replacing a dedicated
 separate XGS-PON OLT chassis with a pluggable OLT used in Cisco routers. This
 enables providers to reduce the power and space footprint in remote locations
 and converge XGS-PON OLT function on routers providing other services such as 
-fiber based L2VPN/L3VPN business services or mobile backhaul. 
-
-### Cisco Routed PON Components 
+fiber based L2VPN/L3VPN business services or mobile backhaul.  
 
 
+# Agile Metro security 
 
 
 
@@ -896,6 +1421,43 @@ evpn
 </pre>
 </div>
 
+# Cisco Cloud Native Broadband Network Gateway 
+
+cnBNG represents a fundamental shift in how providers build converged access
+networks by separating the subscriber BNG control-plane functions from
+user-plane functions. CUPS (Control/User-Plane Separation) allows the use of
+scale-out x86 compute for subscriber control-plane functions, allowing providers
+to place these network functions at an optimal place in the network, and also
+allows simplification of user-plane elements. This simplification enables
+providers to distribute user-plane elements closer to end users, optimizing
+traffic efficiency to and from subscribers. In the CST 5.0 design we include
+both traditional physical BNG (pBNG) and the newer cnBNG architecture.  
+
+## Cisco cnBNG Architecture
+
+Cisco's cnBNG supports the BBF TR-459 standards for control and user plane
+communication. The State Control Interface (SCi) is used for programming and
+management of dynamic subscriber interfaces including accounting information.
+The Control Packet Redirect Interface (CPRi) as its name implies redirects user
+packets destined for control-plane functions from the user plane to control
+plane. These include: DHCP DORA, DHCPv6, PPPoE, and L2TP. More information on 
+TR-459 can be found at <https://www.broadband-forum.org/marketing/download/TR-459.pdf> 
+
+### cnBNG Control Plane 
+The cloud native BNG control plane is a highly resilient scale out architecture.
+Traditional physical BNGs embedded in router software often scale poorly,
+require complex HA mechnaisms for resiliency, and are relatively painful to
+upgrade. Moving these network functions to a modern Kubernetes based
+cloud-native infrastructure reduces operator complexity providing native
+scale-out capacity growth, in-service software upgrades, and faster feature
+delivery.  
+
+### cnBNG User Plane 
+The cnBNG user plane is provided by Cisco ASR 9000 routers. The routers are
+responsible for terminating subscriber sessions (IPoE/PPPoE), communicating with
+the cnBNG control plane for user authentication and policy, applying
+subscriber policy elements such as QoS and security policies, and performs 
+subscriber routing. Fixed and modular platforms are supported  
 
 # Business and Infrastructure Services using L3VPN and EVPN 
 
@@ -963,7 +1525,7 @@ across links and is recommended for all nodes.  In the absence of PTP a
 "two-way" delay mode is supported to calculate the one-way link delay.
 
 Legacy hardware also now supports a software CPU based timestamp method to enable
-SR-PM delay measurements for hardware without PTP timing hardware.  
+SR-PM delay measurements for hardware with PTP timing hardware.  
 
 Delay and loss measurement is also available for SR-TE Policy paths to give the
 provider an accurate latency and loss measurement for all services utilizing the SR-TE
