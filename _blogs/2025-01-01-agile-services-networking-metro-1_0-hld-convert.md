@@ -625,9 +625,7 @@ path SLAs using Segment Routing Traffic Engineering. In addition to satisfying
 those path constraints, traditional QoS is used to make sure the PHB (Per-Hop
 Behavior) of each packet is enforced at each node across the converged network.  
 
-## Cisco 8000 QoS Primer  
-
-## NCS 540, 560, 5500, and 5700 QoS Primer 
+## NCS 540, 560, 5500, and 5700 QoS 
 Full details of the NCS 540 and 5500 QoS capabilities and configuration can be found at: 
 <https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/qos/24xx/configuration/guide/b-qos-cg-ncs5500-24xx.html>
 
@@ -643,8 +641,10 @@ The <code>priority-level</code> command used in an egress QoS policy specifies t
 Please note, multicast traffic does not follow the same constructs as unicast traffic for prioritization. All multicast traffic assigned to Traffic Classes 1-4 are treated as Low Priority and traffic assigned to 5-6 treated as high priority.     
 
 ## Cisco 8000, 8010, 8600, and 8700 QoS  
-The QoS configuration of the Cisco 8000 follows similar configuration guidelines
-as the NCS 540, 5500, and NCS 5700 series devices. Detailed documentation of
+The semantics of the QoS configuration of the Cisco 8000 follows similar
+configuration guidelines as the NCS 540, 5500, and NCS 5700 series devices. It
+utilizes the same traffic class structure, QoS groups, and priority level
+behavior to mark traffic and apply queuing behavior. Detailed documentation of
 8000 series QoS including platform dependencies can be found at:  
 
 <https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/qos/24xx/configuration/guide/b-qos-cg-8k-24xx.html> 
@@ -762,9 +762,7 @@ Separation) allows the use of scale-out x86 compute for subscriber control-plane
 functions, allowing providers to place these network functions at an optimal
 place in the network, and also allows simplification of user-plane elements.
 This simplification enables providers to distribute user-plane elements closer
-to end users, optimizing traffic efficiency to and from subscribers. In the CST
-5.0 design we include both traditional physical BNG (pBNG) and the newer cnBNG
-architecture.  
+to end users, optimizing traffic efficiency to and from subscribers.
 
 ## Cisco cnBNG Architecture
 
@@ -786,7 +784,7 @@ scale-out capacity growth, in-service software upgrades, and faster feature
 delivery.  
 
 ### cnBNG User Plane 
-The cnBNG user plane is provided by Cisco ASR 9000 routers. The routers are
+The cnBNG user plane in Agile Metro 1.1 is provided by Cisco ASR 9000 routers. The routers are
 responsible for terminating subscriber sessions (IPoE/PPPoE), communicating with
 the cnBNG control plane for user authentication and policy, applying
 subscriber policy elements such as QoS and security policies, and performs 
@@ -803,7 +801,30 @@ fiber based L2VPN/L3VPN business services or mobile backhaul.
 
 ### Cisco Routed PON Components 
 
+#### Cisco Routed PON pluggable OLT 
 
+The key component to device level convergence with Cisco RPON is using a pluggable
+XGS-PON Optical Line Terminal. This allows the OLT to be used in a standard 
+IOS-XR router, eliminating the need for the additional OLT.   
+
+![](http://xrdocs.io/design/images/asn-metro/asn-rpon-pluggable.png)
+
+#### Cisco Routed PON controller  
+
+The Cisco Routed PON controller runs directly on the IOS-XR router hosting the pluggable 
+OLT. The software is distributed as part of the IOS-XR software distribution and runs 
+as a third party container within IOS-XR's application hosting infrastructure. It provides 
+the interface between the Routed PON manager and the pluggable OLT.  
+
+#### Cisco Routed PON manager 
+
+The Cisco Routed PON manager provides all of the functionality to manage pluggable 
+OLTs deployed in the field. Provisioning of services is performed either via UI or 
+API via the PON Manager. It also serves as a single point of monitoring for the 
+OLT/ONU infrastructure. The PON Manager has a standard interface via NETCONF 
+used for managing all aspects of the PON network.  
+
+![](http://xrdocs.io/design/images/asn-metro/asn-rpon-manager.png)
 
 
 
@@ -820,6 +841,22 @@ requirements. This blueprint must adapt to carry any service type, for example
 cable access, mobile, and business services over the same converged network infrastructure. 
 The following sections highlight the use cases and the components of the 
 design used in building those solutions.  
+
+## Collapsed use cases 
+While we describe different use cases it doesn't mean multiple use cases cannot 
+be converged on a single device. There are a number of benefits to functional separation in 
+networks but there are times due to location size it isn't cost or operational effective
+to place dedicated routers for each role at a location. Modern Cisco routers are built to 
+handle a wide variety of features covering many use cases.  
+
+## Core
+Core routers typically serve a single purpose in providing high density and high 
+bandwidth aggregation and connectivity between other core routers.  
+
+## Peering and content delivery 
+
+
+
 
 ## Business edge including mobile backhaul  
 
@@ -1094,7 +1131,16 @@ containers to the routers and acts as a single pane of glass for monitoring the
 current state of the overall solution. The software tracks ongoing attacks and 
 mitigations deployed.  
 
-# Automation 
+# Agile Network Automation 
+Network automation in Agile Services Networking Network automation plays a key
+role in how Agile networks are built and managed.  Cisco’s Crosswork family of
+network automation gives network operators the ability to easily deploy network
+infrastructure, manage multi-layer network services, and provide advanced levels
+of network assurance.  This blog will introduce just a few aspects of Cisco’s
+service provider network automation capabilities, please see
+<https://www.cisco.com/c/en/us/products/cloud-systems-management/crosswork-network-controller/index.html>
+ for an in-depth view of all of the capabilities.  
+
 
 ## Network Management using Cisco Crosswork Network Controller 
 
@@ -1163,6 +1209,9 @@ in RFC 8572. More information on Crosswork ZTP can be found at
 Crosswork Network Controller provides support for provisioning SR-MPLS and SRv6   
 traffic engineering policies as well as managing the VPN services utilizing those
 paths or standard IGP based Segment Routing paths.   
+
+
+
 
 # Base Services Supporting Advanced Use Cases  
 ## Overview
