@@ -187,7 +187,7 @@ peering, and aggregation roles in the Agile Metro design. P100 line cards are
 also available for modular systems including the Edge enhanced 88-LC1-12TH24FH-E
 and 88-LC1-52Y8H-EM.  The 88-LC1-52Y8H-EM is the first Silicon One line card
 offering a high density low speed aggregation with 52 SFP28 ports for 10G and
-25G native support. All line cards support MACSEC and Class C timing.   
+25G native support. All line cards support MACSec and Class C timing.   
 
 ![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-p100.png)
 
@@ -490,8 +490,6 @@ network assurance, and network resiliency.
 
 SR-MPLS or SRv6 Segment Identifiers (SIDs) are distributed using IS-IS in both 
 intra-domain and inter-domain use cases.  
-
-
 
 ### Segment Routing Flexible Algorithms (Flex-Algo) 
 
@@ -825,7 +823,6 @@ used for managing all aspects of the PON network.
 ![](http://xrdocs.io/design/images/asn-metro/asn-rpon-manager.png)
 
 
-
 # Agile Metro use cases
 
 Service Provider networks must adopt a flexible design satisfying  
@@ -1031,9 +1028,20 @@ The management of the on-router DDoS Edge Protect containers is done through
 Cisco's Edge Protect DDoS controller. The controller manages the deployment of 
 containers to the routers and acts as a single pane of glass for monitoring the 
 current state of the overall solution. The software tracks ongoing attacks and 
-mitigations deployed.  
+mitigations deployed. 
 
-# Agile Network Automation 
+## MACSec support 
+Cisco A100, P100, and K100 8000 routers such as the 8212-32FH-M, 8712-MOD-M, and 
+8011-4G24Y4H support MACSec across all ports. This allows providers to build 
+end to end networks from access to core protected from man in the middle link 
+snooping.  
+
+## IPSec support  
+Cisco A100 and K100 8000 routers such as the 8712-MOD-M and 8011-4G24Y4H contain
+built-in ASIC support for IPSec. IPSec features and functionality will be
+enabled in future releases of IOS-XR and Agile Metro.   
+
+# Agile network automation 
 Network automation in Agile Services Networking Network automation plays a key
 role in how Agile networks are built and managed.  Cisco’s Crosswork family of
 network automation gives network operators the ability to easily deploy network
@@ -1043,15 +1051,29 @@ service provider network automation capabilities, please see
 <https://www.cisco.com/c/en/us/products/cloud-systems-management/crosswork-network-controller/index.html>
  for an in-depth view of all of the capabilities.  
 
+## IP network management using Cisco Crosswork Network Controller 
 
-## Network Management using Cisco Crosswork Network Controller 
+Crosswork Network Controller provides a platform for UI and API based network management. Agile Metro 1.1 
+utilizes CNC 7.1. CNC 7.1 supports the following major use cases:  
 
-Crosswork Network Controller provides a platform for UI and API based network 
-management. CNC supports RSVP-TE, SR-TE Policy, L2VPN, and L3VPN provisioning 
-using standards based IETF models.
+- Device Element Management with fault, alarm, software management, and day-1 configuration deployment using parameterized templates 
+- Device performance measurement (DPM) to monitor critical network resources such as traffic utilization, PTP status, and coherent optics performance using advanced telemetry methods and user-defined alert thresholds  
+- Advanced network slicing functionality combining policy driven services, underlay traffic engineering, and QoS   
+- Workflow manager allows users to create repeatable network automation tasks  
+- Bandwidth optimization using tactical traffic engineering  
+- Rich visualization of all aspects of network topology including L2VPN and L3VPN services and SRv6, SR-MPLS, and RSVP-TE transport  
+- Provisioning of overlay network services and TE paths 
 
 More information on Crosswork Network Controller can be found at: 
 <https://www.cisco.com/c/en/us/products/cloud-systems-management/crosswork-network-controller/index.html>
+
+### Fleet upgrade functionality 
+CNC 7.1's EMS capability includes the ability to easily manage device software across a variety of 
+network roles. Devices can easily be selected by their properties and upgrades scheduled.  
+
+![](http://xrdocs.io/design/images/asn-metro/cnc-71-fleet-upgrade-1.png)
+
+### Network slicing 
 
 ### L2VPN Service Provisioning and Visualization
 Crosswork Network Controller supports UI and API based provisioning of EVPN-VPWS 
@@ -1085,6 +1107,21 @@ one-way latency on the end to end path of 1680uS has exceeded the SLA of 500uS.
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-5-cnc-l2vpn-degraded.png)
 
+### Device Performance Measurement  
+
+Device performance measurement policies are used to collect network data from 
+specified devices. Traffic data is collected from all supported devices by default. 
+Advanced performance policies can be enabled for specific technologies on a subset of 
+devices.  
+
+![](http://xrdocs.io/design/images/asn-metro/asn-dpm-create-policy.png)
+
+Once a policy is enabled on a device, it can then be monitored by looking at 
+the inventory of the device.   
+
+![](http://xrdocs.io/design/images/asn-metro/asn-dpm-gnss-satellite.png)
+
+
 ## Zero Touch Provisioning
 
 In addition to model-driven configuration and operation, Agile Metro 1.5 
@@ -1107,15 +1144,32 @@ supports both traditional unsecure as well as fully secure ZTP operation as outl
 in RFC 8572. More information on Crosswork ZTP can be found at 
 <https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/datasheet-c78-743677.html> 
 
-## Transport and Service Management using Crosswork Network Controller
-Crosswork Network Controller provides support for provisioning SR-MPLS and SRv6   
-traffic engineering policies as well as managing the VPN services utilizing those
-paths or standard IGP based Segment Routing paths.   
+## Underlay transport management using Crosswork Network Controller
+Crosswork Network Controller provides support for provisioning SR-MPLS, SRv6, and RSVP-TE    
+traffic engineering paths. The creation of the paths is done through standardized models 
+where possible such as the IETF-TE RSVP-TE model. CNC supports full visualization of these 
+paths across distributed multi-IGP instance networks. The following figure highlights the ability 
+to visualize an end to end SRv6-TE path across multiple IS-IS instances.  
+
+![](http://xrdocs.io/design/images/asn-metro/cnc71-srv6-te-path.png)
+
+CNC can also visualize the end to end IGP path taken by each segment, showing 
+ECMP traffic paths.  
+
+![](http://xrdocs.io/design/images/asn-metro/cnc71-sdwan-te-path-igp.png)
+
+CNC also supports visualization of Segment Routing Flexible Algorithms deployed 
+across the provider network. The following shows nodes participating in the 128 (pink) and 129 (green) algorithms along 
+with links interconnecting nodes using the same algorithm. It also displays nodes participaing in both algorithms 
+highlighted by the brown color. 
+
+![](http://xrdocs.io/design/images/asn-metro/cnc71-flex-algo.png)
+
+## Multi-Layer network management using Crosswork Hierarchical Controller 
 
 
+# Base protocols supporting advanced use cases  
 
-
-# Base Services Supporting Advanced Use Cases  
 ## Overview
 
 The Agile Metro Design aims to enable simplification across all
@@ -1153,94 +1207,10 @@ Service Provider Networks:
     
 ### Ethernet VPN Hardware Support 
 
-In CST 3.0+ EVPN ELAN, ETREE, and VPWS services are supported on all IOS-XR
-devices. The ASR920 running IOS-XE does not support native EVPN services in the
-CST design, but can integrate into an overall EVPN service by utilizing service
-hierarchy. Please see the tables under End-to-End and Hierarchical Services for
-supported service types.  
-
-### Multi-Homed & All-Active Ethernet Access
-
-Figure 21 demonstrates the greatest limitation of traditional L2
-Multipoint solutions like
-VPLS.
-
-![](http://xrdocs.io/design/images/asn-metro/image22.png)
-
-_Figure 21: EVPN All-Active Access_
-
-When VPLS runs in the core, loop avoidance requires that PE1/PE2 and
-PE3/PE4 only provide Single-Active redundancy toward their respective
-CEs. Traditionally, techniques such mLACP or Legacy L2 protocols like
-MST, REP, G.8032, etc. were used to provide Single-Active access
-redundancy.
-
-The same situation occurs with Hierarchical-VPLS (H-VPLS), where the
-access node is responsible for providing Single-Active H-VPLS access by
-active and backup spoke pseudowire (PW).
-
-All-Active access redundancy models are not deployable as VPLS
-technology lacks the capability of preventing L2 loops that derive from
-the forwarding mechanisms employed in the Core for certain categories of
-traffic. Broadcast, Unknown-Unicast and Multicast (BUM) traffic sourced
-from the CE is flooded throughout the VPLS Core and is received by all
-PEs, which in turn flood it to all attached CEs. In our example PE1
-would flood BUM traffic from CE1 to the Core, and PE2 would sends it
-back toward CE1 upon receiving it.
-
-EVPN uses BGP-based Control Plane techniques to address this issue and
-enables Active-Active access redundancy models for either Ethernet or
-H-EVPN access.
-
-Figure 22 shows another issue related to BUM traffic addressed by
-EVPN.
-
-![](http://xrdocs.io/design/images/asn-metro/image23.png)
-
-_Figure 22: EVPN BUM Duplication_
-
-In the previous example, we described how BUM is flooded by PEs over the
-VPLS Core causing local L2 loops for traffic returning from the core.
-
-Another issue is related to BUM flooding over VPLS Core on remote PEs.
-In our example either PE3 or PE4 receive and send the BUM traffic to
-their attached CEs, causing CE2 to receive duplicated BUM traffic.
-
-EVPN also addresses this second issue, since the BGP Control Plane
-allows just one PE to send BUM traffic to an All-Active EVPN access.
-
-Figure 23 describes the last important EVPN
-enhancement.
-
-![](http://xrdocs.io/design/images/asn-metro/image24.png)
-
-_Figure 23: EVPN MAC Flip-Flopping_
-
-In the case of All-Active access, traffic is load-balanced (per-flow)
-over the access PEs (CE uses LACP to bundle multiple physical ethernet
-ports and uses hash algorithm to achieve per flow load-balancing).
-Remote PEs, PE3 and PE4, receive the same flow from different neighbors.
-With a VPLS core, PE3 and PE4 would rewrite the MAC address table
-continuously, each time the same mac address is seen from a different
-neighbor.
-
-EVPN solves this by mean of “Aliasing”, which is also signaled via the
-BGP Control Plane.
-
-### Service Provider Network - Integration with Central Office or with Data Center
-
-Another very important EVPN benefit is the simple integration with
-Central Office (CO) or with Data Center (DC). Note that Metro Central
-Office design is not covered by this document.
-
-The adoption of EVPNs provides huge benefits on how L2 Multipoint
-technologies can be deployed in CO/DC. One such benefit is the converged
-Control Plane (BGP) and converged data plane (SR MPLS/SRv6) over SP WAN
-and CO/DC network.
-
-Moreover, EVPNs can replace existing proprietary Ethernet
-Multi-Homed/All-Active solutions with a standard BGP-based Control
-Plane.
+In Agile Metro EVPN VPWS services are supported on all IOS-XR
+devices. EVPN ELAN and ETREE services are supported on specific devices, 
+please see specific router software roadmaps for support on all EVPN related 
+features.   
 
 ## End-To-End (Flat) Services
 
@@ -1364,7 +1334,7 @@ the core network.  EVPN CGW relaxes the constraint and allows the L3 Anycast IRB
 to be located at any point in the EVPN ELAN. The IRB can be placed in either the global 
 routing table or within a VRF. 
 
-In CST 5.0 EVPN Centralized GW is supported on the ASR 9000 platform.  
+In Agile Metro EVPN Centralized GW is supported on the ASR 9000 platform.  
 
 The figure below shows an example EVPN CGW deployment. In this scenario A-PE3,
 A-PE4, A-PE5, PE1, and PE2 all belong to the same EVPN-ELAN EVI 100. The CE
@@ -1382,7 +1352,7 @@ all-active, single-active, or port-active configuration.
 _Figure 31: Hierarchical Services EVPN Centralized GW_ 
 
 ### EVPN Head-End for L3 Services 
-CST 5.0 also introduces Cisco's EVPN Head-End solution for hierarchical
+Agile Metro also supports Cisco's EVPN Head-End solution for hierarchical
 services. EVPN Head-End is similar to the existing Hierarchical PWHE services,
 but allows the use of native EVPN-VPWS between the access PE node and
 centralized PE node. This simplifies deployments by allowing providers to use
@@ -1392,7 +1362,8 @@ EVPN-HE is supported for L3 service termination, with the L3 gateway residing on
 either a PWHE P2P interface or BVI interface. The L3 GW can reside in the global 
 routing table or within a VRF.    
 
-In CST 5.0 EVPN-HE for L3 services is supported on the ASR 9000 platform.  
+In Agile Metro EVPN-HE for L3 services is supported on the ASR 9000 platform and 
+select P100 line cards such as the 88-LC1-12TH24FH-E and 88-LC1-52Y8H-EM.   
 
 The figure below shows a typical EVPN Head-End deployment. A-PE3 is configured
 as an EVPN-VPWS endpoint, with PE1 and PE2 configured with the same EVPN-VPWS
@@ -1403,42 +1374,4 @@ this figure, the CE device could also be multi-homed to two separate A-PE nodes 
 a all-active, single-active, or port-active configuration.       
 
 ![](http://xrdocs.io/design/images/asn-metro/cst-5-evpn-he.png)
-
-_Figure 32: Hierarchical Services EVPN Centralized GW_ 
-
-    
-# The Agile Metro Design - Summary
-
-The Agile Metro brings huge simplification at the Transport as
-well as at the Services layers of a Service Provider network.
-Simplification is a key factor for real Software Defined Networking
-(SDN). Cisco continuously improves Service Provider network designs to
-satisfy market needs for scalability and flexibility.
-
-From a very well established and robust Unified MPLS design, Cisco has
-embarked on a journey toward transport simplification and
-programmability, which started with the Transport Control Plane
-unification in Evolved Programmable Network 5.0 (EPN5.0). The Cisco
-Agile Metro provides another huge leap forward in simplification and
-programmability adding Services Control Plane unification and
-centralized path computation.
-
-![](http://xrdocs.io/design/images/asn-metro/cst-overview.png)
-
-_Figure 51: Agile Metro – Evolution_
-
-The transport layer requires only IGP protocols with Segment Routing
-extensions for Intra and Inter Domain forwarding. Fast recovery for node
-and link failures leverages Fast Re-Route (FRR) by Topology Independent
-Loop Free Alternate (TI-LFA), which is a built-in function of Segment
-Routing. End to End LSPs are built using Traffic Engineering by Segment
-Routing, which does not require additional signaling protocols. Instead
-it solely relies on SDN controllers, thus increasing overall network
-scalability. The controller layer is based on standard industry
-protocols like BGP-LS, PCEP, BGP-SR-TE, etc., for path computation and
-NETCONF/YANG for service provisioning, thus providing a on open
-standards based solution.
-
-For all those reasons, the Cisco Agile Metro design really brings an
-exciting evolution in Service Provider Networking.
 
