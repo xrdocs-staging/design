@@ -647,14 +647,12 @@ utilizes the same traffic class structure, QoS groups, and priority level
 behavior to mark traffic and apply queuing behavior. Detailed documentation of
 8000 series QoS including platform dependencies can be found at:  
 
-<https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/qos/24xx/configuration/guide/b-qos-cg-8k-24xx.html> 
+<https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/qos/25xx/configuration/b-qos-cg-8k-25xx.html>
 
 ## Hierarchical Edge QoS 
 Hierarchical QoS enables a provider to set an overall traffic rate across all services, and then configure parameters per-service via a child QoS policy where the percentages of guaranteed bandwidth are derived from the parent rate
 
 ### Cisco 8000 H-QoS Platform Support  
-Cisco 8000 P100 platforms support 2-level H-QoS. 
-
 Hierarchical QoS will be available on the Cisco 8404, 8010, and 8700 series routers in a future Agile Metro release.  
 
 ### NCS 5500/5700 H-QoS platform support 
@@ -851,12 +849,15 @@ handle a wide variety of features covering many use cases.
 
 ## Core
 Core routers typically serve a single purpose in providing high density and high 
-bandwidth aggregation and connectivity between other core routers.  
+bandwidth aggregation and connectivity between other core routers. The 8000 series
+is ideal for these applications.  
 
 ## Peering and content delivery 
-
-
-
+Internet peering refers to connecting to the global Internet as well as other
+organizations to exchange routing information and ultimately optimize traffic
+delivery between networks. The full global routing table now exceeds 1M IPv4 
+prefixes and 256K IPv6 prefixes, requiring devices with scale to support both 
+internal routing tables as well as the default-free global table.   
 
 ## Business edge including mobile backhaul  
 
@@ -872,118 +873,21 @@ to end Segment Routing. The design introduces no new service types, the existing
 scalable L3VPN and EVPN based services using BGP are sufficient for carrying 5G
 control-plane and user-plane traffic.   
 
-
 ### End to End Timing Validation 
 End to end timing using PTP with profiles G.8275.1 and G.8275.2 have been
-validated in the CST design. Best practice configurations are available in the
-online configurations and CST Implementation Guide. It is recommended to use
-G.8257.1 when possible to main the highest level of accuracy across the network.
-IOS-XR fully supports G.8275.1 to G.8275.2 interworking,
-allowing the use of different profiles across the network. Synchronous Ethernet
-(SyncE) is also recommended across the network to maintain stability when timing
-to the PRC. 
+validated in the Agile Metro design. All Cisco hardware validated in the design
+supports at least Class B network timing with new A100, K100, and P100 8000
+series routers supporting Class C. Best practice configurations are available in
+the online configurations and Agile Services Networking Implementation Guide. It
+is recommended to use G.8257.1 when possible to main the highest level of
+accuracy across the network. 
 
+IOS-XR fully supports G.8275.1 to G.8275.2
+interworking, allowing the use of different profiles across the network.
+Synchronous Ethernet (SyncE) is also recommended across the network to maintain
+stability when timing to the PRC. 
 
-# FTTH Design using EVPN E-Tree 
-
-## Summary 
-Many providers today are migrating from L2 access networks to more flexible L3 underlay networks using xVPN overlays to support a variety of network services. L3 networks offer more flexibility in terms of topology, resiliency, and support of both L2VPN and L3VPN services. Using a converged aggregation and access network simplifies networks and reduced both capex and opex spend by eliminating duplicate networks. Fiber to the home networks using active Ethernet have typically used L2 designs using proprietary methods like Private VLANs for subscriber isolation. EVPN E-Tree gives us a modern alternative to provide these services across a converged L3 Segment Routing network. This use case highlights one specific use case for E-Tree, however there are a number of other business and subscriber service use cases benefitting from EVPN E-Tree.   
-
-## E-Tree Diagram 
-<img src="http://xrdocs.io/design/images/asn-metro/cst-etree.png" width="500"/>
-
-## E-Tree Operation 
-One of the strongest features of EVPN is its dynamic signaling of PE state across the entire EVPN virtual instance. E-Tree extends this paradigm by signaling between EVPN PEs which Ethernet Segments are considered root segments and which ones are considered leaf segments. Similar to hub and spoke L3VPN networks, traffic is allowed between root/leaf and root/root interfaces but not between leaf interfaces either on the same node or on different nodes. EVPN signaling creates the forwarding state and entries to restrict traffic forwarding between endpoints connected to the same leaf Ethernet Segment.   
-
-### Split-Horizon Groups 
-E-Tree enables split horizon groups on access interfaces within the same Bridge Domain/EVI configured for E-Tree to prohibit direct L2 forwarding between these interfaces. 
-
-### L3 IRB Support  
-In a fully distributed FTTH deployment, a provider may choose to put the L3 gateway for downstream access endpoints on the leaf device. The L3 BVI interface defined for the E-Tree 
-BD/EVI is always considered a root endpoint. E-Tree operates at L2 so when a L3 interface is present traffic will be forwarded at L3 between leaf endpoints. Note L2 leaf devices using 
-a centralized IRB L3 GW on an E-Tree root node is not currently supported. In this type of deployment where the L3 GW is not located on the leaf the upstream L3 GW node must be attached via a L2 interface into the E-Tree root node Bridge Domani/EVI. 
-It is recommended to locate the L3 GW on the leaf device if possible.  
-
-### Multicast Traffic 
-Multicast traffic across the E-Tree L2/L3 network is performed using ingress replication from the source to the receiver nodes. It is important to use IGMP or MLDv2 snooping in order to minimize the flooding of 
-multicast traffic across the entire Ethernet VPN instance. When snooping is utilized, traffic is only sent to EVPN PE nodes with interested receivers instead of all PEs in the EVI.   
-
-### Ease of Configuration
-Configuring a node as a leaf in an E-Tree EVI requires only a single command "etree" to be configured under the EVI in the global EVPN configuration. Please see the Implementation Guide for specific configuration examples.  
-
-<div class="highlighter-rouge">
-<pre class="highlight">
-l2vpn
- bridge group etree
-  bridge-domain etree-ftth 
-  interface TenGigE0/0/0/23.1098
-  routed interface BVI100 
-  ! 
-  evi 100 
- !
-!
-evpn
-  evi 100
-<b>   etree 
-   leaf</b> 
-   !
-  advertise-mac
-  !
- ! 
-</pre>
-</div>
-
-
-# Business and Infrastructure Services using L3VPN and EVPN 
-
-## EVPN Multicast 
-Multicast within a L2VPN EVPN has been supported since Agile Metro 1.0. Multicast traffic within an EVPN is replicated to the endpoints interested in a specific group via EVPN signaling. EVPN utilizes ingress replication for all multicast traffic, meaning multicast is encapsulated with a specific EVPN label and unicast to each PE router with interested listeners for each multicast group. Ingress replication may add additional traffic to the network, but simplifies the core and data plane by eliminating multicast signaling, state, and hardware replication.  EVPN multicast is also not subject to domain boundary restrictions.
-
-### EVPN Centralized Gateway Multicast 
-In CGW deployments, EVPN multicast is enhanced with support for EVPN Route Type
-6 (RT-6), the Selective Multicast Ethernet Tag Route. RT-6 or SMET routes are
-used to distribute a leaf node's interest in a specific multicast S,G. This
-allows the sender node to only transmit the multicast traffic to an EVPN router
-with an interested receiver instead of sending unwanted traffic dropped on the
-remote router. In release 5.0 CGW is supported on ASR 9000 routers only.  CGW
-selective multicast is supported for IPv4 and *,G multicast.   
-
-## LDP to Agile Metro Migration  
-Very few networks today are built as greenfield networks, most new designs are migrated 
-from existing ones and must support some level of interop during migration. In the Agile Metro 
-design we tackle one of the most common migration scenarios, LDP to the Agile Metro design. The following 
-sections explain the configuration and best practices for performing the migration. The design is 
-applicable to transport and services originating and terminating in the same LDP domain.     
-
-### Towards Agile Metro Design  
-The Agile Metro design utilizes isolated IGP domains in different parts of the network, with each domain 
-separated at a logical boundary by an ASBR router. SR-PCE is used to provide end to end paths across the 
-inter-domain network. LDP does not support inter-domain transport, only between LDP FECs in the 
-same IGP domain. It is recommended to plan logical boundaries if necessary when doing a flat LDP migration to 
-the Agile Metro design, so that when migration is complete the future scale benefits can be realized.  
- 
-### Segment Routing Enablement 
-One must define the global Segment Routing Block (SRGB) to be used across the network on every node 
-participating in SR. There is a default block enabled by default but it may not be large enough to support
-an entire network, so it's advised to right-size this value for your deployment. The current maximum SRGB size
-for SR-MPLS is 256K entries. 
-
-Enabling SR in IS-IS requires only issuing the command "segment-routing mpls" under the IPv4 
-address-family and assigning a prefix-sid value to any loopback interfaces you require the node 
-be addressed towards as a service destination. Enabling TI-LFA is done on a per-interface basis 
-in the IS-IS configuration for each interface. 
-
-Enabling SR-Prefer within IS-IS aids in migration by preferring a SR prefix-sid to a 
-prefix over an LDP prefix, allowing a seamless migration to SR without needing to enable 
-SR completely within a domain.  
- 
-### Segment Routing Mapping Server Design
-One component introduced with Segment Routing is the SR Mapping Server (SRMS), a control-plane 
-element converting unicast LDP FECs to Segment Routing prefix-SIDs for advertisement 
-throughout the Segment Routing domain. Each separate IGP domain requires a pair of 
-SRMS nodes until full migratino to SR is complete.   
-
-# Network Assurance 
+# Network assurance 
 
 ## SR Performance Measurement  
 The network itself can perform dynamic performance measurement between any two
@@ -1094,7 +998,6 @@ cost-prohibitive and negatively impacting the application latency and the
 quality of experience. The overall scrubbing capacity of the network is also increased 
 since every router now has DDoS scrubbing capability. 
 
-
 You can apply this solution to the existing install base and to new router
 deployments without requiring any additional hardware.
 
@@ -1111,7 +1014,6 @@ proper mitigation technique. In most cases a granular ACL can be deployed to the
 router to mitigate a volumetric attack, dropping traffic based on   
 
 #### Exampls ACL Deployment 
-
 
 <div class="highlighter-rouge">
 <pre class="highlight">
