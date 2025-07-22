@@ -847,28 +847,43 @@ handle a wide variety of features covering many use cases.
 ## Core
 Core routers typically serve a single purpose in providing high density and high 
 bandwidth aggregation and connectivity between other core routers. The 8000 series
-is ideal for these applications.  
+is ideal for these applications at an industry leading power utilization.    
 
 ## Peering and content delivery 
 Internet peering refers to connecting to the global Internet as well as other
 organizations to exchange routing information and ultimately optimize traffic
 delivery between networks. The full global routing table now exceeds 1M IPv4 
 prefixes and 256K IPv6 prefixes, requiring devices with scale to support both 
-internal routing tables as well as the default-free global table.   
+internal routing tables as well as the default-free global table.  
+
+Cisco's Agile Services Networking solves peering and content delivery needs through 
+both hardware, software features, and automation. 
+
+- High RIB/FIB scale across platforms right sized for content and peering deployments  
+- Segment Routing traffic engineering 
+- BGP Flowspec support across platforms 
+- Embedded DDoS protection using Cisco's DDoS Edge Protect 
+- Simplified BGP monitoring using Crosswork Cloud Network Insights 
+- Simplified peering analysis using Crosswork Cloud Traffic Analytics 
+
+
+## AI connectivity 
+Artificial Intelligence is radically changing how enterprises and users operate. 
+Network operators play a crucial role in how AI endpoints and functions will interconnect 
+between each other and reach end users. In its simplest form, this is high bandwidth 
+connectivity between AI cluster components, ideally delivered over a simplified 
+IP and optical network such as one provided by Cisco's Routed Optical Networking solution.  
+
+As agentic AI becomes the standard, it will require low latency connectivity between the 
+components agents are communicating between to deliver a high performance product to applications 
+and end users.  
 
 ## Business edge including mobile backhaul  
+The Agile Metro design continues to support high performance mobile backhaul 
+and traditional L2VPN and L3VPN business services. Delivering these products at 
+high scale 
 
-### Summary and service types  
-The Agile Metro design introduces support for 5G networks and 5G services. There
-are a variety of new service use cases being defined by 3GPP for use on 5G
-networks, illustrated by the figure below. Networks must now be built to support
-the stringent SLA requirements of Ultra-Reliable Low-Latency services while also
-being able to cope with the massive bandwidth introduced by Enhanced Mobile
-Broadband services. The initial support for 5G in the Converged SDN Transport
-design focuses on the backhaul and midhaul portions of the network utilizing end
-to end Segment Routing. The design introduces no new service types, the existing
-scalable L3VPN and EVPN based services using BGP are sufficient for carrying 5G
-control-plane and user-plane traffic.   
+
 
 ### End to End Timing Validation 
 End to end timing using PTP with profiles G.8275.1 and G.8275.2 have been
