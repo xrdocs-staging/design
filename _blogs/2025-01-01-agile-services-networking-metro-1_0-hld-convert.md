@@ -803,7 +803,7 @@ The key component to device level convergence with Cisco RPON is using a pluggab
 XGS-PON Optical Line Terminal. This allows the OLT to be used in a standard 
 IOS-XR router, eliminating the need for the additional OLT.   
 
-![](http://xrdocs.io/design/images/asn-metro/asn-rpon-pluggable.png)
+![](http://xrdocs.io/design/images/asn-metro/asn-rpon-pluggable.png){:height="75%" width="75%"}
 
 #### Cisco Routed PON controller  
 
@@ -965,8 +965,8 @@ performance-measurement
    unauthenticated
     querier-dst-port 12345
 
-</div> 
 </pre> 
+</div> 
 
 
 # Security 
