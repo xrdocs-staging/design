@@ -335,7 +335,7 @@ The example locator above encodes the following information:
 |--------|----|----|
 |fccc:00|24|Base SRv6 locator prefix used network wide |
 |XY|8|Together identifies the uSID block| 
-|X|4|General-use identifier, NCS platforms require this byte be set to 0 |
+|X|4|General-use identifier |
 |Y|4|In our case the X portion identifies Flexible Algorithm, 0-3F usable for global SIDs |
 |ZZ|8|Identifies domain| 
 |NN|8|Identifies node|
