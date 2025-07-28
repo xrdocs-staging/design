@@ -1197,30 +1197,30 @@ on pluggable 100G or 400G DCO in the routers. Crosswork HCO can provision the fo
 
 
 
-
 # Base protocols supporting advanced use cases  
 
 ## Overview
 
 The Agile Metro Design aims to enable simplification across all
 layers of a Service Provider network. Thus, the  Agile Metro
-services layer focuses on a converged Control Plane based on BGP.
+services layer focuses on a converged Services Control Plane based on BGP.
 
-BGP based Services include EVPNs and Traditional L3VPNs (VPNv4/VPNv6).
+BGP based Services include L2VPN using EVPN and traditional L3VPN (VPNv4/VPNv6).
 
 EVPN is a technology initially designed for Ethernet multipoint services
-to provide advanced multi-homing capabilities. By using BGP for
-distributing MAC address reachability information over the MPLS network,
-EVPN brought the same operational and scale characteristics of IP based
-VPNs to L2VPNs. Today, beyond DCI and E-LAN applications, the EVPN
+to provide advanced multi-homing capabilities. EVPN uses BGP to 
+distribute MAC address reachability information over the transport network,
+bringing the same operational and scale characteristics of IP based
+L3VPNs to L2VPNs. Today, beyond DCI and E-LAN applications, the EVPN
 solution family provides a common foundation for all Ethernet service
 types; including E-LINE, E-TREE, as well as data center routing and
-bridging scenarios. EVPN also provides options to combine L2 and L3
-services into the same instance.
+bridging scenarios. EVPN is also used to transport TDM services in Cisco's
+Private Line Emulation solution.  EVPN also provides options to combine L2 and
+L3 services into the same instance.
 
-To simplify service deployment, provisioning of all services is fully
-automated using Cisco Network Services Orchestrator (NSO) using (YANG)
-models and NETCONF. Refer to Section: "Network Services Orchestrator (NSO)".
+To simplify service deployment, provisioning of services is automated using
+Cisco Crosswork Network Controller and Cisco Network Services Orchestrator (NSO)
+using standard YANG data models where possible.   
 
 There are two types of services: End-To-End and Hierarchical. The next
 two sections describe these two types of services in more detail.
@@ -1232,9 +1232,8 @@ Service Provider Networks:
 
   - Multi-Homed & All-Active Ethernet Access
 
-  - Service Provider Network - Integration with Central Office or with
-    Data Center
-    
+  - End to end integration across data centers and across network boundaries  
+
 ### Ethernet VPN Hardware Support 
 
 In Agile Metro EVPN VPWS services are supported on all IOS-XR
@@ -1242,7 +1241,14 @@ devices. EVPN ELAN and ETREE services are supported on specific devices,
 please see specific router software roadmaps for support on all EVPN related 
 features.   
 
-## End-To-End (Flat) Services
+## End-To-End Distributed (Flat) services
+
+In Cisco's Agile Metro design advanced services may have endpoints at any place
+in the network. The Cisco IOS-XR devices used in Agile Metro support
+point-to-point and multipoint unicast services and multipoint multicast
+services. Distributed service termination simplifies deployments by minimizing
+service stitching. Service stitching adds additional provisioning endpoints and
+adds complex control-plane and data-plane functions to provide redundancy.   
 
 The End-To-End Services use cases are summarized in the table in Figure
 24 and shown in the network diagram in Figure 25.
@@ -1261,6 +1267,11 @@ Refer also to Section: "Transport and Services Integration".
 
 ## Hierarchical Services
 
+Hierarchical deployments may be used in scenarios where the service provider
+access equipment cannot support advanced multipoint L2/L3 service termination.
+In these networks a simple L2VPN pseudowire is used from the access node to a
+centralized PE device, where the L2VPN pseudowire is stitched into a multipoint
+L2VPN or L3VPN service.  
 Hierarchical Services Use Cases are summarized in the table of Figure 26
 and shown in the network diagram of Figure 27.
 
@@ -1272,14 +1283,7 @@ _Figure 26: Supported Hierarchical Services_
 
 _Figure 27: Hierarchical Services Control Plane_
 
-Hierarchical services designs are critical for Service Providers looking
-for limiting requirements on the access platforms and deploying more
-centralized provisioning models that leverage very rich features sets on
-a limited number of touch points.
 
-Hierarchical Services can also be required by Service Providers who want
-to integrate their SP-WAN with the Central Office/Data Center network
-using well-established designs based on Data Central Interconnect (DCI).
 
 Figure 27 shows hierarchical services deployed on PE routers, but the
 same design applies when services are deployed on AG or DCI routers.
@@ -1352,8 +1356,6 @@ service.
 ![](http://xrdocs.io/design/images/asn-metro/image31.png)
 
 _Figure 30: Hierarchical Services (H-EVPN and PWHE)_
-
-Refer also to the section: “Transport and Services Integration”.
 
 ### EVPN Centralized Gateway
 Similar to the Hierarchical L2/L3 service with Anycast-IRB, EVPN Centralized 
