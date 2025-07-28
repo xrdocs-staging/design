@@ -1139,7 +1139,7 @@ the inventory of the device.
 
 ## Zero Touch Provisioning
 
-In addition to model-driven configuration and operation, Agile Metro 1.5 
+In addition to model-driven configuration and operation, Agile Metro 
 supports ZTP operation for automated device provisioning. ZTP is useful both in 
 production as well as staging environments to automate initial device software 
 installation, deploy an initial bootstrap configuration, as well as advanced functionality 
@@ -1147,7 +1147,8 @@ triggered by ZTP scripts. ZTP is supported on both out of band management interf
 well as in-band data interfaces. When a device first boots, the IOS-XR ZTP process
 beging on the management interface of the device and if no response is received, or the 
 the interface is not active, the ZTP process will begin the process on data ports. IOS-XR
-can be part of an ecosystem of automated device and service provisioning via Cisco NSO.  
+can be part of an ecosystem of automated device and service provisioning via Crosswork Network Controller
+and Cisco NSO.   
 
 ![](http://xrdocs.io/design/images/asn-metro/ztp-metro-fabric.png)
 
@@ -1181,6 +1182,21 @@ highlighted by the brown color.
 ![](http://xrdocs.io/design/images/asn-metro/cnc71-flex-algo.png)
 
 ## Multi-Layer network management using Crosswork Hierarchical Controller 
+
+Crosswork Hierarchical Controller helps providers manage multi-layer IP+Optical transport networks. HCO's powerful 
+layered network model allows operators to combine service and infrastructure layers together to visualize and correlate
+faults. Fiber layer data can even be imported into HCO in order to trace service paths and faults to the fiber layer.  
+
+Crosswork HCO is a multi-vendor tool, communicating with IP and optical controllers to gather and combine multi-layer 
+data. In Agile Metro 1.1 HCO does not communicate directly with devices, enhancing scalability and simplifying the overall 
+deployment of the solution.  All IP network layer data is learned from Crosswork CNC.   
+
+### Routed Optical Networking multi-layer provisioning 
+
+Crosswork HCO is also responsible for multilayer provisioning of Routed Optical Networking circuits. These circuits originate 
+on pluggable 100G or 400G DCO in the routers. Crosswork HCO can provision the following circuit use cases:  
+
+
 
 
 # Base protocols supporting advanced use cases  
