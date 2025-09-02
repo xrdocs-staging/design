@@ -46,19 +46,13 @@ position: hidden
 
 <br>
 
-# TL;DR What's new in version 3.0?  
+# TL;DR What's new in version 4.0?  
 
-The 3.0 release of Routed Optical Networking further enhances the solution to 
-enable new simplified optical deployments and continues to add unmatched 
-open standards-based IP+Optical automation. This section will briefly highlight 
-new additions but please see the detailed sections in the document for more 
-information. 
-
-Aslo, please see the recent blog on DCO monitoring located here:  
-<https://xrdocs.io/design/blogs/xr-dco-monitoring> 
+The 4.0 release of Routed Optical Networking introduces new industry-leading
+digital coherent optics and enhanced IP+optical automation. 
 
 
-## 100G QSFP28 tuneable DWDM optic
+## 100G QSFP28 tuneable DWDM optics
 
 The DP01QS28-E20 and DP01QS28-E25 transceivers enhances the Routed Optical Networking solution by adding a 100G-only 
 tuneable optic which be used across both QSFP28 and QSFP-DD ports. This expands the support 
@@ -85,24 +79,20 @@ pluggables section and at the following Cisco URL:
 <https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/400g-qsfp-dd-haul-coherent-module-ds.html>
 
 
-## Routed Optical Networking Starter Automation 
-
-The Starter automation stack brings a simplified deployment for those looking to
-manage ZR/ZR+ circuits across their router and optical multi-layer networks but
-do not need the added IP controller functionality of Crosswork Network
-Controller. The Starter version consists of a single installation of Crosswork 
-Hierarchical Controller. The capabilities of CW HCO in the Starter version are 
-identical to the full stack solution, with the same visualization, 
-provisioning, and assurance capabilities. Migration from the starter to full 
-solution can be done in a seamless manner by simply adding the CNC adapter to 
-CW HCO.     
+## Simplified automation 
+Release 4.0 brings a simplified automation solution using Crosswork Hierarchical
+Controller and Crosswork Network Controller. Crosswork HCO manages end to end
+Routed Optical Networking circuits across both Cisco and 3rd party optical
+vendors. CNC manages all aspects of a modern IP network, supporting both Cisco
+and 3rd party router vendors. HCO 11.0 and CNC 7.1 add more seamless integration with
+all aspects of the IP network discovere through CNC.   
 
 ## Optical Automation Updates  
 
-The 3.0 release introduces enhanced versions of the Routed Optical Networking 
+The 4.0 release introduces enhanced versions of the Routed Optical Networking 
 automation components.  
 
-### Cisco Optical Site Manager 7.11.2 
+### Cisco Optical Site Manager 25.1.1  
 
 Cisco Optical Site Manager (COSM) is an embedded XR application used to manage
 optical line systems at a site level as opposed to managing individual nodes.
@@ -117,28 +107,17 @@ URL:
 <https://www.cisco.com/c/en/us/td/docs/optical/cosm/711x/installation/guide/b-cosm-install-guide-r7-11-x/get-started.html> 
 
 
-### Cisco Optical Network Controller 3.1 
+### Cisco Optical Network Controller 25.1.2  
 
-Cisco Optical Network Controller (CONC) 3.1 represents a major leap forward in
-its capabilities to manage modern Cisco optical networks. CONC 3.1 is enhanced
-with a web UI and web applications used to view network-wide alarm information,
-performance data, inventory, and visualize the end to end optical network and
-its optical services. The standards-based TAPI 2.1 NBI remains interface with 
-upstream network controllers. More information on CONC 3.1 can be found later in this document and at the following 
+Cisco Optical Network Controller (CONC) 25.1.2 represents another leap forward in
+its capabilities to manage modern Cisco optical networks. CONC 25.1.2 extends
+support to SVO based NCS 2000 installations and adds additional network
+monitoring capabilities.  The standards-based TAPI 2.1 NBI remains interface
+with upstream network controllers. More information on CONC 25.1.2 can be found
+later in this document and at the following 
 URL: 
 
 <https://www.cisco.com/c/en/us/support/optical-networking/optical-network-controller/series.html>
-
-## Single Sign-On and HCO Cross-Launch 
-
-In release 3.0 there is now support for using SSO for HCO 8.0, CNC 6.0, CONC
-3.1, and COSM 7.11.2. This allows users to seamlessly navigate between
-applications with a single user login. It also allows for seamless cross-launch
-between different applications. HCO 8.0 introduces a new cross-launch framework
-allowing users to inspect network components in HCO and then navigate to
-low-level details in the Network Controller for the domain. As an example HCO
-will discover IGP topology from CNC using standard IETF models. Selecting a node
-in HCO will bring up a cross-launch item to the node details page in CNC.   
 
 
 # What is Routed Optical Networking?   
@@ -174,7 +153,8 @@ bodies to work in parallel at each layer. In some cases even these OSI layers
 are further split into different layers. While these layers can bring some cost
 benefit, it also brings added complexity. Each layer has its own management,
 control plane, planning, and operational model. 
-## Inefficiences Between Network Layers  
+
+## Inefficiencies Between Network Layers    
 
 OTN and IP network traffic must be converted into wavelength
 signals to traverse the DWDM network. This has traditionally required dedicated
@@ -262,18 +242,49 @@ becomes a 1:1 input to output stage in the network, adding no benefit.
 The Routed Optical Networking architecture unlocks this efficiency for networks
 of all sizes, due to advancements in coherent plugable technology. 
 
-## QSFP-DD, 400ZR, and OpenZR+ Standards   
+## OIF 400ZR and OpenZR+ Standards and Cisco transceivers  
 
 As mentioned, the industry saw a point to improve network efficiency by shifting
 coherent DWDM functions to router pluggables. Technology advancements have
 shrunk the DCO components into the standard QSFP-DD form factor, meaning no
 specialized hardware and the ability to use the highest capacity routers
-available today.  ZR/OpenZR+ QSFP-DD optics can be used in the same ports as the
+available today. ZR/OpenZR+ QSFP-DD optics can be used in the same ports as the
 highest speed 400G non-DCO transceivers. 
 
+### Cisco Ultra Long Haul (ULH) Transceiver (DP04QSDD-ULH-A1) **New for 4.0**
+Routed Optical Networking 4.0 introduces the Cisco ULH transceiver using Cisco/Acacia's 
+Delphi DSP. This DSP is a modern 4nm chip capable of rates up to 130Gbd using advanced 
+Probabilistic Constellation Shaping (PCS) modulation. All versions of the ULH optics support +1dBm launch 
+power. The optics support a variety of modes to support various applications including modes backwards 
+compatible with existing 400G OpenZR+ standards. Real-world network deployments have shown 400G reach in excess 
+of 3000km.   
+
+The following modes are supported in Routed Optical Networking version 
+4.0. 
+
+|Line rate|Baud rate|Modulation|  
+|--------|----|------| 
+|400G | 118.2 | QPSK | 
+|400G | 97.9 | MPCS | 
+|400G | 87.4 | MPCS| 
+|400G | 75.0 | MPCS | 
+|400G | 65.7 | MPCS | 
+|400G | 60.1 | 16QAM - OpenZR mode | 
+
+### QSFP28 100G ZR DWDM transceiver **New for 4.0**
+The new Cisco DP01QS28-E20 and DP01QS28-E25 QSFP28 form factor 100G ZR tuneable
+DWDM transceivers extend support of the solution to QSFP28 ports. This allows
+users to utilize digital coherent optics in lower bandwidth devices without
+QSFP-DD ports, extending potential applications. The optics are tuneable across
+the C-band and support unamplified distances of approximately 80km and amplified
+distances up to 300km. The transceiver uses a baud rate of 27.95GBd, QPSK
+modulation, and industry standard SC-FEC.  The nominal launch power in all modes
+is -6.0dBm. 
+
+The E25 version of the transceiver supports extended temperature ranges.   
 
 ### Cisco High Power OpenZR+ Transceiver (DP04QSDD-HE0) **New for 2.1** 
-Routed Optical Networking 2.1 introduces the Cisco HIgh Power +1dB ZR+ transceiver. This high launch power 
+Routed Optical Networking 2.1 introduces the Cisco High Power +1dB ZR+ transceiver. This high launch power 
 DCO enables the use of the optics with optical add drop systems requiring higher input power, and enables 
 longer distances when used in passive or dark fiber applications without amplification.  
 
