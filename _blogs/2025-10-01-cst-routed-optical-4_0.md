@@ -58,20 +58,32 @@ Aslo, please see the recent blog on DCO monitoring located here:
 <https://xrdocs.io/design/blogs/xr-dco-monitoring> 
 
 
-## QDD-OLS Pluggable Optical Line System 
+## 100G QSFP28 tuneable DWDM optic
 
-The Cisco ONS-QDD-OLS transceiver adds a bi-directional optical amplifier capable 
-of +25dB of amplification. When coupled with a 4-channel mux/demux (FLD-4), 
-8-channel mux/demux cable, 16-channel mux/demux cable, or 64-channel mux/demux
-the user can build a simplified optical deployment supporting up to 32 400G 
-channels with a reach up to 120km.      
+The DP01QS28-E20 and DP01QS28-E25 transceivers enhances the Routed Optical Networking solution by adding a 100G-only 
+tuneable optic which be used across both QSFP28 and QSFP-DD ports. This expands the support 
+for Routed Optical Networking to devices with QSFP28 ports, unlocking new use cases across
+access and aggregation networks. 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols.png){:height="30%" width="30%"}
+![](http://xrdocs.io/design/images/ron-hld/ron4-qsfp28-dco.png){:height="30%" width="30%"}
 
-More information about the QDD-OLS can be found later in this document under the 
+The transceiver is available in two versions, the standard temp DP01QS28-E20 and extended temp DP01QS28-E25. More information on the 
+transceivers can be found later in this document in the pluggables section and at the following Cisco URL: 
+
+<https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/qsfp28-100g-zr-coherent-optics-module-ds.html>
+
+## 400G ULH (Ultra Long Haul) optic  
+
+The new DP04QSDD-ULH-A1 utilizes Cisco-Acacia's 4nm Delphi DSP, capable of advanced PCS modulation and baud rates up to 130Gbd. The 400G ULH optic 
+is capable of distances exceeding 3000km at 400G.  
+
+![](http://xrdocs.io/design/images/ron-hld/ron4-400g-ulh.png){:height="30%" width="30%"}
+
+More information about the DP04QSDD-ULH-A1 can be found later in this document under the 
 pluggables section and at the following Cisco URL: 
 
-<https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/qsfp-dd-plug-open-line-system-ds.html>
+<https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/400g-qsfp-dd-haul-coherent-module-ds.html>
+
 
 ## Routed Optical Networking Starter Automation 
 
