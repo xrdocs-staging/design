@@ -219,6 +219,7 @@ flexibility, and widespread interoperability between different vendors based on
 well-defined standards. In larger networks today carrying Internet traffic, the
 Ethernet/IP layer does not typically traverse an OTN layer, the OTN layer is
 primarily used only for business services. 
+
 # Enabling Technologies  
 ## Pluggable Digital Coherent Optics 
 
@@ -400,8 +401,6 @@ ASR 9000, and Cisco 8000 series routers. This enabled providers to utilize the a
 across their end to end infrastructure in a variety of router roles. See   
 
 ![](http://xrdocs.io/design/images/ron-hld/npu_bandwidth.png)
-
-
 
 
 ## Cisco Private Line Emulation 
@@ -645,7 +644,8 @@ journey is replacing external transponders with OpenZR+ QSFP-DD transceivers. At
 400G connecting a 400G gray Ethernet port to a transponder with a 400G or 600G
 line side is not cost or environmentally efficient. Cisco can assist in modeling 
 your core network to determine the TCO of Routed Optical Networking compared to 
-traditional approaches. 
+traditional approaches. The new 400G ULH optics unlock new potential circuit spans 
+with a reach in excess of 3000km @ 400G.   
 
 ## Metro Aggregation 
 Tiered regional or metro networks connecting hub locations to larger aggregation 
@@ -1654,15 +1654,13 @@ Please see the following resources for more information on Crosswork HCO. <https
 ![](https://xrdocs.io/design/images/ron-hld/hco-multi-layer-circuit-2.png){:height="100%" width="100%"}
 
 
-### Crosswork Hierarchical Controller Routed Optical Networking Starter 
+### Simplified deployment with Crosswork HCO and CNC Essentials  
 
-In version 3.0 we introduce the Routed Optical Networking Automation Starter.
-The Automation Starter utilizes the standard HCO 8.0 installation but leverages
-the NSO adapter for provisioning and the XR adapter for assurance. HCO 8.0
-includes a containerized version of Cisco NSO, requiring no additional external
-installation of NSO to utilize the NSO RON-ML Function Pack. The look and feel of 
-Crosswork HCO for managing Routed Optical Networking services is no diffeent 
-between the Starter and Full solution.    
+A simplified solution can be deployed using Crosswork Network Controller Essentials version 
+with Crosswork Hierarchical Controller. CNC Essentials includes all NMS and topology components 
+required to manage IP routers, and Crosswork HCO adds the ability manage multi-layer IP+Optical deployments 
+across multiple vendors. CNC Essentials may be deployed as a single VM (SVM) for smaller deployments.  
+
 
 ## Crosswork Network Controller 
 Crosswork Network Controller is a multi-vendor IP domain controller. Crosswork
@@ -1683,10 +1681,31 @@ Network Controller is responsible for the following IP network functions.
 
 More information on Crosswork and Crosswork Network Controller can be found at <https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/datasheet-c78-743456.html>
 
+### Crosswork Network Controller Routed Optical Networking management 
+
+In Release 4.0 with CNC 7.1+, CNC now has enhanced capabilities to help deploy 
+and monitor Digtial Coherent Optics (DCO) in Cisco routers. CNC's Device Performance 
+Measurement application can monitor and detect threshold crossing alarms for all 
+DCO performance data.  
+
+**Coherent DSP monitoring** 
+![](https://xrdocs.io/design/images/ron-hld/cnc71-dpm-dco-1.png){:height="100%" width="100%"}
+
+**Physical layer monitoring** 
+![](https://xrdocs.io/design/images/ron-hld/cnc71-dpm-dco-2.png){:height="100%" width="100%"}
+
+Release 4.0 also includes CNC's configuration template engine which can be used 
+to make changes to existing DCO configuration as well as deploy new configuration 
+in cases where only CNC is deployed as a management solution.  
+
+![](https://xrdocs.io/design/images/ron-hld/ron-cnc-manage-optics-config.png){:height="100%" width="100%"}
+
+
+
 ## Cisco Optical Site Manager 
 
 Cisco Optical Site Manager represents a modern application used to manage
-optical nodes at the site level. In release 3.0 COSM is an embedded application
+optical nodes at the site level. In release 4.0 COSM is an embedded application
 running IOS-XR on the NCS 1010.   
 
 COSM includes components to configure and monitor the physical optical nodes
@@ -1711,40 +1730,49 @@ additional visualization, assurance, and optical service management capabilities
 
 More information on Cisco ONC can be found at <https://www.cisco.com/c/en/us/support/optical-networking/optical-network-controller/series.html> 
 
-### CONC 3.1 Network Visualization 
+### CONC 25.1.2 Network Visualization 
 The entire network can now be visualized within CONC itself using a geographic
 view.     
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-topology.png){:height="100%" width="100%"}
+![](http://xrdocs.io/design/images/ron-hld/conc-topology.png){:height="100%" width="100%"}
 
-### CONC 3.1 Network Alarms  
+### CONC 25.1.2 Network Alarms  
 Network-wide alarms are available in CONC for all nodes managed by CONC.  
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-alarm.png){:height="100%" width="100%"}
 
-### CONC 3.1 Service Assurance
+### CONC 25.1.2 Service Assurance
 
-CONC 3.1 brings visual service assurance.  Users can see all services on the end
+CONC 25.1.2 brings visual service assurance.  Users can see all services on the end
 to end network and trace the path using a component level path trace as well as
 path tracing on the network topology visualization.  
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-services.png){:height="100%" width="100%"}
 
 
-### CONC 3.1 Service Workspace  
+### CONC 25.1.2 Service Workspace  
 The service workspace allows users to see multiple aspects of the optical network 
 and services in a single dashboard view.  
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-workspace.png){:height="100%" width="100%"}
 
 
-### CONC 3.1 to COSM Communication 
+### CONC 25.1.2 Circuit Monitor 
+![](http://xrdocs.io/design/images/ron-hld/conc-circuit-monitor.png){:height="100%" width="100%"}
+
+
+### CONC 25.1.2 to COSM Communication 
 
 Starting in CONC 3.1, the CONC application does not directly communicate with
 the NCS 1010 device. CONC 3.1 communicates with COSM, COSM aggregates
 inventory, alarm, and performance data from one or more nodes into a single
 communication point.  
 
+### CONC 25.1.2 to SVO Communication  
+
+Starting in CONC 25.1.1, CONC fully supports the discovery and management of 
+NCS 2000 based networks utilizing SVO. This communication is performed through the 
+SVO NETCONF interface.  
 
 ## Cisco Network Services Orchestrator and Routed Optical Networking ML Core Function Pack 
 Cisco NSO is the industry standard for service orchestration and device
