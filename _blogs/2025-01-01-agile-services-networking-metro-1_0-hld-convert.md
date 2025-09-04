@@ -12,7 +12,7 @@ tags:
   - 5G 
   - Cable
   - CIN
-position: hidden 
+position: top 
 ---
 
 {% include toc %}
@@ -338,8 +338,22 @@ eliminates redundant hardware and simplifies management through advanced automat
 with all types of optical networks; P2P dark fiber, simplified P2P DWDM using Cisco's Pluggable OLS with 
 passive multiplexers, and traditional multi-degree ROADMs.
 
-
 ![](http://xrdocs.io/design/images/asn-metro/metro-routed-optical-networking.png) 
+
+### Supported optics 
+Cisco offers a variety of tuneable and fixed wavelength pluggable Digital Coherent Optics supported across most platforms included in the Agile Services Networking architecture. Please see specific transceiver and platform documentation for full support information.  
+
+
+| Transceiver| Form factor | Comments |    
+| ----------|---------|--------| 
+| QDD-400G-ZR-S | QSFP-DD | OIF 400ZR pluggable, -10dBm launch power| 
+| QDD-400G-ZRP-S | QSFP-DD | OpenZR+ MSA pluggable, -10dBm launch power| 
+| DP04QSDD-HE0 | QSFP-DD | OpenZR+ MSA pluggable, +1dBm launch power | 
+| DP04QSDD-ER1 | QSFP-DD | 400G fixed wavelength P2P, +1dBm launch power | 
+| DP04QSDD-ULH-A1 | QSFP-DD | Ultra Long Haul, +1dBm launch power, 3000km+ reach | 
+| DP01QS28-E20 | QSFP28 | 100G, -6dBm launch power, standard temp | 
+| DP01QS28-E25 | QSFP28 | 100G, -6dBm launch power, industrial temp | 
+
 
 For more information on Cisco's Routed Optical Networking design please see the 
 following high-level design document:  
