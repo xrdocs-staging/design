@@ -1193,8 +1193,16 @@ deployment of the solution.  All IP network layer data is learned from Crosswork
 ### Routed Optical Networking multi-layer provisioning 
 
 Crosswork HCO is also responsible for multilayer provisioning of Routed Optical Networking circuits. These circuits originate 
-on pluggable 100G or 400G DCO in the routers. Crosswork HCO can provision the following circuit use cases:  
+on pluggable 100G or 400G DCO in the routers. Crosswork HCO can be utilzed to provision point to point dark fiber connections across DCO as well as provision circuits across both the IP and optical layers. Optical alien wavelength circuit provisioning is supported for both Cisco and select non-Cisco DWDM line systems.  
 
+### Routed Optical Networking multi-layer circuit monitoring 
+
+Crosswork HCO combines data from the fiber, DWDM optical transport, pluggable DCO, IP routing (IGP, TE), and services layers to build an end to end network model. The multi-layer model is used to perform advanced correlation across network layers, giving greater visibility into the network and quickly identifying faults and their affected upper layer resources.  
+
+The following screenshot displays and end to end multi-layer circuit including 
+the relevant DCO PM data.  
+
+![](http://xrdocs.io/design/images/asn-metro/ron4-link-assurance-57b1-5.png)
 
 
 # Base protocols supporting advanced use cases  
