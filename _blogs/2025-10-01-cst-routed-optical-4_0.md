@@ -92,6 +92,27 @@ all aspects of the IP network discovere through CNC.
 The 4.0 release introduces enhanced versions of the Routed Optical Networking 
 automation components.  
 
+### Crosswork Network Controller 7.1 
+
+CNC 7.1 acts as the IP controller in the solution. CNC 7.1 now includes baseline 
+template functionality used for single port configuration of coherent optics and 
+the QDD-OLS pluggable amplifier. CNC also includes specific coherent optic performance 
+monitoring and threshold alerting.  
+
+More information on CNC 7.2 can be found at the following URL: 
+
+
+### Crosswork Hierarchical Controller 11.0 
+
+Crosswork HCO is the multi-layer management application used to operate and
+assure IP and optical networks utilizing both traditional technologies as well
+as Routed Optical Networking. In RON 4.0 HCO 11.0 brings additional capabilities
+with support for managing circuits crossing SSON NCS 2000 networks utilizing
+NCS2K 11.x software managed by EPNM. HCO 11.0 also brings additional integration
+with Crosswork Network Controller simplifying deployment. All IP network
+information is learned from CNC 7.2 and no longer requires direct to router
+adapters.  
+
 ### Cisco Optical Site Manager 25.1.1  
 
 Cisco Optical Site Manager (COSM) is an embedded XR application used to manage
@@ -1910,10 +1931,26 @@ used in router optics provisioning.
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hco-ip-link-provisioning-2.png)
 
+### CMIS AppSel based provisioning
+Starting in RON 4.0 HCO will utilize the CMIS
+application selection code to select the optical configuration of the circuit. The 
+Common Management Interface Specification is an OIF standard used to manage 
+optics. The standard is used to manage both standard optics as well as digital 
+coherent optics. An "AppSel" value represents the configuration of the electrical (host) 
+side of the optics as well as the optical (media) configuration. A single AppSel value 
+corresponds to a tuple of (host, media) values.  
+
+The supported applications are part of the transceiver firmware, allowing dynamic 
+discovery of supported modes which can then be selected by users.  The following picture
+highlights the supported AppSel values for the 400G bandwith rate on a QDD-400G-ZRP-S transceiver.  
+
+![](http://xrdocs.io/design/images/ron-hld/ron4-circuit-creation-appsel.png)
+
 ### Operational Discovery 
 The Crosswork Hierarchical Controller provisioning process also performs a discovery phase to ensure the
 service is operational before considering the provisioning complete. If
 operational discovery fails, the end to end service will be rolled back.  
+
 ## NSO RON-ML CFP Provisioning
 Providers familiar with using Cisco Network Service Orchestrator have an option
 to utilize NSO to provision optical and IP layer configuration for ZR/ZR+ router
