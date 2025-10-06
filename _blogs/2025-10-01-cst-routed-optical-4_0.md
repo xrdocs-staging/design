@@ -2129,6 +2129,8 @@ controller Optics0/0/0/16
 </pre> 
 </div> 
 
+<div class="highlighter-rouge">
+<pre class="highlight">
 #### Display active AppSel code 
 RP/0/RP0/CPU0:ron-poc-8201-1#show controllers optics 0/0/0/16 appsel active
 Mon Oct  6 14:09:27.328 UTC
@@ -2141,9 +2143,6 @@ Mon Oct  6 14:09:27.328 UTC
  Media Lane Count   :1
  Host Lane Assign   :0x1
  Media Lane Assign  :0x0
-<div class="highlighter-rouge">
-<pre class="highlight">
- 
 </pre> 
 </div> 
 
