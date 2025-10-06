@@ -1931,7 +1931,7 @@ used in router optics provisioning.
 
 ![](http://xrdocs.io/design/images/ron-hld/ron-hco-ip-link-provisioning-2.png)
 
-### CMIS AppSel based provisioning
+### CMIS AppSel based provisioning in HCO
 Starting in RON 4.0 HCO will utilize the CMIS
 application selection code to select the optical configuration of the circuit. The 
 Common Management Interface Specification is an OIF standard used to manage 
@@ -2115,6 +2115,37 @@ Mon Oct  6 13:51:38.146 UTC
 ------------------------------------------------------------------------------------------------------------------------------------------
 </pre>
 </div>
+
+#### Configuring AppSel 
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+controller Optics0/0/0/16
+ description DP04QSDD_ULH_19B_trans
+ transmit-power -5
+ dwdm-carrier 100MHz-grid frequency 1949750
+ appsel simple code 19
+! 
+</pre> 
+</div> 
+
+#### Display active AppSel code 
+RP/0/RP0/CPU0:ron-poc-8201-1#show controllers optics 0/0/0/16 appsel active
+Mon Oct  6 14:09:27.328 UTC
+
+ Instance           :1
+ App-ID             :19
+ Host-ID            :17  ETH 400GAUI-8 C2M (Annex 120E)
+ Media-ID           :70  OpenZR+ ZR400-OFEC-16QAM
+ Host Lane Count    :8
+ Media Lane Count   :1
+ Host Lane Assign   :0x1
+ Media Lane Assign  :0x0
+<div class="highlighter-rouge">
+<pre class="highlight">
+ 
+</pre> 
+</div> 
 
 
 ## Model-Driven Configuration using IOS-XR Native Models using NETCONF or gNMI  
