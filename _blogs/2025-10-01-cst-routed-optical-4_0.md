@@ -2066,6 +2066,57 @@ controller Optics0/0/0/20
 </pre>
 </div>
 
+### IOS-XR CMIS AppSel CLI Configuration 
+Coherent optics are configurable in different modes. Optics released prior to 
+RON 4.0 have utilized the "breakout" or "hw-module" commands to configure non-default 
+modes such as 100G, 200G, and 300G trunk rates. Starting with the DP04QSDD-ULH-A1, the 
+mode of the DCO is configured using the CMIS AppSel code corresponding to the mode.  
+The IOS-XR CLI now supports commands to display the full AppSel table for each DCO,  
+configure the AppSel, and show the currently configured AppSel.  
+
+#### Displaying supported AppSel codes 
+
+<div class="highlighter-rouge">
+<pre class="highlight">
+RP/0/RP0/CPU0:ron-poc-8201-1#show controllers optics 0/0/0/16 appsel advertised
+Mon Oct  6 13:51:38.146 UTC
+------------------------------------------------------------------------------------------------------------------------------------------
+  App-ID  |  Host-ID                        |  Media-ID                       |  Standard                 |  Host     |  Power           |
+          |                                 |                                 |                           |  Supported|  Consumption(W)  |
+------------------------------------------------------------------------------------------------------------------------------------------
+  1       |  17    ETH 400GAUI-8 C2M (Annex |  100   OpenROADM FLEXO-4e-DO-QP |  OpenROADM                |  Yes      |  n/a             |
+  2       |  15    ETH 200GAUI-4 C2M (Annex |  100   OpenROADM FLEXO-4e-DO-QP |  OpenROADM                |  Yes      |  n/a             |
+  3       |  13    ETH 100GAUI-2 C2M (Annex |  100   OpenROADM FLEXO-4e-DO-QP |  OpenROADM                |  Yes      |  n/a             |
+  4       |  17    ETH 400GAUI-8 C2M (Annex |  216   ACA FlexO-4e-MPCS098-OS  |  ACA                      |  Yes      |  n/a             |
+  5       |  15    ETH 200GAUI-4 C2M (Annex |  216   ACA FlexO-4e-MPCS098-OS  |  ACA                      |  Yes      |  n/a             |
+  6       |  13    ETH 100GAUI-2 C2M (Annex |  216   ACA FlexO-4e-MPCS098-OS  |  ACA                      |  Yes      |  n/a             |
+  7       |  17    ETH 400GAUI-8 C2M (Annex |  201   ACA FlexO-4e-MPCS087-OS  |  ACA                      |  Yes      |  n/a             |
+  8       |  15    ETH 200GAUI-4 C2M (Annex |  201   ACA FlexO-4e-MPCS087-OS  |  ACA                      |  Yes      |  n/a             |
+  9       |  13    ETH 100GAUI-2 C2M (Annex |  201   ACA FlexO-4e-MPCS087-OS  |  ACA                      |  Yes      |  n/a             |
+  10      |  17    ETH 400GAUI-8 C2M (Annex |  194   ACA FlexO-4e-MPCS075-OS  |  ACA                      |  Yes      |  n/a             |
+  11      |  15    ETH 200GAUI-4 C2M (Annex |  194   ACA FlexO-4e-MPCS075-OS  |  ACA                      |  Yes      |  n/a             |
+  12      |  13    ETH 100GAUI-2 C2M (Annex |  194   ACA FlexO-4e-MPCS075-OS  |  ACA                      |  Yes      |  n/a             |
+  13      |  17    ETH 400GAUI-8 C2M (Annex |  192   ACA FlexO-4e-MPCS066-OS  |  ACA                      |  Yes      |  n/a             |
+  14      |  15    ETH 200GAUI-4 C2M (Annex |  192   ACA FlexO-4e-MPCS066-OS  |  ACA                      |  Yes      |  n/a             |
+  15      |  13    ETH 100GAUI-2 C2M (Annex |  192   ACA FlexO-4e-MPCS066-OS  |  ACA                      |  Yes      |  n/a             |
+  16      |  17    ETH 400GAUI-8 C2M (Annex |  198   ACA OpenZR400-16QAM-OS-E |  ACA                      |  Yes      |  n/a             |
+  17      |  15    ETH 200GAUI-4 C2M (Annex |  198   ACA OpenZR400-16QAM-OS-E |  ACA                      |  Yes      |  n/a             |
+  18      |  13    ETH 100GAUI-2 C2M (Annex |  198   ACA OpenZR400-16QAM-OS-E |  ACA                      |  Yes      |  n/a             |
+  19      |  17    ETH 400GAUI-8 C2M (Annex |  70    OpenZR+ ZR400-OFEC-16QAM |  OpenZR+                  |  Yes      |  n/a             |
+  20      |  15    ETH 200GAUI-4 C2M (Annex |  70    OpenZR+ ZR400-OFEC-16QAM |  OpenZR+                  |  Yes      |  n/a             |
+  21      |  13    ETH 100GAUI-2 C2M (Annex |  70    OpenZR+ ZR400-OFEC-16QAM |  OpenZR+                  |  Yes      |  n/a             |
+  22      |  17    ETH 400GAUI-8 C2M (Annex |  54    OpenZR+ ZR400-OFEC-16QAM |  OpenZR+                  |  Yes      |  n/a             |
+  23      |  15    ETH 200GAUI-4 C2M (Annex |  54    OpenZR+ ZR400-OFEC-16QAM |  OpenZR+                  |  Yes      |  n/a             |
+  24      |  13    ETH 100GAUI-2 C2M (Annex |  54    OpenZR+ ZR400-OFEC-16QAM |  OpenZR+                  |  Yes      |  n/a             |
+  25      |  60    OTN-ITU-T FOIC1.2 (ITU-T |  220   ACA FlexO-4-MPCS101-OS   |  ACA                      |  No       |  n/a             |
+  26      |  60    OTN-ITU-T FOIC1.2 (ITU-T |  202   ACA FlexO-4-MPCS087-OS   |  ACA                      |  No       |  n/a             |
+  27      |  60    OTN-ITU-T FOIC1.2 (ITU-T |  196   ACA FlexO-4-MPCS079-OS   |  ACA                      |  No       |  n/a             |
+  28      |  60    OTN-ITU-T FOIC1.2 (ITU-T |  193   ACA FlexO-4-MPCS069-OS   |  ACA                      |  No       |  n/a             |
+------------------------------------------------------------------------------------------------------------------------------------------
+</pre>
+</div>
+
+
 ## Model-Driven Configuration using IOS-XR Native Models using NETCONF or gNMI  
 All configuration performed in IOS-XR today can also be done using NETCONF/YANG. The following payload exhibits the models 
 and configuration used to perform router optics provisioning. This is a more complete example showing the FEC, power, and 
@@ -2105,17 +2156,21 @@ Please visit the blog at <https://xrdocs.io/design/blogs/zr-openconfig-mgmt> for
 about configuring and monitoring ZR/ZR+ optics using OpenConfig models.  
 
 ```xml
-<config>
+<edit-config>
+    <target>
+        <candidate/>
+    </target>
+    <config>
         <terminal-device xmlns="http://openconfig.net/yang/terminal-device">
             <logical-channels>
                 <channel>
-                    <index>100</index>
+                    <index>30001</index>
                     <config>
-                        <index>200</index>
-                        <rate-class xmlns:idx="http://openconfig.net/yang/transport-types">idx:TRIB_RATE_100G</rate-class>
+                        <index>30001</index>
+                        <rate-class xmlns:idx="http://openconfig.net/yang/transport-types">idx:TRIB_RATE_400G</rate-class>
                         <admin-state>ENABLED</admin-state>
                         <description>ETH Logical Channel</description>
-                        <trib-protocol xmlns:idx="http://openconfig.net/yang/transport-types">idx:PROT_100G_MLG</trib-protocol>
+                        <trib-protocol xmlns:idx="http://openconfig.net/yang/transport-types">idx:PROT_400GE</trib-protocol>
                         <logical-channel-type xmlns:idx="http://openconfig.net/yang/transport-types">idx:PROT_ETHERNET</logical-channel-type>
                     </config>
                     <logical-channel-assignments>
@@ -2123,64 +2178,18 @@ about configuring and monitoring ZR/ZR+ optics using OpenConfig models.
                             <index>1</index>
                             <config>
                                 <index>1</index>
-                                <allocation>100</allocation>
+                                <allocation>400</allocation>
                                 <assignment-type>LOGICAL_CHANNEL</assignment-type>
                                 <description>ETH to Coherent assignment</description>
-                                <logical-channel>200</logical-channel>
+                                <logical-channel>30000</logical-channel>
                             </config>
                         </assignment>
                     </logical-channel-assignments>
                 </channel>
                 <channel>
-                    <index>101</index>
+                    <index>30000</index>
                     <config>
-                        <index>101</index>
-                        <rate-class xmlns:idx="http://openconfig.net/yang/transport-types">idx:TRIB_RATE_100G</rate-class>
-                        <admin-state>ENABLED</admin-state>
-                        <description>ETH Logical Channel</description>
-                        <trib-protocol xmlns:idx="http://openconfig.net/yang/transport-types">idx:PROT_100G_MLG</trib-protocol>
-                        <logical-channel-type xmlns:idx="http://openconfig.net/yang/transport-types">idx:PROT_ETHERNET</logical-channel-type>
-                    </config>
-                    <logical-channel-assignments>
-                        <assignment>
-                            <index>1</index>
-                            <config>
-                                <index>1</index>
-                                <allocation>100</allocation>
-                                <assignment-type>LOGICAL_CHANNEL</assignment-type>
-                                <description>ETH to Coherent assignment</description>
-                                <logical-channel>200</logical-channel>
-                            </config>
-                        </assignment>
-                    </logical-channel-assignments>
-                </channel>
-                <channel>
-                    <index>102</index>
-                    <config>
-                        <index>102</index>
-                        <rate-class xmlns:idx="http://openconfig.net/yang/transport-types">idx:TRIB_RATE_100G</rate-class>
-                        <admin-state>ENABLED</admin-state>
-                        <description>ETH Logical Channel</description>
-                        <trib-protocol xmlns:idx="http://openconfig.net/yang/transport-types">idx:PROT_100G_MLG</trib-protocol>
-                        <logical-channel-type xmlns:idx="http://openconfig.net/yang/transport-types">idx:PROT_ETHERNET</logical-channel-type>
-                    </config>
-                    <logical-channel-assignments>
-                        <assignment>
-                            <index>1</index>
-                            <config>
-                                <index>1</index>
-                                <allocation>100</allocation>
-                                <assignment-type>LOGICAL_CHANNEL</assignment-type>
-                                <description>ETH to Coherent assignment</description>
-                                <logical-channel>200</logical-channel>
-                            </config>
-                        </assignment>
-                    </logical-channel-assignments>
-                </channel>
-                <channel>
-                    <index>200</index>
-                    <config>
-                        <index>200</index>
+                        <index>30000</index>
                         <admin-state>ENABLED</admin-state>
                         <description>Coherent Logical Channel</description>
                         <logical-channel-type xmlns:idx="http://openconfig.net/yang/transport-types">idx:PROT_OTN</logical-channel-type>
@@ -2190,10 +2199,10 @@ about configuring and monitoring ZR/ZR+ optics using OpenConfig models.
                             <index>1</index>
                             <config>
                                 <index>1</index>
-                                <allocation>300</allocation>
+                                <allocation>400</allocation>
                                 <assignment-type>OPTICAL_CHANNEL</assignment-type>
                                 <description>Coherent to optical assignment</description>
-                                <optical-channel>0/0-OpticalChannel0/0/0/20</optical-channel>
+                                <optical-channel>OpticalChannel0/0/0/8</optical-channel>
                             </config>
                         </assignment>
                     </logical-channel-assignments>
@@ -2202,16 +2211,20 @@ about configuring and monitoring ZR/ZR+ optics using OpenConfig models.
         </terminal-device>
         <components xmlns="http://openconfig.net/yang/platform">
             <component>
-                <name>0/0-OpticalChannel0/0/0/20</name>
+                <config> 
+                   <name>OpticalChannel0/0/0/8</name>
+                </config> 
                 <optical-channel xmlns="http://openconfig.net/yang/terminal-device">
                     <config>
-                        <operational-mode>5007</operational-mode>
-                        <frequency>195200000</frequency>
+                        <target-output-power>-10.0</target-output-power>
+                        <operational-mode>5004</operational-mode>
+                        <frequency>194300000</frequency>
                     </config>
                 </optical-channel>
             </component>
         </components>
     </config>
+</edit-config>
 ```
 
 # Routed Optical Networking Assurance 
@@ -2421,6 +2434,18 @@ Q[dB]                          :      9.40      9.40      9.40          0.00    
 Q_Margin[dB]                   :      2.20      2.20      2.20          0.00        NO        0.00        NO
 ```
 
+## Crosswork Network Controller monitoring of pluggable DCO 
+CNC fully supports the discovery of pluggable DCO, displaying them in the CNC device inventory. The Optics and CoherentDSP 
+controllers are shown as inventory components. The user has the ability to monitor the state data for these components. 
+The Device Performance Measurement capabilities of CNC 7.0+ allows users to display PM data for the Optics and CoherentDSP controllers. 
+
+![](http://xrdocs.io/design/images/ron-zrp-inventory-overview.png){:height="100%" width="100%"}
+
+![](http://xrdocs.io/design/images/controller-state.png){:height="100%" width="100%"}
+
+![](http://xrdocs.io/design/images/zrp-dsp-data.pn.png){:height="100%" width="100%"}
+
+
 ## EPNM Monitoring of Routed Optical Networking 
 Evolved Programmable Network Manager, or EPNM, can also be used to monitor router ZR/ZR+ performance measurement data 
 and display device level alarms when faults occur. EPNM stores PM and alarm data for historical analysis.  
@@ -2456,7 +2481,6 @@ layer of the interface.
 ![](http://xrdocs.io/design/images/ron-hld/ron-epnm-optics-dsp-pm.png){:height="100%" width="100%"}
 
 # Cisco IOS-XR Model-Driven Telemetry for Routed Optical Networking Monitoring 
-
 
 All operational data on IOS-XR routers and optical line systems can be monitored using streaming telemetry 
 based on YANG models. Routed Optical Networking is no different, so a wealth of 
