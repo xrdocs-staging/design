@@ -2561,9 +2561,9 @@ Grafana can be used to quickly build powerful dashboards to monitor ZR/ZR+ and N
 
 ---
 # Additional Resources
-## Cisco Routed Optical Networking 3.0 Solution Guide
+## Cisco Routed Optical Networking 4.0 Solution Guide
 
-<https://www.cisco.com/c/en/us/td/docs/optical/ron/3-0/solution/guide/b-ron-solution-30.html> 
+<https://www.cisco.com/c/en/us/td/docs/optical/ron/4-0/solution/guide/b-ron-solution-40/m-ron.html> 
 ## Cisco Routed Optical Networking Home 
 * <https://www.cisco.com/c/en/us/solutions/service-provider/routed-optical-networking.html> 
 ## Cisco Routed Optical Networking Tech Field Day 
