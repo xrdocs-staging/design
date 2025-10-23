@@ -300,8 +300,8 @@ tags:
 
 
 prose:
-  siteurl: 'https://xrdocs.github.io/application-hosting/'
-  relativeLinks: 'http://prose.github.io/starter/links.jsonp'
+  siteurl: 'https://d101lr0mb7xh5s.cloudfront.net/design/'
+  relativeLinks: 'https://d101lr0mb7xh5s.cloudfront.net/design//links.jsonp'
   media: 'images'
   ignore:
     - index.md
