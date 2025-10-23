@@ -104,7 +104,7 @@ a scalable any to any network fabric for Metro networks.
 
 The Agile Metro is a key component of the overall solution as it helps providers build 
 
-![](http://xrdocs.io/design/images/asn-metro/end-to-end.png)
+![]({{site.url}}/design/images/asn-metro/end-to-end.png)
 
 The ASN Metro design brings tremendous value to Service
 Providers:
@@ -162,7 +162,7 @@ network.
 
 The following highlights the key technology building blocks used to build the Agile Metro network. 
 
-![](http://xrdocs.io/design/images/asn-metro/asn-metro-hw.png)
+![]({{site.url}}/design/images/asn-metro/asn-metro-hw.png)
 
 ## Hardware Components 
 
@@ -189,7 +189,7 @@ and 88-LC1-52Y8H-EM.  The 88-LC1-52Y8H-EM is the first Silicon One line card
 offering a high density low speed aggregation with 52 SFP28 ports for 10G and
 25G native support. All line cards support MACSEC and Class C timing.   
 
-![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-p100.png)
+![]({{site.url}}/design/images/asn-metro/metro-hw-8000-p100.png)
 
 More information on the 8711-32FH-M and 8212-48FH-M routers can be found at: 
 
@@ -203,7 +203,7 @@ has an embedded IPSec encryption engine (supported in a future release).
 
 **8712-MOD-M** 
 
-![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-8712.png)
+![]({{site.url}}/design/images/asn-metro/metro-hw-8000-8712.png)
 
 The 8712-MOD-M released with XR 24.4.1 is a modular 2RU 4-slot router using a single ASIC providing 1.6T per slot. The following MPAs will be initially supported ont he 8712-MOD-M. The 8712-MOD-M supports MACSec on all ports with native NPU support for IPSec.   
 
@@ -220,7 +220,7 @@ More details on the 8712-MOD-M router can be found at:
 
 **8404-SYS** 
 
-![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-8404.png)
+![]({{site.url}}/design/images/asn-metro/metro-hw-8000-8404.png)
 
 The 8404-SYS released with XR 25.2.1 is a modular fully redundant 4RU 4-slot router providing 1.2T per slot. The 8404-SYS has a 300mm depth ideal for distributed edge applications. The 8404 supports Class C timing and extended temperature ranges. Each RSP on the 8404-SYS has an integrated 400G MPA with two QSFP-DD and two QSFP28 ports. The following MPAs will be supported on the 8404-SYS with each MPA supporting 800G of total bandwidth.   
 
@@ -241,7 +241,7 @@ Release 1.1 of Agile Metro introduces the first A100 based router focused on agg
 The 8011-4G24Y4H is a fixed router with 4xRJ45 ports supporting 1G, 24xSFP28 ports supporting 1G, 10G, and 25G and 4xQSFP28 ports supporting 
 40G or 100G. The router has a depth <300mm and supports I-temp conditions.  
 
-![](http://xrdocs.io/design/images/asn-metro/metro-hw-8000-8011-4g24y.png)
+![]({{site.url}}/design/images/asn-metro/metro-hw-8000-8011-4g24y.png)
 
 
 ## ASR 9000 
@@ -251,12 +251,12 @@ Pseudowire headend termination. The ASR 9000 is also utilized as a user plane in
 the distributed CUPS architecture for subscriber termination. The solution 
 includes the ASR 9902 and ASR 9903 small form factor modular ASR 9000 routers.   
 
-![](http://xrdocs.io/design/images/asn-metro/cst-hw-asr9000.png)
+![]({{site.url}}/design/images/asn-metro/cst-hw-asr9000.png)
 
 ## NCS 5504, 5508, 5516 Modular Chassis 
 The modular chassis version of the NCS 5500 is available in 4, 8, and 16 slot versions for flexible interfaces at high scale with dual RP modules. A variety of line cards are available with 10G, 40G, 100G, and 400G interface support. The NCS 5500 fully supports timing distribution for applications needing high accuracy clocks like mobile backhaul.  
 
-![](http://xrdocs.io/design/images/asn-metro/cst-hw-ncs5500.png)
+![]({{site.url}}/design/images/asn-metro/cst-hw-ncs5500.png)
 
 ## NCS 5500 / 5700 Fixed Chassis 
 NCS 5500 and 5700 routers are supported in the Agile Metro design. They offer a 
@@ -282,7 +282,7 @@ More information on the NCS 540 router line can be found at:
 
 <https://www.cisco.com/c/en/us/products/routers/network-convergence-system-540-series-routers/index.html>
 
-![](http://xrdocs.io/design/images/asn-metro/cst-hw-ncs540.png)
+![]({{site.url}}/design/images/asn-metro/cst-hw-ncs540.png)
 
 
 # Agile Metro Baseline transport 
@@ -293,7 +293,7 @@ In an Agile Metro network services can be located at any point within the networ
 network boundaries of access, aggregation, edge, and core. These segments in the network may still exist based 
 on geographical boundaries and interconnection, but the "edge" terminating user services can be placed throughout the metro network. The distribution of services enhances overall network scale and resilience.  
 
-![](http://xrdocs.io/design/images/asn-metro/agile-metro-end-state.png) 
+![]({{site.url}}/design/images/asn-metro/agile-metro-end-state.png) 
 
 
 ## Network domains and IGP structure 
@@ -313,7 +313,7 @@ The Agile Metro achieves network scale by IGP domain separation.
 ## Topology options and PE placement - Inline and non-inline PE
 The design is flexible to support edge service placement at different places in the network.  
 
-![](http://xrdocs.io/design/images/asn-metro/metro-deployment-options.png) 
+![]({{site.url}}/design/images/asn-metro/metro-deployment-options.png) 
 
 ### Edge services on a stick 
 This model can be utilized for scenarios where the Edge service termination is relatively 
@@ -339,12 +339,12 @@ with all types of optical networks; P2P dark fiber, simplified P2P DWDM using Ci
 passive multiplexers, and traditional multi-degree ROADMs.
 
 
-![](http://xrdocs.io/design/images/asn-metro/metro-routed-optical-networking.png) 
+![]({{site.url}}/design/images/asn-metro/metro-routed-optical-networking.png) 
 
 For more information on Cisco's Routed Optical Networking design please see the 
 following high-level design document:  
 
-<https://xrdocs.io/design/blogs/latest-routed-optical-networking-hld> 
+<{{site.url}}/design/blogs/latest-routed-optical-networking-hld> 
 
 ## Agile Metro Edge Fabric
 Agile Services Networking enables providers to build networks in the way that
@@ -358,7 +358,7 @@ needs. A fabric may be contained within a single location or span multiple
 geographic locations, interconnected using Cisco's Routed Optical Networking
 solution for simplicity and efficiency.    
 
-![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-diagram-1.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/asn-metro/metro-edge-fabric-diagram-1.png){:height="100%" width="100%"}
 
 ### Additional Edge Fabric properties  
 
@@ -374,7 +374,7 @@ There is also flexibility in how and where the Edge Fabric is deployed in the pr
 The diagram shows four potential options, but the deployment is primarily based on the provider requirements. The fully 
 distributed edge offers the highest scale and performance, but as interim steps during migration other models may be used.  
 
-![](http://xrdocs.io/design/images/asn-metro/metro-edge-fabric-deployment-options.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/asn-metro/metro-edge-fabric-deployment-options.png){:height="100%" width="100%"}
 
 ### Recommended Edge Fabric hardware 
 There is no hard and fast rule about specific hardware deployed in a specific
@@ -430,9 +430,9 @@ advertisement reachable via a simple longest prefix match (LPM) lookup. Networks
 of tens of thousands of nodes can now provide full reachability with very few
 IPv6 routes. 
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-igp-layout.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-igp-layout.png)
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-isis-redist.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-isis-redist.png)
 
 #### Simplified Forwarding 
 In SRv6, if a node is not a terminating node it simply forwards the traffic
@@ -849,7 +849,7 @@ SR-TE Policy does not need to reference the specific SID, only the Algo being
 used as the constraints. The local node or SR-PCE will utilize the Algo to
 compute the path dynamically.   
 
-![](http://xrdocs.io/design/images/asn-metro/cst-hld-dual-plane.png)
+![]({{site.url}}/design/images/asn-metro/cst-hld-dual-plane.png)
 
 The following policy configuration is an example of constraining the path to the Algo 129 "Red" path.  
 
@@ -909,7 +909,7 @@ Admission Controller and guaranteed bandwidth paths for Circuit-Style Policies.
 CNC also supports full provisioning, monitoring, and visualization of
 Circuit-Style SR-TE Policies. 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-cnc-csm-policy-overview.png){:height="50%" width="50%"}
+![]({{site.url}}/design/images/ron-hld/ron-cnc-csm-policy-overview.png){:height="50%" width="50%"}
 
 ### Segment Routing Path Computation Element (SR-PCE)
 
@@ -939,7 +939,7 @@ IS-IS and Segment Routing/SR-TE utilized in the Agile Metro design supports
 using unnumbered IPv4 interfaces. In the topology database each interface is
 uniquely identified by a combination of router ID and SNMP IfIndex value. 
 
-![](http://xrdocs.io/design/images/asn-metro/cst-hld-unnumbered.png)
+![]({{site.url}}/design/images/asn-metro/cst-hld-unnumbered.png)
 
 **Unnumbered interface configuration:**  
 
@@ -1194,7 +1194,7 @@ bring together a unified control and data-plane using SRv6.
 ### L3 Multicast using SR-MPLS Tree-SID
 #### Tree SID Diagram 
 
-![](http://xrdocs.io/design/images/asn-metro/cst-treesid.png)
+![]({{site.url}}/design/images/asn-metro/cst-treesid.png)
 
 ### Tree-SID Overview 
 Tree-SID utilizes the programmability of SR-PCE to create and
@@ -1378,7 +1378,7 @@ to the PRC.
 Many providers today are migrating from L2 access networks to more flexible L3 underlay networks using xVPN overlays to support a variety of network services. L3 networks offer more flexibility in terms of topology, resiliency, and support of both L2VPN and L3VPN services. Using a converged aggregation and access network simplifies networks and reduced both capex and opex spend by eliminating duplicate networks. Fiber to the home networks using active Ethernet have typically used L2 designs using proprietary methods like Private VLANs for subscriber isolation. EVPN E-Tree gives us a modern alternative to provide these services across a converged L3 Segment Routing network. This use case highlights one specific use case for E-Tree, however there are a number of other business and subscriber service use cases benefitting from EVPN E-Tree.   
 
 ## E-Tree Diagram 
-<img src="http://xrdocs.io/design/images/asn-metro/cst-etree.png" width="500"/>
+<img src="{{site.url}}/design/images/asn-metro/cst-etree.png" width="500"/>
 
 ## E-Tree Operation 
 One of the strongest features of EVPN is its dynamic signaling of PE state across the entire EVPN virtual instance. E-Tree extends this paradigm by signaling between EVPN PEs which Ethernet Segments are considered root segments and which ones are considered leaf segments. Similar to hub and spoke L3VPN networks, traffic is allowed between root/leaf and root/root interfaces but not between leaf interfaces either on the same node or on different nodes. EVPN signaling creates the forwarding state and entries to restrict traffic forwarding between endpoints connected to the same leaf Ethernet Segment.   
@@ -1623,11 +1623,11 @@ since every router now has DDoS scrubbing capability.
 You can apply this solution to the existing install base and to new router
 deployments without requiring any additional hardware.
 
-![](http://xrdocs.io/design/images/asn-metro/metro-ddos-protect-overview.png)
+![]({{site.url}}/design/images/asn-metro/metro-ddos-protect-overview.png)
 
 
 ### DDoS Edge Protect operation 
-![](http://xrdocs.io/design/images/asn-metro/metro-ddos-operation.png)
+![]({{site.url}}/design/images/asn-metro/metro-ddos-operation.png)
 
 The above diagram explains the operation of Cisco DDoS Edge Protect. Standard 
 Netflow data is encapsulated in gRPC messages to the internal Edge Protect agent. 
@@ -1673,7 +1673,7 @@ services using the IETF L2NM standard model. Once services are provisionined the
 are visualized using the CNC topology UI along with their underlying SR-TE policies, 
 if applicable.  
 
-![](http://xrdocs.io/design/images/asn-metro/cst-5-cnc-l2vpn.png)
+![]({{site.url}}/design/images/asn-metro/cst-5-cnc-l2vpn.png)
 
 ### L3VPN Service Provisioning and Visualization
 Crosswork Network Controller supports UI and API based provisioning of L3VPN  
@@ -1681,7 +1681,7 @@ services using the IETF L3NM standard model. Once services are provisionined the
 are visualized using the CNC service topology UI along with their underlying SR-TE policies, 
 if applicable.  
 
-![](http://xrdocs.io/design/images/asn-metro/cst-5-cnc-l3vpn.png)
+![]({{site.url}}/design/images/asn-metro/cst-5-cnc-l3vpn.png)
 
 ### Crosswork Automated Assurance 
 
@@ -1690,14 +1690,14 @@ transport infrastructure is also supported including advanced service assurance 
 xVPN services. Service assurance checks all aspects of the network making up the service 
 along with realtime Y.1731 measurements to ensure the defined SLA for the service is met.  
 
-![](http://xrdocs.io/design/images/asn-metro/cst-5-cnc-service-assurance-sla.png)
+![]({{site.url}}/design/images/asn-metro/cst-5-cnc-service-assurance-sla.png)
 
-![](http://xrdocs.io/design/images/asn-metro/cst-5-cnc-assurance.png)
+![]({{site.url}}/design/images/asn-metro/cst-5-cnc-assurance.png)
 
 The figure below shows an example of a degraded service where the measured
 one-way latency on the end to end path of 1680uS has exceeded the SLA of 500uS. 
 
-![](http://xrdocs.io/design/images/asn-metro/cst-5-cnc-l2vpn-degraded.png)
+![]({{site.url}}/design/images/asn-metro/cst-5-cnc-l2vpn-degraded.png)
 
 ## Zero Touch Provisioning
 
@@ -1711,7 +1711,7 @@ beging on the management interface of the device and if no response is received,
 the interface is not active, the ZTP process will begin the process on data ports. IOS-XR
 can be part of an ecosystem of automated device and service provisioning via Cisco NSO.  
 
-![](http://xrdocs.io/design/images/asn-metro/ztp-metro-fabric.png)
+![]({{site.url}}/design/images/asn-metro/ztp-metro-fabric.png)
 
 ### Zero Touch Provisioning using Crosswork Network Controller 
 
@@ -1776,7 +1776,7 @@ Figure 21 demonstrates the greatest limitation of traditional L2
 Multipoint solutions like
 VPLS.
 
-![](http://xrdocs.io/design/images/asn-metro/image22.png)
+![]({{site.url}}/design/images/asn-metro/image22.png)
 
 _Figure 21: EVPN All-Active Access_
 
@@ -1806,7 +1806,7 @@ H-EVPN access.
 Figure 22 shows another issue related to BUM traffic addressed by
 EVPN.
 
-![](http://xrdocs.io/design/images/asn-metro/image23.png)
+![]({{site.url}}/design/images/asn-metro/image23.png)
 
 _Figure 22: EVPN BUM Duplication_
 
@@ -1823,7 +1823,7 @@ allows just one PE to send BUM traffic to an All-Active EVPN access.
 Figure 23 describes the last important EVPN
 enhancement.
 
-![](http://xrdocs.io/design/images/asn-metro/image24.png)
+![]({{site.url}}/design/images/asn-metro/image24.png)
 
 _Figure 23: EVPN MAC Flip-Flopping_
 
@@ -1858,11 +1858,11 @@ Plane.
 The End-To-End Services use cases are summarized in the table in Figure
 24 and shown in the network diagram in Figure 25.
 
-![](http://xrdocs.io/design/images/asn-metro/cst-services-flat-5.png)
+![]({{site.url}}/design/images/asn-metro/cst-services-flat-5.png)
 
 _Figure 24: End-To-End – Services table_
 
-![](http://xrdocs.io/design/images/asn-metro/image26.png)
+![]({{site.url}}/design/images/asn-metro/image26.png)
 
 _Figure 25: End-To-End – Services_
 
@@ -1875,11 +1875,11 @@ Refer also to Section: "Transport and Services Integration".
 Hierarchical Services Use Cases are summarized in the table of Figure 26
 and shown in the network diagram of Figure 27.
 
-![](http://xrdocs.io/design/images/asn-metro/cst-services-hierarchical-5.png)
+![]({{site.url}}/design/images/asn-metro/cst-services-hierarchical-5.png)
 
 _Figure 26: Supported Hierarchical Services_ 
 
-![](http://xrdocs.io/design/images/asn-metro/image28.png)
+![]({{site.url}}/design/images/asn-metro/image28.png)
 
 _Figure 27: Hierarchical Services Control Plane_
 
@@ -1915,7 +1915,7 @@ Hierarchical L2 Multipoint Multi-Homed/All-Active (Single-Homed Ethernet
 access) service with traditional access router
 integration.
 
-![](http://xrdocs.io/design/images/asn-metro/image29.png)
+![]({{site.url}}/design/images/asn-metro/image29.png)
 
 _Figure 28: Hierarchical Services (Anycast-PW)_
 
@@ -1941,7 +1941,7 @@ Hierarchical L2 Multi/Single-Home, All/Single-Active modes are available
 at each layer of the service
 hierarchy.
 
-![](http://xrdocs.io/design/images/asn-metro/image30.png)
+![]({{site.url}}/design/images/asn-metro/image30.png)
 
 _Figure 29: Hierarchical Services (H-EVPN)_
 
@@ -1960,7 +1960,7 @@ It completely replaces traditional H-VPLS based solutions. This use case
 provides Hierarchical L2 Multi/Single-Home, All/Single-Active
 service.
 
-![](http://xrdocs.io/design/images/asn-metro/image31.png)
+![]({{site.url}}/design/images/asn-metro/image31.png)
 
 _Figure 30: Hierarchical Services (H-EVPN and PWHE)_
 
@@ -1988,7 +1988,7 @@ Also in this example CE4 is an example of a multi-homed CE node, utilizing a LAG
 across A-PE4/A-PE3. This multi-homed connection can be configured in an
 all-active, single-active, or port-active configuration.  
 
-![](http://xrdocs.io/design/images/asn-metro/cst-5-evpn-cgw.png)
+![]({{site.url}}/design/images/asn-metro/cst-5-evpn-cgw.png)
 
 _Figure 31: Hierarchical Services EVPN Centralized GW_ 
 
@@ -2013,7 +2013,7 @@ redundant gateway for the CE device with address 10.1.0.2/24. While not shown in
 this figure, the CE device could also be multi-homed to two separate A-PE nodes in 
 a all-active, single-active, or port-active configuration.       
 
-![](http://xrdocs.io/design/images/asn-metro/cst-5-evpn-he.png)
+![]({{site.url}}/design/images/asn-metro/cst-5-evpn-he.png)
 
 _Figure 32: Hierarchical Services EVPN Centralized GW_ 
 
@@ -2034,7 +2034,7 @@ Agile Metro provides another huge leap forward in simplification and
 programmability adding Services Control Plane unification and
 centralized path computation.
 
-![](http://xrdocs.io/design/images/asn-metro/cst-overview.png)
+![]({{site.url}}/design/images/asn-metro/cst-overview.png)
 
 _Figure 51: Agile Metro – Evolution_
 

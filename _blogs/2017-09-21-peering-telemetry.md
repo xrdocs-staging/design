@@ -37,7 +37,7 @@ Peering Metric Data
 
 ## Peering Metric Data Protocols 
 ### Model-Driven Telemetry 
-IOS-XR on the NCS5500 series supports MDT, or Model-Driven Telemetry over TCP or gRPC as an efficient method to stream statistics to a collector. The MDT fields are accessed by a specific telemetry sensor path defined in native IOS-XR, OpenConfig, or standard IETF YANG models. Multiple MDT groups can be configured to report data at different intervals, for instance to stream interface statistics at higher frequency than BGP protocol statistics. Much more information on Model-Driven Telemetry in IOS-XR can be found at http://xrdocs.io/telemetry/.  
+IOS-XR on the NCS5500 series supports MDT, or Model-Driven Telemetry over TCP or gRPC as an efficient method to stream statistics to a collector. The MDT fields are accessed by a specific telemetry sensor path defined in native IOS-XR, OpenConfig, or standard IETF YANG models. Multiple MDT groups can be configured to report data at different intervals, for instance to stream interface statistics at higher frequency than BGP protocol statistics. Much more information on Model-Driven Telemetry in IOS-XR can be found at {{site.url}}/telemetry/.  
 
 ### Sampled Netflow / IPFIX 
 Netflow was invented by Cisco due to requirements for traffic visibility and accounting. Netflow in its simplest form exports 5-tuple data for each flow traversing a Netflow-enabled interface. Netflow data is further enhanced with the inclusion of BGP information in the exported Netflow data, namely AS\_PATH and destination prefix. This inclusion makes it possible to see where traffic originated by ASN and derive the destination for the traffic per BGP prefix. The latest iteration of Cisco Netflow is Netflow v9, with the next-generation IETF standardized version called IPFIX (IP Flow Information Export). IPFIX has expanded on Netflow’s capabilities by introducing hundreds of entities.
@@ -105,7 +105,7 @@ Enabling Telemetry
 
 MDT is enabled on the node itself in three steps. 1) Grouping source data YANG paths, called sensors, into a sensor group. 2) Creating a destination group with the destination and data encoding method. 3) Creating a subscription grouping a sensor-group to a destination-group. This method of configuration is known as “dial-out” since the node itself initiates the streaming. Another method, called “dial-in” uses specific models to configure all of the above information from an external management application. The dial-in configuration is ephemeral, meaning it is not stored in the startup configuration. Configuration of MDT for IOS-XR on the NCS5500 can be found here: <https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/telemetry/b-telemetry-cg-ncs5500-62x/b-telemetry-cg-ncs5500-62x_chapter_011.html>
 
-Also, <http://xrdocs.io> has a number of telemetry related blogs which go in depth on configuration and use cases for MDT.
+Also, <{{site.url}}> has a number of telemetry related blogs which go in depth on configuration and use cases for MDT.
 
 On the collection side, Pipeline is a Cisco open-source project which can be used to collect streaming data and output it to several popular time-series databases. Pipeline can be located at <https://github.com/cisco/bigmuddy-network-telemetry-pipeline> and tutorial on using Pipeline at <https://xrdocs.github.io/telemetry/tutorials/2017-05-08-pipeline-with-grpc>
 

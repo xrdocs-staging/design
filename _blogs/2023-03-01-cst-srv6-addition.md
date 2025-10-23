@@ -64,7 +64,7 @@ SRv6 is the technology for enabling next-generation IPv6 based networks to
 support complex user and infrastructure services.   
 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-cst-overview.png)
+![]({{site.url}}/design/images/ron-hld/ron-cst-overview.png)
 
 # SRv6 Technology Overview  
 
@@ -307,7 +307,7 @@ utilized in the CST SRv6 design. In our example network we have three domains, t
 and one core domain. Each of these IGP domains is assigned a unique instance identifier. 
 
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-igp-layout.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-igp-layout.png)
 
 ## SRv6 Network Address Planning 
 SRv6 using micro-SID requires allocating the appropriate parent IPv6 prefix and then further 
@@ -327,7 +327,7 @@ The following is a recommended way to define the locator format which allows for
 required to use a locator prefix length of /48 on all nodes when using the F3216 carrier format.   
 
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-locator-example.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-locator-example.png)
 
 The example locator above encodes the following information: 
 
@@ -568,7 +568,7 @@ summary.
 
 #### Core and Access Mutual Redistribution
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-isis-redist.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-isis-redist.png)
 
 Redistribution between IGP instances should always utilize route policies with 
 appropriate prefix-sets or tags to restrict the prefixes advertised between domains. 
@@ -947,7 +947,7 @@ The uDT4 behavior means "decapsulate the packet and perform an IPv4 routing look
 SID fccc:1:215:e004::/64 is assigned to the specific L3VPN VRF.  
 
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-l3vpn-forwarding.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-l3vpn-forwarding.png)
 
 ### L3VPN Configuration Example 
 This is an example of a 3-node L3VPN using SRv6. Each node has already been assigned 
@@ -1268,7 +1268,7 @@ and their associated data plane forwarding information between SR-MPLS and SRv6 
 In CST SRv6 1.0 the ASR 9000 and NCS 5500 series support this functionality using per-VRF MPLS label and 
 SRv6 SID allocation.   
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-service-interworking.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-service-interworking.png)
 
 
 <div class="highlighter-rouge">
@@ -1337,7 +1337,7 @@ data path for service prefixes being translated.
 
 **The folowing shows the data plane in the MPLS to SRv6 direction** 
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-interworking-dataplane.jpeg)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-interworking-dataplane.jpeg)
 
 **In-Depth SRv6 to MPLS Service Interworking Documentation** 
 
@@ -1410,11 +1410,11 @@ and L3VPN services utilizing an SRv6 data plane.
 
 **The Traffic Engineering dashboard gives summary information for all TE path types** 
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-cnc-dashboard.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-cnc-dashboard.png)
 
 **Selecting an SRv6-TE Policy will highlight the end to end path across domains**
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-cnc-srv6-policy-selection.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-cnc-srv6-policy-selection.png)
 
 **Selecting the ellipses and "details" will show details about the policy**
 
@@ -1423,15 +1423,15 @@ which has been created to build the end-to-end path across IGP instances. Since
 we are crossing two domains we have two additional micro-SIDs at cst-pa1 and
 cst-pe3. The last SID is the egress node, a-pe7.  
 
-![](http://xrdocs.io/design/images/cst-srv6/cst-srv6-cnc-srv6-policy-details.png)
+![]({{site.url}}/design/images/cst-srv6/cst-srv6-cnc-srv6-policy-details.png)
 
 
 # Additional Resources 
 
 **Converged SDN Transport Design** 
 
-High Level Design Guide: <https://xrdocs.io/design/blogs/latest-converged-sdn-transport-hld> 
-Implementation Guide: <https://xrdocs.io/design/blogs/latest-converged-sdn-transport-ig> 
+High Level Design Guide: <{{site.url}}/design/blogs/latest-converged-sdn-transport-hld> 
+Implementation Guide: <{{site.url}}/design/blogs/latest-converged-sdn-transport-ig> 
 
 **Cisco Segment Routing Home** 
 

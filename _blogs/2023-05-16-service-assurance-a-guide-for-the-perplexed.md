@@ -16,7 +16,7 @@ tags:
 
 The concept of IP assurance is not quite as old as IP, but it's close: ARAPNET deployed IPv4 in January of 1983; by December, Mike Muuss had developed the ping utility to test reachability and delay. Techniques for assuring the network's forwarding functions through direct performance measurement have been evolving ever since, resulting in a confusing array of tools, protocols and choices.  Many network architects are left wondering: "What should I deploy for assurance, where, and why?"
 
-These are big questions, so I'm going to tackle them across a series of blog posts.  This first one will cover the what and why of assurance.  In [part two](https://xrdocs.io/design/blogs/2023-05-26-service-assurance-a-guide-for-the-perplexed-part-two/), I'll cover the protocols and tools you have to work with.  And in [part three](https://xrdocs.io/design/blogs/2023-05-26-service-assurance-a-guide-for-the-perplexed-part-three), I'll look at some key design questions.
+These are big questions, so I'm going to tackle them across a series of blog posts.  This first one will cover the what and why of assurance.  In [part two]({{site.url}}/design/blogs/2023-05-26-service-assurance-a-guide-for-the-perplexed-part-two/), I'll cover the protocols and tools you have to work with.  And in [part three]({{site.url}}/design/blogs/2023-05-26-service-assurance-a-guide-for-the-perplexed-part-three), I'll look at some key design questions.
 
 ## What Is Service Assurance?
 
@@ -69,4 +69,4 @@ See [RFC 7799](https://datatracker.ietf.org/doc/html/rfc7799) for more on the di
 ## Conclusion
 Unlike optical services (which carry performance, fault and path data in the header of every frame), IP/MPLS-based services like L2 and L3VPNs do not define an embedded assurance function.  Nevertheless, end customers expect their SLAs to be delivered as promised. Assuring service performance through some form of active monitoring is increasingly a must-have for Service Providers.
 
-In [part two](https://xrdocs.io/design/blogs/2023-05-26-service-assurance-a-guide-for-the-perplexed-part-two/) of this series, I'll take a deep dive into protocols and tools for active assurance. 
+In [part two]({{site.url}}/design/blogs/2023-05-26-service-assurance-a-guide-for-the-perplexed-part-two/) of this series, I'll take a deep dive into protocols and tools for active assurance. 

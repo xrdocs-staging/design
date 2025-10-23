@@ -20,7 +20,7 @@ tags:
 
 # Version 
 The following aligns to and uses features from Converged SDN Transport 4.0, please
-see the overview High Level Design document at https://xrdocs.io/design/blogs/latest-converged-sdn-transport-hld
+see the overview High Level Design document at {{site.url}}/design/blogs/latest-converged-sdn-transport-hld
 
 # Targets
 
@@ -54,19 +54,19 @@ see the overview High Level Design document at https://xrdocs.io/design/blogs/la
 
 # Testbed Overview
 
-[](https://xrdocs.io/design/images/cmfi/image1.png)
+[]({{site.url}}/design/images/cmfi/image1.png)
 
 _Figure 1: Compass Converged SDN Transport High Level Topology_
 
-![](https://xrdocs.io/design/images/cmfi/cst-topology.png)
+![]({{site.url}}/design/images/cmfi/cst-topology.png)
 
 _Figure 2: Testbed Physical Topology_
 
-![](https://xrdocs.io/design/images/cmfi/image3.png)
+![]({{site.url}}/design/images/cmfi/image3.png)
 
 _Figure 3: Testbed Route-Reflector and SR-PCE physical connectivity_
 
-![](https://xrdocs.io/design/images/cmfi/image4.png)
+![]({{site.url}}/design/images/cmfi/image4.png)
 
 _Figure 4: Testbed IGP Domains_
 
@@ -475,7 +475,7 @@ SR DPM first performs interface adjacency checks by sending an MPLS OAM packet t
 Once this connectivity is verified, SR DPM will then test forwarding to all other node SIDs in the IGP domain across each adjacency.  This is done by crafting a MPLS OAM packet with SID list {Adj-SID, Target Node SID} with TTL=2. The packet is sent to the adjacent node, back to the SR DPM testing node, and then onto the target node via SR-MPLS forwarding. The downstream node towards the target node will receive the packet with TTL=0 and send an MPLS OAM response to the SR DPM originating node. This communicates valid forwarding across the originating node towards the target node. 
 
 
-![](https://xrdocs.io/design/images/cmfi/cst-ig-srdpm.png)
+![]({{site.url}}/design/images/cmfi/cst-ig-srdpm.png)
 
 It is recommended to enable SR DPM on all CST IOS-XR nodes.  
 
@@ -822,7 +822,7 @@ router isis ACCESS
 ### Summary 
 This section contains the base configurations used for both G.8275.1 and G.8275.2 timing. Please see the CST HLD for an overview on timing in general.  
 
-![](http://xrdocs.io/design/images/cmfi/cmf-timing.png)
+![]({{site.url}}/design/images/cmfi/cmf-timing.png)
 
 ### Enable frequency synchronization
 In order to lock the internal oscillator to a PTP source, frequency synchronization must first be enabled globally.  
@@ -1385,7 +1385,7 @@ visibility of the entire inter-domain network.
 
 **Note:** Each IS-IS process in the network requires a unique instance-id to identify itself to the PCE.
 
-![](http://xrdocs.io/design/images/cmfi/image5.png)
+![]({{site.url}}/design/images/cmfi/image5.png)
 
 _Figure 5: BGP-LS Topology Distribution_
 
@@ -1649,7 +1649,7 @@ Please see the CST 3.0 HLD for in-depth information on design choices.
 ### Core QoS configuration 
 The core QoS policies defined for CST 3.0 utilize priority levels, with no bandwidth guarantees per traffic class. In a production network it is recommended to analyze traffic flows and determine an appropriate BW guarantee per traffic class. The core QoS uses four classes. Note the "video" class uses priority level 6 since only levels 6 and 7 are supported for high priority multicast.   
 
-![](http://xrdocs.io/design/images/cmfi/cmf-qos-core.png)
+![]({{site.url}}/design/images/cmfi/cmf-qos-core.png)
 
  Traffic Type | Priority Level | Core EXP Marking  
 | ----------|---------|----------|---------------|
@@ -1972,19 +1972,19 @@ policy-map hqos-egress-child-shaping
     
 ## End-To-End VPN Services 
 
-![](http://xrdocs.io/design/images/cmfi/image6.png)
+![]({{site.url}}/design/images/cmfi/image6.png)
 
 _Figure 6: End-To-End Services Table_
 
 ### End-To-End VPN Services Data Plane
 
-![](http://xrdocs.io/design/images/cmfi/image10.png)
+![]({{site.url}}/design/images/cmfi/image10.png)
 
 _Figure 10: End-To-End Services Data Plane_
 
 ### L3VPN MP-BGP VPNv4 On-Demand Next-Hop
 
-![](http://xrdocs.io/design/images/cmfi/image7.png)
+![]({{site.url}}/design/images/cmfi/image7.png)
 
 _Figure 7: L3VPN MP-BGP VPNv4 On-Demand Next-Hop Control Plane_
 
@@ -2135,7 +2135,7 @@ router bgp 100
 
 ### L2VPN Single-Homed EVPN-VPWS On-Demand Next-Hop
 
-![](http://xrdocs.io/design/images/cmfi/image8.png)
+![]({{site.url}}/design/images/cmfi/image8.png)
 
 _Figure 8: L2VPN Single-Homed EVPN-VPWS On-Demand Next-Hop Control Plane_
 
@@ -2191,7 +2191,7 @@ interface TenGigE0/0/0/5.1 l2transport
 
 ### L2VPN Static Pseudowire (PW) – Preferred Path (PCEP)
 
-![](http://xrdocs.io/design/images/cmfi/image9.png)
+![]({{site.url}}/design/images/cmfi/image9.png)
 
 _Figure 9: L2VPN Static Pseudowire (PW) – Preferred Path (PCEP) Control
 Plane_
@@ -2409,13 +2409,13 @@ interface BVI11011
 
 ## Hierarchical Services
 
-![](http://xrdocs.io/design/images/cmfi/image11.png)
+![]({{site.url}}/design/images/cmfi/image11.png)
 
 _Figure 11: Hierarchical Services Table_
 
 ### L3VPN – Single-Homed EVPN-VPWS, MP-BGP VPNv4/6 with Pseudowire-Headend (PWHE)
 
-![](http://xrdocs.io/design/images/cmfi/image12.png)
+![]({{site.url}}/design/images/cmfi/image12.png)
 
 _Figure 12: L3VPN – Single-Homed EVPN-VPWS, MP-BGP VPNv4/6 with Pseudowire-Headend (PWHE) Control Plane_
 
@@ -2581,14 +2581,14 @@ l2vpn
 </pre> 
 </div> 
 
-![](http://xrdocs.io/design/images/cmfi/image13.png)
+![]({{site.url}}/design/images/cmfi/image13.png)
 
 _Figure 13: L3VPN – Single-Homed EVPN-VPWS, MP-BGP VPNv4/6 with
 Pseudowire-Headend (PWHE) Data Plane_
 
 ### L3VPN – Anycast Static Pseudowire (PW), MP-BGP VPNv4 with Anycast IRB
 
-![](http://xrdocs.io/design/images/cmfi/image14.png)
+![]({{site.url}}/design/images/cmfi/image14.png)
 
 _Figure 14: L3VPN – Anycast Static Pseudowire (PW), MP-BGP VPNv4 with
 Anycast IRB Control Plane_
@@ -2809,14 +2809,14 @@ router bgp 100
 </pre> 
 </div> 
 
-![](http://xrdocs.io/design/images/cmfi/image15.png)
+![]({{site.url}}/design/images/cmfi/image15.png)
 
 _Figure 15: L3VPN – Anycast Static Pseudowire (PW), MP-BGP VPNv4/6 with
 Anycast IRB Datal Plane_
 
 ### L2/L3VPN – Anycast Static Pseudowire (PW), Multipoint EVPN with Anycast IRB
 
-![](http://xrdocs.io/design/images/cmfi/image16.png)
+![]({{site.url}}/design/images/cmfi/image16.png)
 
 _Figure 16: L2/L3VPN – Anycast Static Pseudowire (PW), Multipoint EVPN
 with Anycast IRB Control Plane_
@@ -3045,7 +3045,7 @@ router bgp 100
 </pre> 
 </div> 
 
-![](http://xrdocs.io/design/images/cmfi/image17.png)
+![]({{site.url}}/design/images/cmfi/image17.png)
 
 _Figure 17: L2/L3VPN – Anycast Static Pseudowire (PW), Multipoint EVPN
 with Anycast IRB Data Plane_
@@ -3581,19 +3581,19 @@ Tree: treesid-1
 
 ### End-To-End VPN Services Data Plane
 
-![](http://xrdocs.io/design/images/cmfi/image10.png)
+![]({{site.url}}/design/images/cmfi/image10.png)
 
 _Figure 10: End-To-End Services Data Plane_
 
 ## Hierarchical Services
 
-![](http://xrdocs.io/design/images/cmfi/image11.png)
+![]({{site.url}}/design/images/cmfi/image11.png)
 
 _Figure 11: Hierarchical Services Table_
 
 ### L3VPN – Single-Homed EVPN-VPWS, MP-BGP VPNv4/6 with Pseudowire-Headend (PWHE)
 
-![](http://xrdocs.io/design/images/cmfi/image12.png)
+![]({{site.url}}/design/images/cmfi/image12.png)
 
 _Figure 12: L3VPN – Single-Homed EVPN-VPWS, MP-BGP VPNv4/6 with Pseudowire-Headend (PWHE) Control Plane_
 
@@ -3759,14 +3759,14 @@ l2vpn
 </pre> 
 </div> 
 
-![](http://xrdocs.io/design/images/cmfi/image13.png)
+![]({{site.url}}/design/images/cmfi/image13.png)
 
 _Figure 13: L3VPN – Single-Homed EVPN-VPWS, MP-BGP VPNv4/6 with
 Pseudowire-Headend (PWHE) Data Plane_
 
 ### L3VPN – Anycast Static Pseudowire (PW), MP-BGP VPNv4 with Anycast IRB
 
-![](http://xrdocs.io/design/images/cmfi/image14.png)
+![]({{site.url}}/design/images/cmfi/image14.png)
 
 _Figure 14: L3VPN – Anycast Static Pseudowire (PW), MP-BGP VPNv4 with
 Anycast IRB Control Plane_
@@ -3987,14 +3987,14 @@ router bgp 100
 </pre> 
 </div> 
 
-![](http://xrdocs.io/design/images/cmfi/image15.png)
+![]({{site.url}}/design/images/cmfi/image15.png)
 
 _Figure 15: L3VPN – Anycast Static Pseudowire (PW), MP-BGP VPNv4/6 with
 Anycast IRB Datal Plane_
 
 ### L2/L3VPN – Anycast Static Pseudowire (PW), Multipoint EVPN with Anycast IRB
 
-![](http://xrdocs.io/design/images/cmfi/image16.png)
+![]({{site.url}}/design/images/cmfi/image16.png)
 
 _Figure 16: L2/L3VPN – Anycast Static Pseudowire (PW), Multipoint EVPN
 with Anycast IRB Control Plane_
@@ -4223,7 +4223,7 @@ router bgp 100
 </pre> 
 </div> 
 
-![](http://xrdocs.io/design/images/cmfi/image17.png)
+![]({{site.url}}/design/images/cmfi/image17.png)
 
 _Figure 17: L2/L3VPN – Anycast Static Pseudowire (PW), Multipoint EVPN
 with Anycast IRB Data Plane_
@@ -4374,7 +4374,7 @@ Please see the general QoS section for core-facing QoS configuration
 Please see the G.8275.1 and G.8275.2 timing configuration guides in this document for configuring G.8275.2 on downstream RPD interfaces.  Starting in CST 4.0, PTP can be enabled on either physical L3 interfaces or BVI interfaces. PTP is not supported on Bundle Ethernet interfaces.  
 Starting in CST 4.0 it is recommended to use G.8275.1 end to end across the timing domain, and utilize G.8275.2 on specific interfaces using the PTP Multi-Profile configuration outlined in this document. G.8275.1 allows the use of Bundle Ethernet interfaces within the CIN network.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hld-ptp-interworking.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hld-ptp-interworking.png)
 
 #### PTP Messaging Rates 
 The following are recommended rate values to be used for PTP messaging.   

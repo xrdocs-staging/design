@@ -19,8 +19,8 @@ position: top
 This CIN design guide is an excerpt from the complete Converged SDN Transport architecture. If you are implementing a converged residential, mobile, and business access and aggregation network, please visit the links below for more details on the holistic design. This design focuses on elements specific to the support for Remote PHY over CIN.   
 
 ## Links to complete Converged SDN Transport Documents 
-https://xrdocs.io/design/blogs/latest-converged-sdn-transport-hld
-https://xrdocs.io/design/blogs/latest-converged-sdn-transport-ig
+{{site.url}}/design/blogs/latest-converged-sdn-transport-hld
+{{site.url}}/design/blogs/latest-converged-sdn-transport-ig
 
 ## Cisco Hardware 
 The design utilizes the following Cisco hardware in the following roles. While these are the roles used in the design, all of the devices utilize IOS-XR and could be utilized in any role in the CIN depending on scale requirements. All devices presented support class B timing using PTP.   
@@ -28,22 +28,22 @@ The design utilizes the following Cisco hardware in the following roles. While t
 ### RPD Aggregation Leaf
 Due to the 10G requirements of RPDs and future RMD connections, these leaf devices are dense in 10G SFP+ connectivity required to support longer distance DWDM optics. In addition to supporting 10GE SFP+ on all ports the N540-24Z8Q2C has 8x25G SFP28 ports and the 55A1-24Q6H-S has 24x25G SFP28 ports.   
 
-![](http://xrdocs.io/design/images/rphy-design-guide/cin-hardware-leaf.png)
+![]({{site.url}}/design/images/rphy-design-guide/cin-hardware-leaf.png)
 
 ### DPIC Aggregation  
 In larger deployments a DPIC aggregation leaf is recommended. Depending on the cBR8 DPIC card being used, a 10GE or 100GE aggregation device is required. The above RPD leaf devices can be utilized for high density DPIC 10GE aggregation. 100GE DPIC aggregation can also be served by the NCS-55A1-24H (24x100GE) or NCS-55A1-36H-S (36x100GE), or a variety of line cards for the NCS 5504 or 5508 modular chassis. All 100GE ports support 4x10GE breakouts for seamless migration to 100GE.   
 
-![](http://xrdocs.io/design/images/rphy-design-guide/cin-hardware-leaf.png)
+![]({{site.url}}/design/images/rphy-design-guide/cin-hardware-leaf.png)
 
 ### Aggregation Spine  
 The CIN aggregation spine router needs high density 100GE connectivity. Cisco has fixed or modular chassis variants supporting high density 100GE. 
 
-![](http://xrdocs.io/design/images/rphy-design-guide/cin-hardware-spine.png)
+![]({{site.url}}/design/images/rphy-design-guide/cin-hardware-spine.png)
 
 ### Core / PE  
 This device is typically used for cBR8 SUP uplinks. The ASR 9000 series or NCS 5500 can fulfill this role at high density including 400GE support.  
 
-![](http://xrdocs.io/design/images/rphy-design-guide/cin-hardware-pe.png)
+![]({{site.url}}/design/images/rphy-design-guide/cin-hardware-pe.png)
 
 
 # Cable Converged Interconnect Network (CIN) High Level Design  
@@ -84,7 +84,7 @@ The RPD is provisioned using ZTP (Zero Touch Provisioning). DHCPv4 and DHCPv6 ar
 ### Remote PHY Standard Flows 
 The following diagram shows the different core functions of a Remote PHY solution and the communication between those elements. 
 
-<img src="http://xrdocs.io/design/images/cmf-hld/cmf-docsis-communication.png" width="500"/>
+<img src="{{site.url}}/design/images/cmf-hld/cmf-docsis-communication.png" width="500"/>
 
 
 ### GCP 
@@ -104,7 +104,7 @@ Due to the large number of elements and generally greenfield network builds, the
 #### Network Timing 
 Frequency and phase synchronization is required between the cBR-8 and RPD to properly handle upstream scheduling and downstream transmission. Remote PHY uses PTP (Precision Timing Protocol) for timing synchronization with the ITU-T G.8275.2 timing profile. This profile carries PTP traffic over IP/UDP and supports a network with partial timing support, meaning multi-hop sessions between Grandmaster, Boundary Clocks, and clients as shown in the diagram below. The cBR-8 and its client RPD require timing alignment to the same Primary Reference Clock (PRC). In order to scale, the network itself must support PTP G.8275.2 as a T-BC (Boundary Clock).  Synchronous Ethernet (SyncE) is also recommended across the CIN network to maintain stability when timing to the PRC. 
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-g82752.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-g82752.png)
 
 #### QoS
 Control plane functions of Remote PHY are critical to achieving proper operation and subscriber traffic throughput. QoS is required on all RPD-facing ports, the cBR-8 DPIC ports, and all core interfaces in between. Additional QoS may be necessary between the cBR-8, RPD, and any PTP timing elements. See the design section for further details on QoS components.   
@@ -120,19 +120,19 @@ The Converged SDN Transport design is extremely flexible in how Remote PHY compo
 ### High Scale Design (Recommended)
 This option maximizes statistical multiplexing by aggregating Digital PIC downstream connections on a separate leaf device, allowing one to connect a number of cBR-8 interfaces to a fabric with minimal 100GE uplink capacity. The topology also supports the connectivity of remote shelves for hub consolidation. Another benefit is the fabric has optimal HA and the ability to easily scale with more leaf and spine nodes.     
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-topology-full.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-topology-full.png)
 _High scale topology_ 
 
 ### Collapsed Digital PIC and SUP Uplink Connectivity  
 This design for smaller deployments connects both the downstream Digital PIC connections and uplinks on the same CIN core device. If there is enough physical port availability and future growth does not dictate capacity beyond these nodes this design can be used. This design still provides full redundancy and the ability to connect RPDs to any cBR-8.  Care should be taken to ensure traffic between the DPIC and RPD does not traverse the SUP uplink interfaces. 
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-topology-small.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-topology-small.png)
 _Collapsed cBR-8 uplink and Digital PIC connectivity_ 
 
 ### Collapsed RPD and cBR-8 DPIC Connectivity 
 This design connects each cBR-8 Digital PIC connection to the RPD leaf connected to the RPDs it will serve. This design can also be considered a "pod" design where cBR-8 and RPD connectivity is pre-planned. Careful planning is needed since the number of ports on a single device may not scale efficiently with bandwidth in this configuration.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-topology-collapsed.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-topology-collapsed.png)
 _Collapsed or Pod cBR-8 Digital PIC and RPD connectivity_ 
 
 In the collapsed desigs care must be taken to ensure traffic between each RPD can reach the appropriate DPIC interface. If a leaf is single-homed to the aggregation router its DPIC interface is on, RPDs may not be able to reach their DPIC IP. The options with the shortest convergence time are: Adding interconnects between the agg devices or multiple uplinks from the leaf to agg devices.  
@@ -181,7 +181,7 @@ In a single IGP network with equal IGP metrics, certain link failures may cause 
 ### cBR-8 DPIC to CIN Interconnection  
 The cBR-8 supports two mechanisms for DPIC high availability outlined in the overview section. DPIC line card and link redundancy is recommended but not a requirement. In the CST reference design, if link redundancy is being used each port pair on the active and standby line cards is connected to a different router and the default active ports (even port number) is connected to a different router. In the example figure, port 0 from active DPIC card 0 is connected to R1 and port 0 from standby DPIC card 1 is connected to R2.  DPIC link redundancy MUST be configured using the "cold" method since the design is using L3 to each DPIC interface and no intermediate L2 switching.  This is done with the _cable rphy link redundancy cold_ global command and will keep the standby link in a down/down state until switchover occurs. 
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-dpic-redundancy.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-dpic-redundancy.png)
 _DPIC line card and link HA_ 
 
 #### DPIC Interface Configuration 
@@ -204,7 +204,7 @@ It is recommended to configure the RPD leaf using bridge-domains and BVI interfa
 
  The following shows the P2P and BVI deployment options.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-bvi-p2p.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-bvi-p2p.png)
 
 ### Native IP or L3VPN/mVPN Deployment 
 Two options are available and validated to carry Remote PHY traffic between the RPD and MAC function. 
@@ -239,7 +239,7 @@ The following lists specific traffic types which should be treated with specific
 ### CST and Remote-PHY Load Balancing 
  Unicast network traffic is load balanced based on MPLS labels and IP header criteria. The devices used in the CST design are capable of load balancing traffic based on MPLS labels used in the SR underlay and IP headers underneath any MPLS labels. In the higher bandwidth downstream direction, where a series of L2TP3 tunnels are created from the cBR-8 to the RPD, traffic is hashed based on the source and destination IP addresses of those tunnels. Downstream L2TPv3 tunnels from a single Digital PIC interface to a set of RPDs will be distributed across the fabric based on RPD destination IP address. The followUing illustrates unicast load balancing across the network. 
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-load-balancing.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-load-balancing.png)
 
 Multicast traffic is not load balanced across the network. Whether the network is utilizing PIMv4, PIMv6, or mVPN, a multicast flow with two equal cost downstream paths will utilize only a single path, and only a single member link will be utilized in a link bundle. If using multicast, ensure sufficient bandwidth is available on a single link between two adjacencies. 
 
@@ -410,7 +410,7 @@ router isis ACCESS
 ### Summary 
 This section contains the base configurations used for both G.8275.1 and G.8275.2 timing. Please see the CST 3.0 HLD for an overview on timing in general.  
 
-![](http://xrdocs.io/design/images/cmfi/cmf-timing.png)
+![]({{site.url}}/design/images/cmfi/cmf-timing.png)
 
 ### Enable frequency synchronization
 In order to lock the internal oscillator to a PTP source, frequency synchronization must first be enabled globally.  
@@ -1120,10 +1120,10 @@ In this section we will show an example deployments with complete configurations
 ## Network Diagrams 
 
 ### Global Routing Table with DPIC Leaf 
-![](http://xrdocs.io/design/images/rphy-design-guide/cin-topology-grt.png)
+![]({{site.url}}/design/images/rphy-design-guide/cin-topology-grt.png)
 
 ### L3VPN Collapsed  
-![](http://xrdocs.io/design/images/rphy-design-guide/cin-topology-l3vpn.png)
+![]({{site.url}}/design/images/rphy-design-guide/cin-topology-l3vpn.png)
 
 
 ## Connectivity Table
@@ -1526,7 +1526,7 @@ Much of the configuration across the IOS-XR CIN nodes is the same with regards t
 #### Network Timing Configuration 
 See the timing configuration section in this document for standard timing profiles.  The following diagram shows the flow of timing end to end across the network.  
 
-![](http://xrdocs.io/design/images/rphy-design-guide/cin-timing-diagram.png)
+![]({{site.url}}/design/images/rphy-design-guide/cin-timing-diagram.png)
 
 
 #### Timing Configuration between PA4 and ASR-903 Grandmaster

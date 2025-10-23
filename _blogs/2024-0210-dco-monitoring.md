@@ -46,7 +46,7 @@ information on Routed Optical Networking can be found at the following locations
 
 
  - <https://www.cisco.com/c/en/us/solutions/service-provider/routed-optical-networking.html> 
- - <https://xrdocs.io/latest-routed-optical-networking-hld> 
+ - <{{site.url}}/latest-routed-optical-networking-hld> 
 
 # Pluggable Digital Coherent Optics Overview 
 One of the foundations of Routed Optical Networking is the use of small form
@@ -66,14 +66,14 @@ highest speed 400G non-DCO transceivers.
 
 ### Cisco High-Power OpenZR+ "Bright" Transceiver (DP04QSDD-HE0)
 
-<img src="http://xrdocs.io/design/images/ron-hld/bright_zrp.png" width="500"/>
+<img src="{{site.url}}/design/images/ron-hld/bright_zrp.png" width="500"/>
 
 ### Cisco OpenZR+ Transceiver (QDD-400G-ZRP-S)
 
-<img src="http://xrdocs.io/design/images/ron-hld/zrp.png" width="500"/>
+<img src="{{site.url}}/design/images/ron-hld/zrp.png" width="500"/>
 
 ### Cisco OIF 400ZR Transceiver (QDD-400G-ZR-S)
- <img src="http://xrdocs.io/design/images/ron-hld/zr.png" width="500"/>
+ <img src="{{site.url}}/design/images/ron-hld/zr.png" width="500"/>
 
 Two industry optical standards have emerged to cover a variety of use cases. The
 OIF created the 400ZR specification,
@@ -84,7 +84,7 @@ wavelength rates, so the OpenZR+ MSA was created, https://www.openzrplus.org.
 The following table outlines the specs of each standard. ZR400 and OpenZR+ transceivers 
 are tunable across the ITU C-Band, 196.1 To 191.3 THz.  
 
-![](http://xrdocs.io/design/images/ron-hld/zr_zrp_specs.png)
+![]({{site.url}}/design/images/ron-hld/zr_zrp_specs.png)
 
 The following part numbers are used for Cisco's ZR400 and OpenZR+ MSA transceivers 
 
@@ -127,13 +127,13 @@ data is derived from and how best to monitor the optics.
 
 
 ### Component Diagram 
-<img src="http://xrdocs.io/design/images/ron-hld/coherent-optic-diagram.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/coherent-optic-diagram.png" width="1000"/>
 
 ### Component Packaging 
 On modern DCO like Cisco's ZR/ZR+ multiple elements are co-packaged leading to
 simpler design and greater power efficiency.  
 
-<img src="http://xrdocs.io/design/images/ron-hld/acacia-optics-picture.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/acacia-optics-picture.png" width="1000"/>
 
 ## Coherent DSP 
 
@@ -1022,7 +1022,7 @@ on the view.
 
 #### Link Assurance with PM Data 
 
-<img src="http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance-3.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/ron-hco-link-assurance-3.png" width="1000"/>
 
 
 HCO's Performance application allows the user to explore the PM data at a device 
@@ -1055,17 +1055,17 @@ gray optics.
 
 
 #### L1 Optics Available PM Metrics  
-<img src="http://xrdocs.io/design/images/ron-hld/cnc-built-in-l1-optics.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/cnc-built-in-l1-optics.png" width="1000"/>
 
 #### L1 Optics KPI Profile 
-<img src="http://xrdocs.io/design/images/ron-hld/cnc-built-in-l1-optics-kpi-profile.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/cnc-built-in-l1-optics-kpi-profile.png" width="1000"/>
 
 #### L1 optics power data 
-<img src="http://xrdocs.io/design/images/ron-hld/cnc-l1-optics-data.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/cnc-l1-optics-data.png" width="1000"/>
 <br> 
 
 #### L1 optics temperature data 
-<img src="http://xrdocs.io/design/images/ron-hld/cnc-l1-optics-temp.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/cnc-l1-optics-temp.png" width="1000"/>
 
 
 
@@ -1076,25 +1076,25 @@ into KPI Profiles specific to the application.
 Here we see a KPI Profile being used to monitor RX/TX Power and Q-Margin which 
 can then be applied to devices with DCO.   
 
-<img src="http://xrdocs.io/design/images/ron-hld/cnc-custom-ron-kpi-profile.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/cnc-custom-ron-kpi-profile.png" width="1000"/>
 
 KPI graph being used specifically for DCO monitoring. Any sensor path leaf returning 
 data as numeric data can be graphed. If the data is non-numeric it cannot be 
 graphed but can be shown in a tabular format.   
 
-<img src="http://xrdocs.io/design/images/ron-hld/cnc-health-insights-dco-monitoring.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/cnc-health-insights-dco-monitoring.png" width="1000"/>
 
 The following shows alerts triggered by our custom KPIs. A critical alarm is raised when the 
 Q-Factor of the DCO drops below .5 for a specific amount of time, and clears when the 
 Q-Factor returns to a nominal value.  
 
-<img src="https://xrdocs.io/design/images/ron-hld/cnc-qfactor-alarm.png" width="1000"/>
+<img src="{{site.url}}/design/images/ron-hld/cnc-qfactor-alarm.png" width="1000"/>
 
 # Additional Resources 
 
 ### Routed Optical Networking Design Guide
 
-<https://xrdocs.io/design/blogs/latest-routed-optical-networking-hld> 
+<{{site.url}}/design/blogs/latest-routed-optical-networking-hld> 
 
 ### Routed Optical Networking Landing Page 
 

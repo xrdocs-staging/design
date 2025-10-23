@@ -54,7 +54,7 @@ new additions but please see the detailed sections in the document for more
 information. 
 
 Aslo, please see the recent blog on DCO monitoring located here:  
-<https://xrdocs.io/design/blogs/xr-dco-monitoring> 
+<{{site.url}}/design/blogs/xr-dco-monitoring> 
 
 
 ## QDD-OLS Pluggable Optical Line System 
@@ -65,7 +65,7 @@ of +25dB of amplification. When coupled with a 4-channel mux/demux (FLD-4),
 the user can build a simplified optical deployment supporting up to 32 400G 
 channels with a reach up to 120km.      
 
-![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols.png){:height="30%" width="30%"}
+![]({{site.url}}/design/images/ron-hld/ron-qdd-ols.png){:height="30%" width="30%"}
 
 More information about the QDD-OLS can be found later in this document under the 
 pluggables section and at the following Cisco URL: 
@@ -138,7 +138,7 @@ technologies and network layers into a single cost efficient and easy to manage
 network infrastructure. Here we present the Cisco Routed Optical Networking
 architecture and validated design.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-cst-overview.png)
+![]({{site.url}}/design/images/ron-hld/ron-cst-overview.png)
 
 # Key Drivers
 ## Changing Networks  
@@ -202,7 +202,7 @@ infrastructure and operations.
 ## Today's Complex Multi-Layer Network Infrastructure
 
 
-![](http://xrdocs.io/design/images/ron-hld/multi-layer-network.png)
+![]({{site.url}}/design/images/ron-hld/multi-layer-network.png)
 
 ### DWDM 
 
@@ -264,13 +264,13 @@ Routed Optical Networking 2.1 introduces the Cisco HIgh Power +1dB ZR+ transceiv
 DCO enables the use of the optics with optical add drop systems requiring higher input power, and enables 
 longer distances when used in passive or dark fiber applications without amplification.  
 
-![](http://xrdocs.io/design/images/ron-hld/bright_zrp.png)
+![]({{site.url}}/design/images/ron-hld/bright_zrp.png)
 
 ### Cisco OpenZR+ Transceiver (QDD-400G-ZRP-S)
-![](http://xrdocs.io/design/images/ron-hld/zrp.png){:height="50%" width="50%"}
+![]({{site.url}}/design/images/ron-hld/zrp.png){:height="50%" width="50%"}
 
 ### Cisco OIF 400ZR Transceiver (QDD-400G-ZR-S)
-![](http://xrdocs.io/design/images/ron-hld/zr.png){:height="50%" width="50%"}
+![]({{site.url}}/design/images/ron-hld/zr.png){:height="50%" width="50%"}
 
 Two industry optical standards have emerged to cover a variety of use cases. The
 OIF created the 400ZR specification,
@@ -281,7 +281,7 @@ wavelength rates, so the OpenZR+ MSA was created, https://www.openzrplus.org.
 The following table outlines the specs of each standard. ZR400 and OpenZR+ transceivers 
 are tunable across the ITU C-Band, 196.1 To 191.3 THz.  
 
-![](http://xrdocs.io/design/images/ron-hld/zr_zrp_specs.png)
+![]({{site.url}}/design/images/ron-hld/zr_zrp_specs.png)
 
 The following part numbers are used for Cisco's ZR400 and OpenZR+ MSA transceivers 
 
@@ -315,7 +315,7 @@ The following highlights the reach of the optics without the use of amplifiers.
 The use of the QDD-OLS amplifier mentioned int he next section can increase the
 reach to 80/120km.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-p2p-optics.png)
+![]({{site.url}}/design/images/ron-hld/ron-hld-p2p-optics.png)
 
 ## Cisco Pluggbale Optical Line System   
 
@@ -343,12 +343,12 @@ The following diagram shows how the QDD-OLS is deployed. DCO optics are
 connected via a mux/demux to the COM side of the QDD-OLS. The Cisco options for
 mux/demux up to 32 channels will be highlighted in the optical use case section.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols-deployment.png)
+![]({{site.url}}/design/images/ron-hld/ron-qdd-ols-deployment.png)
 
 
 The following diagram highlights the amplifier and port configuration of the QDD-OLS
 
-![](http://xrdocs.io/design/images/ron-hld/ron-qdd-ols-diagram.png)
+![]({{site.url}}/design/images/ron-hld/ron-qdd-ols-diagram.png)
 
 
 In release 3.0 with IOS-XR 7.11.1 the QDD-OLS is supported on the following NCS 5700
@@ -375,7 +375,7 @@ Cisco supports 400ZR and OpenZR+ optics across the NCS 540, NCS 5500, NCS 5700,
 ASR 9000, and Cisco 8000 series routers. This enabled providers to utilize the architecture 
 across their end to end infrastructure in a variety of router roles. See   
 
-![](http://xrdocs.io/design/images/ron-hld/npu_bandwidth.png)
+![]({{site.url}}/design/images/ron-hld/npu_bandwidth.png)
 
 
 
@@ -427,7 +427,7 @@ aggregation, core, peering, DCI, and even PE routers can be enabled with high
 speed DCO optics. Routed Optical Networking is also not limited to SP networks,
 there are applications across enterprise, government, and education networks.  
 
-![](http://xrdocs.io/design/images/ron-hld/network-use-cases.png)
+![]({{site.url}}/design/images/ron-hld/network-use-cases.png)
 
 ## Where to use 400ZR and where to use OpenZR+
 
@@ -455,12 +455,12 @@ and pre-amplifier.
 The following table represents a lookup table based on the 
 fiber loss, transceiver type, and DCO mode for an 8-channel system.
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-8ch-settings.png)
+![]({{site.url}}/design/images/ron-hld/ron-hld-qdd-ols-8ch-settings.png)
 
 The following table represents a lookup table based on the 
 fiber loss, transceiver type, and DCO mode for a 16-channel system.
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-16ch-settings.png)
+![]({{site.url}}/design/images/ron-hld/ron-hld-qdd-ols-16ch-settings.png)
 
 
 ### QDD OLS XR CLI Configuration 
@@ -482,13 +482,13 @@ channels. When coupled with the QDD-OLS the user can carry up to four 400G
 signals across a single span up to 120km. The 15216-FLD-4 is available in 
 fixed 4-channel 400Ghz increments across the C-band.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-fld4.png)
+![]({{site.url}}/design/images/ron-hld/ron-hld-fld4.png)
 
 The diagram below shows a typical deployment with two 400G channels multiplexed
 onto a single outside plant fiber, giving 800G of bandwidth between the two 
 routers.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-fld4-picture.png)
+![]({{site.url}}/design/images/ron-hld/ron-hld-qdd-fld4-picture.png)
 
 
 Full datasheet for the various FLD-4 models can be found at:  
@@ -517,7 +517,7 @@ Recommended channel plan for 8 channels using the BRK-CS-8LC:
 |43|194.3|
 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-brk8.png)
+![]({{site.url}}/design/images/ron-hld/ron-hld-qdd-ols-brk8.png)
 
 
 ### 32-channel deployment (up to 12.8Tb) deployment using NCS1K-MD-64-C
@@ -538,7 +538,7 @@ The below diagram shows represents a typical deployment. ZR/ZR+ DCO from two
 different 8201-32FH routers are connected to a single MD-64 mux/demux connected 
 to a QDD-OLS amplifier in one of the 8201-32FH at each location.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-qdd-ols-md64.png)
+![]({{site.url}}/design/images/ron-hld/ron-hld-qdd-ols-md64.png)
 
 
 ### Multi-degree ring or mesh QDD-OLS deployment 
@@ -567,7 +567,7 @@ simplicity of the Routed Optical Networking solution.  The "optical" portion of
 the network including the ZR/ZR+ configuration can be completed in a matter of
 minutes from start to finish.   
 
-![](http://xrdocs.io/design/images/ron-hld/optical-zr-p2p.png)
+![]({{site.url}}/design/images/ron-hld/optical-zr-p2p.png)
 
 ### NCS 1010 64 Channel FOADM P2P Deployment 
 The NCS 1010 includes two add/drop ports with embedded bi-directional EDFA
@@ -575,13 +575,13 @@ amplifiers, ideal for connecting the new MD-32-E/O 32 channel, 150Ghz spaced
 passive multiplexer. Connecting both even and odd multiplexers allows the use of 
 64 total channels. 
 
-![](http://xrdocs.io/design/images/ron-hld/optical-zr-p2p-1010.png)
+![]({{site.url}}/design/images/ron-hld/optical-zr-p2p-1010.png)
 ### NCS 2000 Colorless Add/Drop Deployment 
 Using the NCS2K-MF-6AD-CFS colorless NCS2K-MF-LC module along with the LC16 LC
 aggregation module, and SMR20-FS ROADM module, a scalable colorless add/drop
 complex can be deployed to support 400ZR and OpenZR+.   
 
-![](http://xrdocs.io/design/images/ron-hld/optical-zrp-colorless.png)
+![]({{site.url}}/design/images/ron-hld/optical-zrp-colorless.png)
 
 ### NCS 2000 Multi-Degree ROADM Deployment 
 In this example a 3 degree ROADM node is shown with a local add/drop degree. The
@@ -591,7 +591,7 @@ efficient network build. In cases where an existing or new build requires DWDM
 switching capability, ZR and ZR+ wavelengths are easily provisioned over the
 infrastructure.  
 
-![](http://xrdocs.io/design/images/ron-hld/optical-zrp-roadm.png)
+![]({{site.url}}/design/images/ron-hld/optical-zrp-roadm.png)
 
 
 ### NCS 1010 Multi-Degree Deployment
@@ -602,7 +602,7 @@ express those wavelengths through the interconnect to site 4 via the additional
 1010 OLT unit connected to site 4. In our example the wavelength originating at 
 sites 1 and 4 using ZR+ optics is expressed through site 3.  
 
-![](http://xrdocs.io/design/images/ron-hld/optical-zr-bypass-1010.png)
+![]({{site.url}}/design/images/ron-hld/optical-zr-bypass-1010.png)
 
 
 ### Long-Haul Deployment 
@@ -650,7 +650,7 @@ converged Segment Routing packet network. The following provides an overview of
 the hardware and software involved in supporting PL services. The figure below 
 gives an overview of PLE service signaling and transport.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-ple-overview.png)
+![]({{site.url}}/design/images/ron-hld/ron-ple-overview.png)
 
 
 ## Circuit Style Segment Routing 
@@ -686,7 +686,7 @@ path is the protect path, and if a third lower preference path is configured
 would be a dynamic restoration path.  This provides 1:1+R protection for CS
 SR-TE policies.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-srcs-paths.png)
+![]({{site.url}}/design/images/ron-hld/ron-srcs-paths.png)
 
 ### Static CS SR-TE Policies 
 Static CS SR-TE policies are policies using explicit pre-defined paths for the
@@ -1044,11 +1044,11 @@ The Link CS BW Min Threshold configuration is used to trigger system alerts when
 the BW on a link meets or exceeds the threshold percentage configured by the
 user. 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-cnc-csm-configuration.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-cnc-csm-configuration.png){:height="100%" width="100%"}
 
 **Allocated and reserved link bandwidth**
 
-![](http://xrdocs.io/design/images/ron-hld/ron-cnc-csm-link-bandwidth.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-cnc-csm-link-bandwidth.png){:height="100%" width="100%"}
 
 #### SR-PCE to Circuit Style Manager (CSM) Communication 
 
@@ -1056,7 +1056,7 @@ CSM communicates to SR-PCE through the SR-PCE northbound API. When the session i
 between CSM and SR-PCE, SR-PCE will delegate all CS-SRTE Policies with bandwidth constraints 
 to CSM for path computation. 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-cnc-csm-communication.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-cnc-csm-communication.png){:height="100%" width="100%"}
 
 #### Bandwidth Admission Control Operation 
 BW CAC is supported for dynamic CS SR-TE Policies. Utilizing the "bandwidth"
@@ -1105,19 +1105,19 @@ are identified as a specific type of policy in the Traffic Engineering dashboard
 and have enhanced visualization and monitoring capabilities.  
 
 **CS-SRTE Dashboard** 
-![](http://xrdocs.io/design/images/ron-hld/ron-cnc-csm-policy-dashboard.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-cnc-csm-policy-dashboard.png){:height="100%" width="100%"}
 
 **CS-SRTE Policy Visualization of Working and Protect Paths** 
 When visualizing CS-SRTE policies we can see both Working and Protect paths 
 including which path is currently active, denoted by the A icon.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-cnc-csm-policy-overview.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-cnc-csm-policy-overview.png){:height="100%" width="100%"}
 
 **CS-SRTE Policy Path Details** 
 When we inspect the policy path details we can see both the requested and reserved bandwidth for the path 
 and then the additional details such as path constraints and hop by hop path.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-cnc-csm-policy-path-details.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-cnc-csm-policy-path-details.png){:height="100%" width="100%"}
 
 ### CNC CS-SRTE Provisioning 
 In CNC 5.0 the Circuit-Style SR-TE Function Pack is supported. This service type
@@ -1203,7 +1203,7 @@ defining each one independently.
 Starting in IOS-XR 7.7.1 the NC55-OIP-02 Modular Port Adapter (MPA) is supported
 on the NCS-55A2-MOD and NCS-57C3-MOD platforms. The NC55-OIP-02 has 8 SFP+ ports 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hardware-ple-mpa-2.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hardware-ple-mpa-2.png){:height="100%" width="100%"}
 
 Each port on the PLE MPA can be configured independently. The PLE MPA is responsible 
 for receiving data frames from the native PLE client and packaging those into fixed 
@@ -1441,7 +1441,7 @@ OpenZR+ transceivers. Cisco supports Routed Optical Networking in the NCS 540,
 NCS 5500/5700, ASR 9000, and Cisco 8000 router families. The breadth of coverage
 enabled the solution across all areas of the network.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-validated-hardware.png)
+![]({{site.url}}/design/images/ron-hld/ron-validated-hardware.png)
 ### Cisco 8000 Series  
 
 The Cisco 8000 and its Silicone One NPU represents the next generation in
@@ -1483,7 +1483,7 @@ migration path from 100G to 400G access rings or uplinks when used in an aggrega
 See more information on Cisco NCS 540 at <https://www.cisco.com/c/en/us/products/collateral/routers/network-convergence-system-500-series-routers/ncs-540-large-density-router-ds.html>
 ## Routed Optical Networking Optical Hardware
 
-![](http://xrdocs.io/design/images/ron-hld/ron-optical-hardware.png)
+![]({{site.url}}/design/images/ron-hld/ron-optical-hardware.png)
 
 
 ### Network Convergence System 1010 
@@ -1506,17 +1506,17 @@ The NCS 1010 utilizes IOS-XR, inheriting the advanced automation and telemetry
 features similar to IOS-XR routers.   
 
 **NCS 1010 OLT with RAMAN** 
-![](http://xrdocs.io/design/images/ron-hld/ron-1010-olt-raman.png)
+![]({{site.url}}/design/images/ron-hld/ron-1010-olt-raman.png)
 
 **NCS 1010 ILA with RAMAN** 
-![](http://xrdocs.io/design/images/ron-hld/ron-1010-ila-raman.png)
+![]({{site.url}}/design/images/ron-hld/ron-1010-ila-raman.png)
 
 The NCS1K-MD32-E/O-C 32-port 150Ghz spaced passive multiplexer is used with the NCS 1010, supporting the 75Ghz 
 ZR/ZR+ signals and future higher baud rate signals. The MD-32 contains photodiodes to monitor RX power levels 
 on each add/drop port.   
 
 **NCS 1010 MD-32 Passive Filter** 
-![](http://xrdocs.io/design/images/ron-hld/ron-1010-md32.png)
+![]({{site.url}}/design/images/ron-hld/ron-1010-md32.png)
 
 The NCS 1010 supports point to point and express DWDM optical topologies in Routed Optical Networking 
 2.0. All NCS 1010 services in Routed Optical Networking are managed using Cisco Optical Network
@@ -1552,7 +1552,7 @@ The picture below does not represent all available hardware on the NCS 2000,
 however does capture the modules typically used in Routed Optical Networking 
 deployments.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-optical-hardware.png)
+![]({{site.url}}/design/images/ron-hld/ron-optical-hardware.png)
 
 # Routed Optical Networking Automation 
 ## Overview 
@@ -1584,13 +1584,13 @@ the ONF for the management of optical line system networks and optical services.
 In packet we are leveraging Openconfig device models where possible and IETF
 models for packet topology (RFC8345) and xVPN services (L2NM and L3NM) 
 
-![](http://xrdocs.io/design/images/ron-hld/actn-framework.png){:height="90%" width="90%"}
+![]({{site.url}}/design/images/ron-hld/actn-framework.png){:height="90%" width="90%"}
 ## Cisco's SDN Controller Automation Stack
 Aligning to the ACTN framework, Cisco's automation stack includes a
 multi-vendor IP domain controller (PNC), optical domain controller (PNC), and
 multi-vendor hierarchical controller (HCO/MDSC).    
 
-![](http://xrdocs.io/design/images/ron-hld/cisco-automation-stack.png)
+![]({{site.url}}/design/images/ron-hld/cisco-automation-stack.png)
 
 ## Cisco Open Automation 
 Cisco believes not all providers consume automation in the same way, so we are
@@ -1603,7 +1603,7 @@ interfaces to communicate with devices and expose standards based NBIs. Our
 multi-layer/multi-domain controller likewise uses the same standard interfaces.
 
 
-![](http://xrdocs.io/design/images/ron-hld/open-automation.png){:height="90%" width="90%"}
+![]({{site.url}}/design/images/ron-hld/open-automation.png){:height="90%" width="90%"}
 
 ## Crosswork Hierarchical Controller 
 Responsible for Multi-Layer Automation is the Crosswork Hierarchical Controller. Crosswork Hierarchical Controller is responsible for the following network functions: 
@@ -1627,7 +1627,7 @@ Responsible for Multi-Layer Automation is the Crosswork Hierarchical Controller.
 
 Please see the following resources for more information on Crosswork HCO. <https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/solution-overview-c22-744695.html> 
 
-![](https://xrdocs.io/design/images/ron-hld/hco-multi-layer-circuit-2.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/hco-multi-layer-circuit-2.png){:height="100%" width="100%"}
 
 
 ### Crosswork Hierarchical Controller Routed Optical Networking Starter 
@@ -1672,7 +1672,7 @@ data are covered by COSM.
 The following shows a site with a single NCS 1010 OLT node with an MD-32 fixed 
 multiplexer connected.  
 
-![](https://xrdocs.io/design/images/ron-hld/ron-hld-cosm-overview.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hld-cosm-overview.png){:height="100%" width="100%"}
 
 
 ## Cisco Optical Network Controller 
@@ -1691,12 +1691,12 @@ More information on Cisco ONC can be found at <https://www.cisco.com/c/en/us/sup
 The entire network can now be visualized within CONC itself using a geographic
 view.     
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-topology.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hld-onc-topology.png){:height="100%" width="100%"}
 
 ### CONC 3.1 Network Alarms  
 Network-wide alarms are available in CONC for all nodes managed by CONC.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-alarm.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hld-onc-alarm.png){:height="100%" width="100%"}
 
 ### CONC 3.1 Service Assurance
 
@@ -1704,14 +1704,14 @@ CONC 3.1 brings visual service assurance.  Users can see all services on the end
 to end network and trace the path using a component level path trace as well as
 path tracing on the network topology visualization.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-services.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hld-onc-services.png){:height="100%" width="100%"}
 
 
 ### CONC 3.1 Service Workspace  
 The service workspace allows users to see multiple aspects of the optical network 
 and services in a single dashboard view.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hld-onc-workspace.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hld-onc-workspace.png){:height="100%" width="100%"}
 
 
 ### CONC 3.1 to COSM Communication 
@@ -1817,7 +1817,7 @@ add/drop port.
 
 The below screenshot shows defined NMC cross-links.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-cross-layer-link.png)
+![]({{site.url}}/design/images/ron-hld/ron-hco-cross-layer-link.png)
 
 ### Cross-Layer Link Validation 
 
@@ -1834,7 +1834,7 @@ Using the Cross-Layer Link Validation is service affecting
 
 The screenshot below shows a successful validation.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-cl-link-validation.png)
+![]({{site.url}}/design/images/ron-hld/ron-hco-cl-link-validation.png)
 
 ### IP Link Provisioning using Crosswork HCO 
 
@@ -1856,7 +1856,7 @@ workflow. The frequency and power is automatically derived by Cisco Optical
 Network Controller based on the add/drop port and returned as a parameter to be
 used in router optics provisioning.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-ip-link-provisioning-2.png)
+![]({{site.url}}/design/images/ron-hld/ron-hco-ip-link-provisioning-2.png)
 
 ### Operational Discovery 
 The Crosswork Hierarchical Controller provisioning process also performs a discovery phase to ensure the
@@ -2012,7 +2012,7 @@ parameters.
 Below is an example of an OpenConfig payload to configure ZR/ZR+ optics port 0/0/0/20 with a 
 300G trunk rate with frequency 195.20 THz.  
 
-Please visit the blog at <https://xrdocs.io/design/blogs/zr-openconfig-mgmt> for in depth information 
+Please visit the blog at <{{site.url}}/design/blogs/zr-openconfig-mgmt> for in depth information 
 about configuring and monitoring ZR/ZR+ optics using OpenConfig models.  
 
 ```xml
@@ -2136,7 +2136,7 @@ Segment Routing TE layer across all layers. CW HCO identifies specific Routed
 Optical Networking links using ZR/ZR+ optics as seen by the ZRC (ZR Channel) and
 ZRM (ZR Media) layers from the 400ZR specification.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-trace-2.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-trace-2.png){:height="100%" width="100%"}
 
 When faults occur at a specific layer, faults will be highlighted in red,
 quickly identifying the layer a fault has occurred. In this case we can see the
@@ -2144,7 +2144,7 @@ fault has occurred at an optical layer, but is not a fiber fault. Having the
 ability to pinpoint the fault layer even within a specific domain is a powerful
 way to quickly determine the root cause of the fault.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-trace-fault-2.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-trace-fault-2.png){:height="100%" width="100%"}
 
 ### Routed Optical Networking Link Assurance 
 The Link Assurance application allows users to view a network link and all of 
@@ -2153,22 +2153,22 @@ services. In addition to viewing layer information, fault and telemetry informat
 is also available by simply selecting a link or port.   
 
 #### ZRM Layer TX/RX Power 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance-2.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-assurance-2.png){:height="100%" width="100%"}
 
 #### ZRC Layer BER and Q-Factor / Q-Margin  
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance-3.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-assurance-3.png){:height="100%" width="100%"}
 
 Optionally the user can see graphs of collected telemetry data to quickly identify trends or changes in specific operational 
 data. Graphs of collected performance data is accessed using the "Performance" tab when a link or port is selected.   
 
 #### OTS Layer RX/TX Power Graph
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance-graph-2.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-assurance-graph-2.png){:height="100%" width="100%"}
 
 #### Event Monitoring 
 Crosswork HCO records any transition of a network resource between up/down operational states. This is reflected in the 
 Link Assurance tool under the "Events" tab. 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance-events.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-assurance-events.png){:height="100%" width="100%"}
 
 
 ### Crosswork Hierarchical Controller to COSM Cross Launch 
@@ -2193,7 +2193,7 @@ following components:
 The following shows the node cross-launch function to COSM while using the Link
 Assurance application.   
 
-![](https://xrdocs.io/design/images/ron-hld/ron-hld-optical-cross-launch.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hld-optical-cross-launch.png){:height="100%" width="100%"}
 
 
 ## IOS-XR CLI Monitoring of ZR400/OpenZR+ Optics
@@ -2343,11 +2343,11 @@ the scope of alarms and data.
 
 #### Chassis View 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-epnm-chassis-view.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-epnm-chassis-view.png){:height="100%" width="100%"}
 
 #### Interface/Port View 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-epnm-interface-view.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-epnm-interface-view.png){:height="100%" width="100%"}
 
 ### EPNM DCO Performance Measurement 
 EPNM continuously monitors and stores PM data for DCO optics for important KPIs such as TX/RX power, BER, and Q values.  The screenshots 
@@ -2359,12 +2359,12 @@ data every 20 seconds.
 The following shows common physical layer KPIs such as OSNR and RX/TX power.  This is exposed by monitoring the Optics layer of the interface.   
 DCO.    
 
-![](http://xrdocs.io/design/images/ron-hld/ron-epnm-optics-phy-pm.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-epnm-optics-phy-pm.png){:height="100%" width="100%"}
 
 The following shows common framing layer KPIs such as number of corrected words per interval and  (BIEC) Bit Error Rate. This is exposed by monitoring the CoherentDSP 
 layer of the interface.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-epnm-optics-dsp-pm.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-epnm-optics-dsp-pm.png){:height="100%" width="100%"}
 
 # Cisco IOS-XR Model-Driven Telemetry for Routed Optical Networking Monitoring 
 
@@ -2410,9 +2410,9 @@ per-channel monitoring, exposed as the OTS-OCH
 Cisco model-driven telemetry along with the open source collector Telegraf and the open source dashboard software 
 Grafana can be used to quickly build powerful dashboards to monitor ZR/ZR+ and NCS 1010 OLS performance.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-telemetry-grafana.png)
+![]({{site.url}}/design/images/ron-hld/ron-telemetry-grafana.png)
 
-![](http://xrdocs.io/design/images/ron-hld/ron-telemetry-grafana-1010.png)
+![]({{site.url}}/design/images/ron-hld/ron-telemetry-grafana-1010.png)
 
 <br>
 
@@ -2450,7 +2450,7 @@ Grafana can be used to quickly build powerful dashboards to monitor ZR/ZR+ and N
 
 ## DWDM Network Hardware Overview  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-design-optical-components.png)
+![]({{site.url}}/design/images/ron-hld/ron-design-optical-components.png)
 ### Optical Transmitters and Receivers 
 Optical transmitters provide the source signals carried across the DWDM network.
 They convert digital electrical signals into a photonic light stream on a

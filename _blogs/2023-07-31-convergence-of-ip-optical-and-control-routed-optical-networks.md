@@ -24,7 +24,7 @@ Routed Optical Networking (RON) is an architecture that combines optical network
 
 Today’s collection of disparate management tools is being replaced with per technology SDN controllers orchestrated by a Hierarchical Controller (HCO) enabling simpler provisioning, troubleshooting, performance monitoring and much more. 
 More details about Routed Optical Networking (RON) can be found here: 
-[Routed Optical Networking - HLD](https://xrdocs.io/design/blogs/latest-routed-optical-networking-hld)
+[Routed Optical Networking - HLD]({{site.url}}/design/blogs/latest-routed-optical-networking-hld)
 
 Achieving a full multivendor solution implies that the control system must have in depth understanding of how each domain and each technology must be configured, as well as an understanding of the possible failure modes, allowing for detailed troubleshooting. This implies that the control system must comprise of vendor specific tools that provide intimate knowledge of the different domains, and an umbrella controller on top that integrates information from all the domains into a single vendor-agnostic database. In other words, a hierarchical structure of domain controllers and a hierarchical controller as shown in the following figure.
 
@@ -49,5 +49,5 @@ But the problem is even worse than that: many routers connect to other routers v
 
 We believe that the right solution is simple: all changes in the router must be done via a single owner to the router state and this owner is the IP controller. This is aligned with the hierarchical SDN architecture and standards and allows for clean roles & responsibilities for the different controllers. Allowing an optical controller to be this single owner will block the evolution of RON – and this evolution holds much more value than mere transponder replacement.
 
-More details about the control architecture for RON can be found [here](https://xrdocs.io/design/blogs/2023-08-02-controlling-routed-optical-networks/).
+More details about the control architecture for RON can be found [here]({{site.url}}/design/blogs/2023-08-02-controlling-routed-optical-networks/).
 

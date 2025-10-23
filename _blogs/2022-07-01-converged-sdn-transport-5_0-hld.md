@@ -76,7 +76,7 @@ Business, 4G/5G Mobile Backhaul, Video, IoT) on the premise of
 simplicity, full programmability, and cloud integration, with guaranteed
 service level agreements (SLAs).
 
-![](http://xrdocs.io/design/images/cmf-hld/end-to-end.png)
+![]({{site.url}}/design/images/cmf-hld/end-to-end.png)
 
 The  Converged SDN Transport design brings tremendous value to Service
 Providers:
@@ -125,7 +125,7 @@ The  Converged SDN Transport design satisfies the following criteria for scalabl
 
 # Technical Overview
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-hld-hw.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-hld-hw.png)
 
 The  Converged SDN Transport design evolves from the successful Cisco
 Evolved Programmable Network (EPN) 5.0 architecture framework, to bring
@@ -169,24 +169,24 @@ blocks:**
 ## Cisco 8000 
 The Converged SDN Transport design now includes the Cisco 8000 family. Cisco 8000 routers provide the lowest power consumption in the industry, all while supporting systems over 200 Tbps and features service providers require.  Starting in CST 5.0 the Cisco 8000 fulfills the role of core and aggregation router in the design. The 8000 provides transit for end to end unicast and multicast services including those using SR-TE and advanced capabilities such as SR Flexible Algorithms.  Service termination is not supported on the 8000 in CST 5.0.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-8000.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-8000.png)
 
 ## ASR 9000 
 The ASR 9000 is the router of choice for high scale edge services.  The Converged SDN Transport utilizes the ASR 9000 in a PE function role, performing high scale 
 L2VPN, L3VPN, and Pseudowire headend termination. All testing up to CST 3.0 has been performed using Tomahawk series line cards on the ASR 9000. Starting in CST 5.0 we introduce 
 ASR 9000 Lightspeed+ high capacity line cards to the design.  The ASR 9000 also serves as the user plane for Cisco's distributed BNG architecture.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-asr9000.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-asr9000.png)
 
 ## NCS-560 
 The NCS-560 with RSP4 is a next-generation platform with high scale and modularity to fit in many access, pre-aggregation, and aggregation roles. Available in 4-slot and 7-slot versions, the NCS 560 is fully redundant with a variety of 40GE/100GE, 10GE, and 1GE modular adapters. The NCS 560 RSP4 has built-in GNSS timing support along with a high scale (-E) version to support full Internet routing tables or large VPN routing tables with room to spare for 5+ years of growth. The NCS 560 provides all of this with a very low power and space footprint with a depth of 9.5". 
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-ncs560.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-ncs560.png)
 
 ## NCS 5504, 5508, 5516 Modular Chassis 
 The modular chassis version of the NCS 5500 is available in 4, 8, and 16 slot versions for flexible interfaces at high scale with dual RP modules. A variety of line cards are available with 10G, 40G, 100G, and 400G interface support. The NCS 5500 fully supports timing distribution for applications needing high accuracy clocks like mobile backhaul.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-ncs5500.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-ncs5500.png)
 
 ## NCS 5500 / 5700 Fixed Chassis 
 The NCS 5500 / 5700 fixed series devices are validated in access, aggregation,
@@ -201,10 +201,10 @@ and 6x40GE/100GE interfaces. The 24Q6H-SS provides MACSEC support on all
 interfaces. The NCS-55A1-24Q6H series also supports 10GE/25GE DWDM optics on all
 relevant ports.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-55a1-48q6h.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-55a1-48q6h.png)
 _NCS-55A1-48Q6H_ 
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-55a1-24q6h.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-55a1-24q6h.png)
 _NCS-55A1-24Q6H_ 
 
 The NCS-57C1-48Q6D platform 32xSFP28 (1/10/25), 16xSFP56 (1/10/25/50), 4x400G QSFP-DD, 
@@ -236,7 +236,7 @@ These fronthaul routers support native CPRI interfaces and special processing
 for eCPRI and ROE (Radio over Ethernet) traffic guaranteeing low latency.  These
 devices also support stringent class C timing.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-ncs540.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-ncs540.png)
 
 ## NCS-55A2-MOD 
 The Converged SDN Transport design now supports the NCS-55A2-MOD access and aggregation router. The 55A2-MOD is a modular 2RU 
@@ -245,7 +245,7 @@ per slot using Cisco NCS Modular Port Adapters or MPAs. MPAs add additional 1G/1
 100G/200G CFP2 interfaces. The 55A2-MOD is available in an extended temperature version with a conformal coating as well as a high scale 
 configuration (NCS-55A2-MOD-SE-S) scaling to millions of IPv4 and IPv6 routes.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-ncs-55a2-mod.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-ncs-55a2-mod.png)
 
 ## NCS-57C3-MOD
 The NCS-57C3-MOD is the next-generation 300mm modular router supporting the
@@ -256,18 +256,18 @@ expansion modules support additional 1/10/25G, 100G, and 400G interfaces.  The
 NCS-57C3 is available in both standard (NCS-57C3-MOD-SYS) and scale
 (NCS-57C3-MOD-SE-SYS) varieties.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-57c3.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-57c3.png)
 
 ## ASR 920 
 The IOS-XE based ASR 920 is tested within the Converged SDN Transport as an access node. The Segment Routing data plane and supported service types are validated 
 on the ASR 920 within the CST design. <b>Please see the services support section for all service types supported on the ASR 920. </b>  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-asr920.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-asr920.png)
 
 ## NCS 520 
 The IOS-XE based NCS 520 acts as an Ethernet demarcation device (NID) or carrier Ethernet switch in the Converged SDN Transport design. The MEF 3.0 certified device acts as a customer equipment termination point where QoS, OAM (Y.1731,802.3ah), and service validation/testing using Y.1564 can be performed. The NCS 520 is available in a variety of models covering different port requirements including industrial temp and conformal coated models for harsher environments.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hw-ncs520.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hw-ncs520.png)
 # Transport – Design Components  
     
 ## Network Domain Structure 
@@ -279,7 +279,7 @@ provider need.
 
 Refer to the network topology in Figure 1.
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-high-scale-distributed.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-high-scale-distributed.png)
 
 _Figure 1: High scale fully distributed_ 
 
@@ -289,7 +289,7 @@ the Core domain is extended over the Aggregation domain, thus increasing
 the number of nodes in the
 Core.
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-expanded-core.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-expanded-core.png)
 
 _Figure 2: Distributed with expanded access_ 
 
@@ -298,7 +298,7 @@ domain remains unaltered and the Access domain is extended over the
 Aggregation domain, thus increasing the number of nodes in the Access
 domain.:%s/
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-expanded-access.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-expanded-access.png)
 
 _Figure 3: Distributed with expanded core_ 
 
@@ -318,7 +318,7 @@ control-plane configuration of the Converged SDN Transport does not change, all
 existing ABR configuration remains the same, but the device no longer acts as a
 high-scale PE.    
 
-![](http://xrdocs.io/design/images/cmf-hld/non-inline-design.png)
+![]({{site.url}}/design/images/cmf-hld/non-inline-design.png)
 _Figure: Non-Inline Aggregation Topology_
 
 
@@ -334,7 +334,7 @@ supported over Cisco ZR and ZR+ enabled interfaces.
 For more information on Cisco's Routed Optical Networking design please see the 
 following high-level design document:  
 
-<https://xrdocs.io/design/blogs/latest-routed-optical-networking-hld> 
+<{{site.url}}/design/blogs/latest-routed-optical-networking-hld> 
 
 Note class C timing is currently not supported over ZR/ZR+ optics, ZR/ZR+ optics 
 in this release support class A or B timing depending on platform.   
@@ -363,13 +363,13 @@ individual hardware data sheets for MACSec support.
 In the simplest deployment access rings are deployed over dark fiber, enabling
 plug and play operation up to 80km without amplification.
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-dwdm-ring.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-dwdm-ring.png)
 _Routed Optical Networking DWDM ring deployment_ 
 
 ### Routed Optical Networking deployment with multiplexer 
 In this option the nodes are deployed with active or passive multiplexers to maximize fiber utilization rings needing more bandwidth per ring site. While this example shows each site on the ring having direct DWDM links back to the aggregation nodes, a hybrid approach could also be supported targeting only high-bandwidth locations with direct links while leaving other sites on a an aggregation ring.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-dwdm-mux.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-dwdm-mux.png)
 _Routed Optical Networking DWDM hub and spoke or partial mesh deployment_ 
 
 
@@ -384,7 +384,7 @@ unnumbered interfaces. SR-PCE used to compute inter-domain SR-TE paths also supp
 uniquely identified by a combination of router ID and SNMP IfIndex value. 
 
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hld-unnumbered.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hld-unnumbered.png)
 _Unnumbered node insertion_ 
 
 **Unnumbered interface configuration:**  
@@ -484,7 +484,7 @@ Figure 4 shows two sets of ABRs:
 
   - Provider Edge ABRs – PE
 
-![](http://xrdocs.io/design/images/cmf-hld/image6.png)
+![]({{site.url}}/design/images/cmf-hld/image6.png)
 
 _Figure 4: IGP Domains - ABRs Anycast-SID_
 
@@ -492,7 +492,7 @@ Figure 5 shows the End-To-End Stack of SIDs for packets traveling from
 left to right through the
 network.
 
-![](http://xrdocs.io/design/images/cmf-hld/image7.png)
+![]({{site.url}}/design/images/cmf-hld/image7.png)
 
 _Figure 5: Inter-Domain LSP – SR-TE Policy_
 
@@ -547,7 +547,7 @@ Note both options can be combined on the same network.
 AG/PE ABRs redundancy enables high availability for Inter-Domain
 Forwarding.
 
-![](http://xrdocs.io/design/images/cmf-hld/image6.png)
+![]({{site.url}}/design/images/cmf-hld/image6.png)
 
 _Figure 7: IGP Domains - ABRs Anycast-SID_
 
@@ -558,7 +558,7 @@ independently by TI-LFA as described in Section: "Intra-Domain Forwarding - Fast
 Figure 8 shows how FRR is achieved for a Inter-Domain
 LSP.
 
-![](http://xrdocs.io/design/images/cmf-hld/image9.png)
+![]({{site.url}}/design/images/cmf-hld/image9.png)
 
 _Figure 8: Inter-Domain - FRR_
 
@@ -593,7 +593,7 @@ always possible in an aggregation network due to fiber or geographic constraints
 open rings by utilizing MPLSoGRE tunnels between terminating boundary nodes across the upstream IGP domain. The following picture 
 illustrates open ring support between an access and aggregation network.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hld-open-ring.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hld-open-ring.png)
 
 In the absence of a physical link between the boundary nodes PA1 and PA2, GRE tunnels can be created to interconnect each domain 
 over its adjacent domain. During a protection event, such as the link failure between PA1 and GA1, traffic will enter the tunnel on the 
@@ -606,7 +606,7 @@ Path Computation Element (SR-PCE) and WAN Automation Engines (WAE).
 High-Availability is achieved by device redundancy in the Aggregation
 and Core networks.
 
-![](http://xrdocs.io/design/images/cmf-hld/image10.png)
+![]({{site.url}}/design/images/cmf-hld/image10.png)
 
 _Figure 9: Transport Programmability – PCEP_
 
@@ -648,7 +648,7 @@ additional RRs and SR-PCE elements into the Access Domain.
 Figure 11 shows the  Converged SDN Transport physical topology with examples
 of product placement.
 
-![](http://xrdocs.io/design/images/cmf-hld/image12.png)
+![]({{site.url}}/design/images/cmf-hld/image12.png)
 
 _Figure 11:  Converged SDN Transport – Physical Topology with transport
 programmability_
@@ -736,7 +736,7 @@ The SR-PCE provides a path based on constraints such as:
   
   - Latency  
 
-![](http://xrdocs.io/design/images/cmf-hld/image13.png)
+![]({{site.url}}/design/images/cmf-hld/image13.png)
 
 _Figure 12: XR Transport Controller – Components_
 
@@ -859,7 +859,7 @@ SR-TE Policy does not need to reference the specific SID, only the Algo being
 used as the constraints. The local node or SR-PCE will utilize the Algo to
 compute the path dynamically.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hld-dual-plane.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hld-dual-plane.png)
 
 The following policy configuration is an example of constraining the path to the Algo 129 "Red" path.  
 
@@ -1056,7 +1056,7 @@ policy-map core-egress-exp-marking
 ## L3 Multicast using Segment Routing Tree-SID
 ### Tree SID Diagram 
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-treesid.png)
+![]({{site.url}}/design/images/cmf-hld/cst-treesid.png)
 
 ### Tree-SID Overview 
 Converged SDN Transport 3.5 introduces Segment Routing Tree-SID across all
@@ -1182,7 +1182,7 @@ cable access, mobile, and business services over the same converged network infr
 The following sections highglight some specific customer use cases and the components of the 
 design used in building those solutions.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-multi-service-network.png) 
+![]({{site.url}}/design/images/cmf-hld/cmf-multi-service-network.png) 
 
 
 # 4G and 5G Mobile Networks  
@@ -1190,7 +1190,7 @@ design used in building those solutions.
 ## Summary and 5G Service Types  
 The Converged SDN Transport design introduces support for 5G networks and 5G services. There are a variety of new service use cases being defined by 3GPP for use on 5G networks, illustrated by the figure below. Networks must now be built to support the stringent SLA requirements of Ultra-Reliable Low-Latency services while also being able to cope with the massive bandwidth introduced by Enhanced Mobile Broadband services. The initial support for 5G in the Converged SDN Transport design focuses on the backhaul and midhaul portions of the network utilizing end to end Segment Routing. The design introduces no new service types, the existing scalable L3VPN and EVPN based services using BGP are sufficient for carrying 5G control-plane and user-plane traffic.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-5g-services.png) 
+![]({{site.url}}/design/images/cmf-hld/cmf-5g-services.png) 
 
 ## Key Validated Components 
 The following key features have been added to the CST validated design to support 5G deployments
@@ -1479,7 +1479,7 @@ having a 2-level H-QoS policy applied.
 Many providers today are migrating from L2 access networks to more flexible L3 underlay networks using xVPN overlays to support a variety of network services. L3 networks offer more flexibility in terms of topology, resiliency, and support of both L2VPN and L3VPN services. Using a converged aggregation and access network simplifies networks and reduced both capex and opex spend by eliminating duplicate networks. Fiber to the home networks using active Ethernet have typically used L2 designs using proprietary methods like Private VLANs for subscriber isolation. EVPN E-Tree gives us a modern alternative to provide these services across a converged L3 Segment Routing network. This use case highlights one specific use case for E-Tree, however there are a number of other business and subscriber service use cases benefitting from EVPN E-Tree.   
 
 ## E-Tree Diagram 
-<img src="http://xrdocs.io/design/images/cmf-hld/cst-etree.png" width="500"/>
+<img src="{{site.url}}/design/images/cmf-hld/cst-etree.png" width="500"/>
 
 ## E-Tree Operation 
 One of the strongest features of EVPN is its dynamic signaling of PE state across the entire EVPN virtual instance. E-Tree extends this paradigm by signaling between EVPN PEs which Ethernet Segments are considered root segments and which ones are considered leaf segments. Similar to hub and spoke L3VPN networks, traffic is allowed between root/leaf and root/root interfaces but not between leaf interfaces either on the same node or on different nodes. EVPN signaling creates the forwarding state and entries to restrict traffic forwarding between endpoints connected to the same leaf Ethernet Segment.   
@@ -1657,7 +1657,7 @@ correct GCP server for further provisioning.
 The following diagram shows the different core functions of a Remote PHY
 solution and the communication between those elements. 
 
-<img src="http://xrdocs.io/design/images/cmf-hld/cmf-docsis-communication.png"
+<img src="{{site.url}}/design/images/cmf-hld/cmf-docsis-communication.png"
 width="500"/>
 
 
@@ -1704,11 +1704,11 @@ Due to the large number of elements and generally greenfield network builds, the
 #### Network Timing 
 Frequency and phase synchronization is required between the cBR-8 and RPD to properly handle upstream scheduling and downstream transmission. Remote PHY uses PTP (Precision Timing Protocol) for timing synchronization with the ITU-T G.8275.2 timing profile. This profile carries PTP traffic over IP/UDP and supports a network with partial timing support, meaning multi-hop sessions between Grandmaster, Boundary Clocks, and clients as shown in the diagram below. The cBR-8 and its client RPD require timing alignment to the same Primary Reference Clock (PRC). In order to scale, the network itself must support PTP G.8275.2 as a T-BC (Boundary Clock).  Synchronous Ethernet (SyncE) is also recommended across the CIN network to maintain stability when timing to the PRC. 
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-g82752.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-g82752.png)
 #### CST 4.0+ Update to CIN Timing Design 
 Starting in CST 4.0, NCS nodes support both G.8275.1 and G.8275.2 on the same node, and also support interworking between them.  If the network path between the PTP GM and client RPDs can support G.8275.1 on each hop, it should be used. G.8275.1 runs on physical interfaces and does not have limitations such as running over Bundle Ethernet interfaces.  The G.8275.1 to G.8275.2 interworking will take place on the RPD leaf node, with G.8275.2 being used to the RPDs.  The following diagram depicts a recommended end-to-end timing design between the PTP GM and the RPD. Please review the CST 4.0 Implementation Guide for details on configuring G.8275.1 to G.8275.2 interworking. In addition to PTP interworking, CST 4.0 supports PTP timing on BVI interfaces.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hld-ptp-interworking.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hld-ptp-interworking.png)
 
 #### QoS
 Control plane functions of Remote PHY are critical to achieving proper operation and subscriber traffic throughput. QoS is required on all RPD-facing ports, the cBR-8 DPIC ports, and all core interfaces in between. Additional QoS may be necessary between the cBR-8, RPD, and any PTP timing elements. See the design section for further details on QoS components.   
@@ -1724,19 +1724,19 @@ The Converged SDN Transport design is extremely flexible in how Remote PHY compo
 ### High Scale Design (Recommended)
 This option maximizes statistical multiplexing by aggregating Digital PIC downstream connections on a separate leaf device, allowing one to connect a number of cBR-8 interfaces to a fabric with minimal 100GE uplink capacity. The topology also supports the connectivity of remote shelves for hub consolidation. Another benefit is the fabric has optimal HA and the ability to easily scale with more leaf and spine nodes.     
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-topology-full.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-topology-full.png)
 _High scale topology_ 
 
 ### Collapsed Digital PIC and SUP Uplink Connectivity  
 This design for smaller deployments connects both the downstream Digital PIC connections and uplinks on the same CIN core device. If there is enough physical port availability and future growth does not dictate capacity beyond these nodes this design can be used. This design still provides full redundancy and the ability to connect RPDs to any cBR-8.  Care should be taken to ensure traffic between the DPIC and RPD does not traverse the SUP uplink interfaces. 
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-topology-small.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-topology-small.png)
 _Collapsed cBR-8 uplink and Digital PIC connectivity_ 
 
 ### Collapsed RPD and cBR-8 DPIC Connectivity 
 This design connects each cBR-8 Digital PIC connection to the RPD leaf connected to the RPDs it will serve. This design can also be considered a "pod" design where cBR-8 and RPD connectivity is pre-planned. Careful planning is needed since the number of ports on a single device may not scale efficiently with bandwidth in this configuration.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-topology-collapsed.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-topology-collapsed.png)
 _Collapsed or Pod cBR-8 Digital PIC and RPD connectivity_ 
 
 In the collapsed desigs care must be taken to ensure traffic between each RPD can reach the appropriate DPIC interface. If a leaf is single-homed to the aggregation router its DPIC interface is on, RPDs may not be able to reach their DPIC IP. The options with the shortest convergence time are: Adding interconnects between the agg devices or multiple uplinks from the leaf to agg devices.  
@@ -1785,7 +1785,7 @@ In a single IGP network with equal IGP metrics, certain link failures may cause 
 ### cBR-8 DPIC to CIN Interconnection  
 The cBR-8 supports two mechanisms for DPIC high availability outlined in the overview section. DPIC line card and link redundancy is recommended but not a requirement. In the CST reference design, if link redundancy is being used each port pair on the active and standby line cards is connected to a different router and the default active ports (even port number) is connected to a different router. In the example figure, port 0 from active DPIC card 0 is connected to R1 and port 0 from standby DPIC card 1 is connected to R2.  DPIC link redundancy MUST be configured using the "cold" method since the design is using L3 to each DPIC interface and no intermediate L2 switching.  This is done with the _cable rphy link redundancy cold_ global command and will keep the standby link in a down/down state until switchover occurs. 
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-dpic-redundancy.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-dpic-redundancy.png)
 _DPIC line card and link HA_ 
 
 #### DPIC Interface Configuration 
@@ -1808,7 +1808,7 @@ It is recommended to configure the RPD leaf using bridge-domains and BVI interfa
 
  The following shows the P2P and BVI deployment options.   
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-bvi-p2p.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-bvi-p2p.png)
 
 ### Native IP or L3VPN/mVPN Deployment 
 Two options are available and validated to carry Remote PHY traffic between the RPD and MAC function. 
@@ -1843,14 +1843,14 @@ The following lists specific traffic types which should be treated with specific
 ### CST and Remote-PHY Load Balancing 
  Unicast network traffic is load balanced based on MPLS labels and IP header criteria. The devices used in the CST design are capable of load balancing traffic based on MPLS labels used in the SR underlay and IP headers underneath any MPLS labels. In the higher bandwidth downstream direction, where a series of L2TP3 tunnels are created from the cBR-8 to the RPD, traffic is hashed based on the source and destination IP addresses of those tunnels. Downstream L2TPv3 tunnels from a single Digital PIC interface to a set of RPDs will be distributed across the fabric based on RPD destination IP address. The followUing illustrates unicast load balancing across the network. 
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-rphy-load-balancing.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-rphy-load-balancing.png)
 
 Multicast traffic is not load balanced across the network. Whether the network is utilizing PIMv4, PIMv6, or mVPN, a multicast flow with two equal cost downstream paths will utilize only a single path, and only a single member link will be utilized in a link bundle. If using multicast, ensure sufficient bandwidth is available on a single link between two adjacencies.  
 
 ### SmartPHY RPD Automation 
 SmartPHY is an automation solution for managing deployed RPDs across the SP network. In a non-SmartPHY deployment providers must manually assign RPHY cores via DHCP and manually configure the cBR8 by CLI SmartPHY provides a flexible either GUI or API driven way to eliminate manual configuration. SmartPHY is configured as the RPHY core in the DHCP server for all RPDs. When the RPD boots it will initiate a GCP session to SmartPHY.  SmartPHY identifies the RPD and if configured in SmartPHY, will redirect it to the proper RPHY core instance. When provisioning a new RPD, SmartPHY will also deploy the proper configuration to the RPHY core cBR8 node and verify the RPD is operational. The diagram below shows basic SmartPHY operation.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-hld-smartphy.png)
+![]({{site.url}}/design/images/cmf-hld/cst-hld-smartphy.png)
 
 ## 4G Transport and Services Modernization 
 
@@ -1934,7 +1934,7 @@ services using the IETF L2NM standard model. Once services are provisionined the
 are visualized using the CNC topology UI along with their underlying SR-TE policies, 
 if applicable.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-5-cnc-l2vpn.png)
+![]({{site.url}}/design/images/cmf-hld/cst-5-cnc-l2vpn.png)
 
 ### L3VPN Service Provisioning and Visualization
 Crosswork Network Controller supports UI and API based provisioning of L3VPN  
@@ -1942,7 +1942,7 @@ services using the IETF L3NM standard model. Once services are provisionined the
 are visualized using the CNC service topology UI along with their underlying SR-TE policies, 
 if applicable.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-5-cnc-l3vpn.png)
+![]({{site.url}}/design/images/cmf-hld/cst-5-cnc-l3vpn.png)
 
 ### Crosswork Automated Assurance 
 
@@ -1951,14 +1951,14 @@ transport infrastructure is also supported including advanced service assurance 
 xVPN services. Service assurance checks all aspects of the network making up the service 
 along with realtime Y.1731 measurements to ensure the defined SLA for the service is met.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-5-cnc-service-assurance-sla.png)
+![]({{site.url}}/design/images/cmf-hld/cst-5-cnc-service-assurance-sla.png)
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-5-cnc-assurance.png)
+![]({{site.url}}/design/images/cmf-hld/cst-5-cnc-assurance.png)
 
 The figure below shows an example of a degraded service where the measured
 one-way latency on the end to end path of 1680uS has exceeded the SLA of 500uS. 
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-5-cnc-l2vpn-degraded.png)
+![]({{site.url}}/design/images/cmf-hld/cst-5-cnc-l2vpn-degraded.png)
 
 ## Zero Touch Provisioning
 
@@ -1972,7 +1972,7 @@ beging on the management interface of the device and if no response is received,
 the interface is not active, the ZTP process will begin the process on data ports. IOS-XR
 can be part of an ecosystem of automated device and service provisioning via Cisco NSO.  
 
-![](http://xrdocs.io/design/images/cmf-hld/ztp-metro-fabric.png)
+![]({{site.url}}/design/images/cmf-hld/ztp-metro-fabric.png)
 
 ### Zero Touch Provisioning using Crosswork Network Controller 
 
@@ -1984,7 +1984,7 @@ in RFC 8572. More information on Crosswork ZTP can be found at
 
 ## Model-Driven Telemetry 
 
-In the 3.0 release the implementation guide includes a table of model-driven telemetry paths applicable to different components within the design.  More information on Cisco model-driven telemetry can be found at <https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/telemetry/66x/b-telemetry-cg-ncs5500-66x.html>. Additional information about how to consume and visualize telemetry data can be found at <https://xrdocs.io/telemetry>. We also introduce integration with Cisco Crosswork Health Insights, a telemetry and automated remediation platform, and sensor packs correspondding to Converged SDN Transport components. More information on Crosswork Health Insights can be found at <https://www.cisco.com/c/en/us/support/cloud-systems-management/crosswork-health-insights/model.html>  
+In the 3.0 release the implementation guide includes a table of model-driven telemetry paths applicable to different components within the design.  More information on Cisco model-driven telemetry can be found at <https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/telemetry/66x/b-telemetry-cg-ncs5500-66x.html>. Additional information about how to consume and visualize telemetry data can be found at <{{site.url}}/telemetry>. We also introduce integration with Cisco Crosswork Health Insights, a telemetry and automated remediation platform, and sensor packs correspondding to Converged SDN Transport components. More information on Crosswork Health Insights can be found at <https://www.cisco.com/c/en/us/support/cloud-systems-management/crosswork-health-insights/model.html>  
 
 ## Transport and Service Management using Crosswork Network Controller
 Crosswork Network Controller provides support for provisioning SR-TE and RSVP-TE
@@ -2017,7 +2017,7 @@ Function Packs are used for end-to-end provisioning of CST services.
   - Service model with mapping logic and service
 templates
 
-![](http://xrdocs.io/design/images/cmf-hld/image33.png)
+![]({{site.url}}/design/images/cmf-hld/image33.png)
 
 _Figure 32: NSO – Components_
 
@@ -2121,7 +2121,7 @@ Figure 21 demonstrates the greatest limitation of traditional L2
 Multipoint solutions like
 VPLS.
 
-![](http://xrdocs.io/design/images/cmf-hld/image22.png)
+![]({{site.url}}/design/images/cmf-hld/image22.png)
 
 _Figure 21: EVPN All-Active Access_
 
@@ -2151,7 +2151,7 @@ H-EVPN access.
 Figure 22 shows another issue related to BUM traffic addressed by
 EVPN.
 
-![](http://xrdocs.io/design/images/cmf-hld/image23.png)
+![]({{site.url}}/design/images/cmf-hld/image23.png)
 
 _Figure 22: EVPN BUM Duplication_
 
@@ -2168,7 +2168,7 @@ allows just one PE to send BUM traffic to an All-Active EVPN access.
 Figure 23 describes the last important EVPN
 enhancement.
 
-![](http://xrdocs.io/design/images/cmf-hld/image24.png)
+![]({{site.url}}/design/images/cmf-hld/image24.png)
 
 _Figure 23: EVPN MAC Flip-Flopping_
 
@@ -2203,11 +2203,11 @@ Plane.
 The End-To-End Services use cases are summarized in the table in Figure
 24 and shown in the network diagram in Figure 25.
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-services-flat-5.png)
+![]({{site.url}}/design/images/cmf-hld/cst-services-flat-5.png)
 
 _Figure 24: End-To-End – Services table_
 
-![](http://xrdocs.io/design/images/cmf-hld/image26.png)
+![]({{site.url}}/design/images/cmf-hld/image26.png)
 
 _Figure 25: End-To-End – Services_
 
@@ -2220,11 +2220,11 @@ Refer also to Section: "Transport and Services Integration".
 Hierarchical Services Use Cases are summarized in the table of Figure 26
 and shown in the network diagram of Figure 27.
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-services-hierarchical-5.png)
+![]({{site.url}}/design/images/cmf-hld/cst-services-hierarchical-5.png)
 
 _Figure 26: Supported Hierarchical Services_ 
 
-![](http://xrdocs.io/design/images/cmf-hld/image28.png)
+![]({{site.url}}/design/images/cmf-hld/image28.png)
 
 _Figure 27: Hierarchical Services Control Plane_
 
@@ -2260,7 +2260,7 @@ Hierarchical L2 Multipoint Multi-Homed/All-Active (Single-Homed Ethernet
 access) service with traditional access router
 integration.
 
-![](http://xrdocs.io/design/images/cmf-hld/image29.png)
+![]({{site.url}}/design/images/cmf-hld/image29.png)
 
 _Figure 28: Hierarchical Services (Anycast-PW)_
 
@@ -2286,7 +2286,7 @@ Hierarchical L2 Multi/Single-Home, All/Single-Active modes are available
 at each layer of the service
 hierarchy.
 
-![](http://xrdocs.io/design/images/cmf-hld/image30.png)
+![]({{site.url}}/design/images/cmf-hld/image30.png)
 
 _Figure 29: Hierarchical Services (H-EVPN)_
 
@@ -2305,7 +2305,7 @@ It completely replaces traditional H-VPLS based solutions. This use case
 provides Hierarchical L2 Multi/Single-Home, All/Single-Active
 service.
 
-![](http://xrdocs.io/design/images/cmf-hld/image31.png)
+![]({{site.url}}/design/images/cmf-hld/image31.png)
 
 _Figure 30: Hierarchical Services (H-EVPN and PWHE)_
 
@@ -2333,7 +2333,7 @@ Also in this example CE4 is an example of a multi-homed CE node, utilizing a LAG
 across A-PE4/A-PE3. This multi-homed connection can be configured in an
 all-active, single-active, or port-active configuration.  
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-5-evpn-cgw.png)
+![]({{site.url}}/design/images/cmf-hld/cst-5-evpn-cgw.png)
 
 _Figure 31: Hierarchical Services EVPN Centralized GW_ 
 
@@ -2358,7 +2358,7 @@ redundant gateway for the CE device with address 10.1.0.2/24. While not shown in
 this figure, the CE device could also be multi-homed to two separate A-PE nodes in 
 a all-active, single-active, or port-active configuration.       
 
-![](http://xrdocs.io/design/images/cmf-hld/cst-5-evpn-he.png)
+![]({{site.url}}/design/images/cmf-hld/cst-5-evpn-he.png)
 
 _Figure 32: Hierarchical Services EVPN Centralized GW_ 
 
@@ -2379,7 +2379,7 @@ Converged SDN Transport provides another huge leap forward in simplification and
 programmability adding Services Control Plane unification and
 centralized path computation.
 
-![](http://xrdocs.io/design/images/cmf-hld/image48.png)
+![]({{site.url}}/design/images/cmf-hld/image48.png)
 
 _Figure 51: Converged SDN Transport – Evolution_
 

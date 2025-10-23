@@ -49,7 +49,7 @@ local forwarding entries. The logic used to program forwarding entries is based
 only on the information carried in the routing protocols. Most networks today 
 fall under the umbrella of "non-SDN" networks. 
 
-![](http://xrdocs.io/design/images/sdn/sdn-non-sdn.png)
+![]({{site.url}}/design/images/sdn/sdn-non-sdn.png)
 
 ### SDN-Only Network 
 The physical separation of the network "control plane" and "data plane" was a
@@ -64,7 +64,7 @@ The other main component to any SDN network is the use of open APIs and
 programming interfaces, in the original SDN network that was a lower level
 API interface directly to the forwarding plane such as OpenFlow.   
 
-![](http://xrdocs.io/design/images/sdn/sdn-purist.png)
+![]({{site.url}}/design/images/sdn/sdn-purist.png)
 
 ### Hybrid SDN Network 
 Hybrid SDN represents a more pragmatic approach to SDN. Hybrid SDN adds intelligence 
@@ -75,7 +75,7 @@ Open APIs are still critical in a hybrid SDN network, however instead of interfa
 with the forwarding layer directly, SDN controllers may interface with higher layer 
 control plane elements within the network infrastructure.  
 
-![](http://xrdocs.io/design/images/sdn/sdn-purist.png)
+![]({{site.url}}/design/images/sdn/sdn-purist.png)
 
 ### Intent Based Networking 
 Intent based networking often goes hand in hand with SDN. Intent based
@@ -169,7 +169,7 @@ the ONF for the management of optical line system networks and optical services.
 In packet we are leveraging Openconfig device models where possible and IETF
 models for packet topology (RFC8345) and xVPN services (L2NM and L3NM) 
 
-![](http://xrdocs.io/design/images/ron-hld/actn-framework.png){:height="90%" width="90%"}
+![]({{site.url}}/design/images/ron-hld/actn-framework.png){:height="90%" width="90%"}
 
 
 ## 
@@ -184,7 +184,7 @@ models for packet topology (RFC8345) and xVPN services (L2NM and L3NM)
 ## Today's Complex Multi-Layer Network Infrastructure
 
 
-![](http://xrdocs.io/design/images/ron-hld/multi-layer-network.png)
+![]({{site.url}}/design/images/ron-hld/multi-layer-network.png)
 
 
 # Cisco's SDN Controller Automation Stack
@@ -192,7 +192,7 @@ Aligning to the ACTN framework, Cisco's automation stack includes a
 multi-vendor IP domain controller (PNC), optical domain controller (PNC), and
 multi-vendor hierarchical controller (HCO/MDSC).    
 
-![](http://xrdocs.io/design/images/ron-hld/cisco-automation-stack.png)
+![]({{site.url}}/design/images/ron-hld/cisco-automation-stack.png)
 
 Cisco believes not all providers consume automation in the same way, so we are
 dedicated to make sure we have open interfaces at each layer of the network
@@ -204,7 +204,7 @@ interfaces to communicate with devices and expose standards based NBIs. Our
 multi-layer/multi-domain controller likewise uses the same standard interfaces.
 
 
-![](http://xrdocs.io/design/images/ron-hld/open-automation.png){:height="90%" width="90%"}
+![]({{site.url}}/design/images/ron-hld/open-automation.png){:height="90%" width="90%"}
 
 ## Crosswork Hierarchical Controller 
 Responsible for Multi-Layer Automation is the Crosswork Hierarchical Controller. Crosswork Hierarchical Controller is responsible for the following network functions: 
@@ -223,7 +223,7 @@ Responsible for Multi-Layer Automation is the Crosswork Hierarchical Controller.
 
 Please see the following resources for more information on Crosswork HCO. <https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/solution-overview-c22-744695.html> 
 
-![](http://xrdocs.io/design/images/ron-hld/hco-multi-layer-circuit.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/hco-multi-layer-circuit.png){:height="100%" width="100%"}
 
 ## Crosswork Network Controller 
 Crosswork Network Controller is a multi-vendor IP domain controller. Crosswork
@@ -270,12 +270,12 @@ Segment Routing TE layer across all layers. CW HCO identifies specific Routed
 Optical Networking links using ZR/ZR+ optics as seen by the ZRC (ZR Channel) and
 ZRM (ZR Media) layers from the 400ZR specification.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-trace.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-trace.png){:height="100%" width="100%"}
 
 When faults occur at a specific layer, faults will be highlighted in red,
 quickly identifying the layer a fault has occurred.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-trace-fault.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-trace-fault.png){:height="100%" width="100%"}
 
 ### Routed Optical Networking Link Assurance 
 The Link Assurance application isolates the multi-layer path of a single Routed
@@ -283,19 +283,19 @@ Optical Networking service, showing both the router termination points as well
 as the optical layer. This information is further enhanced with telemetry data
 coming from both the ZR/ZR+ optics as well as the optical link system nodes. 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-assurance.png){:height="100%" width="100%"}
 
 Optionally the user can see graphs of collected telemetry data to quickly identify trends or changes in specific operational 
 data.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance-graph.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-assurance-graph.png){:height="100%" width="100%"}
 tu-current/otu-second30/otu-second30fecs/otu-second30fec|ec-bits__data, post-fec-ber__average, pre-fec-ber__average, q__average, qmargin__average, uc-words__data |  
 
 ## Open-source ZR/ZR+ Monitoring 
 Cisco model-driven telemetry along with the open source collector Telegraf and the open source dashboard software 
 Grafana can be used to quickly build powerful dashboards to monitor ZR/ZR+ performance.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-telemetry-grafana.png)
+![]({{site.url}}/design/images/ron-hld/ron-telemetry-grafana.png)
 
 <br>
 

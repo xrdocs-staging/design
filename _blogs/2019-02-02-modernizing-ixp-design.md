@@ -153,7 +153,7 @@ Modern IXP Fabric Network Design
 ### Scale Out Design 
 We can learn from modern datacenter design in how we build a modern IX fabric, at least the network located within a single facility or group of locations in close proximity. The use of smaller functional building blocks increases operational efficiency and resiliency within the fabric. Connecting devices in a Clos (leaf/spine or fat-tree are other names) fabric seen in Figure XX versus a large modular chassis approach has a number of benefits.
 
-![ixp-scale-out.png](http://xrdocs.io/design/images/ixp-design/ixp-scale-out.png)
+![ixp-scale-out.png]({{site.url}}/design/images/ixp-design/ixp-scale-out.png)
 
 #### Fabric Design Benefits 
 * Scale the fabric by simply adding devices and interconnects 
@@ -219,7 +219,7 @@ In the simplest deployment example, Segment Routing is deployed by configuring e
 
 ### Topology Diagram for Single-plane Fabric 
 
-![ixp-sr-topology.png](http://xrdocs.io/design/images/ixp-design/ixp-sr-topology.png)
+![ixp-sr-topology.png]({{site.url}}/design/images/ixp-design/ixp-sr-topology.png)
 
 ### SRGB and SRLB Definition 
 It's recommended to first configure the Segment Routing Global Block (SRGB) across all nodes needing connectivity between each other. In most instances a single SRGB will be used across the entire network. In a SR MPLS deployment the SRGB and SRLB correspond to the label blocks allocated to SR. IOS-XR has a maximum configurable SRGB limit of 512,000 labels, however please consult platform-specific documentation for maximum values. The SRLB corresponds to the labels allocated for SIDs local to the node, such as Adjacency-SIDs. It is recommended to configure the same SRLB block across all nodes. The SRLB must not overlap with the SRGB.  The SRGB and SRLB are configured in IOS-XR with the following configuration:   
@@ -299,13 +299,13 @@ The dual plane design extends the base configuration by defining a topology base
 ### Flex-Algo Background 
 SR Flex-Algo is a simple extension to SR and its compatible IGP protocols to advertise membership in a logical network topology by configuring a specific "algorithm" attached to a node prefix-sid. All nodes with the same algorithm defined participate in the topology and can use the definition to define the behavior of a path.  In the below example when a head-end computes a path to node 9's node-SID assigned to algorithm 129 it will only use nodes participating in the minimal delay topology. This means a constraint can be met using a single node SID in the SID list instead of multiple explicit SIDs. Flex-algo is defined in IETF draft: draft-ietf-lsr-flex-algo and more details on Flex-Algo can be found on http://www.segment-routing.net  
 
-![ixp-flex-algo.png](http://xrdocs.io/design/images/ixp-design/ixp-flex-algo.png)
+![ixp-flex-algo.png]({{site.url}}/design/images/ixp-design/ixp-flex-algo.png)
 * Algo 0 = IGP Metric 
 * Algo 128 = Green = Minimize TE Metric 
 * Algo 129 = Red = Minimize Delay 
 
 ### Diagram 
-![ixp-dual-plane.png](http://xrdocs.io/design/images/ixp-design/ixp-dual-plane.png)
+![ixp-dual-plane.png]({{site.url}}/design/images/ixp-design/ixp-dual-plane.png)
 
 ### Dual-plane Flex-Algo Configuration 
 We will not re-introduce all of the configuration but the subset necessary to define both planes. To enable flexible algorithms you must first define the algorithms globally in IS-IS. The second step is to define a node prefix-sid on a Loopback interface and attach an algorithm to the SID. By default all nodes participate in algorithm 0, which is to simply compute a path based on minimal IGP metric. 
@@ -376,7 +376,7 @@ This value is used only with EVPN VPWS point to point services. It defines a loc
 ### Topology Diagram for Example Services 
 The following is a topology diagram to follow along with the service endpoints in the below service configuration examples. Each CE node represents a peering fabric participant.   
 
-![ixp-base-topology.png](http://xrdocs.io/design/images/ixp-design/ixp-base-topology.png)
+![ixp-base-topology.png]({{site.url}}/design/images/ixp-design/ixp-base-topology.png)
 
 ### P2P Peer Interconnect using EVPN-VPWS  
 The following highlights a simple P2P transparent L2 interconnect using EVPN-VPWS. It is assumed the EVPN BGP address family has been configured.  
@@ -387,7 +387,7 @@ to identify a specific service.  This service originates on PE1 and terminates o
 core network, one of the benefits of using an SR underlay. As you can see in the config below, there is no static neighbor config, P2P VPWS connections are dynamically setup by matching the EVI, target, and source identifiers. The target and source identifiers must match on the two nodes participating in the service.    
 
 <b>Diagram</b>
-![ixp-sh-vpws.png](http://xrdocs.io/design/images/ixp-design/ixp-sh-vpws.png)
+![ixp-sh-vpws.png]({{site.url}}/design/images/ixp-design/ixp-sh-vpws.png)
 
 <b>PE1</b> 
 <div class="highlighter-rouge">
@@ -434,7 +434,7 @@ the ethernet-segment from the DF (default forwarder). Single-active is commonly 
 redundancy. In the case where there are multiple EVPN services on the same bundle interface, they will be balanced across the interfaces using the DF election algorithm.     
 
 <b>Diagram</b>
-![ixp-mh-vpws.png](http://xrdocs.io/design/images/ixp-design/ixp-mh-vpws.png)
+![ixp-mh-vpws.png]({{site.url}}/design/images/ixp-design/ixp-mh-vpws.png)
 
 
 Note the LACP system MAC and ethernet-segment (ESI) on both PE nodes must be configured with the same values. 

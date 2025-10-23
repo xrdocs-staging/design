@@ -651,7 +651,7 @@ beging on the management interface of the device and if no response is received,
 the interface is not active, the ZTP process will begin the process on data ports. IOS-XR
 can be part of an ecosystem of automated device and service provisioning via Cisco NSO.  
 
-![](http://xrdocs.io/design/images/cmf-hld/ztp-metro-fabric.png)
+![]({{site.url}}/design/images/cmf-hld/ztp-metro-fabric.png)
 
 # Services – Design
     

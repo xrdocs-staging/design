@@ -10,7 +10,7 @@ tags:
 position: hidden
 ---
 ## How I Learned to Love NSO
-When I started working on the [Core Fabric Design](https://xrdocs.io/design/blogs/latest-core-fabric-hld) (a simple, highly available, scalable reference design for the core), I had one overriding goal: whatever features and use cases we covered, the whole thing had to be be model-driven.  CLI is dead to me.  If I can’t do something with a model, I won't do it at all.  I’m happy to say that I (mostly) succeeded.  I also learned some cool tricks along the way and came to appreciate the power of the Network Services Orchestrator ([NSO](https://www.cisco.com/c/en/us/solutions/service-provider/solutions-cloud-providers/network-services-orchestrator-solutions.html)).  
+When I started working on the [Core Fabric Design]({{site.url}}/design/blogs/latest-core-fabric-hld) (a simple, highly available, scalable reference design for the core), I had one overriding goal: whatever features and use cases we covered, the whole thing had to be be model-driven.  CLI is dead to me.  If I can’t do something with a model, I won't do it at all.  I’m happy to say that I (mostly) succeeded.  I also learned some cool tricks along the way and came to appreciate the power of the Network Services Orchestrator ([NSO](https://www.cisco.com/c/en/us/solutions/service-provider/solutions-cloud-providers/network-services-orchestrator-solutions.html)).  
 
 ## Yes, I Drank the Model Koolaid.
 Eons ago, as a fresh, young engineer at Cisco, I cut my coding teeth on test automation, all of which was done via CLI and screen-scraping.  I learned to love Tcl, expect, and regular expressions of all kinds, and it was a lot of fun to write the test scripts.  What I didn’t like was maintaining them across platforms and releases.  CLI was just too fragile for robust automation.  And I don’t even want to tell you the number of script runs that failed because my script accidentally shut the interface I was connected to (blush).  So when I started working with IOS XR and discovered the power of [YANG](https://tools.ietf.org/html/rfc6020) data models, I was hooked.
@@ -20,7 +20,7 @@ Data models provide a way for a device to announce what kind of configuration an
 Things get even better when you combine those data models with a standard protocol like [NETCONF](https://tools.ietf.org/html/rfc6241.html), which defines many useful operations.  For instance, if even one line of the config fails, NETCONF can “rollback-on-failure.”  If you request a “confirm-commit," the router will rollback the config changes if it doesn’t get a follow-up confirmation (e.g. because you mistakenly shut the interface that you’re talking to!).   All that makes automation easier and more robust.  No, data models aren’t perfect.  Yes, YANG can be abstract and NETCONF’s reliance on XML can be irritating.  Nevertheless, this clearly is a better way to automate. 
 
 ## Modeling Best Practices With NSO
-Initially, I started the Validated Core automation work with useful open source tools like [ncclient](https://github.com/ncclient/ncclient) and [ANX](https://github.com/cisco-ie/anx).  But it got tedious after a while, manipulating all that XML and talking to one device at a time, especially as my testbed grew.  Take the [LDP to Segment Routing (SR) Migration](https://xrdocs.io/design/blogs/latest-core-fabric-hld#ldp-to-sr-core-migration) use case.  The basic SR config consists of mostly static content with a handful of variables (IGP instance name, Loopback interface, SR Global Block (SRGB), and the device SID).  Here's what that looks like in XML using the [Cisco-IOS-XR-clns-isis-cfg.yang](https://github.com/YangModels/yang/blob/master/vendor/cisco/xr/651/Cisco-IOS-XR-clns-isis-cfg.yang) model:
+Initially, I started the Validated Core automation work with useful open source tools like [ncclient](https://github.com/ncclient/ncclient) and [ANX](https://github.com/cisco-ie/anx).  But it got tedious after a while, manipulating all that XML and talking to one device at a time, especially as my testbed grew.  Take the [LDP to Segment Routing (SR) Migration]({{site.url}}/design/blogs/latest-core-fabric-hld#ldp-to-sr-core-migration) use case.  The basic SR config consists of mostly static content with a handful of variables (IGP instance name, Loopback interface, SR Global Block (SRGB), and the device SID).  Here's what that looks like in XML using the [Cisco-IOS-XR-clns-isis-cfg.yang](https://github.com/YangModels/yang/blob/master/vendor/cisco/xr/651/Cisco-IOS-XR-clns-isis-cfg.yang) model:
 
 ```xml
   <isis xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-clns-isis-cfg">
@@ -216,13 +216,13 @@ Content-Type: application/yang-data+xml
 
 Every resource and service can be configured this way.  Throw it all in a tool like a Postman Runner, and boom, all the services are deployed and the whole LDP to SR migration use case is set up with a click.  Delete the services with a few more RESTCONF calls and boom, a few seconds later, the network is back to its original state.  Now I had an _API-driven_ Ctrl-Z for my network!
 
-I know I only scratched the surface of NSO with the simple services we created for the [Core Fabric Design](https://xrdocs.io/design/blogs/latest-core-fabric-hld) use cases.  This is a truly powerful platform.  Once you get started, the ideas just keep flowing.   Encode your best practices in service models.  Cover your back with Ctrl-Z for the whole network.  Tie it all into your OSS system with the northbound APIs.  Do all this knowing you have the robustness of data models and NETCONF to keep you out of trouble.  One thing I know for sure is that I’m not going to be doing any design validation without NSO at my side.  
+I know I only scratched the surface of NSO with the simple services we created for the [Core Fabric Design]({{site.url}}/design/blogs/latest-core-fabric-hld) use cases.  This is a truly powerful platform.  Once you get started, the ideas just keep flowing.   Encode your best practices in service models.  Cover your back with Ctrl-Z for the whole network.  Tie it all into your OSS system with the northbound APIs.  Do all this knowing you have the robustness of data models and NETCONF to keep you out of trouble.  One thing I know for sure is that I’m not going to be doing any design validation without NSO at my side.  
 
 Check out what NSO and IOS XR data models can do for you:
 ### IOS-XR 
-[Data-Model Overview](https://xrdocs.io/programmability/tutorials/2016-09-15-xr-data-model-overview/)
+[Data-Model Overview]({{site.url}}/programmability/tutorials/2016-09-15-xr-data-model-overview/)
 
-[Model-Driven Programmability](https://xrdocs.io/programmability/blogs/2016-09-12-model-driven-programmability/)
+[Model-Driven Programmability]({{site.url}}/programmability/blogs/2016-09-12-model-driven-programmability/)
 
 [YANG Models by Release](https://github.com/YangModels/yang/tree/master/vendor/cisco/xr)
 

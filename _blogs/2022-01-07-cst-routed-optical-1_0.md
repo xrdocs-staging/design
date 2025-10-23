@@ -46,7 +46,7 @@ technologies and network layers into a single cost efficient and easy to manage
 network infrastructure. Here we present the Cisco Routed Optical Networking
 architecture and validated design.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-cst-overview.png)
+![]({{site.url}}/design/images/ron-hld/ron-cst-overview.png)
 
 # Key Drivers
 ## Changing Networks  
@@ -111,7 +111,7 @@ infrastructure and operations.
 ## Today's Complex Multi-Layer Network Infrastructure
 
 
-![](http://xrdocs.io/design/images/ron-hld/multi-layer-network.png)
+![]({{site.url}}/design/images/ron-hld/multi-layer-network.png)
 
 ### DWDM 
 
@@ -168,10 +168,10 @@ available today.  ZR/OpenZR+ QSFP-DD optics can be used in the same ports as the
 highest speed 400G non-DCO transceivers. 
 
 ### Cisco OpenZR+ Transceiver (QDD-400G-ZRP-S)
-![](http://xrdocs.io/design/images/ron-hld/zrp.png)
+![]({{site.url}}/design/images/ron-hld/zrp.png)
 
 ### Cisco OIF 400ZR Transceiver (QDD-400G-ZR-S)
-![](http://xrdocs.io/design/images/ron-hld/zr.png)
+![]({{site.url}}/design/images/ron-hld/zr.png)
 
 Two industry optical standards have emerged to cover a variety of use cases. The
 OIF created the 400ZR specification,
@@ -182,7 +182,7 @@ wavelength rates, so the OpenZR+ MSA was created, https://www.openzrplus.org.
 The following table outlines the specs of each standard. ZR400 and OpenZR+ transceivers 
 are tunable across the ITU C-Band, 196.1 To 191.3 THz.  
 
-![](http://xrdocs.io/design/images/ron-hld/zr_zrp_specs.png)
+![]({{site.url}}/design/images/ron-hld/zr_zrp_specs.png)
 
 The following part numbers are used for Cisco's ZR400 and OpenZR+ MSA transceivers 
 
@@ -206,7 +206,7 @@ Cisco supports 400ZR and OpenZR+ optics across the NCS 540, NCS 5500, NCS 5700,
 ASR 9000, and Cisco 8000 series routers. This enabled providers to utilize the architecture 
 across their end to end infrastructure in a variety of router roles. See   
 
-![](http://xrdocs.io/design/images/ron-hld/npu_bandwidth.png)
+![]({{site.url}}/design/images/ron-hld/npu_bandwidth.png)
 
 
 ## Cisco DWDM Network Hardware  
@@ -228,7 +228,7 @@ aggregation, core, peering, DCI, and even PE routers can be enabled with high
 speed DCO optics. Routed Optical Networking is also not limited to SP networks,
 there are applications across enterprise, government, and education networks.  
 
-![](http://xrdocs.io/design/images/ron-hld/network-use-cases.png)
+![]({{site.url}}/design/images/ron-hld/network-use-cases.png)
 
 ## Where to use 400ZR and where to use OpenZR+
 
@@ -264,14 +264,14 @@ simplicity of the Routed Optical Networking solution.  The "optical" portion of
 the network including the ZR/ZR+ configuration can be completed in a matter of
 minutes from start to finish.   
 
-![](http://xrdocs.io/design/images/ron-hld/optical-zr-p2p.png)
+![]({{site.url}}/design/images/ron-hld/optical-zr-p2p.png)
 
 ### Colorless Add/Drop Deployment 
 Using the NCS2K-MF-6AD-CFS colorless NCS2K-MF-LC module along with the LC16 LC
 aggregation module, and SMR20-FS ROADM module, a scalable colorless add/drop
 complex can be deployed to support 400ZR and OpenZR+.   
 
-![](http://xrdocs.io/design/images/ron-hld/optical-zrp-colorless.png)
+![]({{site.url}}/design/images/ron-hld/optical-zrp-colorless.png)
 
 ### Multi-Degree ROADM Deployment 
 In this example a 3 degree ROADM node is shown with a local add/drop degree. The
@@ -281,7 +281,7 @@ efficient network build. In cases where an existing or new build requires DWDM
 switching capability, ZR and ZR+ wavelengths are easily provisioned over the
 infrastructure.  
 
-![](http://xrdocs.io/design/images/ron-hld/optical-zrp-roadm.png)
+![]({{site.url}}/design/images/ron-hld/optical-zrp-roadm.png)
 
 ### Long-Haul Deployment 
 Cisco has demonstrated in a physical lab 400G OpenZR+ services provisioned
@@ -330,7 +330,7 @@ OpenZR+ transceivers. Cisco supports Routed Optical Networking in the NCS 540,
 NCS 5500/5700, ASR 9000, and Cisco 8000 router families. The breadth of coverage
 enabled the solution across all areas of the network.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-validated-hardware.png)
+![]({{site.url}}/design/images/ron-hld/ron-validated-hardware.png)
 ### Cisco 8000 Series  
 
 The Cisco 8000 and its Silicone One NPU represents the next generation in
@@ -374,7 +374,7 @@ See more information on Cisco NCS 540 at <https://www.cisco.com/c/en/us/products
 Below gives an overview of some of the supported equipment used to build the
 DWDM layer of the Routed Optical Networking Solution.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-optical-hardware.png)
+![]({{site.url}}/design/images/ron-hld/ron-optical-hardware.png)
 
 ### Network Convergence System 2000 
 
@@ -429,13 +429,13 @@ the ONF for the management of optical line system networks and optical services.
 In packet we are leveraging Openconfig device models where possible and IETF
 models for packet topology (RFC8345) and xVPN services (L2NM and L3NM) 
 
-![](http://xrdocs.io/design/images/ron-hld/actn-framework.png){:height="90%" width="90%"}
+![]({{site.url}}/design/images/ron-hld/actn-framework.png){:height="90%" width="90%"}
 ## Cisco's SDN Controller Automation Stack
 Aligning to the ACTN framework, Cisco's automation stack includes a
 multi-vendor IP domain controller (PNC), optical domain controller (PNC), and
 multi-vendor hierarchical controller (HCO/MDSC).    
 
-![](http://xrdocs.io/design/images/ron-hld/cisco-automation-stack.png)
+![]({{site.url}}/design/images/ron-hld/cisco-automation-stack.png)
 
 ## Cisco Open Automation 
 Cisco believes not all providers consume automation in the same way, so we are
@@ -448,7 +448,7 @@ interfaces to communicate with devices and expose standards based NBIs. Our
 multi-layer/multi-domain controller likewise uses the same standard interfaces.
 
 
-![](http://xrdocs.io/design/images/ron-hld/open-automation.png){:height="90%" width="90%"}
+![]({{site.url}}/design/images/ron-hld/open-automation.png){:height="90%" width="90%"}
 
 ## Crosswork Hierarchical Controller 
 Responsible for Multi-Layer Automation is the Crosswork Hierarchical Controller. Crosswork Hierarchical Controller is responsible for the following network functions: 
@@ -467,7 +467,7 @@ Responsible for Multi-Layer Automation is the Crosswork Hierarchical Controller.
 
 Please see the following resources for more information on Crosswork HCO. <https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/solution-overview-c22-744695.html> 
 
-![](http://xrdocs.io/design/images/ron-hld/hco-multi-layer-circuit.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/hco-multi-layer-circuit.png){:height="100%" width="100%"}
 
 ## Crosswork Network Controller 
 Crosswork Network Controller is a multi-vendor IP domain controller. Crosswork
@@ -556,7 +556,7 @@ router ZR/ZR+ optics and the optical line system add/drop ports. This is done
 using a GUI based NMC (Network Media Channel) Cross-Link application in Crosswork HCO.
 The below screenshot shows defined NMC cross-links.   
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-nmc-xconnects.png)
+![]({{site.url}}/design/images/ron-hld/ron-hco-nmc-xconnects.png)
 ### IP Link Provisioning 
 Once the inter-layer links are created, the user can then proceed in
 provisioning an end to end circuit.  The provisioning UI takes as input the two
@@ -566,7 +566,7 @@ the user, simplifying the end to end workflow. The frequency and power is
 automatically derived by Cisco Optical Network Controller based on the add/drop
 port and returned as a parameter to be used in router optics provisioning.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-ip-link-provisioning.png)
+![]({{site.url}}/design/images/ron-hld/ron-hco-ip-link-provisioning.png)
 
 ### Operational Discovery 
 The Crosswork Hierarchical Controller provisioning process also performs a discovery phase to ensure the
@@ -759,12 +759,12 @@ Segment Routing TE layer across all layers. CW HCO identifies specific Routed
 Optical Networking links using ZR/ZR+ optics as seen by the ZRC (ZR Channel) and
 ZRM (ZR Media) layers from the 400ZR specification.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-trace.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-trace.png){:height="100%" width="100%"}
 
 When faults occur at a specific layer, faults will be highlighted in red,
 quickly identifying the layer a fault has occurred.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-trace-fault.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-trace-fault.png){:height="100%" width="100%"}
 
 ### Routed Optical Networking Link Assurance 
 The Link Assurance application isolates the multi-layer path of a single Routed
@@ -772,12 +772,12 @@ Optical Networking service, showing both the router termination points as well
 as the optical layer. This information is further enhanced with telemetry data
 coming from both the ZR/ZR+ optics as well as the optical link system nodes. 
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-assurance.png){:height="100%" width="100%"}
 
 Optionally the user can see graphs of collected telemetry data to quickly identify trends or changes in specific operational 
 data.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-hco-link-assurance-graph.png){:height="100%" width="100%"}
+![]({{site.url}}/design/images/ron-hld/ron-hco-link-assurance-graph.png){:height="100%" width="100%"}
 ## IOS-XR CLI Monitoring of ZR400/OpenZR+ Optics
 
 ### Optics Controller 
@@ -936,7 +936,7 @@ sensor paths.  Note PM fields also support 15m and 24h paths in addition to the
 Cisco model-driven telemetry along with the open source collector Telegraf and the open source dashboard software 
 Grafana can be used to quickly build powerful dashboards to monitor ZR/ZR+ performance.  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-telemetry-grafana.png)
+![]({{site.url}}/design/images/ron-hld/ron-telemetry-grafana.png)
 
 <br>
 
@@ -973,7 +973,7 @@ Grafana can be used to quickly build powerful dashboards to monitor ZR/ZR+ perfo
 
 ## DWDM Network Hardware Overview  
 
-![](http://xrdocs.io/design/images/ron-hld/ron-design-optical-components.png)
+![]({{site.url}}/design/images/ron-hld/ron-design-optical-components.png)
 ### Optical Transmitters and Receivers 
 Optical transmitters provide the source signals carried across the DWDM network.
 They convert digital electrical signals into a photonic light stream on a

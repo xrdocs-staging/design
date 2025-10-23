@@ -179,7 +179,7 @@ More information on Segment Routing technology and its future evolution can be f
 
 ## Telemetry  
 
-The core design uses the rich telemetry available in IOS-XR to enable an unprecedented level of insight into network and device behavior.  [Model-Driven Telemetry](https://xrdocs.io/telemetry/) and NETCONF combined with  standard and native YANG models enables rapid statistics collection. Telemetry configuration and applicable sensor paths have been identified to assist network operators in knowing what to monitor and how to monitor it. Through streaming data mechanisms such as Model-Driven Telemetry, operators can extract data useful for operations, capacity planning, security, and many other use cases.  
+The core design uses the rich telemetry available in IOS-XR to enable an unprecedented level of insight into network and device behavior.  [Model-Driven Telemetry]({{site.url}}/telemetry/) and NETCONF combined with  standard and native YANG models enables rapid statistics collection. Telemetry configuration and applicable sensor paths have been identified to assist network operators in knowing what to monitor and how to monitor it. Through streaming data mechanisms such as Model-Driven Telemetry, operators can extract data useful for operations, capacity planning, security, and many other use cases.  
 
 The ASR9000 series router also supports Segment-Routing Traffic Matrix (SR-TM) for advanced, bandwidth-based traffic-engineering.
 
@@ -332,8 +332,8 @@ Since bandwidth utilization is not carried in the IGP, SR-TE cannot compute the 
 Therefore, the routers in the network must send link utilization data to a bandwidth optimization application.  This data is most efficiently streamed used Segment Routing Traffic Matrix (SR-TM).  When the platform does not support SR-TM, the bandwidth application can use SNMP data to calculate a demand matrix (a much slower process than SR-TM).  In any event, when the bandwidth application detects an over-utilized link, it can deploy an SR-TE policy to redirect traffic to different paths.  When link utilization falls back to acceptable levels, the SR-TE policy can be removed.  This is an example of reactive traffic engineering.
 
 ### Egress Peering Engineering
-[![InterfaceEPE.png]({{site.baseurl}}/images/InterfaceEPE.png){:height="40%" width="40%"}{: .align-right}](https://xrdocs.io/design/blogs/latest-peering-fabric-hld#sr-peer-traffic-engineering)
-SD-WAN Core networks can use [Peering](https://xrdocs.io/design/blogs/2017-08-01-internet-edge-peering-current-practice/) to directly connect to content and service providers on the Internet.  You can use SR-TE policies to engineer how traffic crosses your network to reach egress peers (hence the name [Egress Peering Engineering](https://xrdocs.io/design/blogs/latest-peering-fabric-hld#sr-peer-traffic-engineering)).  SR-TE makes it possible to direct traffic from deep in your network to specific egress nodes, egress interfaces, egress peers or set of peers.  For example, you may want to create a low-latency path to a particular egress peer for a latency-sensitive SaaS application.  Or you may want best-effort traffic to egress through a link to a less expensive peering arrangement.  
+[![InterfaceEPE.png]({{site.baseurl}}/images/InterfaceEPE.png){:height="40%" width="40%"}{: .align-right}]({{site.url}}/design/blogs/latest-peering-fabric-hld#sr-peer-traffic-engineering)
+SD-WAN Core networks can use [Peering]({{site.url}}/design/blogs/2017-08-01-internet-edge-peering-current-practice/) to directly connect to content and service providers on the Internet.  You can use SR-TE policies to engineer how traffic crosses your network to reach egress peers (hence the name [Egress Peering Engineering]({{site.url}}/design/blogs/latest-peering-fabric-hld#sr-peer-traffic-engineering)).  SR-TE makes it possible to direct traffic from deep in your network to specific egress nodes, egress interfaces, egress peers or set of peers.  For example, you may want to create a low-latency path to a particular egress peer for a latency-sensitive SaaS application.  Or you may want best-effort traffic to egress through a link to a less expensive peering arrangement.  
 
 Through the use of Anycast SIDs, traffic can be load balanced between several peer nodes as well, simplifying the process of balancing egress traffic.
 
@@ -356,13 +356,13 @@ The Secure SD-WAN Core based on Segment Routing is a proven design with producti
 
 [NSO Example Services for Segment Routing](https://github.com/NSO-developer/nso-xr-segmentrouting) 
 
-[Simpler Segment Routing with NSO -- The Inside Story](https://xrdocs.io/design/blogs/2018-10-09-simpler-segment-routing-with-nso-and-ios-xr/) 
+[Simpler Segment Routing with NSO -- The Inside Story]({{site.url}}/design/blogs/2018-10-09-simpler-segment-routing-with-nso-and-ios-xr/) 
 
 ### IOS-XR  
 
-[Data-Model Overview](https://xrdocs.io/programmability/tutorials/2016-09-15-xr-data-model-overview/) 
+[Data-Model Overview]({{site.url}}/programmability/tutorials/2016-09-15-xr-data-model-overview/) 
 
-[Model-Driven Programmability](https://xrdocs.io/programmability/blogs/2016-09-12-model-driven-programmability/) 
+[Model-Driven Programmability]({{site.url}}/programmability/blogs/2016-09-12-model-driven-programmability/) 
 
 [YANG Models by Release](https://github.com/YangModels/yang/tree/master/vendor/cisco/xr)
 

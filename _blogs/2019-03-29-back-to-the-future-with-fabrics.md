@@ -43,7 +43,7 @@ Massive data center fabrics arose out of the need to provide equidistant, non-bl
 
 ![Traffic Patterns.jpg]({{site.baseurl}}/images/Traffic Patterns.jpg)
 
-Having a clear understanding of the traffic pattern you need to support is crucial in understanding if fabrics are right for you.  There are certainly places in the network where traffic patterns are changing very rapidly today.  For example, the [rise of local peering and caching in Service Provider networks](https://xrdocs.io/design/blogs/2017-08-01-internet-edge-peering-current-practice/) means that traffic that might once have been aggregated and sent across the backbone can now be served locally instead.  That introduces a strong east-west component into what was once an almost entirely north-south pattern.  Introducing a fabric with a spine layer to provide connectivity between PE nodes and Peering or Caching nodes starts to make sense in that scenario.  
+Having a clear understanding of the traffic pattern you need to support is crucial in understanding if fabrics are right for you.  There are certainly places in the network where traffic patterns are changing very rapidly today.  For example, the [rise of local peering and caching in Service Provider networks]({{site.url}}/design/blogs/2017-08-01-internet-edge-peering-current-practice/) means that traffic that might once have been aggregated and sent across the backbone can now be served locally instead.  That introduces a strong east-west component into what was once an almost entirely north-south pattern.  Introducing a fabric with a spine layer to provide connectivity between PE nodes and Peering or Caching nodes starts to make sense in that scenario.  
 
 ![CO-As-Fabric.png]({{site.baseurl}}/images/CO-As-Fabric.png)
 

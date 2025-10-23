@@ -35,7 +35,7 @@ information on Routed Optical Networking can be found at the following locations
 
 
  - <https://www.cisco.com/c/en/us/solutions/service-provider/routed-optical-networking.html> 
- - <https://xrdocs.io/latest-routed-optical-networking-hld> 
+ - <{{site.url}}/latest-routed-optical-networking-hld> 
 
 
 
@@ -71,10 +71,10 @@ highest speed 400G non-DCO transceivers.
 
 ### Cisco OpenZR+ Transceiver (QDD-400G-ZRP-S)
 
-<img src="http://xrdocs.io/design/images/ron-hld/zrp.png" width="500"/>
+<img src="{{site.url}}/design/images/ron-hld/zrp.png" width="500"/>
 
 ### Cisco OIF 400ZR Transceiver (QDD-400G-ZR-S)
- <img src="http://xrdocs.io/design/images/ron-hld/zr.png" width="500"/>
+ <img src="{{site.url}}/design/images/ron-hld/zr.png" width="500"/>
 
 Two industry optical standards have emerged to cover a variety of use cases. The
 OIF created the 400ZR specification,
@@ -85,7 +85,7 @@ wavelength rates, so the OpenZR+ MSA was created, https://www.openzrplus.org.
 The following table outlines the specs of each standard. ZR400 and OpenZR+ transceivers 
 are tunable across the ITU C-Band, 196.1 To 191.3 THz.  
 
-![](http://xrdocs.io/design/images/ron-hld/zr_zrp_specs.png)
+![]({{site.url}}/design/images/ron-hld/zr_zrp_specs.png)
 
 The following part numbers are used for Cisco's ZR400 and OpenZR+ MSA transceivers 
 
@@ -279,7 +279,7 @@ channel, and ultimately to a 200G line port associated with the output optical
 channel. Note the numbers assigned to the logical channels are arbitrary
 integers.  
 
-![](https://xrdocs.io/design/images/ron-hld/ron-oc-muxponder.png)
+![]({{site.url}}/design/images/ron-hld/ron-oc-muxponder.png)
 
 ### Pluggable in Router Use Case 
 
@@ -291,12 +291,12 @@ pluggable, there is no physical client component, only the logical components
 associated with the host side of the DCO transceiver.  In Cisco routers, it is
 represented as one more Ethernet interfaces depending on the configuration.  
 
-![](https://xrdocs.io/design/images/ron-hld/ron-oc-generic.png)
+![]({{site.url}}/design/images/ron-hld/ron-oc-generic.png)
 
 Looking at a picture of the two optics is helpful in showing how the hierarchical 
 structure is configured for the DCO optics.  
 
-![](https://xrdocs.io/design/images/ron-hld/ron-oc-transceiver-structure.png)
+![]({{site.url}}/design/images/ron-hld/ron-oc-transceiver-structure.png)
 
 
 The example below shows a similar 200G application, but instead of two client
@@ -310,7 +310,7 @@ Note this example is only possible with the OpenZR+ transceiver since it
 supports line rates of 100G, 200G, 300G, and 400G where the OIF 400ZR only
 supports 400G.  
 
-![](https://xrdocs.io/design/images/ron-hld/ron-oc-zrp-200g.png)
+![]({{site.url}}/design/images/ron-hld/ron-oc-zrp-200g.png)
 
 
 # OpenConfig Provisioning Examples 

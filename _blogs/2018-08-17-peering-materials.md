@@ -15,15 +15,15 @@ excerpt: List of materials related to Peering
 
 ## XRdocs
 
-- [Peering Fabric Design](https://xrdocs.io/design/blogs/2018-05-08-peering-fabric-hld/)
+- [Peering Fabric Design]({{site.url}}/design/blogs/2018-05-08-peering-fabric-hld/)
  
-- [Internet Traffic Trends](https://xrdocs.io/design/blogs/2018-02-25-internet-traffic-trends/) 
+- [Internet Traffic Trends]({{site.url}}/design/blogs/2018-02-25-internet-traffic-trends/) 
  
-- [Peering Telemetry](https://xrdocs.io/design/blogs/2017-09-21-peering-telemetry/) 
+- [Peering Telemetry]({{site.url}}/design/blogs/2017-09-21-peering-telemetry/) 
  
-- [Internet Edge Peering - Current Practice](https://xrdocs.io/design/blogs/2017-08-01-internet-edge-peering-current-practice/) 
+- [Internet Edge Peering - Current Practice]({{site.url}}/design/blogs/2017-08-01-internet-edge-peering-current-practice/) 
  
-- [Express Peering Fabric](https://xrdocs.io/design/blogs/2018-05-01-express-peering-fabric/) 
+- [Express Peering Fabric]({{site.url}}/design/blogs/2018-05-01-express-peering-fabric/) 
 
 ## Vimeo
 

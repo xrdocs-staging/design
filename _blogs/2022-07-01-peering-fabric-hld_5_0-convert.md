@@ -109,7 +109,7 @@ devices have the flexibility to integrate other functions such as small edge PE 
 5G Mobile Edge Compute edge DC.  Scale limitations are not a consideration with the ability to support full routing tables
 in an environmentally optimized 1RU/2RU footprint.  
 
-![](http://xrdocs.io/design/images/cpf-hld/cache-aggregation.png)
+![]({{site.url}}/design/images/cpf-hld/cache-aggregation.png)
 
 ## Topology and Peer Distribution
 
@@ -121,7 +121,7 @@ internal fabric to connect each function. The second option utilizes a
 fabric separating the network functions into separate physical layers,
 connected via an external fabric running over standard Ethernet.
 
-![](http://xrdocs.io/design/images/cpf-hld/cpf-topology.png)
+![]({{site.url}}/design/images/cpf-hld/cpf-topology.png)
 
 In many typical SP peering deployments, a traditional two-node setup is
 used where providers vertically upgrade nodes to support the higher
@@ -265,7 +265,7 @@ installation, deploy an initial bootstrap configuration, as well as advanced fun
 triggered by ZTP scripts. ZTP is supported on both out of band management interfaces as 
 well as in-band data interfaces.  
 
-![](http://xrdocs.io/design/images/cpf-hld/ztp-peering.png)
+![]({{site.url}}/design/images/cpf-hld/ztp-peering.png)
 
 ### Cisco Crosswork Health Insights KPI pack 
 
@@ -312,7 +312,7 @@ The following steps describe the analysis and mitigation of DDoS attacks using R
 3. PFL nodes use interface monitoring sessions to mirror specific ingress traffic to an interface connected to the DefensePro element. The interface can be local to the PFL node or traffic or SPAN over Pseudowire can be used to tunnel traffic to an interface attached to a centralized DefensePro.   
 
 ### Solution diagram 
-![](http://xrdocs.io/design/images/cpf-hld/cpf-radware.png)
+![]({{site.url}}/design/images/cpf-hld/cpf-radware.png)
 
 ### Router SPAN (monitor) to physical interface configuration 
 The following is used to direct traffic to a DefensePro virtual machine or appliance. 
@@ -367,7 +367,7 @@ SPs can deploy the Arbor TMS or vTMS scrubbing appliances on-net to separate and
 Information about all of Netscout's traffic visibility and security solutions can be found at https://www.netscout.com 
 
 ### Solution Diagram 
-![](http://xrdocs.io/design/images/cpf-hld/pf-netscout-solution.png)
+![]({{site.url}}/design/images/cpf-hld/pf-netscout-solution.png)
 
 ### Netscout Arbor Sightline 
 
@@ -431,7 +431,7 @@ each edge router. The Netscout Arbor system identifies the top sources of attack
 The graphic below shows an example of traffic mitigation via RTBH. Netscout Arbor still receives flow information from the network edge for mitigated traffic, so Arbor is able to detect the amount of traffic which has been mitigates using the 
 appropriate mitigation method.  
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-traffic-blackhole.png)
+![]({{site.url}}/design/images/cpf-hld/pf-traffic-blackhole.png)
 
 
 ## Internet and Peering in a VRF 
@@ -466,9 +466,9 @@ Route Origin Validation (ROV). ROV verifies the origin ASN in the AS_PATH of the
 
 The Peering Fabric design was validated using the Routinator RPKI validator.  Please see the security section for configuration of RPKI ROV in IOS-XR.  
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-rpki.png)
+![]({{site.url}}/design/images/cpf-hld/pf-rpki.png)
 
-For more information on RPKI and RPKI deployment with IOS-XR please see: https://xrdocs.io/design/blogs/routinator-hosted-on-xr
+For more information on RPKI and RPKI deployment with IOS-XR please see: {{site.url}}/design/blogs/routinator-hosted-on-xr
 
 
 ## Next-Generation IXP Fabric 
@@ -476,7 +476,7 @@ Introduced in Peering Fabric 2.0 is a modern design for IXP fabrics. The design 
 
 The IX fabric can also utilize the NSO automation created in the Metro Fabric design for deploying EVPN VPWS (point-to-point) and multi-point EVPN ELAN services.
 
-![](http://xrdocs.io/design/images/cpf-hld/ixp-fabric.png)
+![]({{site.url}}/design/images/cpf-hld/ixp-fabric.png)
 
 ## Validated Design
 
@@ -487,7 +487,7 @@ Validation is done exceeding real-world scaling requirements to ensure
 the design fulfills its rule in existing networks with room for future
 growth.
 
-![](http://xrdocs.io/design/images/cpf-hld/peering-validation.png)
+![]({{site.url}}/design/images/cpf-hld/peering-validation.png)
 
 
 # Peering Fabric Design Use Cases  
@@ -512,7 +512,7 @@ The diagram below shows a fully distributed fabric, where peers are now
 distributed across three PFL nodes, each with full connectivity to
 upstream PFS nodes.
 
-![](http://xrdocs.io/design/images/cpf-hld/peering-migration.png)
+![]({{site.url}}/design/images/cpf-hld/peering-migration.png)
 
 ## Peering Fabric Extension
 
@@ -525,7 +525,7 @@ geographic area you do not wish to install a complete peering fabric
 into. In those cases, connecting remote PFL nodes to a larger peering
 fabric can be done using optical transport or longer range gray optics.
 
-![](http://xrdocs.io/design/images/cpf-hld/peering-extension.png)
+![]({{site.url}}/design/images/cpf-hld/peering-extension.png)
 
 ## Localized Metro Peering and Content Delivery
 
@@ -539,7 +539,7 @@ or content delivery center, connected via a common peering fabric. In
 these cases the PFS nodes connect directly to the metro core to enable
 delivery across the region or metro.
 
-![](http://xrdocs.io/design/images/cpf-hld/local-peering.png)
+![]({{site.url}}/design/images/cpf-hld/local-peering.png)
 
 ## Express Peering Fabric
 
@@ -551,7 +551,7 @@ muxponders such as the NCS1002 along with flexible photonic ROADM
 architectures enabled by the NCS2000 can help make the most efficient
 use of metro fiber assets.
 
-![](http://xrdocs.io/design/images/cpf-hld/express-peering.png)
+![]({{site.url}}/design/images/cpf-hld/express-peering.png)
 
 ## Datacenter Edge Peering
 
@@ -564,7 +564,7 @@ Peering Fabric supports interconnected to the DC via the SP core or with
 the PFS nodes as leafs to the DC spine. These would act as traditional
 border routers in the DC design.
 
-![](http://xrdocs.io/design/images/cpf-hld/spdc-peering.png)
+![]({{site.url}}/design/images/cpf-hld/spdc-peering.png)
 
 ## Peer Traffic Engineering with Segment Routing
 
@@ -599,15 +599,15 @@ across my larger SP network. Some of this traffic may be Best Effort with no con
 ### DDoS Traffic Steering using SR-TE and EPE  
 SR-TE and Egress Peer Engineering can be utilized to direct DDoS traffic to a specific end node and specific DDoS destination interface without the complexities of using VRFs to separate dirty/clean traffic. On ingress, traffic is immediately steered into a SR-TE Policy and no IP lookup is performed between the ingress node and egress DDoS "dirty" interface. In the 3.0 design using IOS-XR 6.6.3 Flowspec redirects traffic to a next-hop IP pointing to a pre-configured "DDoS" SR-Policy. An MPLS xconnect is used map DDoS traffic with a specific EPE label on the egress node to a specific egress interface.   
 
-![](http://xrdocs.io/design/images/cpf-hld/cpf-ddos-srte.png)
+![]({{site.url}}/design/images/cpf-hld/cpf-ddos-srte.png)
 
 # Low-Level Design
 
 ### Integrated Peering Fabric Reference Diagram
-![](http://xrdocs.io/design/images/cpf-hld/integrated.png)
+![]({{site.url}}/design/images/cpf-hld/integrated.png)
 
 ### Distributed Peering Fabric Reference Diagram
-![](http://xrdocs.io/design/images/cpf-hld/distributed.png)
+![]({{site.url}}/design/images/cpf-hld/distributed.png)
 
 
 ## Peer Termination Strategy
@@ -675,7 +675,7 @@ oversubscription ratio.
 
 ## Peering Fabric Control Plane
 
-![](http://xrdocs.io/design/images/cpf-hld/control-plane.png)
+![]({{site.url}}/design/images/cpf-hld/control-plane.png)
 
 ### PFL to Peer
 
@@ -748,7 +748,7 @@ Node EPE directs traffic to a specific peering node within the fabric.
 The node is targeted using first the PFS cluster anycast IP along with
 the specific PFL node SID.
 
-![](http://xrdocs.io/design/images/cpf-hld/epe-node.png)
+![]({{site.url}}/design/images/cpf-hld/epe-node.png)
 
 ### Peer Interface EPE
 
@@ -756,7 +756,7 @@ This example uses an Egress Peer Engineering peer-adj-SID value assigned
 to a single peer interface. The result is traffic sent along this SR
 path will use only the prescribed interface for egress traffic.
 
-![](http://xrdocs.io/design/images/cpf-hld/epe-interface.png)
+![]({{site.url}}/design/images/cpf-hld/epe-interface.png)
 
 ### Abstract Peering
 
@@ -765,7 +765,7 @@ the anycast SIDs of its cluster of PFS nodes. In this case PHP is used
 for the anycast SIDs and traffic is simply forwarded as IP to the final
 destination across the fabric.
 
-![](http://xrdocs.io/design/images/cpf-hld/epe-abstract.png)
+![]({{site.url}}/design/images/cpf-hld/epe-abstract.png)
 
 ## SR-TE On-Demand Next-Hop for Peering 
 
@@ -824,7 +824,7 @@ matches the color and BGP next-hop of an incoming prefix and either matches it t
 the Forwarding Class, when making a decision which SR-TE Policy to forward traffic onto.  The Forwarding Class is set by matching ingress traffic header criteria using the IOS-XR QoS framework.  A new SR-TE Policy type, the Per-Flow Policy is used as a parent policy, with each child 
 policy corresponding to a specific Forwarding Class. When an incoming BGP prefix matches the color of the Per-Flow Policy, ingress traffic will utilize the Forward Class and child SR-TE Policies for forwarding.  A child policy can be any SR-TE Per-Destination Policy with the same endpoint as the Per-Flow Policy.  
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-per-flow-policy.png)
+![]({{site.url}}/design/images/cpf-hld/pf-per-flow-policy.png)
 
 ### Per-Flow Segment Routing Configuration (NCS Platforms)
 The following configuration is required on the NCS 5500 / 5700 platforms to
@@ -989,7 +989,7 @@ PeerAdj | Used to steer traffic out a specific adjacent single interface
 PeerNode | Used to steer traffic out multiple interfaces to the same EBGP peer (typically requires the use of eBGP Multi-Hop)
 PeerSet | Used to steer traffic out a set of interfaces or nodes by grouping PeerAdj and PeerNode SIDs into a set addressable by the PeerSet SID
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-hld-epe-overview.png)
+![]({{site.url}}/design/images/cpf-hld/pf-hld-epe-overview.png)
 
 ### EPE PeerSet Use Case 
 In the following example we would like to balance traffic to 10.0.0.0/24 across three egress interface to three different ASNs. In typical networks, 
@@ -997,7 +997,7 @@ the BGP best path selection algorithm will select the best egress path based on 
 the proper criteria is met, but it can not be guaranteed.  EPE will override this process and balance traffic out the three interfaces despite the BGP 
 path selection process. 
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-hld-epe-usecase.png)
+![]({{site.url}}/design/images/cpf-hld/pf-hld-epe-usecase.png)
 
 ### IOS-XR Configuration 
 The following configuration is used for the above example. Peer-set 1 groups the 
@@ -1057,7 +1057,7 @@ Comprehensive configuration for EVPN L2VPN services are outside the scope of thi
 document, please consult the Converged SDN Transport design guide or associated Cisco 
 documentation for low level details on configuring EVPN VPWS and EVPN ELAN services. 
 The Converged SDN Transport design guide can be found at the following URL: 
-https://xrdocs.io/design/blogs/latest-converged-sdn-transport-hld 
+{{site.url}}/design/blogs/latest-converged-sdn-transport-hld 
 
 
 # Peering Fabric Telemetry
@@ -1086,7 +1086,7 @@ systems.
 
 ### Telemetry Diagram
 
-![](http://xrdocs.io/design/images/cpf-hld/peering-telemetry.png)
+![]({{site.url}}/design/images/cpf-hld/peering-telemetry.png)
 
 ## Model-Driven Telemetry
 
@@ -1180,7 +1180,7 @@ from its origin through a specified ASN, in this case 3356. The visibility of th
 prefix at CCNIs end probes on the left show the prefix is correctly being propagated 
 through 3356.  
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-hld-ccni-path-trace.png)
+![]({{site.url}}/design/images/cpf-hld/pf-hld-ccni-path-trace.png)
 
 ### AS Path and Prefix Alarm Capabilities 
 CCNI can alarm and send notifications on a wide variety of prefix anomaly
@@ -1211,7 +1211,7 @@ export flows to multiple destinations from the routers. The flexible tagging
 architecture also makes grouping sets of prefixes or devices very easy and
 allows users to view aggregate data across those tagged elements.   
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-hld-ccta-traffic.png)
+![]({{site.url}}/design/images/cpf-hld/pf-hld-ccta-traffic.png)
 
 CCTA allows users to drill down into per-prefix data and provides advanced
 aplications such as Peer Prospecting and Traffic Balancing recommendations. The
@@ -1220,7 +1220,7 @@ on a specific prefix or set of prefixes between different routers. The example
 below shows a traffic inbalance for a set of prefixes on two separate edge
 peering routers.     
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-hld-ccta-inbalance.png)
+![]({{site.url}}/design/images/cpf-hld/pf-hld-ccta-inbalance.png)
 
 
 More information on CCTA can be found at https://crosswork.cisco.com/
@@ -1232,7 +1232,7 @@ from its origin through a specified ASN, in this case 3356. The visibility of th
 prefix at CCNIs end probes on the left show the prefix is correctly being propagated 
 through 3356.  
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-hld-ccni-path-trace.png)
+![]({{site.url}}/design/images/cpf-hld/pf-hld-ccni-path-trace.png)
 
 ### AS Path and Prefix Alarm Capabilities 
 CCNI can alarm and send notifications on a wide variety of prefix anomaly
@@ -1268,7 +1268,7 @@ Insights are highlighted below.
 The figure below shows tracking of both inventory and SW/HW changes over the 
 specified timeline.  
 
-![](http://xrdocs.io/design/images/cpf-hld/pf-hld-ccti.png)
+![]({{site.url}}/design/images/cpf-hld/pf-hld-ccti.png)
 
 ### Utilize Trusted Data for Automation
 - Use securely collected evidence of hardware and software inventory
@@ -2202,7 +2202,7 @@ PFL and PFS nodes and the PFS nodes and the rest of the network. IOS-XR provides
 to be imported to/from each peer VRF to the default VRF.  This provides dataplane isolation between 
 peers and another mechanism to determine which SP routes are advertised to each peer.    
 
-![](http://xrdocs.io/design/images/cpf-hld/peer-vrf.png)
+![]({{site.url}}/design/images/cpf-hld/peer-vrf.png)
 
 ### Internet in a VRF Only 
 In this method all Internet endpoints are configured in the same "Internet" VRF. The security 
@@ -2213,7 +2213,7 @@ all peering fabric nodes as well as SP PEs participating in the global routing t
 VPN customers or public-facing services in their own VRF needing Internet access, routes can be imported/exported 
 from the Internet VRF on the PE devices they attach to.   
 
-![](http://xrdocs.io/design/images/cpf-hld/internet-vrf.png)
+![]({{site.url}}/design/images/cpf-hld/internet-vrf.png)
  
  
 ### VRF per Peer, Internet in a VRF 
@@ -2223,7 +2223,7 @@ infrastructure layer. The exchange of routes between the peer VRFs and Internet 
 on the PFL nodes with the rest of the network operating the same as the Internet in a VRF use case.  
 The VPNv4 and VPNv6 address families must be configured across all routers in the network.  
 
-![](http://xrdocs.io/design/images/cpf-hld/internet-peer-vrf.png)
+![]({{site.url}}/design/images/cpf-hld/internet-peer-vrf.png)
 
 ## Infrastructure ACLs
 

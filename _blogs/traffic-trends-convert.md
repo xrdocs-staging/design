@@ -25,7 +25,7 @@ Broadcast Video History
 -----------------------
 Television video delivery for many years followed the same path blazed by radio before it, broadcasting a single program over the air at a specific time to anyone within range of the signal. Cable networks were built in the 70s and 80s, with the promise of delivering a wider variety of content to subscribers not subject to the same impairments as over the air (OTA) broadcasts, while eliminating the use of antennas. A physical medium like coaxial cable exhibits similar properties as transmission through the air as electrical signals are replicated across branches in the medium. The original primitive cable networks were still analog end to end and built for broadcast delivery of all video to every user. Satellite video delivery worked in much the same way, simply broadcasting all signals and requiring the end device tune to the channel at a specific analog frequency and the user tune in to watch at a specific time of day. In the 1980s and 1990s, TV viewers could always cite the exact day and time of their favorite programs. While broadcast video has limitations on flexibility for users, it has the ultimate efficiency when it comes to network resources as the signal is broadcast once to all users once at the origin.  
 
-![broadcast_video.png](http://xrdocs.io/design/images/broadcast_video.png){:height="80%" width="80%"}
+![broadcast_video.png]({{site.url}}/design/images/broadcast_video.png){:height="80%" width="80%"}
  
 <center><b>Broadcast Video Delivery</b></center>
 
@@ -39,12 +39,12 @@ Video over IP
 --------------
 Service providers who built out wireline networks using DSL and Ethernet technology, network infrastructure types not having a native analog video delivery method, looked at IP as the higher layer protocol to deliver video content to users. These networks were deployed to take advantage of multicast, a subset of the broadcast capability inherent in Ethernet, and standardized for IP in RFC 1112. IP multicast improves network efficiency by implementing frame replication in the network devices, combined with a set of control-plane protocols to create optimized distribution trees. In its simplest form IP multicast replicates a broadcast network, sending all channels to all users (dense mode), and some providers used this method. However, to improve network efficiency it is now most common for end devices to use protocols like IGMP (v4) and MLD (v6) so optimized multicast trees are built. This type of multicast IP delivery is known as IPTV and is implemented in North America by networks such as AT&T UVerse and Google Fiber.  
 
- ![multicast_video.png](http://xrdocs.io/design/images/multicast_video.png){:height="80%" width="80%"}}
+ ![multicast_video.png]({{site.url}}/design/images/multicast_video.png){:height="80%" width="80%"}}
 <center><b>Multicast Video Delivery</b></center>&nbsp; 
 
 Supporting VoD on these networks requires delivering video over IP. Similar mechanisms can be used as analog networks, using a specific multicast address for the subscriber stream. However, instead of simulating a unicast stream using a more complex multicast process, streaming the content as a to a unicast IP address assigned to a device is much simpler and supported a wider range of devices, even across networks that do not support native multicast delivery. Today more and more content on wireline networks is delivered using unicast IP, even on traditional cable networks, due to its flexibility and the ability to serve content to a variety of end user devices from a single content source. The flexibility and ease of delivery using unicast IP has superceded the inefficiencies of delivering duplicate content over the same network resources.   
 
-![unicast_video.png](http://xrdocs.io/design/images/unicast_video.png){:height="80%" width="80%"}}
+![unicast_video.png]({{site.url}}/design/images/unicast_video.png){:height="80%" width="80%"}}
 <center><b>Unicast Video Delivery</b></center>
 
 
@@ -52,7 +52,7 @@ Over the Top IP Video
 --------------------- 
 The unicast video content described above has typically been contained within a service provider network. As the Internet has grown and bandwidth to end users increased, video content from alternative sources emerged. Broadband Internet became more widely available in the mid 2000s and with it came user-generated video providers like YouTube along with traditional media rental companies like Netflix embracing streaming video for rental delivery. These Internet content providers deliver video "over the top" (OTT) of service provider networks since the origin and destination are applications controlled by the content provider. The growth of OTT Internet video has continued to climb rapidly over the last decade along with IP video in general. IP video accounted for 73% of all Internet traffic in 2016, and by 2021 will account for 82% of all Internet traffic. The most rapid increase is in over the top Internet video, shown in the graph below from the Cisco VNI. 
 
-![vni_video_traffic.png](http://xrdocs.io/design/images/vni_video_traffic.png) 
+![vni_video_traffic.png]({{site.url}}/design/images/vni_video_traffic.png) 
 
 It is not only on-demand content driving OTT growth, streaming of traditional broadcast video like sports to mobile devices, tablets, smart TVs, and additional endpoints is increasing in popularity. The last few years have seen a number of new services delivering traditional linear (live) TV using OTT IP delivery. Over the top video is by nature unicast, as each stream is simply sent on demand when a user clicks "play." Since there is little efficiency in sending a single stream to each user, it causes tremendous strain on network resources. It is however a trend that is unlikely to change, so new methods need to be employed to improve network efficiency and build networks to handle increasing video traffic demands.   
 
@@ -89,7 +89,7 @@ Localized Peering
 -----------------
  Reducing the distance and network hops between where unicast video packets enter your network and exit to the consumer is a key priority for service providers in reducing network cost. Each pass through an optical transponder or router interface adds additional cost to the transit path, especially on long-haul paths from traditional large IXPs to subscriber regions. The aforementioned rise in video traffic demands peering move closer to the edges of the network to serve wireline broadband subscribers along with high-bandwidth 5G mobile users. Content providers have invested heavily in their own networks as well as distributed caches serving content from any network location with Internet access. Third party co-location providers have begun building more regional locations supporting PNI between content distributors and the end subscribers on the SP network. This leads to a localized peering option for SPs and content providers, greatly reducing the distance and hops across the network. As more traffic shifts to becoming locally delivered building additional regional or metro peering locations becomes important to ensure less reliance on longer paths during failures.
 
- ![local_peering.png](http://xrdocs.io/design/images/local_peering.png)
+ ![local_peering.png]({{site.url}}/design/images/local_peering.png)
 <center><b>Localized Peering</b></center>&nbsp;  
 
  Service Provider Unicast Delivery Headend 

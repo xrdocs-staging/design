@@ -51,7 +51,7 @@ Business, 5G Mobile Backhauling, Video, IoT) on the premise of
 simplicity, full programmability, and cloud integration, with guaranteed
 service level agreements (SLAs).
 
-![](http://xrdocs.io/design/images/cmf-hld/end-to-end.png)
+![]({{site.url}}/design/images/cmf-hld/end-to-end.png)
 
 The  Converged SDN Transport design brings tremendous value to the Service
 Providers:
@@ -103,7 +103,7 @@ compass designs:
 
 # Technical Overview
 
-![](http://xrdocs.io/design/images/cmf-hld/cmf-hld-hw.png)
+![]({{site.url}}/design/images/cmf-hld/cmf-hld-hw.png)
 
 The  Converged SDN Transport design evolves from the successful Cisco
 Evolved Programmable Network (EPN) 5.0 architecture framework, to bring
@@ -160,7 +160,7 @@ To provide unlimited network scale, the  Converged SDN Transport is
 structured into multiple IGP Domains: Access, Aggregation, and Core.
 Refer to the network topology in Figure 1.
 
-![](http://xrdocs.io/design/images/cmf-hld/image3.png)
+![]({{site.url}}/design/images/cmf-hld/image3.png)
 
 _Figure 1: Distributed Central Office_
 
@@ -170,7 +170,7 @@ the Core domain is extended over the Aggregation domain, thus increasing
 the number of nodes in the
 Core.
 
-![](http://xrdocs.io/design/images/cmf-hld/image4.png)
+![]({{site.url}}/design/images/cmf-hld/image4.png)
 _Figure 2: Distributed Central Office with Core domain extension_
 
 A similar approach is shown in Figure 3. In this scenario the Core
@@ -178,7 +178,7 @@ domain remains unaltered and the Access domain is extended over the
 Aggregation domain, thus increasing the number of nodes in the Access
 domain.
 
-![](http://xrdocs.io/design/images/cmf-hld/image5.png)
+![]({{site.url}}/design/images/cmf-hld/image5.png)
 
 _Figure 3: Distributed Central Office with Access domain extension_
 
@@ -261,7 +261,7 @@ Figure 4 shows two sets of ABRs:
 
   - Provider Edge ABRs – PE
 
-![](http://xrdocs.io/design/images/cmf-hld/image6.png)
+![]({{site.url}}/design/images/cmf-hld/image6.png)
 
 _Figure 4: IGP Domains - ABRs Anycast-SID_
 
@@ -269,7 +269,7 @@ Figure 5 shows the End-To-End Stack of SIDs for packets traveling from
 left to right through the
 network.
 
-![](http://xrdocs.io/design/images/cmf-hld/image7.png)
+![]({{site.url}}/design/images/cmf-hld/image7.png)
 
 _Figure 5: Inter-Domain LSP – SRTE Policy_
 
@@ -323,7 +323,7 @@ Note that both options can be combined on the same network.
 AG/PE ABRs redundancy enables high availability for Inter-Domain
 Forwarding.
 
-![](http://xrdocs.io/design/images/cmf-hld/image6.png)
+![]({{site.url}}/design/images/cmf-hld/image6.png)
 
 _Figure 7: IGP Domains - ABRs Anycast-SID_
 
@@ -334,7 +334,7 @@ independently by TI-LFA as described in Section: "Intra-Domain Forwarding - Fast
 Figure 8 shows how FRR is achieved for a Inter-Domain
 LSP.
 
-![](http://xrdocs.io/design/images/cmf-hld/image9.png)
+![]({{site.url}}/design/images/cmf-hld/image9.png)
 
 _Figure 8: Inter-Domain - FRR_
 
@@ -364,7 +364,7 @@ Path Computation Element (SR-PCE) and WAN Automation Engines (WAE).
 High-Availability is achieved by device redundancy in the Aggregation
 and Core networks.
 
-![](http://xrdocs.io/design/images/cmf-hld/image10.png)
+![]({{site.url}}/design/images/cmf-hld/image10.png)
 
 _Figure 9: Transport Programmability – PCEP_
 
@@ -403,7 +403,7 @@ Services or at both the Access and ABR routersfor Hierarchical Services. The SRT
 Plane in the case of Service End Point co-located with the Access router
 was described in Figure 5.
 
-![](http://xrdocs.io/design/images/cmf-hld/image11.png)
+![]({{site.url}}/design/images/cmf-hld/image11.png)
 
 _Figure 10: Transport Programmability – BGP-SRTE_
 
@@ -415,7 +415,7 @@ Figure 11 shows the  Converged SDN Transport physical topology with examples
 of product
 placement.
 
-![](http://xrdocs.io/design/images/cmf-hld/image12.png)
+![]({{site.url}}/design/images/cmf-hld/image12.png)
 
 _Figure 11:  Converged SDN Transport – Physical Topology with transport
 programmability_
@@ -474,7 +474,7 @@ The SR-PCE provides a path based on constraints such as:
   
   - Disjoint path. 
 
-![](http://xrdocs.io/design/images/cmf-hld/image13.png)
+![]({{site.url}}/design/images/cmf-hld/image13.png)
 
 _Figure 12: XR Transport Controller – Components_
 
@@ -503,7 +503,7 @@ There are three models available to program transport LSPs:
 All models assume SR-PCE has acquired full network topology through
 BGP-LS.
 
-![](http://xrdocs.io/design/images/cmf-hld/image14.png)
+![]({{site.url}}/design/images/cmf-hld/image14.png)
 
 _Figure 13: PCE Path Computation_
 
@@ -540,7 +540,7 @@ The CST 2.0 4G Transport modernization covers only MPLS-based access and not L2 
 ## Non-Inline Aggregation Fabric 
 The non-inline PE topology, shown in the figure below, moves the services edge PE device from the forwarding path between the access/aggregation networks and the core.  There are several factors which can drive providers to this design vs. one with an in-line PE, some of which are outlined in the table below. The control-plane configuration of the Converged SDN Transport does not change, all existing ABR configuration remains the same, but the device no longer acts as a high-scale PE.    
 
-![](http://xrdocs.io/design/images/cmf-hld/non-inline-design.png)
+![]({{site.url}}/design/images/cmf-hld/non-inline-design.png)
 
 _Figure: Non-Inline Aggregation Topology_
 
@@ -618,7 +618,7 @@ beging on the management interface of the device and if no response is received,
 the interface is not active, the ZTP process will begin the process on data ports. IOS-XR
 can be part of an ecosystem of automated device and service provisioning via Cisco NSO.  
 
-![](http://xrdocs.io/design/images/cmf-hld/ztp-metro-fabric.png)
+![]({{site.url}}/design/images/cmf-hld/ztp-metro-fabric.png)
 
 # Services – Design
     
@@ -663,7 +663,7 @@ Figure 21 demonstrates the greatest limitation of traditional L2
 Multipoint solutions like
 VPLS.
 
-![](http://xrdocs.io/design/images/cmf-hld/image22.png)
+![]({{site.url}}/design/images/cmf-hld/image22.png)
 
 _Figure 21: EVPN All-Active Access_
 
@@ -693,7 +693,7 @@ H-EVPN access.
 Figure 22 shows another issue related to BUM traffic addressed by
 EVPN.
 
-![](http://xrdocs.io/design/images/cmf-hld/image23.png)
+![]({{site.url}}/design/images/cmf-hld/image23.png)
 
 _Figure 22: EVPN BUM Duplication_
 
@@ -710,7 +710,7 @@ allows just one PE to send BUM traffic to an All-Active EVPN access.
 Figure 23 describes the last important EVPN
 enhancement.
 
-![](http://xrdocs.io/design/images/cmf-hld/image24.png)
+![]({{site.url}}/design/images/cmf-hld/image24.png)
 
 _Figure 23: EVPN MAC Flip-Flopping_
 
@@ -745,11 +745,11 @@ Plane.
 The End-To-End Services use cases are summarized in the table in Figure
 24 and shown in the network diagram in Figure 25.
 
-![](http://xrdocs.io/design/images/cmf-hld/image25.png)
+![]({{site.url}}/design/images/cmf-hld/image25.png)
 
 _Figure 24: End-To-End – Services table_
 
-![](http://xrdocs.io/design/images/cmf-hld/image26.png)
+![]({{site.url}}/design/images/cmf-hld/image26.png)
 
 _Figure 25: End-To-End – Services_
 
@@ -764,7 +764,7 @@ and shown in the network diagram of Figure 27.
 
 _Figure 26: Hierarchical – Services table_
 
-![](http://xrdocs.io/design/images/cmf-hld/image28.png)
+![]({{site.url}}/design/images/cmf-hld/image28.png)
 
 _Figure 27: Hierarchical - Services_
 
@@ -800,7 +800,7 @@ Hierarchical L2 Multipoint Multi-Homed/All-Active (Single-Homed Ethernet
 access) service with traditional access router
 integration.
 
-![](http://xrdocs.io/design/images/cmf-hld/image29.png)
+![]({{site.url}}/design/images/cmf-hld/image29.png)
 
 _Figure 28: Hierarchical – Services (Anycast-PW)_
 
@@ -826,7 +826,7 @@ Hierarchical L2 Multi/Single-Home, All/Single-Active modes are available
 at each layer of the service
 hierarchy.
 
-![](http://xrdocs.io/design/images/cmf-hld/image30.png)
+![]({{site.url}}/design/images/cmf-hld/image30.png)
 
 _Figure 29: Hierarchical – Services (H-EVPN)_
 
@@ -845,7 +845,7 @@ It completely replaces traditional H-VPLS based solutions. This use case
 provides Hierarchical L2 Multi/Single-Home, All/Single-Active
 service.
 
-![](http://xrdocs.io/design/images/cmf-hld/image31.png)
+![]({{site.url}}/design/images/cmf-hld/image31.png)
 
 _Figure 30: Hierarchical – Services (H-EVPN and PWHE)_
 
@@ -856,7 +856,7 @@ Refer also to the section: “Transport and Services Integration”.
 Figure 31 shows the design of Services Router-Reflectors
 (S-RRs).
 
-![](http://xrdocs.io/design/images/cmf-hld/image32.png)
+![]({{site.url}}/design/images/cmf-hld/image32.png)
 
 _Figure 31: Services – Route-Reflectors_
 
@@ -903,7 +903,7 @@ Management, Service Provisioning, and Service Orchestration.
   - Service model with mapping logic and service
 templates
 
-![](http://xrdocs.io/design/images/cmf-hld/image33.png)
+![]({{site.url}}/design/images/cmf-hld/image33.png)
 
 _Figure 32: NSO – Components_
 
@@ -937,11 +937,11 @@ Converged SDN Transport 1.5 supports the following NSO service models for provis
 hierarchical and flat services across the fabric. All NSO service modules in 1.5 
 utilize the IOS-XR and IOS-XE CLI NEDs for configuration. 
 
-![](http://xrdocs.io/design/images/cmf-hld/automation-flat-1_5.png)
+![]({{site.url}}/design/images/cmf-hld/automation-flat-1_5.png)
 
 _Figure 33: Automation – Flat Service Models_
 
-![](http://xrdocs.io/design/images/cmf-hld/automation-hierarchy-1_5.png)
+![]({{site.url}}/design/images/cmf-hld/automation-hierarchy-1_5.png)
 
 _Figure 34: 
 
@@ -957,7 +957,7 @@ from a Control-Plane standpoint. Note that while network operators could
 use both PCEP and BGR-SRTE at the same time, it is not
 typical.
 
-![](http://xrdocs.io/design/images/cmf-hld/image34.png)
+![]({{site.url}}/design/images/cmf-hld/image34.png)
 
 _Figure 35:  Converged SDN Transport – Control-Plane_
 
@@ -979,7 +979,7 @@ Figure 36 shows a consolidated view of  the Converged SDN Transport network from
 a Data Plane
 standpoint.
 
-![](http://xrdocs.io/design/images/cmf-hld/image35.png)
+![]({{site.url}}/design/images/cmf-hld/image35.png)
 
 _Figure 36:  Converged SDN Transport – Data-Plane_
 
@@ -1003,7 +1003,7 @@ Validation will be done on two types of access platforms, IOS-XR and
 IOS-XE, to prove
 interoperability.
 
-![](http://xrdocs.io/design/images/cmf-hld/image36.png)
+![]({{site.url}}/design/images/cmf-hld/image36.png)
 
 _Figure 37: Access Domain Extension – End-To-End Transport_
 
@@ -1014,7 +1014,7 @@ remote Access IGP Domain, 2 additional TI-LFA labels can be used for FRR
 (node and link protection). In Phase 1 PE ABRs are represented by
 Prefix-SID. Refer also to Section: "Transport Programmability - Phase 1".
 
-![](http://xrdocs.io/design/images/cmf-hld/image37.png)
+![]({{site.url}}/design/images/cmf-hld/image37.png)
 
 _Figure 38: Access Domain Extension – Hierarchical Transport_
 
@@ -1035,7 +1035,7 @@ The  Converged SDN Transport employs a distributed and highly available SR-PCE
 design as described in Section: "Transport Programmability". Transport programmability is based
 on PCEP. Figure 39 shows the design when SR-PCE uses PCEP.
 
-![](http://xrdocs.io/design/images/cmf-hld/image38.png)
+![]({{site.url}}/design/images/cmf-hld/image38.png)
 
 _Figure 39: SR-PCE – PCEP_
 
@@ -1050,7 +1050,7 @@ Computation to SR-PCE” mode described in Section: "Path Computation Engine - W
 in Figure
 38.
 
-![](http://xrdocs.io/design/images/cmf-hld/image39.png)
+![]({{site.url}}/design/images/cmf-hld/image39.png)
 
 _Figure 40: PCE Path Computation – Phase 1_
 
@@ -1075,11 +1075,11 @@ The table in Figure 41 describes the End-To-End services, while the
 network diagram in Figure 40 shows how services are deployed in the
 network. Refer also to Section: "Services - Design" of this document.
 
-![](http://xrdocs.io/design/images/cmf-hld/image40.png)
+![]({{site.url}}/design/images/cmf-hld/image40.png)
 
 _Figure 41: End-To-End Services table_
 
-![](http://xrdocs.io/design/images/cmf-hld/image41.png)
+![]({{site.url}}/design/images/cmf-hld/image41.png)
 
 _Figure 42: End-To-End Services_
 
@@ -1090,18 +1090,18 @@ network. Refer also to Section: "Services - Design" of this document.
 In addition, the table in Figure 44 shows where PE ABRs Anycast-SID is
 required and where ODN in the Core IGP domain is used.
 
-![](http://xrdocs.io/design/images/cmf-hld/image42.png)
+![]({{site.url}}/design/images/cmf-hld/image42.png)
 
 _Figure 41: Hierarchical Services table_
 
-![](http://xrdocs.io/design/images/cmf-hld/image43.png)
+![]({{site.url}}/design/images/cmf-hld/image43.png)
 
 _Figure 42: Hierarchical Services_
 
 The  Converged SDN Transport uses the hierarchical Services Route-Reflectors
 (S-RRs) design described in Section: "Services - Route-Reflector (S-RR)". Figure 43 shows in detail the S-RRs design used for Phase 1.
 
-![](http://xrdocs.io/design/images/cmf-hld/image44.png)
+![]({{site.url}}/design/images/cmf-hld/image44.png)
 
 _Figure 43: Services Route-Reflectors (S-RRs)_
 
@@ -1113,21 +1113,21 @@ Refer to Section: "Network Services Orchestrator (NSO)".
 Transport and Services integration is described in Section: "Transport and Services Integration" of this document. Figure 44 shows an example of End-To-End LSP and services
 integration in Phase 1.
 
-![](http://xrdocs.io/design/images/cmf-hld/image45.png)
+![]({{site.url}}/design/images/cmf-hld/image45.png)
 
 _Figure 44: Transport and Services Data-Plane_
 
 Figure 45 shows a consolidated view of the Transport and Services
 Control-Plane.
 
-![](http://xrdocs.io/design/images/cmf-hld/image46.png)
+![]({{site.url}}/design/images/cmf-hld/image46.png)
 
 _Figure 45: Transport and Services Control-Plane_
 
 Figure 46 shows the physical topology of the testbed used for Phase 1
 validation.
 
-![](http://xrdocs.io/design/images/cmf-hld/image47.png)
+![]({{site.url}}/design/images/cmf-hld/image47.png)
 
 _Figure 46: Testbed – Phase 1_
 
@@ -1147,7 +1147,7 @@ Converged SDN Transport provides another huge leap forward in simplification and
 programmability adding Services Control Plane unification and
 centralized path computation.
 
-![](http://xrdocs.io/design/images/cmf-hld/image48.png)
+![]({{site.url}}/design/images/cmf-hld/image48.png)
 
 _Figure 47: Converged SDN Transport – Evolution_
 
